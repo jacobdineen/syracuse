@@ -1,0 +1,431 @@
+.narrative INPUT {
+	font-family: Verdana, Arial, sans-serif;
+    font-size:9pt;
+}
+
+.narrative p {
+ 		font-family: Verdana, Arial, sans-serif;
+        font-size:9pt;
+		line-height: 1.75;
+}
+
+.narrative table tr td  {
+ 		font-family: Verdana, Arial, sans-serif;
+        font-size:9pt;
+		line-height: 1.75;
+}
+
+.narrative table tr th  {
+ 		font-family: Verdana, Arial, sans-serif;
+        font-size:9pt;
+		line-height: 1.75;
+}
+.narrative {
+	font-family: Verdana, Arial, sans-serif;
+	color:#000;
+	font-size:9pt;
+	line-height: 1.75;
+}
+
+.mcLabel {
+            font-family: Verdana, Arial, sans-serif;
+            font-size:9pt;
+}
+
+.choiceTable tr td {
+                font-family: Verdana, Arial, sans-serif;
+                font-size:9pt;
+                }
+
+.feedBackWidgetContent {
+                font-family: Verdana, Arial, sans-serif;
+                color:#000;
+                font-size:9pt;
+                line-height: 1.75;
+}
+
+.covalentItem, .covalentItem table {
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 9pt;
+  }
+
+.covalentItem select {
+    font-size: 12px;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+.narrative2 {
+	font-family: Verdana, Arial, sans-serif;
+	color:#000;
+	font-size:9pt;
+	border: 0px;
+	line-height: 1.75;
+}
+
+.taccount_table {
+	border: 0;
+	border-collapse: collapse;
+}
+.taccount_table th {
+    border-left: medium none windowtext !important;
+    border-right: medium none windowtext !important;
+    border-top: medium none windowtext !important;
+    border-bottom: 1.5pt solid windowtext !important;
+    padding: 0 2.9pt 3pt 2.9pt !important;
+    margin: 0 !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    vertical-align: top !important;
+} 
+
+.taccount_table th.empty {
+	border-left: 0 none #FFFFFF !important;
+	border-right: 0 none #FFFFFF !important;
+	border-top: 0 none #FFFFFF !important;
+	border-bottom: 0 none #FFFFFF !important;
+}
+.taccount_table td{
+ 	border: medium none;
+	padding: 3 2.9pt;
+	vertical-align: top;
+ }
+.taccount_table td.left-col {
+	text-align: right;
+	border-left: medium none; 
+	border-right: 1.5pt solid windowtext; 
+	border-top: medium none; 
+	border-bottom: medium none;
+}
+
+.taccount_table td.tbline {
+	border-left: medium none;
+	border-right: hidden none;
+	border-top: medium none;
+	border-bottom: 1.5pt solid windowtext; 
+}
+
+.thin_bottom_border {
+	border-bottom-width: 1px !important;
+
+}
+
+.narrative input{
+	width:60px;
+	border:solid 1px #ccc;
+	text-align:right;
+}
+.narrative1 input{
+	width:30px;
+	border:solid 1px #ccc;
+	text-align:right;
+}
+.narrative2 input{
+	width:60px;
+	border:solid 1px #ccc;
+	text-align:right;
+}
+
+.narrative3 input{
+	width:90px;
+	border:solid 1px #ccc;
+	text-align:right;
+}
+.narrative4 input{
+	width:100px;
+	border:solid 1px #ccc;
+	text-align:right;
+}
+
+/* specific cell styles */
+
+/* gain and loss classes are now merged as "debitcredit" */
+ .gain{
+	padding-right:10px;
+	padding-left:10px;
+	text-align:right;
+	white-space:nowrap;
+}
+.loss{
+	padding-right:10px;
+	padding-left:10px;
+	text-align:right;
+	white-space:nowrap;
+} 
+
+.debitcredit{
+	padding-right:5px;
+	padding-left:9px;
+	/*padding-left:10px;*/
+	text-align:center;
+	white-space:nowrap;
+}
+.dollar{
+	background:url(images/dollar.gif) no-repeat left center;
+	background-color:none;
+}
+
+.line input{
+	border-bottom:solid 1px #000;
+}
+.d_line input{
+	border-bottom:double 3px #000;
+}
+.sub{
+	padding-left:20px;
+	width:360px;
+	white-space:nowrap;
+	font-size:9pt;
+}
+.subtotal{
+	padding-left:40px;
+	width:360px;
+	font-size:9pt;
+}
+
+.narrative_line{
+	border-bottom:solid 1px #000;
+}
+.narrative_dline{
+	border-bottom:double 3px #000;
+}
+
+
+
+/*For drop down menus*/
+#sddm
+{	margin: 0;
+	padding: 0;
+	z-index: 30}
+
+#sddm li
+{	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: left;
+	font: bold 11px arial;
+	border:0px;
+	}
+
+#sddm li a
+{	display: block;
+	margin: 0 1px 0 0;
+	padding: 2px 5px;
+	width: 175px;
+	background: #5970B2;
+	color: #FFF;
+	text-align: center;
+	text-decoration: none;
+	font: bold 11px arial;
+	text-decoration: none;
+	border:0px;
+	}
+
+#sddm li a:hover
+{	background: #49A3FF;
+text-decoration: none;
+}
+
+#sddm div
+{	position: absolute;
+	visibility: hidden;
+	margin: 0;
+	padding: 0;
+	background: #EAEBD8;
+	border: 1px solid #5970B2}
+
+	#sddm div a
+	{	position: relative;
+		display: block;
+		margin: 0;
+		padding: 2px 5px;
+		width: auto;
+		white-space: nowrap;
+		text-align: left;
+		text-decoration: none;
+		background: #EAEBD8;
+		color: #2875DE;
+		font: 11px arial}
+
+	#sddm div a:hover
+	{	background: #49A3FF;
+		color: #FFF;
+	}
+		
+		
+/*/* For Key-Terms */
+
+#set_of_links {
+	padding:9px;
+	margin-bottom:20px;
+	
+	
+}
+#set_of_links  a {
+	display:inline;
+	padding:0px;
+	text-decoration:none;
+	color:#000000;
+	font-weight:bold;
+	
+}
+
+#set_of_links a:hover {
+	background:white;
+	text-decoration:none;
+	
+}
+
+.set_of_links_href {
+	border-bottom-width:thin;
+	border-bottom: dashed 1px #000000;
+	font-weight:bold;
+}
+
+a.set_of_links_href{
+color:#000;
+text-decoration:none;
+}
+
+#set_of_links a span {
+	display:none;
+	
+}
+#set_of_links a:hover span {
+	display:inline;
+	border:1px solid #4A101F;
+	padding:5px;
+	text-decoration:none;
+	background-color:#FFFFFF;
+	font-weight:100;
+}
+
+/* for javascript-based drop-down menus */
+
+#sddm
+{	margin: 0;
+	padding: 0;
+	z-index: 30}
+
+#sddm li
+{	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: left;
+	font: bold 11px arial}
+
+#sddm li a
+{	display: block;
+	margin: 0 1px 0 0;
+	padding: 2px 5px;
+	width: 175px;
+	background: #5970B2;
+	color: #FFF;
+	text-align: center;
+	text-decoration: none}
+
+#sddm li a:hover
+{	background: #49A3FF}
+
+#sddm div
+{	position: absolute;
+	visibility: hidden;
+	margin: 0;
+	padding: 0;
+	background: #EAEBD8;
+	border: 1px solid #5970B2}
+
+	#sddm div a
+	{	position: relative;
+		display: block;
+		margin: 0;
+		padding: 2px 5px;
+		width: auto;
+		white-space: nowrap;
+		text-align: left;
+		text-decoration: none;
+		background: #EAEBD8;
+		color: #2875DE;
+		font: 11px arial}
+
+	#sddm div a:hover
+	{	background: #49A3FF;
+		color: #FFF}
+
+/* for HTML launch pages */		
+h1 {
+	font-family: Verdana, Arial, sans-serif;
+	color:#000;
+	font-size:14px;
+	font-weight:bold; 
+}
+
+h2 {
+	font-family: Verdana, Arial, sans-serif;
+	color:#000;
+	font-size:9pt;
+	font-weight:bold; 
+}
+
+.iconpos {
+position: relative; top: 20px;}
+
+/* Integrated Financial statement */
+.main_table td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.white {
+background-color: #FFFFFF;
+}
+
+.inner_table1{
+background-color: #FF0000;
+}
+
+
+.inner_table2 .black {
+border-left: 1px solid #000000;
+}
+
+.last_table td {
+padding: 5px;
+}
+
+.main_table {
+background-color: #AAE0F9;
+}
+
+.inner_table1 td{
+padding: 5px;
+background-color: #8DD8F8;
+}
+.heading{
+text-align: center;
+}
+.inner_table1 .heading, .main_table .heading {
+font-style: italic;
+}
+
+.inner_table1 .heading td, .main_table .heading td {
+font-weight: bold;
+}
+
+.inner_table2 td{
+border: 1px solid #ffffff;
+background-color: #E2F4FD;
+padding: 5px;
+}
+ol li li {
+    list-style-type: disc;
+}
+ol ul li {
+    list-style-type: disc;
+}
+/*table, table tr, table tr td, table tr th {
+	color: #000000;
+ 		font-family: Verdana, Arial, sans-serif;
+        font-size:9pt;
+		line-height: 1.75;
+}*/

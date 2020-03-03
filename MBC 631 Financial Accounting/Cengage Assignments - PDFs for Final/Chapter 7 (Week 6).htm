@@ -1,0 +1,3591 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Chapter 7 (Week 6)</title><link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/core.css" media="all"><style media="all" type="text/css">
+            	@import "/media/css/style_sheet_v3.css";
+                body,
+                html
+                {
+                    background: #FFF !important;
+                	margin: 5px;
+                }
+                div.documentHeader
+                {
+                	border: 1px solid #4D6AAC;
+                }
+				div.information
+				{
+					font-size: 1em;
+					margin: 0.5em;
+				}
+				div.information span.infoTitle
+				{
+					font-weight: bold;
+				}
+				div.information span.info
+				{
+					padding-left: 5px;
+					font-weight: normal;
+				}
+				div#assignmentHeader
+				{
+					float: right;
+				}
+                div.item
+                {
+                	padding: 5px;
+                	border-top: 1px solid #4D6AAC;
+                }
+                div.item div.itemNumber
+                {
+                	font-weight: bold;
+                }
+            </style><style media="print" type="text/css">
+                div.item,
+                div.item div
+                {
+                	page-break-inside: avoid;
+            	}
+            	body
+            	{
+            		margin: 0.25in;
+            	}
+            </style>
+<!-- Javascript imports for com.thomson.OldEventsHelper -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/com.js"></script>
+
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/engine.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE="com.thomson";</script>
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/DWRHelper.js"></script>
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/JSOLService.htm"></script>
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/com_002.js"></script>
+
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+<link type="text/css" href="Chapter%207%20%28Week%206%29_files/cnowCovalentAdapter.css" rel="stylesheet"><link type="text/css" href="Chapter%207%20%28Week%206%29_files/jquery_002.css" rel="stylesheet">
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery-1.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery_002.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery-ui-1.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery_006.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery_004.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+<script type="text/javascript">
+      // turn off $() and instead revert to jQuery() so that we do not conflict with other javascript frameworks.
+      jQuery.noConflict();
+    </script>
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/cim_min.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/API.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapter%207%20%28Week%206%29_files/CnowCovalentAdapter.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+<script type="text/javascript">
+        jQuery(window).load(function(){
+            if( typeof(CovalentItemManager) != 'function' )
+                return;
+            
+            if (! 'tmpl' in jQuery) {
+                jQuery.getScript('/media/jsframeworks/jquery/jquery.tmpl.min.js');
+            }
+
+            if (!jQuery.timepicker){
+                jQuery.getScript('/media/jsframeworks/jquery/plugins/timepicker/jquery-ui-timepicker-addon.js', function(){
+                    jQuery.getScript('/media/jsframeworks/jquery/plugins/dateTimeWidget/jquery.dateTimeWidget.js');
+                });
+            }
+      
+            if (!jQuery.dropdown){
+                jQuery.dropdown = {};
+                jQuery.getScript('/media/jsframeworks/jquery/plugins/dropdown/jquery.dropdown.js');
+            }
+      
+            var covalentRenderer = new CnowCovalentRenderer({
+                showCheckMyWork: true
+            });
+      
+            if( !covalentRenderer )
+                return;
+          
+            CovalentItemManager.getInstance().pageLoaded(covalentRenderer);
+        });
+    </script><style type="text/css" media="print">.dropShadow{visibility:hidden;}</style><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJax.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJax.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJax.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJax.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJax.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MathJax.js"></script><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap; display: none}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+.fieldHolder {visibility: hidden}
+</style></head><body><div id="MathJax_Message" style="display: none;"></div><div class="documentHeader"><div id="assignmentHeader" class="information"><span class="infoTitle">Assignment:
+					</span><span class="info">Chapter 7 (Week 6)</span></div><div id="studentHeader" class="information"><span class="infoTitle">Student:
+					</span><span class="info">
+						Jacob Dineen
+					</span></div></div><div id="score"><h3>Take Details</h3><table class="secondaryHighlight listTable delineated"><tbody><tr><th>Assignment score: </th><td>
+                100%
+    			</td></tr><tr><th>Total Time spent:
+    		</th><td>5 hours, 16 minutes, 56 seconds</td></tr><tr><th>Score for selected take: </th><td>
+                    100%
+                    (100/100)</td></tr><tr><th>Time spent on selected take:</th><td></td></tr></tbody></table><div class="secondaryHighlight primaryBorder toolBar integrated leads largeSet"></div></div><div id="details"><div class="item"><div class="itemNumber">1.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_1957513701"><link href="Chapter%207%20%28Week%206%29_files/accdefault.css" rel="stylesheet" type="text/css" xmlns:fo="http://www.w3.org/1999/XSL/Format"><link href="Chapter%207%20%28Week%206%29_files/accInlineStyling.css" rel="stylesheet" type="text/css"><script type="text/javascript" language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script type="text/javascript">
+        function accountingAjaxCleanup(item)
+        {
+            ACcleanupAutocomplete();
+        }
+        
+        function accountingOnloadAction()
+        {
+            if (typeof(MultipleCorrectsPopupHandler) != 'undefined'){
+                MultipleCorrectsPopupHandler.getInstance().render();
+            }
+        }
+    </script><!--#-9161369678505656169--><link href="Chapter%207%20%28Week%206%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/API.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "1957513701",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(accountingOnloadAction),
+                            ptOnUnloadActions: new Array(accountingAjaxCleanup),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "002_Exercise 7-04",
+                    "adapter": itemAdapter,
+                    "renderingContext": "CmbjvjR6sdABK9YT0qy05746dXdr9OHMzRjtFbbaV9q8YnGbek1aEbUXZ6lgUpiMAaaKqIuk44S0\nCuIVD33Z8yDXddVUBWyQMqGtCAsSqL22iyjm+go/0CvhCZHqDMeadC15EXH362CPAPJhjxcJznG+\nspgEoQkNo42uekMKKFrw7CYdvGE3aMruxaqwFxsuw69GpvoS8hy/F6wIY7C4q+RR+7GeUb/VS1AJ\nt/Tvo1wkZR4FB2fG5ZE6MZSZ/BDMGHyOy+r4i6L9G1TTrqPxgckP+vOQT94v1uKt8T6zAG07mH3g\nZ3vpTtOwinKFiMhddpibRALSp/1fypR3LSY89LpQr4O9wya8jGEZlJSbaADPlp0wJGkLCD+GpUle\nvY+f70WgluvigfIBLI/aKTvzjUcI71VcTXFvkEnMf+CqCnRPNBFsYuh8JSrrWxur1125OesqP8Zi\nbGcke4F/xyOgX17g24eoR3NOEx/cIurXurx83oJOv1Yan3bAeNFu36XVRuRVkdIfMbIp6AQkce7P\nQ4ZonLvESOjZFZYZeIt+f8zMZjHvr1AaCeXOJS48SHLQKj/fzqco14QvWs4Qv0zc+ARsEU0vFesl\ntwMSGxqBMut96qmIOSr3nBLBSt8oQwgvQ4BQ4NwI75BWHC/hpDnQpQr5ZnK1NX2niRZtzQ83Ns6k\n5EJd2gI7jZTMSJMmHk8G5qiq3ae40264+5nVZgGgvGvEGY/pvObRVyu7HmQ8ZCmKYZxiysvV5zHl\n9bXDZd9m42BFRJ02QD85KcFrJv8G1pvoVZFCXcpcP7OL3rKnaBoqNTJzR+irYuyY9bo1CZDxBRJk\nka66PnvDVejlQM219gE7AHFtbhKWT6qVT3KrpRSL6nSfPqq9dFkDTKkGxoPgxx42v+oz5c+r8DGt\nGSqBGOUgvH+BFUGRzco0qSDBBLlJ+vuAmI8dH7jC58i+hSJk8gDLJigsrTYuYTBb2hx5qCv1PV/K\n9hYqn/cxRL8Ut9JkH0EcqtTo5cvWtPKRcJClQUlgqJjlVD/6Vtb7hhJ9dU4r9Ot6TdshHbKYQcFM\nfjjejyVKdTkX89zWQqqGL/sG",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5O5WhLVXBG2WFfE5ECspw7ijE9FeUTaSf0+7Tkku9cB9"
+                } ) );
+            </script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/onload.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/location.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '1957513701';
+
+              }
+              function validateItem1957513701() {var result = false;  if (typeof(validateScript1957513701) != 'undefined') {try {eval(validateScript1957513701);} catch(e) {result = e;}}return result;}
+          </script><input id="item-state_1957513701" name="item-state_1957513701" value="" type="hidden"><div class="questionWrapper">
+<div class="questionContent">
+<div>
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/jquery_002.css" type="text/css">
+<link id="absolutePath" href="http://cvg.cengagenow.com/">
+<script language="javascript" src="Chapter%207%20%28Week%206%29_files/autocomplete.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/specialnumber.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/specialNumberFieldInlineFunctions.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/engine.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/JSOLService.htm"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script type="text/javascript">
+          var absolutePath = document.getElementById('absolutePath').href;
+          var jqueryHome = absolutePath + 'media/jsframeworks/jquery/';
+          if (!jQuery.ui) {
+              jQuery.ui = jQuery.dropdown = {};
+              jQuery.getScript(jqueryHome + 'jquery-ui-1.10.3.custom.min.js', function(){
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              });
+          } else {
+              if (!jQuery.dropdown){
+                  jQuery.dropdown = {};
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              }
+          }
+      </script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/formTools.js"></script><script language="javascript">
+
+        var allAccountingStyles = [];
+        
+            allAccountingStyles.push( 'accdefault' );
+        
+            allAccountingStyles.push( 'gen-statement' );
+        
+            allAccountingStyles.push( 'journal-entry' );
+        
+
+        
+      jQuery( function()
+      {
+          var feedbackElements = jQuery('.clearFeedbackTrigger');
+
+          var clearFeedbackForElement = function(ev)
+          {
+              if( !ev )
+                  return;
+
+              for (var j = 0; j < allAccountingStyles.length; j++) {
+                  var element = jQuery (ev.target);
+                  var rightStyle = allAccountingStyles[j] + "_right";
+                  var wrongStyle = allAccountingStyles[j] + "_wrong";
+                  var defaultStyle = allAccountingStyles[j] + "_default";
+                  do {
+                      if (element.hasClass (rightStyle) || element.hasClass (wrongStyle)) {
+                          element.removeClass(rightStyle).removeClass(wrongStyle).addClass(defaultStyle).prop("title", "");
+                          return;
+                      }
+                      element = element.parent()
+                  } while (element.length);
+              }
+          }
+
+          feedbackElements.filter(':checkbox').click(clearFeedbackForElement);
+
+          var feedbackElementsNotCheckbox = jQuery(feedbackElements).not(':checkbox');
+          feedbackElementsNotCheckbox = feedbackElementsNotCheckbox.not(function(arg){
+                if (jQuery(this.parentNode.parentNode).hasClass('autocomplete_div'))
+                    return this;
+          });
+
+          for (var i = 0; i < feedbackElementsNotCheckbox.length; i++){
+                var  oldValue = feedbackElementsNotCheckbox[i].value;
+                jQuery(feedbackElementsNotCheckbox[i]).change(function(old_value){
+                    return function(e){
+                        var value = this.value;
+                        if (old_value != value)
+                            clearFeedbackForElement(e);
+                    }
+                }(oldValue));
+          }
+
+          if( typeof(CovalentItemManager) != 'function' || !CovalentItemManager )
+              return;
+
+          var thisItem = CovalentItemManager.getInstance().findItem('1957513701');
+          if (!thisItem) {
+              return;
+          }
+          var helper = function(item){
+
+              return {
+                  hideFeedback: function()
+                  {
+                      for(var j = 0; j < allAccountingStyles.length; j++)
+                      {
+                          var rightStyle = allAccountingStyles[j] + "_right";
+                          var wrongStyle = allAccountingStyles[j] + "_wrong";
+                          var defaultStyle = allAccountingStyles[j] + "_default";
+
+                          jQuery('.' + rightStyle + ', .' + wrongStyle).each(function()
+                          {
+                              var feedbackElement = jQuery(this);
+                              feedbackElement.toggleClass(rightStyle, false).toggleClass(wrongStyle, false).toggleClass(defaultStyle, true);
+                              feedbackElement.attr('title', '');
+                          });
+                      }
+                  }
+              };
+
+          }(thisItem);
+
+          thisItem.addItemHelper( helper );
+      });
+
+       // ILRN-36468
+       // Used for determining correct localized prefix for the reserve word status
+       var global_reserveWordCorrectStatus = {
+         'correct'   : 'Correct',
+         'incorrect' : 'Incorrect'
+       };
+
+      var MEScot1='Sorry, your current browser does not support this content. \nPlease upgrade your browser. Refer to the CengageNOW System Requirements to determine the appropriate browser and version for your system.';
+
+      function elem(id) {
+         return document.getElementById(id);
+      }
+      function showAndHide(divId, anchorId) {
+        var anchor = elem(anchorId);
+        var div = elem(divId);
+        if (div.style.display == "none") {
+          div.style.display = "";
+          anchor.innerHTML = 'Hide';
+          anchor.title = 'Hide';
+        }
+        else {
+          div.style.display = "none";
+          anchor.innerHTML = 'Show';
+          anchor.title = 'Show';
+        }
+      }
+
+      function calendarSetStyle(inputId, style, fieldStyle) {
+        document.getElementById(inputId + '_y').parentNode.className = style;
+        document.getElementById(inputId + '_m').parentNode.className = style;
+        document.getElementById(inputId + '_d').parentNode.className = style;
+        document.getElementById(inputId + '_y').className = style;
+        document.getElementById(inputId + '_m').className = style;
+        document.getElementById(inputId + '_d').className = style;
+        if (typeof(fieldStyle) != "undefined" && fieldStyle != "0") {
+          document.getElementById(inputId + '_y').parentNode.align = "right";
+          document.getElementById(inputId + '_m').parentNode.align = "right";
+          document.getElementById(inputId + '_d').parentNode.align = "right";
+          document.getElementById(inputId + '_y').parentNode.style.display = "";
+          document.getElementById(inputId + '_m').parentNode.style.display = "";
+          document.getElementById(inputId + '_d').parentNode.style.display = "";
+        }
+      }
+
+      function _fixEmpty(value) {
+        if (value == null || typeof(value) == "undefined" || value == "" || value == "blank") {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+
+      function _fixEmptyFITB(value) {
+        if (_fixEmpty(value) == "&#160;" || value == '""') {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+    </script>
+<div class="box-in-blue-box">
+<div class="problemTypes">
+<br><link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapter%207%20%28Week%206%29_files/jquery.css" rel="stylesheet" type="text/css">
+			<script src="Chapter%207%20%28Week%206%29_files/jquery_003.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script><div class="narrative">
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapter%207%20%28Week%206%29_files/mindTapReader.js" type="text/javascript"><!-- Keep the end script tag. --></script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" href="#" ebook="{ &quot;docId&quot;:&quot;WGNQQG631146985&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" style="">7-1: Accounts Receivable</a></div></span>
+
+
+<p>Using an Aging Schedule to Account for Bad Debts</p>
+<p>Carter Company sells on credit with terms of n/30. For the $500,000 
+of accounts at the end of the year that are not overdue, there is a 90% 
+probability of collection. For the $200,000 of accounts that are less 
+than a month past due, Carter estimates the likelihood of collection 
+going down to 70%. The probability of collecting the $100,000 of 
+accounts more than a month past due is estimated to be 25%.</p>
+<p><strong>Required:</strong></p>
+</div><span method="post" autocomplete="off" name="submitForm_1957513701" id="submitForm_1957513701" action="?" onsubmit="if ( document.getElementById('buttonClick').value != 1 ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.1957513701" type="hidden" align="absmiddle"><script type="text/JavaScript" language="JavaScript">
+                  function getCssStep(index) {
+                  
+                    if (index == 0) {
+                      return "gen-statement";
+                    }
+                  
+                    if (index == 1) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 2) {
+                      return "accdefault";
+                    }
+                  
+                  }
+                </script>
+<br>
+<span id="topquestion_0"></span>
+<style type="text/css">
+            table.acc_main_table input[type=text]:focus {
+                outline: 1px solid #79B5DE !important;
+                border-color: transparent !important;
+            }
+        </style>
+<table name="accMainTable" class="acc_main_table ">
+<tbody><tr>
+<td>
+<div class="gen-statement_answered-border-box">
+<div class="gen-statement_answered-right-border">
+<div class="gen-statement_answered-title-border">
+<div class="gen-statement_answered-ul-corner">
+<div class="gen-statement_answered-ur-corner">
+<div style="padding-top: 5px;" align="center"></div>
+</div>
+</div>
+</div>
+<div class="gen-statement_answered-box-paragraph2" id="showhidediv1">
+<div class="gen-statement_answered-box-paragraph">
+<span id="question_0"><link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+<link href="Chapter%207%20%28Week%206%29_files/gen-statement.css" rel="stylesheet" type="text/css"> 
+<div class="narrative">
+<p><strong>1. &nbsp;</strong>Prepare an aging schedule to estimate the amount of uncollectible accounts.</p>
+</div></span>
+<br>
+<br><script src="Chapter%207%20%28Week%206%29_files/velocityAptUtils.js" type="text/javascript"><!--keep this --></script>
+<script src="Chapter%207%20%28Week%206%29_files/commonVelocityFunctions.js" type="text/javascript"><!-- keep this--></script>
+
+
+
+
+
+
+
+
+<table class="gen-statement_TopTable template_table_left template9" cellspacing="0" cellpadding="2" border="1">
+    
+           <tbody><tr style="" class="gen-statement_Header">
+      <td colspan="7" align="center">
+         <table class="gen-statement_TopTable" cellspacing="0" cellpadding="0">
+            <tbody><tr>
+                                                <td class="gen-statement_HeaderField " title="">
+                                          
+<span class="answer_1_1">
+
+
+
+
+    
+
+
+
+    <div class="PT_ACCT_MTRX_comment gen-statement_comment gen-statement_IndentNone gen-statement_HeaderField Auto Regular simple_text comment">
+      <span style="white-space: nowrap;">
+        <span class="leadingtext"></span>
+        <span class="value gen-statement_UnderlineNone" style="width:95%; display:inline-block;">
+                            Carter Company
+                    </span>
+        <span class="trailingtext"></span>
+        <input id="answer.1957513701_0_1" name="answer.1957513701_0_1" value="Carter Company" class="gen-statement_HeaderField" type="hidden">
+      </span>
+    </div>
+
+</span>                                    </td>
+            </tr>
+         </tbody></table>
+      </td>
+   </tr>
+
+           <tr style="" class="gen-statement_Header">
+      <td colspan="7" align="center">
+         <table class="gen-statement_TopTable" cellspacing="0" cellpadding="0">
+            <tbody><tr>
+                                                <td class="gen-statement_HeaderField " title="">
+                                          
+<span class="answer_1_2">
+
+
+
+
+    
+
+
+
+    <div class="PT_ACCT_MTRX_comment gen-statement_comment gen-statement_IndentNone gen-statement_HeaderField Center Regular simple_text comment">
+      <span style="white-space: nowrap;">
+        <span class="leadingtext"></span>
+        <span class="value gen-statement_UnderlineNone" style="width:95%; display:inline-block;">
+                            Aging Schedule to Account for Bad Debts
+                    </span>
+        <span class="trailingtext"></span>
+        <input id="answer.1957513701_0_2" name="answer.1957513701_0_2" value="Aging Schedule to Account for Bad Debts" class="gen-statement_HeaderField" type="hidden">
+      </span>
+    </div>
+
+</span>                                    </td>
+            </tr>
+         </tbody></table>
+      </td>
+   </tr>
+
+           <tr style="" class="gen-statement_Header">
+      <td colspan="7" class="gen-statement_DoubleLineRight" align="center">
+         <table class="gen-statement_TopTable" cellspacing="0" cellpadding="0">
+            <tbody><tr>
+                                                <td class="gen-statement_HeaderField " title="">
+                                          
+<span class="answer_1_3">
+
+
+
+
+    
+
+
+
+    <div class="PT_ACCT_MTRX_comment gen-statement_comment gen-statement_IndentNone gen-statement_HeaderField Auto Regular simple_text comment">
+      <span style="white-space: nowrap;">
+        <span class="leadingtext"></span>
+        <span class="value gen-statement_UnderlineNone" style="width:95%; display:inline-block;">
+                            &nbsp;
+                    </span>
+        <span class="trailingtext"></span>
+        <input id="answer.1957513701_0_3" name="answer.1957513701_0_3" value="" class="gen-statement_HeaderField" type="hidden">
+      </span>
+    </div>
+
+</span>                                    </td>
+            </tr>
+         </tbody></table>
+      </td>
+   </tr>
+   
+    
+   
+         <tr class="gen-statement_EvenNumberedRow row col">
+                  <td height="15">
+                                                         <table class="" width="100%" cellspacing="0" cellpadding="0">
+                     <tbody><tr>
+                        <td class="" title="">
+                           
+<div class="answer_1_4">
+
+
+
+
+    
+
+
+
+
+
+    <div id="1957513701_0_4_206937170542318173">
+        <div class="autocomplete_comment PT_ACCT_MTRX_comment gen-statement_comment Center Regular gen-statement_IndentNone gen-statement_EvenNumberedField">
+            <span class="leadingtext"></span>
+            <span class="value gen-statement_UnderlineNone">
+                                    <nobr>
+                        Category
+                    </nobr>
+                            </span>
+            <span class="trailingtext"></span>
+            <input id="answer.1957513701_0_4" name="answer.1957513701_0_4" value="Category" type="hidden">
+        </div>
+    </div>
+
+
+</div>
+                        </td>
+                     </tr>
+                  </tbody></table>
+                                    </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="" title="">
+                         
+<span class="answer_1_5">
+
+
+
+
+    
+
+
+
+    <div class="PT_ACCT_MTRX_comment gen-statement_comment gen-statement_IndentNone gen-statement_EvenNumberedField Center Regular simple_text comment">
+      <span style="white-space: nowrap;">
+        <span class="leadingtext"></span>
+        <span class="value gen-statement_UnderlineNone" style="width:95%; display:inline-block;">
+                            Estimated Amount
+                    </span>
+        <span class="trailingtext"></span>
+        <input id="answer.1957513701_0_5" name="answer.1957513701_0_5" value="Estimated Amount" class="gen-statement_EvenNumberedField" type="hidden">
+      </span>
+    </div>
+
+</span>
+                                                                           </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="" title="">
+                         
+<span class="answer_1_6">
+
+
+
+
+    
+
+
+
+    <div class="PT_ACCT_MTRX_comment gen-statement_comment gen-statement_IndentNone gen-statement_EvenNumberedField Center Regular simple_text comment">
+      <span style="white-space: nowrap;">
+        <span class="leadingtext"></span>
+        <span class="value gen-statement_UnderlineNone" style="width:95%; display:inline-block;">
+                            Percent Uncollectible
+                    </span>
+        <span class="trailingtext"></span>
+        <input id="answer.1957513701_0_6" name="answer.1957513701_0_6" value="Percent Uncollectible" class="gen-statement_EvenNumberedField" type="hidden">
+      </span>
+    </div>
+
+</span>
+                                                                           </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="" title="">
+                         
+<span class="answer_1_7">
+
+
+
+
+    
+
+
+
+    <div class="PT_ACCT_MTRX_comment gen-statement_comment gen-statement_IndentNone gen-statement_EvenNumberedField Center Regular simple_text comment">
+      <span style="white-space: nowrap;">
+        <span class="leadingtext"></span>
+        <span class="value gen-statement_UnderlineNone" style="width:95%; display:inline-block;">
+                            Amount Uncollectible
+                    </span>
+        <span class="trailingtext"></span>
+        <input id="answer.1957513701_0_7" name="answer.1957513701_0_7" value="Amount Uncollectible" class="gen-statement_EvenNumberedField" type="hidden">
+      </span>
+    </div>
+
+</span>
+                                                                           </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+               </tr>
+         <tr class="gen-statement_OddNumberedRow row col">
+                  <td height="15">
+                                                         <table class="" width="100%" cellspacing="0" cellpadding="0">
+                     <tbody><tr>
+                        <td class="" title="">
+                           
+<div class="answer_1_8">
+
+
+
+
+    
+
+
+
+
+
+    <div id="1957513701_0_8_8633968743663439972">
+        <div class="autocomplete_comment PT_ACCT_MTRX_comment gen-statement_comment Auto Regular gen-statement_IndentNone gen-statement_OddNumberedField">
+            <span class="leadingtext"></span>
+            <span class="value gen-statement_UnderlineNone">
+                                    <nobr>
+                        Current
+                    </nobr>
+                            </span>
+            <span class="trailingtext"></span>
+            <input id="answer.1957513701_0_8" name="answer.1957513701_0_8" value="Current" type="hidden">
+        </div>
+    </div>
+
+
+</div>
+                        </td>
+                     </tr>
+                  </tbody></table>
+                                    </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_9">
+
+
+
+
+    
+
+
+
+        
+       
+            <div class=" gen-statement_OddNumberedField simple_text" id="1957513701_0_9_8450881046983217296">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_9_8450881046983217296" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_OddNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext">$</td>
+                    <td class="value gen-statement_UnderlineNone" style="width:95%;">500000</td>
+                    <td class="trailingtext"></td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_10">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_OddNumberedField simple_text" id="1957513701_0_10_180727400088023160">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_10_180727400088023160" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_OddNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext"></td>
+                    <td class="value gen-statement_UnderlineNone" style="width:95%;">10</td>
+                    <td class="trailingtext">%</td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_11">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_OddNumberedField simple_text" id="1957513701_0_11_7133503103999300586">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_11_7133503103999300586" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_OddNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext">$</td>
+                    <td class="value gen-statement_UnderlineNone" style="width:95%;">50000</td>
+                    <td class="trailingtext"></td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+               </tr>
+         <tr class="gen-statement_EvenNumberedRow row col">
+                  <td height="15">
+                                                         <table class="" width="100%" cellspacing="0" cellpadding="0">
+                     <tbody><tr>
+                        <td class="" title="">
+                           
+<div class="answer_1_12">
+
+
+
+
+    
+
+
+
+
+
+    <div id="1957513701_0_12_4000150202728767938">
+        <div class="autocomplete_comment PT_ACCT_MTRX_comment gen-statement_comment Auto Regular gen-statement_IndentNone gen-statement_EvenNumberedField">
+            <span class="leadingtext"></span>
+            <span class="value gen-statement_UnderlineNone">
+                                    <nobr>
+                        Past due:
+                    </nobr>
+                            </span>
+            <span class="trailingtext"></span>
+            <input id="answer.1957513701_0_12" name="answer.1957513701_0_12" value="Past due:" type="hidden">
+        </div>
+    </div>
+
+
+</div>
+                        </td>
+                     </tr>
+                  </tbody></table>
+                                    </td>
+                   <td>
+                                            </td>
+           <td align="center" height="15">
+                                                        </td>
+                   <td>
+                                            </td>
+           <td align="center" height="15">
+                                                        </td>
+                   <td>
+                                            </td>
+           <td align="center" height="15">
+                                                        </td>
+               </tr>
+         <tr class="gen-statement_OddNumberedRow row col">
+                  <td height="15">
+                                                         <table class="" width="100%" cellspacing="0" cellpadding="0">
+                     <tbody><tr>
+                        <td class="" title="">
+                           
+<div class="answer_1_13">
+
+
+
+
+    
+
+
+
+
+
+    <div id="1957513701_0_13_2323719671998139796">
+        <div class="autocomplete_comment PT_ACCT_MTRX_comment gen-statement_comment Auto Regular gen-statement_IndentSingle gen-statement_OddNumberedField">
+            <span class="leadingtext"></span>
+            <span class="value gen-statement_UnderlineNone">
+                                    <nobr>
+                        Less than one month
+                    </nobr>
+                            </span>
+            <span class="trailingtext"></span>
+            <input id="answer.1957513701_0_13" name="answer.1957513701_0_13" value="Less than one month" type="hidden">
+        </div>
+    </div>
+
+
+</div>
+                        </td>
+                     </tr>
+                  </tbody></table>
+                                    </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_14">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_OddNumberedField simple_text" id="1957513701_0_14_4012552608380432718">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_14_4012552608380432718" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_OddNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext"></td>
+                    <td class="value gen-statement_UnderlineNone" style="width:95%;">200000</td>
+                    <td class="trailingtext"></td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_15">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_OddNumberedField simple_text" id="1957513701_0_15_4432679198543637229">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_15_4432679198543637229" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_OddNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext"></td>
+                    <td class="value gen-statement_UnderlineNone" style="width:95%;">30</td>
+                    <td class="trailingtext">%</td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_16">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_OddNumberedField simple_text" id="1957513701_0_16_7048234272895934582">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_16_7048234272895934582" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_OddNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext"></td>
+                    <td class="value gen-statement_UnderlineNone" style="width:95%;">60000</td>
+                    <td class="trailingtext"></td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+               </tr>
+         <tr class="gen-statement_EvenNumberedRow row col">
+                  <td height="15">
+                                                         <table class="" width="100%" cellspacing="0" cellpadding="0">
+                     <tbody><tr>
+                        <td class="" title="">
+                           
+<div class="answer_1_17">
+
+
+
+
+    
+
+
+
+
+
+    <div id="1957513701_0_17_4425239435151011932">
+        <div class="autocomplete_comment PT_ACCT_MTRX_comment gen-statement_comment Auto Regular gen-statement_IndentSingle gen-statement_EvenNumberedField">
+            <span class="leadingtext"></span>
+            <span class="value gen-statement_UnderlineNone">
+                                    <nobr>
+                        More than one month
+                    </nobr>
+                            </span>
+            <span class="trailingtext"></span>
+            <input id="answer.1957513701_0_17" name="answer.1957513701_0_17" value="More than one month" type="hidden">
+        </div>
+    </div>
+
+
+</div>
+                        </td>
+                     </tr>
+                  </tbody></table>
+                                    </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_18">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_EvenNumberedField simple_text" id="1957513701_0_18_6208790821618611051">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_18_6208790821618611051" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_EvenNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext"></td>
+                    <td class="value gen-statement_UnderlineSingle" style="width:95%;">100000</td>
+                    <td class="trailingtext"></td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_19">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_EvenNumberedField simple_text" id="1957513701_0_19_7771545132230684678">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_19_7771545132230684678" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_EvenNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext"></td>
+                    <td class="value gen-statement_UnderlineNone" style="width:95%;">75</td>
+                    <td class="trailingtext">%</td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_20">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_EvenNumberedField simple_text" id="1957513701_0_20_7056532217646093056">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_20_7056532217646093056" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_EvenNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext"></td>
+                    <td class="value gen-statement_UnderlineSingle" style="width:95%;">75000</td>
+                    <td class="trailingtext"></td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+               </tr>
+         <tr class="gen-statement_OddNumberedRow row col">
+                  <td height="15">
+                                                         <table class="" width="100%" cellspacing="0" cellpadding="0">
+                     <tbody><tr>
+                        <td class="" title="">
+                           
+<div class="answer_1_21">
+
+
+
+
+    
+
+
+
+
+
+    <div id="1957513701_0_21_8260608935564911551">
+        <div class="autocomplete_comment PT_ACCT_MTRX_comment gen-statement_comment Auto Regular gen-statement_IndentNone gen-statement_OddNumberedField">
+            <span class="leadingtext"></span>
+            <span class="value gen-statement_UnderlineNone">
+                                    <nobr>
+                        Totals
+                    </nobr>
+                            </span>
+            <span class="trailingtext"></span>
+            <input id="answer.1957513701_0_21" name="answer.1957513701_0_21" value="Totals" type="hidden">
+        </div>
+    </div>
+
+
+</div>
+                        </td>
+                     </tr>
+                  </tbody></table>
+                                    </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_22">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_OddNumberedField simple_text" id="1957513701_0_22_8474348292348168789">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_22_8474348292348168789" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_OddNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext">$</td>
+                    <td class="value gen-statement_UnderlineDouble" style="width:95%;">800000</td>
+                    <td class="trailingtext"></td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+                   <td>
+                                            </td>
+           <td align="center" height="15">
+                                                        </td>
+                   <td>
+                                                                            </td>
+           <td align="center" height="15">
+                                                  <table class="gen-statement_TopTableBorder" width="100%" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                         <td class="gen-statement_right fbIcon" title="Correct">
+                         
+<span class="answer_1_23">
+
+
+
+
+    
+
+
+
+    
+       
+            <div class=" gen-statement_OddNumberedField simple_text" id="1957513701_0_23_1509317884239600669">
+        <span class=" gen-statement_IndentNone" style="white-space: nowrap;">
+                            <div id="answer.1957513701_0_23_1509317884239600669" class="gen-statement_IndentNone clearFeedbackTrigger gen-statement_OddNumberedField Auto Regular" style="width: 104px;">
+                <table style="width: 100%;"><tbody><tr><td class="leadingtext">$</td>
+                    <td class="value gen-statement_UnderlineDouble" style="width:95%;">185000</td>
+                    <td class="trailingtext"></td></tr></tbody></table>
+                </div>
+                    </span>
+            </div>
+
+    
+</span>
+                                                                                                    </td>
+                      </tr>
+                   </tbody></table>
+                                          </td>
+               </tr>
+   </tbody></table>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        // Adjust width of selected SimpleText fields. A value of 10 is used because for
+        // ILRN-43120, a fixed width of 15 characters is specified. Since calculateNumericFieldWidth()
+        // accounts for commas, dollar signs and other characters, the value of 8 gives us approximately
+        // 15 characters.
+        var fieldWidth = calculateNumericFieldWidth(8,6.5, 10.0, 10.0);
+        // The following select by id attribute is used instead of jQuery('#...') because the id value
+        // often contains a period which doesn't work with the jQuery css style selection logic
+                    jQuery('[id="answer.1957513701_0_9_8450881046983217296"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_10_180727400088023160"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_11_7133503103999300586"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_14_4012552608380432718"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_15_4432679198543637229"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_16_7048234272895934582"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_18_6208790821618611051"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_19_7771545132230684678"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_20_7056532217646093056"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_22_8474348292348168789"]').width(fieldWidth);
+                    jQuery('[id="answer.1957513701_0_23_1509317884239600669"]').width(fieldWidth);
+            });
+</script>
+
+<p>&nbsp;</p>
+<span id="secondquestion_0"></span>
+</div>
+</div>
+<div class="gen-statement_answered-bottom-border">
+<div class="gen-statement_answered-ll-corner">
+<div class="gen-statement_answered-lr-corner">
+<img src="Chapter%207%20%28Week%206%29_files/onepixel.gif" alt=""></div>
+</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+</tbody></table>
+<br>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1957513701">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p style="width:950px">
+<strong>2. &nbsp;</strong>On the basis of the schedule in part (1), 
+identify and analyze the adjustment needed to estimate bad debts. Assume
+ that the balance in Allowance for Doubtful Accounts is $20,000. 
+</p><table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Operating</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Allowance for Doubtful Accounts Increase, Bad Debts Expense Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+<p></p>
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1957513701">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br> If a 
+financial statement item is not affected, select "No Entry" and leave 
+the amount box blank. If the effect on a financial statement item is 
+negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign. Remember: if a contra account is <i>increased</i>, it will have the effect of <i>decreasing</i> the corresponding financial statement item.</p>
+
+
+<table cellpading="3" class="narrative3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Allowance for Doubtful Accounts</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-165000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-165000</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>Bad Debts Expense</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>165000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-165000</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+</span><script language="javascript">
+              jQuery(".globalReserveWordCorrectStatusPlaceHolder").each(function(i, item) {
+                  jQuery(item).replaceWith(global_reserveWordCorrectStatus['jQuery(item).text()'])
+              });
+          </script>
+</div>
+</div>
+</div>
+</div>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><style>
+        #content table.accdefault_answerInfo
+        {
+            background-color: #FFF;
+            padding: 2px;
+            margin: 5px;
+            border: 1px dashed #CDE;
+            width: auto;
+        }
+        
+        #content table.accdefault_answerInfo td
+        {
+        }
+      </style>
+</span></div><div class="item"><div class="itemNumber">2.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_1196005400"><link href="Chapter%207%20%28Week%206%29_files/accdefault.css" rel="stylesheet" type="text/css" xmlns:fo="http://www.w3.org/1999/XSL/Format"><link href="Chapter%207%20%28Week%206%29_files/accInlineStyling.css" rel="stylesheet" type="text/css"><script type="text/javascript" language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script type="text/javascript">
+        function accountingAjaxCleanup(item)
+        {
+            ACcleanupAutocomplete();
+        }
+        
+        function accountingOnloadAction()
+        {
+            if (typeof(MultipleCorrectsPopupHandler) != 'undefined'){
+                MultipleCorrectsPopupHandler.getInstance().render();
+            }
+        }
+    </script><!--#7577138586369503323--><link href="Chapter%207%20%28Week%206%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/API.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "1196005400",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(accountingOnloadAction),
+                            ptOnUnloadActions: new Array(accountingAjaxCleanup),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "002_Exercise 7-02 (Algorithmic)",
+                    "adapter": itemAdapter,
+                    "renderingContext": "CmbjvjR6sdABK9YT0qy05xF2o54Fbg6U7KMk8jvYLkzO95da6xKNFRLn7/4cdaZGuVw3UwL66E5w\n2sPPmkx0a3ojzCo+0mBz6HStuN5+Fyglt5MFfkt/ZCpkpj+T0Aag5VL9C+xxvaYzVw7AeBM+wmnP\nPTwX5L+7pvNOenv+Mm9HUkjYG9hwjrmzCWjAqMzdEaOpjmsUwOqpoC7U9WBctCLV5GJWLETRv0wI\n8e4+KrAv7vNVmnGpSXZZ7EbdJzcOIB7few+QtpMNHeoeV05lTg6wzYXPE5/+AmQzdO49mXS53R6p\nVdXV6nRVHEDrk9EjGqAz2YZhX28v/982ZX3IEmfjMJ2a08hgmBhUJdlSbtl6HURbd505GtXTWa8a\nVTZjnX2Rt2I/JTKjAT0J1jsdid5MbSSGVA11DGVeQwIwbKJWrdFHsReoaSnDzrZtobaIkb2slBYa\nW/Wx+/YF4rXO3XYJTAT8B8ow+vl65Qqr7TB8m9hK1TSSFGZTfdtRCot094S95hHDOihikCz870d4\na3eOOOVLSuhT9kmrcvN/v5zxNVi8pdjsBONaQu8AN2oiXgcNB3tF2djFoc9VDqg++MYHY3BxOClY\niF4uR9QQo/2Yq4MJpdz+I1+WiqVQHHyG8ilQhVJe5mG1gAD0OVoyVQS2NWVCc1EINgahlBxYayNj\nvn9wRRRwYMpSkOCab6wGSFsdn7n9xCrCVXGQljgEufZKJ/zhYNERU78KTXbdTfT6olnWf3Uwugy6\ni0bleb+FV/YgNEIXqZz/NTS+Dg8q3rUW3ddybhpjs6BrHnKtVAKS9/IHaqbe9apZL62CSihZ22hr\nOOV2eJdylkzSxD9/Vc3xxm60GvZxNqERkD1X6oCB34tnTviEO4pHJLarnyEq+xgTAtwomtv2AsPF\nIDOAG+H88gQFbUehIJQ45VrZAzJ4Z75f/kCMBOA/3N9sILZkD4FS8yNRu96WkLHd+axfWe4AxUFH\n55LwgUEItj7r8xkkMUrwWm70dbn/Vipp6p49D0SO0897/Hc87zS0/Z9R5CGTwKnF32rc9qzB2zTd\nAPnujgNv+ZerU7Chp4L4SDdGQKvFg2BgYGFJwCxjC27BCvQ6z5vngbjBHF0axO6WmKQ=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5OpyyIHbLZ++bHGRugIhm1otaBPlyo7ZT1t+sO5wAQzE"
+                } ) );
+            </script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/onload.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/location.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '1196005400';
+
+              }
+              function validateItem1196005400() {var result = false;  if (typeof(validateScript1196005400) != 'undefined') {try {eval(validateScript1196005400);} catch(e) {result = e;}}return result;}
+          </script><input id="item-state_1196005400" name="item-state_1196005400" value="" type="hidden"><div class="questionWrapper">
+<div class="questionContent">
+<div>
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/jquery_002.css" type="text/css">
+<link id="absolutePath" href="http://cvg.cengagenow.com/">
+<script language="javascript" src="Chapter%207%20%28Week%206%29_files/autocomplete.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/specialnumber.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/specialNumberFieldInlineFunctions.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/engine.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/JSOLService.htm"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script type="text/javascript">
+          var absolutePath = document.getElementById('absolutePath').href;
+          var jqueryHome = absolutePath + 'media/jsframeworks/jquery/';
+          if (!jQuery.ui) {
+              jQuery.ui = jQuery.dropdown = {};
+              jQuery.getScript(jqueryHome + 'jquery-ui-1.10.3.custom.min.js', function(){
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              });
+          } else {
+              if (!jQuery.dropdown){
+                  jQuery.dropdown = {};
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              }
+          }
+      </script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/formTools.js"></script><script language="javascript">
+
+        var allAccountingStyles = [];
+        
+            allAccountingStyles.push( 'accdefault' );
+        
+            allAccountingStyles.push( 'journal-entry' );
+        
+
+        
+      jQuery( function()
+      {
+          var feedbackElements = jQuery('.clearFeedbackTrigger');
+
+          var clearFeedbackForElement = function(ev)
+          {
+              if( !ev )
+                  return;
+
+              for (var j = 0; j < allAccountingStyles.length; j++) {
+                  var element = jQuery (ev.target);
+                  var rightStyle = allAccountingStyles[j] + "_right";
+                  var wrongStyle = allAccountingStyles[j] + "_wrong";
+                  var defaultStyle = allAccountingStyles[j] + "_default";
+                  do {
+                      if (element.hasClass (rightStyle) || element.hasClass (wrongStyle)) {
+                          element.removeClass(rightStyle).removeClass(wrongStyle).addClass(defaultStyle).prop("title", "");
+                          return;
+                      }
+                      element = element.parent()
+                  } while (element.length);
+              }
+          }
+
+          feedbackElements.filter(':checkbox').click(clearFeedbackForElement);
+
+          var feedbackElementsNotCheckbox = jQuery(feedbackElements).not(':checkbox');
+          feedbackElementsNotCheckbox = feedbackElementsNotCheckbox.not(function(arg){
+                if (jQuery(this.parentNode.parentNode).hasClass('autocomplete_div'))
+                    return this;
+          });
+
+          for (var i = 0; i < feedbackElementsNotCheckbox.length; i++){
+                var  oldValue = feedbackElementsNotCheckbox[i].value;
+                jQuery(feedbackElementsNotCheckbox[i]).change(function(old_value){
+                    return function(e){
+                        var value = this.value;
+                        if (old_value != value)
+                            clearFeedbackForElement(e);
+                    }
+                }(oldValue));
+          }
+
+          if( typeof(CovalentItemManager) != 'function' || !CovalentItemManager )
+              return;
+
+          var thisItem = CovalentItemManager.getInstance().findItem('1196005400');
+          if (!thisItem) {
+              return;
+          }
+          var helper = function(item){
+
+              return {
+                  hideFeedback: function()
+                  {
+                      for(var j = 0; j < allAccountingStyles.length; j++)
+                      {
+                          var rightStyle = allAccountingStyles[j] + "_right";
+                          var wrongStyle = allAccountingStyles[j] + "_wrong";
+                          var defaultStyle = allAccountingStyles[j] + "_default";
+
+                          jQuery('.' + rightStyle + ', .' + wrongStyle).each(function()
+                          {
+                              var feedbackElement = jQuery(this);
+                              feedbackElement.toggleClass(rightStyle, false).toggleClass(wrongStyle, false).toggleClass(defaultStyle, true);
+                              feedbackElement.attr('title', '');
+                          });
+                      }
+                  }
+              };
+
+          }(thisItem);
+
+          thisItem.addItemHelper( helper );
+      });
+
+       // ILRN-36468
+       // Used for determining correct localized prefix for the reserve word status
+       var global_reserveWordCorrectStatus = {
+         'correct'   : 'Correct',
+         'incorrect' : 'Incorrect'
+       };
+
+      var MEScot1='Sorry, your current browser does not support this content. \nPlease upgrade your browser. Refer to the CengageNOW System Requirements to determine the appropriate browser and version for your system.';
+
+      function elem(id) {
+         return document.getElementById(id);
+      }
+      function showAndHide(divId, anchorId) {
+        var anchor = elem(anchorId);
+        var div = elem(divId);
+        if (div.style.display == "none") {
+          div.style.display = "";
+          anchor.innerHTML = 'Hide';
+          anchor.title = 'Hide';
+        }
+        else {
+          div.style.display = "none";
+          anchor.innerHTML = 'Show';
+          anchor.title = 'Show';
+        }
+      }
+
+      function calendarSetStyle(inputId, style, fieldStyle) {
+        document.getElementById(inputId + '_y').parentNode.className = style;
+        document.getElementById(inputId + '_m').parentNode.className = style;
+        document.getElementById(inputId + '_d').parentNode.className = style;
+        document.getElementById(inputId + '_y').className = style;
+        document.getElementById(inputId + '_m').className = style;
+        document.getElementById(inputId + '_d').className = style;
+        if (typeof(fieldStyle) != "undefined" && fieldStyle != "0") {
+          document.getElementById(inputId + '_y').parentNode.align = "right";
+          document.getElementById(inputId + '_m').parentNode.align = "right";
+          document.getElementById(inputId + '_d').parentNode.align = "right";
+          document.getElementById(inputId + '_y').parentNode.style.display = "";
+          document.getElementById(inputId + '_m').parentNode.style.display = "";
+          document.getElementById(inputId + '_d').parentNode.style.display = "";
+        }
+      }
+
+      function _fixEmpty(value) {
+        if (value == null || typeof(value) == "undefined" || value == "" || value == "blank") {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+
+      function _fixEmptyFITB(value) {
+        if (_fixEmpty(value) == "&#160;" || value == '""') {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+    </script>
+<div class="box-in-blue-box">
+<div class="problemTypes">
+<br><link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapter%207%20%28Week%206%29_files/jquery.css" rel="stylesheet" type="text/css">
+			<script src="Chapter%207%20%28Week%206%29_files/jquery_003.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script><div class="narrative">
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapter%207%20%28Week%206%29_files/mindTapReader.js" type="text/javascript"><!-- Keep the end script tag. --></script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" href="#" ebook="{ &quot;docId&quot;:&quot;WGNQQG631146985&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" style="">7-1: Accounts Receivable</a></div></span>
+
+<span class="additional_resource demo additional_resource_dropdown"><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span>
+
+<div class="additional_resource_list" style="display: none;"><a href="http://www.cengage.com/accounting/book_content/porter_9781285182957/video/video.html?asset=pwt_e7_2" target="_blank">Show Me How</a></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div></span>
+
+
+<p>Allowance Method of Accounting for Bad Debts—Comparison of the Two Approaches</p>
+<p>Stonemoss Enterprises had the following data available for 2014 (before making any adjustments):</p>
+<table class="narrative2" width="450" cellspacing="0" cellpadding="3" border="0">
+  <tbody><tr>
+    <td>Accounts receivable, 12/31/14</td>
+    <td align="right">$325,000</td>
+    </tr>
+  <tr>
+    <td>Allowance for doubtful accounts</td>
+    <td align="right">2,600</td>
+    </tr>
+  <tr>
+    <td>Net credit sales, 2014</td>
+    <td align="right">868,000</td>
+    </tr>
+</tbody></table>
+<p><strong>Required:</strong></p>
+</div><span method="post" autocomplete="off" name="submitForm_1196005400" id="submitForm_1196005400" action="?" onsubmit="if ( document.getElementById('buttonClick').value != 1 ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.1196005400" type="hidden" align="absmiddle"><script type="text/JavaScript" language="JavaScript">
+                  function getCssStep(index) {
+                  
+                    if (index == 0) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 1) {
+                      return "accdefault";
+                    }
+                  
+                    if (index == 2) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 3) {
+                      return "accdefault";
+                    }
+                  
+                    if (index == 4) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 5) {
+                      return "accdefault";
+                    }
+                  
+                    if (index == 6) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 7) {
+                      return "accdefault";
+                    }
+                  
+                  }
+                </script>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1196005400">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>
+<strong>1. &nbsp;</strong>Identify and analyze the adjustment to recognize bad debts under the following assumptions:<br>(a) bad debts expense is expected to be 2% of net credit sales for the year.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Operating</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Allowance for Doubtful Accounts Increase, Bad Debts Expense Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1196005400">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br> If a 
+financial statement item is not affected, select "No Entry" and leave 
+the amount box blank. If the effect on a financial statement item is 
+negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign. Remember: if a contra account is <i>increased</i>, it will have the effect of <i>decreasing</i> the corresponding financial statement item.</p>
+
+
+<table cellpading="3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Allowance for Doubtful Accounts</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-17360</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-17360</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>Bad Debts Expense</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>17360</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-17360</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1196005400">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>(b) Stonemoss expects it will not be able to collect 6% of the balance in accounts receivable at year-end.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Operating</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Allowance for Doubtful Accounts Increase, Bad Debts Expense Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1196005400">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br> If a 
+financial statement item is not affected, select "No Entry" and leave 
+the amount box blank. If the effect on a financial statement item is 
+negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign. Remember: if a contra account is <i>increased</i>, it will have the effect of <i>decreasing</i> the corresponding financial statement item.</p>
+
+
+<table cellpading="3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Allowance for Doubtful Accounts</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-16900</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-16900</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>Bad Debts Expense</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>16900</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-16900</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1196005400">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p style="width:950px">
+<strong>2. &nbsp;</strong>Assume instead that the balance in the allowance account is a negative $2,600. How will this
+affect your answers to part (1)?
+
+</p>
+<p>(a) bad debts expense is expected to be 2% of net credit sales for the year.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Operating</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Allowance for Doubtful Accounts Increase, Bad Debts Expense Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1196005400">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br> If a 
+financial statement item is not affected, select "No Entry" and leave 
+the amount box blank. If the effect on a financial statement item is 
+negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign. Remember: if a contra account is <i>increased</i>, it will have the effect of <i>decreasing</i> the corresponding financial statement item.</p>
+
+<table cellpading="3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Allowance for Doubtful Accounts</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-17360</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-17360</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>Bad Debts Expense</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>17360</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-17360</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1196005400">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>(b) Stonemoss expects it will not be able to collect 6% of the balance in accounts receivable at year-end.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Operating</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Allowance for Doubtful Accounts Increase, Bad Debts Expense Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1196005400">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br> If a 
+financial statement item is not affected, select "No Entry" and leave 
+the amount box blank. If the effect on a financial statement item is 
+negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign. Remember: if a contra account is <i>increased</i>, it will have the effect of <i>decreasing</i> the corresponding financial statement item.</p>
+
+
+<table cellpading="3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Allowance for Doubtful Accounts</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-22100</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-22100</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>Bad Debts Expense</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>22100</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-22100</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+</span><script language="javascript">
+              jQuery(".globalReserveWordCorrectStatusPlaceHolder").each(function(i, item) {
+                  jQuery(item).replaceWith(global_reserveWordCorrectStatus['jQuery(item).text()'])
+              });
+          </script>
+</div>
+</div>
+</div>
+</div>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><style>
+        #content table.accdefault_answerInfo
+        {
+            background-color: #FFF;
+            padding: 2px;
+            margin: 5px;
+            border: 1px dashed #CDE;
+            width: auto;
+        }
+        
+        #content table.accdefault_answerInfo td
+        {
+        }
+      </style>
+</span></div><div class="item"><div class="itemNumber">3.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_1776707173"><link href="Chapter%207%20%28Week%206%29_files/accdefault.css" rel="stylesheet" type="text/css" xmlns:fo="http://www.w3.org/1999/XSL/Format"><link href="Chapter%207%20%28Week%206%29_files/accInlineStyling.css" rel="stylesheet" type="text/css"><script type="text/javascript" language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script type="text/javascript">
+        function accountingAjaxCleanup(item)
+        {
+            ACcleanupAutocomplete();
+        }
+        
+        function accountingOnloadAction()
+        {
+            if (typeof(MultipleCorrectsPopupHandler) != 'undefined'){
+                MultipleCorrectsPopupHandler.getInstance().render();
+            }
+        }
+    </script><!--#-3070414789563258886--><link href="Chapter%207%20%28Week%206%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/API.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "1776707173",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(accountingOnloadAction),
+                            ptOnUnloadActions: new Array(accountingAjaxCleanup),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "001_Brief Exercise 7-01 (Algorithmic)",
+                    "adapter": itemAdapter,
+                    "renderingContext": "YAVWQC2ab5PpADbr2lbf0Mg4jJMvnq0GJ/npJG84CaxXjLXMQB4b5nfybjTu0MeulB77O6lt78mP\nwo+NcD1zPUNTtiQ2ILzZSR9g8qpA28HubbmOkKbAa03BaowA23AULqEkN+8Q9EptFHga7u/Z0PMN\n3jrWjoRe9E0hFiu/WNGRmir+mwryns+zlOahJwjZrjdd4e3+zc1wBSntjlCSphy6HcSk6v0e/cpv\nVxMe8vuOMzaj80l95MHxTvCw8Yb9i7MhpRWFICYV19mf7/Qg5IVM6cpMPP7Uojmc8hv6Ce3+mbLW\nCwakojA+c90wqfLvPzARBifEulKxth7k/W/xqZ82oI65eCxJ8OsAib3CHMfPqzACnfwKshNQcx43\nnPFEubn6WwcvxwBefJvonvaDm7bzi608Qur4Z/MdqO+wcGwr6XS/yvkhuOHQoKb+O60d7ObJWdjs\nEzGchSLKWJuPx5mthxPlRLOHtZcuG79enTlnDZ3YuQgm9xok87MvxfddYKUfCfiboSGuSDBsMD8m\nRNOTKTIChXCDP7UVKCfkngkSS+sSACRRvpmBi6LPqToJ9UGbMsmX7CTOXXhh4e4f9q5fZKNi2Ehc\nb9m+eAdY4mbo56OvT0CvyoZHdo1nSTq0OIZbNZKVVxeXiGVxzPw60ihscwMPf32tU/POHZ0VsnYN\nqNk0daDzzfiEHdyjUnI15u19Fro9zyAwXqLUu04WKkNr45U1maka4rY+gMutt6o1qI08ZMnNtJ7g\ndGexmxfB5kMlaScpYDLLfFO5LRWpZstrUW5zSc7p5LEDR8FhHpy/J0uKIS9sQTNdk0xB3vNt5Htq\nsBxMmJotCT2+6nlvo/uAForB+rQtBJUYk9CCykIotGkdTxme4xKe/e9bS4Zw3q9VHa1bKBiRcLC/\nNQtwVdtXE7I8+C/C3ePST670jV2duNiyyIH2TNtnlZJ/Qx2EKzqZolUYqoTWpqCk1Bsm2sG0892W\nKVyKjxecY3+tgfYDZ+5u/bS3Jv1UiywQHENghCrpeVI+D1edNA0fUoYqVsZ0dnFAgNclks7NDUx3\nadv+7vngjgGT1UkwQYoup7+DgyqCUoF6ABnsHnxLPKjqUddQL37nbaEUDSqbtlC+tWM=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5ItRvN74zfSkCWjn235UNNNngk3M7gEms/dsn3EhMkUl"
+                } ) );
+            </script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/onload.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/location.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '1776707173';
+
+              }
+              function validateItem1776707173() {var result = false;  if (typeof(validateScript1776707173) != 'undefined') {try {eval(validateScript1776707173);} catch(e) {result = e;}}return result;}
+          </script><input id="item-state_1776707173" name="item-state_1776707173" value="" type="hidden"><div class="questionWrapper">
+<div class="questionContent">
+<div>
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/jquery_002.css" type="text/css">
+<link id="absolutePath" href="http://cvg.cengagenow.com/">
+<script language="javascript" src="Chapter%207%20%28Week%206%29_files/autocomplete.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/specialnumber.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/specialNumberFieldInlineFunctions.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/engine.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/JSOLService.htm"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script type="text/javascript">
+          var absolutePath = document.getElementById('absolutePath').href;
+          var jqueryHome = absolutePath + 'media/jsframeworks/jquery/';
+          if (!jQuery.ui) {
+              jQuery.ui = jQuery.dropdown = {};
+              jQuery.getScript(jqueryHome + 'jquery-ui-1.10.3.custom.min.js', function(){
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              });
+          } else {
+              if (!jQuery.dropdown){
+                  jQuery.dropdown = {};
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              }
+          }
+      </script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/formTools.js"></script><script language="javascript">
+
+        var allAccountingStyles = [];
+        
+            allAccountingStyles.push( 'accdefault' );
+        
+            allAccountingStyles.push( 'journal-entry' );
+        
+
+        
+      jQuery( function()
+      {
+          var feedbackElements = jQuery('.clearFeedbackTrigger');
+
+          var clearFeedbackForElement = function(ev)
+          {
+              if( !ev )
+                  return;
+
+              for (var j = 0; j < allAccountingStyles.length; j++) {
+                  var element = jQuery (ev.target);
+                  var rightStyle = allAccountingStyles[j] + "_right";
+                  var wrongStyle = allAccountingStyles[j] + "_wrong";
+                  var defaultStyle = allAccountingStyles[j] + "_default";
+                  do {
+                      if (element.hasClass (rightStyle) || element.hasClass (wrongStyle)) {
+                          element.removeClass(rightStyle).removeClass(wrongStyle).addClass(defaultStyle).prop("title", "");
+                          return;
+                      }
+                      element = element.parent()
+                  } while (element.length);
+              }
+          }
+
+          feedbackElements.filter(':checkbox').click(clearFeedbackForElement);
+
+          var feedbackElementsNotCheckbox = jQuery(feedbackElements).not(':checkbox');
+          feedbackElementsNotCheckbox = feedbackElementsNotCheckbox.not(function(arg){
+                if (jQuery(this.parentNode.parentNode).hasClass('autocomplete_div'))
+                    return this;
+          });
+
+          for (var i = 0; i < feedbackElementsNotCheckbox.length; i++){
+                var  oldValue = feedbackElementsNotCheckbox[i].value;
+                jQuery(feedbackElementsNotCheckbox[i]).change(function(old_value){
+                    return function(e){
+                        var value = this.value;
+                        if (old_value != value)
+                            clearFeedbackForElement(e);
+                    }
+                }(oldValue));
+          }
+
+          if( typeof(CovalentItemManager) != 'function' || !CovalentItemManager )
+              return;
+
+          var thisItem = CovalentItemManager.getInstance().findItem('1776707173');
+          if (!thisItem) {
+              return;
+          }
+          var helper = function(item){
+
+              return {
+                  hideFeedback: function()
+                  {
+                      for(var j = 0; j < allAccountingStyles.length; j++)
+                      {
+                          var rightStyle = allAccountingStyles[j] + "_right";
+                          var wrongStyle = allAccountingStyles[j] + "_wrong";
+                          var defaultStyle = allAccountingStyles[j] + "_default";
+
+                          jQuery('.' + rightStyle + ', .' + wrongStyle).each(function()
+                          {
+                              var feedbackElement = jQuery(this);
+                              feedbackElement.toggleClass(rightStyle, false).toggleClass(wrongStyle, false).toggleClass(defaultStyle, true);
+                              feedbackElement.attr('title', '');
+                          });
+                      }
+                  }
+              };
+
+          }(thisItem);
+
+          thisItem.addItemHelper( helper );
+      });
+
+       // ILRN-36468
+       // Used for determining correct localized prefix for the reserve word status
+       var global_reserveWordCorrectStatus = {
+         'correct'   : 'Correct',
+         'incorrect' : 'Incorrect'
+       };
+
+      var MEScot1='Sorry, your current browser does not support this content. \nPlease upgrade your browser. Refer to the CengageNOW System Requirements to determine the appropriate browser and version for your system.';
+
+      function elem(id) {
+         return document.getElementById(id);
+      }
+      function showAndHide(divId, anchorId) {
+        var anchor = elem(anchorId);
+        var div = elem(divId);
+        if (div.style.display == "none") {
+          div.style.display = "";
+          anchor.innerHTML = 'Hide';
+          anchor.title = 'Hide';
+        }
+        else {
+          div.style.display = "none";
+          anchor.innerHTML = 'Show';
+          anchor.title = 'Show';
+        }
+      }
+
+      function calendarSetStyle(inputId, style, fieldStyle) {
+        document.getElementById(inputId + '_y').parentNode.className = style;
+        document.getElementById(inputId + '_m').parentNode.className = style;
+        document.getElementById(inputId + '_d').parentNode.className = style;
+        document.getElementById(inputId + '_y').className = style;
+        document.getElementById(inputId + '_m').className = style;
+        document.getElementById(inputId + '_d').className = style;
+        if (typeof(fieldStyle) != "undefined" && fieldStyle != "0") {
+          document.getElementById(inputId + '_y').parentNode.align = "right";
+          document.getElementById(inputId + '_m').parentNode.align = "right";
+          document.getElementById(inputId + '_d').parentNode.align = "right";
+          document.getElementById(inputId + '_y').parentNode.style.display = "";
+          document.getElementById(inputId + '_m').parentNode.style.display = "";
+          document.getElementById(inputId + '_d').parentNode.style.display = "";
+        }
+      }
+
+      function _fixEmpty(value) {
+        if (value == null || typeof(value) == "undefined" || value == "" || value == "blank") {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+
+      function _fixEmptyFITB(value) {
+        if (_fixEmpty(value) == "&#160;" || value == '""') {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+    </script>
+<div class="box-in-blue-box">
+<div class="problemTypes">
+<br><link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapter%207%20%28Week%206%29_files/jquery.css" rel="stylesheet" type="text/css">
+			<script src="Chapter%207%20%28Week%206%29_files/jquery_003.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script><div class="narrative">
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapter%207%20%28Week%206%29_files/mindTapReader.js" type="text/javascript"><!-- Keep the end script tag. --></script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" href="#" ebook="{ &quot;docId&quot;:&quot;WGNQQG631146985&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" style="">7-1: Accounts Receivable</a></div></span>
+
+<span class="additional_resource demo additional_resource_dropdown"><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span>
+
+<div class="additional_resource_list" style="display: none;"><a href="http://www.cengage.com/accounting/book_content/porter_9781285182957/video/video.html?asset=pwt_be7_1" target="_blank">Show Me How</a></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div></span>
+
+
+<p>Accounting for Bad Debts</p>
+<p>Condor recorded $530,000 of net sales for the year of which 2% is estimated to be uncollectible.</p>
+</div><span method="post" autocomplete="off" name="submitForm_1776707173" id="submitForm_1776707173" action="?" onsubmit="if ( document.getElementById('buttonClick').value != 1 ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.1776707173" type="hidden" align="absmiddle"><script type="text/JavaScript" language="JavaScript">
+                  function getCssStep(index) {
+                  
+                    if (index == 0) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 1) {
+                      return "accdefault";
+                    }
+                  
+                  }
+                </script>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1776707173">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>Identify and analyze the adjustment required at the end of the year to record bad debts.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Operating</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Allowance for Doubtful Accounts Increase, Bad Debts Expense Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1776707173">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br> If a 
+financial statement item is not affected, select "No Entry" and leave 
+the amount box blank. If the effect on a financial statement item is 
+negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign. Remember: if a contra account is <i>increased</i>, it will have the effect of <i>decreasing</i> the corresponding financial statement item.</p>
+
+
+<table cellpading="3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Allowance for Doubtful Accounts</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-10600</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-10600</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>Bad Debts Expense</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>10600</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-10600</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+</span><script language="javascript">
+              jQuery(".globalReserveWordCorrectStatusPlaceHolder").each(function(i, item) {
+                  jQuery(item).replaceWith(global_reserveWordCorrectStatus['jQuery(item).text()'])
+              });
+          </script>
+</div>
+</div>
+</div>
+</div>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><style>
+        #content table.accdefault_answerInfo
+        {
+            background-color: #FFF;
+            padding: 2px;
+            margin: 5px;
+            border: 1px dashed #CDE;
+            width: auto;
+        }
+        
+        #content table.accdefault_answerInfo td
+        {
+        }
+      </style>
+</span></div><div class="item"><div class="itemNumber">4.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_46709252"><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><!--#-1568501535665321674--><link href="Chapter%207%20%28Week%206%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/API.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "46709252",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(null),
+                            ptOnUnloadActions: new Array(null),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "005_Decision Case 7-01",
+                    "adapter": itemAdapter,
+                    "renderingContext": "CmbjvjR6sdABK9YT0qy05zsGf2v01BUNqNeyPlWwosHHWPfGs0UELjxPboVUTvMPX9DgqV5d0HCS\n5jlPDhMOewJUMAj4ISP8hGIWOUJOBdMQd8mGN1fxxDH6iyS4UfRbIhr+lji929KiphiJ5MrB4clH\n4mMm0DN5aDT3tzoSicT6XUesO6TW5n+0O7tZh1hz/E2TdJZnP0qYZzVvFvn8sxpjX0zjsjC8Jl9B\nkDmsAF6nwtB/OicIHIB6db/H4Lat9fvzZuo4fDPedxa9QITjbiKSQoh3Dv4Gk8wzpUKc93LhkzG8\namhsrtNxH1fgt8q3r+FMFl3VsGZtUuToUaEfZ2GeWopqoepq7ve9iKfIWo+ISqzPEOOZetvGw0rG\ngs97QAYS8dsTkTIh73eVx/QMYc90xDKL8LQtAS3Woun+Io0Nfx1VQMRXj+eDmDnaa2KLOZqqcfFB\n99y7z2ZKZ8UJ1OSZfLG/uqN1ksCXs9tvSUxuH/jgKiviXIlwVhn40DdFLB/2USSum/HiBc6Qvcd8\ntTgDp4KzqbAa4U61WlkTTHNz61SHf/ejF4r7RdA4QuQ36ZJslLKxN5aROzcJNp0sdUbXcFmCO3LR\nnF6P8vr9oXbBd7uAZdUgNf8An7fKr4dswrxoIOl5SGGBQ61MVZMOi8+LQYNFO5DwGKalT/NUohVx\nMyIsLs+CkcAWZCUlVcjvPVxiLdSNUgdk5p/iJ6NJyg/tNF3WLlERTbKWq6ZEBBg6Ffk/530FDUFK\nCvk0/6UZfVaE0/0829UmRP2DZCQJcHTUn2jSD3zyWUZddI1r/vXiSVuDPJ7XDOp+l+86aiug3lJM\nbu6vU+Kv5V90KT/bArvcJsS60DB4vOOI/gM608PcaEuQXX8Y8iJURHSX+0SMTSjzuSIV/c1l0FmF\npt8UF/ejL8CJPhlxfLg1OhrgASR+s1Z1TT+hUecBj9esI85A/yCHxmwGHigJTatcg/YhY1Ij+rWX\nfSGn/wzmwj5VsLnVV/LoRFlbtStfCH5DBwAJ2gpY9/+ELZmsCw3kcYvwcDwdNkR+wxV40yVCUMcS\nMV5jokU7a94UuvT8i5s6OSLqsfBjg/ygzoqDBy0enzdgOGrvIKifybo4rWvTIsmRbYA=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5OZwiGZ5UPEp1pKFiQnYJJd3eEjWTeZQL1DPOepD2SV9"
+                } ) );
+            </script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/onload.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/location.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '46709252';
+
+              }
+              function validateItem46709252() {var result = false;  if (typeof(validateScript46709252) != 'undefined') {try {eval(validateScript46709252);} catch(e) {result = e;}}return result;}
+          </script><div class="questionWrapper questionContent">
+<table width="100%" cellspacing="4" cellpadding="0" border="0">
+<tbody><tr>
+<td class="problemTypes" colspan="100%" width="100%" align="left"><span method="post" name="submitForm_46709252" id="submitForm_46709252" action="" onsubmit="if ( typeof( buttonClick ) == 'undefined' || !buttonClick ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.46709252" type="hidden"><input name="uid" id="uid" value="46709252" type="hidden"><input id="item-state_46709252" name="item-state_46709252" value="" type="hidden"><span id="rejoinderPlaceholder_46709252_">
+<!--placeholder for rejoinderPlaceholder_46709252_--></span><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_46709252">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+
+<link href="Chapter%207%20%28Week%206%29_files/jquery.css" rel="stylesheet" type="text/css">
+			
+<script src="Chapter%207%20%28Week%206%29_files/jquery_003.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script>
+<div class="narrative">
+
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapter%207%20%28Week%206%29_files/mindTapReader.js" type="text/javascript"> Keep the end script tag. </script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" ebook="{ &quot;docId&quot;:&quot;WGNQQG631146985&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" href="#" style="">7-1: Accounts Receivable</a></div></span>
+
+
+
+<p>Reading 3M Company’s Balance Sheet: Accounts Receivable</p>
+  
+<p>The following current asset appears on the balance sheet in <strong>3M Company’s</strong> Form 10-K for the year ended December 31, 2012 (amounts in millions of dollars):
+<br>
+<br>
+
+<img src="Chapter%207%20%28Week%206%29_files/pnal09h_ch07_dc7-1.gif"></p>
+
+
+<p>Use this information to answer the following questions. Enter dollar amounts in millions.</p>
+
+<p>
+<strong>Required:</strong>
+</p>
+
+<p>
+<strong>1. &nbsp;</strong>What is the balance in 3M Company’s Allowance for Doubtful Accounts at the end of 2012 and 2011?</p>
+
+
+<table class="narrative2" width="250" cellspacing="0" cellpadding="3">
+  
+<tbody><tr>
+    
+<td>2012</td>
+    <td>$<div>
+<u>105</u>
+</div> million</td>
+  
+</tr>
+  
+<tr>
+    
+<td>2011</td>
+    <td>$<div>
+<u>108</u>
+</div> million</td>
+  
+</tr>
+
+</tbody></table>
+
+
+<p>
+<strong>2. &nbsp;</strong>What is the net realizable value of 3M Company’s accounts receivable at the end of each of these two years?</p>
+
+
+<table class="narrative2" width="250" cellspacing="0" cellpadding="3">
+  
+<tbody><tr>
+    
+<td>2012</td>
+    <td>$<div>
+<u>4061</u>
+</div> million</td>
+  
+</tr>
+  
+<tr>
+    
+<td>2011</td>
+    <td>$<div>
+<u>3867</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div> million</td>
+  
+</tr>
+
+</tbody></table>
+
+
+</div>
+</div>
+<br>
+</span></td>
+</tr>
+</tbody></table>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><script type="text/javascript">
+        
+            (function(covalentItem){
+            
+                
+        (function(covalentItem){
+        
+            var rejoinders = [];
+        
+            
+
+            jQuery.each(rejoinders, function(i, rejoinder){
+                covalentItem.addRejoinder(rejoinder);
+            });
+
+        })(covalentItem);
+        
+    
+            
+            })( CovalentItemManager.getInstance().findItem('46709252') );
+
+        </script>
+</span></div><div class="item"><div class="itemNumber">5.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_2112001182"><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><!--#4475338525341543312--><link href="Chapter%207%20%28Week%206%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/API.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "2112001182",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(null),
+                            ptOnUnloadActions: new Array(null),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "002_Exercise 7-01 (Algorithmic)",
+                    "adapter": itemAdapter,
+                    "renderingContext": "CmbjvjR6sdABK9YT0qy057Wc6lGXZg3PY9b39FXCS7jHlpxKL8urz6U1f4qoVikE7uOCvkHLstd9\nastIF7TPZaFIPOkewoLVq4lEnSuX5mr1eGUybO8GbVUpAzt3VGj9VoKuFLz7mLEKkubQXLpFC89n\nzjkAd5jnPdLKSIIJRoJURLt6nxIM8WWIuTAJqrv/W8qP2zVTjvTZcSdfbZ4Vc7MoSSBBxlZm9DJJ\nmrqud+zyhI1GA1hyB/gQQZ4DUw6YYZSJ30scN9o7pTQBaOC6iJvvAq2HNSyLUiAkmAIxyymJhjZg\nOh0SveyxoO9Ms+MbYESC5zShYEgL8oaCFQKLIV44/Ev1RAD7nOA4Qm+1Ptg1CC8DOkLH8kqQ81/O\nuEpiv1Ke8nCtgpCi7g1TyXew+Oy6v6UfMqCN8+v4kO/HBpaxRoCSOeNgdE0QgrPxhqCIXdMUWSOR\nkiybnns+4XGfPqNjfYI74XqFh2pCFfU0DjHjsl+tNuEKIQQ+wQdvH0JOB2pAWVuKo3C9Ps23knPG\nFsEPiTkc61NoQWFR1Sr0eW9C0r53cNQw2y9f5PxaRvRt4ouJAUhv9WPMqxbsNL0Tl5sut+jjR45U\nIxJoH0GNTtGWxS6YVWzlHyZR54GA332wYsSn9bF621bg2hdG2Ac7e/yq2zEmiyVHKt4bDDKIrjiQ\nm+Oswbg3taKdapZ/qYSrCGiffpUgPQtxrawgHPan/m+OFLIXFYW7m/R+aHpcz5opp6js92OiISoH\nXiw3cVASxdjOme3xb9NUOiwRFkUYp7R+GzNZZlKel/wTCc7Z6CGG7iZgsx42/NMx+d526QL4pAld\ni/HuPTVvcFrYiulAfq/xO8FdsvWeKAn+lWU1NDYwFMaUFoccKOs8dGrvEcQpqwTGzc2jcEKRp7TH\nldfbeWlWocNxYV+s7e3HNooZl4WxjwLXg4BToh3Vh1Vi8JxE6x3U+GtCdwpujh1+rADTMSZwdElK\nnUeem8Hvi52U4Z2CRAxUhoZISvc9HKoJneoVUU3F7IE/AmaN1yJbDPh5Aqjc1yutHPFMGMaat48Y\nCVmJb3IUnKrT5g6aeXzluKJIydHYzt7QPE35dnyPS/CWL5YOnn/sRiIzwXBQGLsT2XE=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5JurKpYiwPKE2JSMZ50pXH/0kv1sfE9XDvcHNpP7gV98"
+                } ) );
+            </script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/onload.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/location.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '2112001182';
+
+              }
+              function validateItem2112001182() {var result = false;  if (typeof(validateScript2112001182) != 'undefined') {try {eval(validateScript2112001182);} catch(e) {result = e;}}return result;}
+          </script><div class="questionWrapper questionContent">
+<table width="100%" cellspacing="4" cellpadding="0" border="0">
+<tbody><tr>
+<td class="problemTypes" colspan="100%" width="100%" align="left"><span method="post" name="submitForm_2112001182" id="submitForm_2112001182" action="" onsubmit="if ( typeof( buttonClick ) == 'undefined' || !buttonClick ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.2112001182" type="hidden"><input name="uid" id="uid" value="2112001182" type="hidden"><input id="item-state_2112001182" name="item-state_2112001182" value="
+&lt;item-state&gt;&lt;state/&gt;&lt;/item-state&gt;" type="hidden"><span id="rejoinderPlaceholder_2112001182_">
+<!--placeholder for rejoinderPlaceholder_2112001182_--></span><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_2112001182">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+
+<link href="Chapter%207%20%28Week%206%29_files/jquery.css" rel="stylesheet" type="text/css">
+			
+<script src="Chapter%207%20%28Week%206%29_files/jquery_003.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script>
+<div class="narrative">
+
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapter%207%20%28Week%206%29_files/mindTapReader.js" type="text/javascript"> Keep the end script tag. </script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" ebook="{ &quot;docId&quot;:&quot;WGNQQG631146985&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" href="#" style="">7-1: Accounts Receivable</a></div></span>
+
+
+
+<p>Comparison of the Direct Write-Off and Allowance Methods of Accounting for Bad Debts</p>
+
+<p>In its first year of business, Upton Cyclery has net income of 
+$135,000, exclusive of any adjustment for bad debts expense. So far, no 
+adjustments have been made to write off uncollectible accounts or to 
+estimate bad debts. The relevant data are as follows:<br>
+<br>
+<img src="Chapter%207%20%28Week%206%29_files/pnal09h_ch07_ex7_1.gif"></p>
+
+<p>
+<strong>Required:</strong>
+</p>
+
+<p>Under the direct write-off method, net income is $</p><div>
+<u>124500</u>
+</div> and under the allowance method, net income is $<div>
+<u>122000</u>
+</div>. The <div>
+<u>direct write-off method</u>
+</div> results in the higher net income but the method that should be used is the <div>
+<u>allowance method</u>
+</div> because this is the preferred method under accounting standards because it follows the <div>
+<u>matching principle</u>
+</div>. The direct write-off method should only be used if the amount of bad debts is <div>
+<u>immaterial</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>.<p></p>
+
+
+</div>
+</div>
+<br>
+</span></td>
+</tr>
+</tbody></table>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><script type="text/javascript">
+        
+            (function(covalentItem){
+            
+                
+        (function(covalentItem){
+        
+            var rejoinders = [];
+        
+            
+
+            jQuery.each(rejoinders, function(i, rejoinder){
+                covalentItem.addRejoinder(rejoinder);
+            });
+
+        })(covalentItem);
+        
+    
+            
+            })( CovalentItemManager.getInstance().findItem('2112001182') );
+
+        </script>
+</span></div><div class="item"><div class="itemNumber">6.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_744178769"><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><!--#-2202186817567117719--><link href="Chapter%207%20%28Week%206%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/API.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "744178769",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(null),
+                            ptOnUnloadActions: new Array(null),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "002_Exercise 7-03 Algorithmic",
+                    "adapter": itemAdapter,
+                    "renderingContext": "YAVWQC2ab5PpADbr2lbf0M5sRlE/0dwCi/NlkDXvjxS0hStEbIkp6X1cVjahYc0WKy94ZB4+Yd3Z\nOW8iYvBSwdc+Rp9xOhRcLZozBvv4X+EejXR+kuLk5Q4N1qNGEr2Xp8Bfq82oTUc+zQWZ+f0SmNK+\n0tbnhcvT5bSBbHjfI2Vcrf93wzH0YtAltriUMZBwbwh1IwxQmaLZfaJ6IhD8kc7hzPsmYK4UbQRY\nYxvdXDQER1DRnzstdPmDLKIeOVY2QnOqYBmcftArvHH3AAzIMJQ9qagsa7c/vd3zcZjjpoxrq4KZ\nfpopQrxVv9nV7+0KdiAW42hHhiNMERpwWy+PUAiu9PKiOpxvq7O7aqs2qTxsfZKLZ+4XsgfsfnuO\nAsj7N1VpijoR0XGCqSyxV3ZoM1Ms5k7gpa14ZQ70F5HpF6QK1C6xBIXqy14m7ReWu9tRBP2vcYx4\nLbisq94bEBM5HIwQwm8JvJ5w3PRaMwsFemXb440ajYIW6+lXBPaQFq0lhf/B7MZRGKrzOuaAKxjD\nf7INxWGz0NL9UmlQlZOKz+7HcZ06YniX11FV7MR2Pzp+cuUz/5Go0PAOOowJ8xKMC1yMUP13tUYt\njU+ZfIH23jA26rVSFE1oygeh7FwqM2uOaxP/cVwnUHJ08aN1RHr1GfOoSmY1seue6KV2+CFYYTJ4\nmY2JoB8a6vfqq0lnFWaNMPIcreP62dd8usp9sHkm/EnESoflcWY3BFGdGBAr86iLEOVZAGnPAgHe\nwHD14WfHEvTlOKUlrRFRrMYqA2gxgtdawi4nW9zYj6x4ZKJX5MuYVC+Qm4T95gLw4sLyLofpTRNs\nIPkh+jLGUNK9Kx++NGIpvRuUYyYmoZ8QybBFCtEr4NxVDIOzyFZO48bBRw6FcARQ2/f/RsNuSeBg\nIukvftSM2fQryh423vaYezw8syCv2gmZcocrpZbtWuKYieWzWWzcT/X5fpeknMo1LnApHMDjxIh3\nWMFG9ayljSwUYI1ncGUf13nPvk1ts6Wx3D4bRq9FnP7WKRhugJlCSbAxDrlNGkfTfJg9P5HGfN+f\nVTzLrBBiVVArFNsryz7rUwefWmAwjmWHBJYsOX22ZuyhpxOLboLNm6SBhFKAXhycw+g=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5GmN2pAUY3563IIUXwjgzBK0MCY0CpilgIAundqShNLc"
+                } ) );
+            </script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/onload.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/location.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '744178769';
+
+              }
+              function validateItem744178769() {var result = false;  if (typeof(validateScript744178769) != 'undefined') {try {eval(validateScript744178769);} catch(e) {result = e;}}return result;}
+          </script><div class="questionWrapper questionContent">
+<table width="100%" cellspacing="4" cellpadding="0" border="0">
+<tbody><tr>
+<td class="problemTypes" colspan="100%" width="100%" align="left"><span method="post" name="submitForm_744178769" id="submitForm_744178769" action="" onsubmit="if ( typeof( buttonClick ) == 'undefined' || !buttonClick ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.744178769" type="hidden"><input name="uid" id="uid" value="744178769" type="hidden"><input id="item-state_744178769" name="item-state_744178769" value="
+&lt;item-state&gt;&lt;state/&gt;&lt;/item-state&gt;" type="hidden"><span id="rejoinderPlaceholder_744178769_">
+<!--placeholder for rejoinderPlaceholder_744178769_--></span><script language="javascript" src="Chapter%207%20%28Week%206%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/sysCheck.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/popupTools.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/jquery_005.js"></script><script language="javascript" src="Chapter%207%20%28Week%206%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_744178769">
+<link rel="stylesheet" href="Chapter%207%20%28Week%206%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapter%207%20%28Week%206%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapter%207%20%28Week%206%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+
+<link href="Chapter%207%20%28Week%206%29_files/jquery.css" rel="stylesheet" type="text/css">
+			
+<script src="Chapter%207%20%28Week%206%29_files/jquery_003.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script>
+<div class="narrative">
+
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapter%207%20%28Week%206%29_files/mindTapReader.js" type="text/javascript"> Keep the end script tag. </script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" ebook="{ &quot;docId&quot;:&quot;WGNQQG631146985&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" href="#" style="">7-1: Accounts Receivable</a></div></span>
+
+
+
+<p>Working Backward: Allowance for Doubtful Accounts</p>
+
+<p>Olson Corp. reported the following in the Current Assets section of its December 31, 2014, balance sheet:<br>
+
+<br>
+
+
+
+</p><table width="450px" cellspacing="0" cellpadding="0" border="0">
+
+<tbody><tr>
+    
+<td width="60%"></td>
+    <td width="20%" align="center"><strong>12/31/14</strong></td>
+    <td width="20%" align="center"><strong>12/31/13</strong></td>
+    
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="3"></td>
+
+</tr>
+
+
+<tr>
+    
+<td>Accounts receivable, net of allowances</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    
+</tr>
+
+
+<tr>
+    
+<td>of $4,910 and $2,930, respectively</td>
+    <td align="center">$54,250</td>
+    <td align="center">$46,160</td>
+    
+</tr>
+
+</tbody></table>
+
+
+<p></p>
+
+<p>During 2014, Olson recorded $80,170 of sales on credit and wrote off $3,850 of uncollectible accounts.</p>
+
+<p>
+<strong>Required:</strong>
+</p>
+
+<p>
+<strong>1. &nbsp;</strong>Determine the amount of cash collected during 2014 from sales on credit. <br>$</p><div>
+<u>66250</u>
+</div>
+<p></p>
+
+<p>
+<strong>2. &nbsp;</strong>Determine the amount of bad debts expense for 2014. <br>$</p><div>
+<u>5830</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+<p></p>
+
+</div>
+</div>
+<br>
+</span></td>
+</tr>
+</tbody></table>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><script type="text/javascript">
+        
+            (function(covalentItem){
+            
+                
+        (function(covalentItem){
+        
+            var rejoinders = [];
+        
+            
+
+            jQuery.each(rejoinders, function(i, rejoinder){
+                covalentItem.addRejoinder(rejoinder);
+            });
+
+        })(covalentItem);
+        
+    
+            
+            })( CovalentItemManager.getInstance().findItem('744178769') );
+
+        </script>
+</span></div></div><script type="text/javascript">
+			    
+                    forceDisableRejoinderEvents = true;
+                    
+                    function blankSync(){};
+
+			    </script></body></html>

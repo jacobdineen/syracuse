@@ -1,0 +1,50 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fmodern\fcharset0 CourierNewPS-BoldMT;\f1\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\vieww12000\viewh15840\viewkind0
+\deftab720
+\pard\pardeftab720\ri-720\partightenfactor0
+
+\f0\b\fs32 \cf0 Week 8 \'96 Twitter Demo\
+\pard\pardeftab720\ri-720\partightenfactor0
+
+\f1\b0\fs22 \cf0 \
+Start the mongoDB server.\
+\
+Run the DB_from_file.py program to load Tweets from a file.\
+\
+From Anaconda prompt run this Python program:\
+\
+python DB_from_file.py bball bbcoll bball_mm2.txt\
+\
+Now, let\'92s get into Python and look at the Tweets.\
+\
+import pymongo\
+client = pymongo.MongoClient('localhost',27017)\
+#list the databases defined\
+client.database_names()\
+\
+db = client.bball\
+db.collection_names()\
+coll=db.bbcoll\
+docs = coll.find()\
+\
+# convert the document cursor to a list of documents\
+doclist = [tweet for tweet in docs]\
+len(doclist)\
+\
+# show difference from print\
+print(doclist[:1])\
+Look through this to point out field names.\
+\
+Here is a little print function that will help.\
+\
+def print_tweet_data(tweets):\
+  for tweet in tweets:\
+    print('\\nDate:', tweet['created_at'])\
+    print('From:', tweet['user']['name'])\
+    print('Message', tweet['text'])\
+\
+print_tweet_data(doclist[:5])\
+}

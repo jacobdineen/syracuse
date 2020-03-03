@@ -1,0 +1,26 @@
+#Jake Dineen
+#9.3
+
+#Tutorial
+#http://www.regexpal.com/
+#[em] finds all occurrences of e and m
+# [A-Z] highlights all capital letters [a-z] highlights all lowercase letters
+# . without the brackets finds everything
+#[^A-Z] find everything that isn't a capital letters
+#step|cat finds all regex matches of step and cat [cC]at case won't matter
+
+import re
+string = "Celebrate #NationalPetDay with our puppy playlist: https://t.co/eBHHFPW0z7 https://t.co/uix5AY2FFQ<a href="http://msande.stanford.edu"> Management Science and Engineering </a><p class="MsoNormal"
+
+      Address: Terman 311, Stanford CA 94305<br>
+
+      Email: ashishg@cs.stanford.edu<br>
+
+      Phone: (650)814-9999 [Cell], Fax: (650)723-9999<br>
+
+      Admin asst: Roz Morf, Terman 405, 650-723-9999, rozm@stanford.edu</p>
+
+The U.S.A. olympic teams have east-west training centers with up-to-date equipment."
+
+url = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', string)
+print(url)

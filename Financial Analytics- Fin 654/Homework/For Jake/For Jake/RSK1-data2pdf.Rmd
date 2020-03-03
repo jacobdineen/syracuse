@@ -1,0 +1,49 @@
+---
+title: "R Skills - data2pdf"
+author: "Bill Foote"
+date: "January 4, 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+The objective is to show the work flow from data collection through output and rendering.
+
+## Data
+
+Data is from [FRED](https://fred.stlouisfed.org/categories/32407).
+
+\begin{center}
+  \begin{tabular}{| l | p{9cm} | l |}
+    \hline
+    Variable & Description & Units \\ \hline
+    rate & Weighted-Average Effective Loan Rate by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EETP365PDNQ) & percent \\ \hline
+prepay & Percent of Value of Loans Subject to Prepayment Penalty by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EPTP365PDNQ) & percent \\ \hline
+maturity & Weighted-Average Maturity/Repricing Interval in Days by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EITP365PDNQ) & days \\ \hline
+size & Average Loan Size by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EATP365PDNQ) & thousandsUSD \\ \hline
+volume & Total Value of Loans by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EVTP365PDNQ) & millionsUSD \\ \hline
+  \end{tabular}
+\end{center}
+
+## Data Exploration
+
+Read in the data.
+
+```{r}
+x.data <- read.csv("data/commloans.csv")
+head(x.data)
+tail(x.data)
+summary(x.data)
+```
+
+## Analysis
+
+Insert analysis here.
+
+
+## Observations & Recommendations
+
+Insert observations and recommendations summary here.

@@ -1,0 +1,11 @@
+Data studio build out Notes:
+
+10 hours QAing aesthetics on Feb reporting in march (March 7-15)
+	Changing graphs, Editing Queries, Changing Screenshots, Changing formats
+
+40-45 hours building out dashboards on datastudios. There was about 33ish datastudios. Some took under an hour, some took over an hour depending on channels.
+
+10-15 hours cross checking all query results against GA and source data.
+5 hours writing some data munging scripts via Python. (Sifi/Facebook)
+
+	

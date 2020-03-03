@@ -1,0 +1,1098 @@
+---
+title: "Group 1 Final Project - Examining Oil"
+output: 
+  flexdashboard::flex_dashboard:
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(tidy = TRUE)
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=36))
+knitr::opts_chunk$set(size = "small")
+knitr::opts_hooks$set(fig.width = function(options) {
+  if (options$fig.width < options$fig.height) {
+    options$fig.width = options$fig.height
+  }
+  options
+})
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+Project Overview 
+===================================== 
+
+Row 
+-----------------------------------------------------------------------
+### Introduction (Jake)
+
+Our approach throughout this assignment will be to look at oil and integrated energy conglomerates, along with crude oil prices, with an objective outlook at portfolio diversification. We will be looking at this data, and the scope of this project, through the eyes of asset managers from The Vanguard Group pondering the risk and returns as it pertains to oil, contingent on volatility, and correlation against crude oil prices. The Vanguard Group is currently the largest institutional shareholder of ExxonMobil's (Exxon) shares but is contemplating if they should diversify their portfolio amongst various oil companies. 
+
+Our initial goal was to analyze market emergence of downstream products in a new geographic area, but we settled on a portfolio analytics task, ultimately due to data limitations.
+
+We will:
+
+- Measure returns, correlation, cluster volatility, and find temporal trends in the data.
+
+- Understand the distributions of our data and be able to visualize our findings.
+
+- Measure risk and be able to show risk at different levels of risk tolerance.
+
+- Create investment scenarios that enforce or detract our sentiment.
+
+
+
+### A Financial Analytics Workflow (Stephanie)
+
+1. What decision are we making about our investment in stocks?
+2. What are the questions that we need to ask?
+3. Where should we get the data in regards to oil/oil company prices?
+4. What tools will highlight correlations and performance the best?
+5. Will we be able to simulate risk and future performance?
+6. Can we optimize our existing portfolio?
+7. If there a direct relationship between returns/volatility of Crude Oil prices and the stock prices for our analyzed companies?
+
+Our hypothetical scenario involves us carrying positions in 4 major oil companies, at equal weightings, let's say $25 million/company in USD: Exxon, Shell, BP, and Chevron, for the case of portfolio optimization. Initial analysis will be done exclusively on Exxon, but will then cross-analyze the other three corporations. After analysis, our hope is to be able to diagnose our current positions, likely leading to consolidation or shorting. Oil prices during the mid-2010s proved to be an incredibly volatile commodity, dropping 60% between 2014-2016. Experts point to a decreased global demand in oil and a stagnant to increasing supply in exceedance of that demand, particularly in the US, Libya and Iraq.
+
+
+Row 
+-----------------------------------------------------------------------
+
+### Business Questions: (Diana)
+
+- What am I exposing my portfolio to in regards to risks? Refer to "Market Risk and EDA / Market Risk and EDA cont (Stephanie)" tabs for futher explanation.
+
+- How do we define risk? Refer to "Market Risk and EDA / Market Risk and EDA cont (Stephanie)" tabs for further explanation.
+
+- What is the decision process for a risky commodity? Refer to "Market Risk and EDA / Market Risk and EDA cont (Stephanie)" tabs for futher explanation.
+
+- Is there a strong relationship between the performance of crude oil trading and the stock prices of the 4 oil companies noted above? Refer to "A Look at Crude (Jake)" tab for further explanation.
+
+- How do we invest our wealth? Refer to "Decisions (Diana)" tab for further explanation.
+
+- Which assets are the most attractive? Refer to "Decisions (Diana)" tab for further explanation.
+
+- Should we adjust our current positions? Refer to "Decisions (Diana)" tab for further explanation.
+
+
+### Data source(s): (Diana)
+
+All stock data was pulled manually from Yahoo Finance for each of the 4 companies. Data collected is representative of daily adjusted closing prices for the time period 3/4/2013 - 3/1/2018 - i.e., the stock/commodity's closing price on a given day of trading, amended to include corporate actions occuring before the opening bell of the following day (investopedia.com). 
+
+
+Data 
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+
+###About the companies
+- "ExxonMobil is the world's largest publicly traded international oil and gas company" (corporate.exxonmobil.com).
+
+
+- "Royal Dutch Shell plc, commonly known as Shell, is a British-Dutch multi-national oil and gas company. "Shell is a global group of energy and petrochemical companies" (shell.com).
+
+
+- "BP is one of the world's leading integrated oil and gas companies. We provide customers with fuel for transportation, energy for heat and light, lubricants to keep engines moving, and the petrochemicals products used to make everyday items as diverse as paints, clothes and packaging" (bp.com)."
+
+
+- "Chevron works to meet the world's growing demand for energy by exploring for oil and natural gas; refining and marketing gasoline; producing chemicals and more" (chevron.com).
+
+- "Crude oil is one of the most important commodities in the world. It's an unrefined petroleum product composed of hydrocarbon deposits and other organic materials that can be refined to produce usable products such as gasoline, diesel and various types of petrochemicals" (Investopedia).
+
+### Historical data (Jake)
+
+To begin, we look at Oil conglomerates' stock prices from 2013 to the present date.  To do so, we will analyze market volatility, risk and relationships with external commodities, such as Crude Oil.
+
+Returns appear to be centered around a mean of 0 - Generally volatility in returns in one direction is met with a subsequent correction in the opposite direction. Our correlograms suggest that there is a high clustering of volatility when looking at both returns and absolute value of returns. This would lend its hand during construction of an arima model, but for now, we'll relinquish to the idea that returns and sizes against a lagged order of time appear to be related amongst our four companies being analyzed, which is not particularly surprising since they are in the same market segment. 
+
+We have moderate kurtosis in our autoplot of returns, but it appears that 2016 was a much more volatile time in the market for Exxon- The kurtosis of our sizes, our magnitudes of return suggest further volatility with a kurtosis of 10.17 and a skew to the right tail. BP appears to be the least volatile, but also appears to have the lowest upper limit of returns, initially suggesting a low risk low reward scenario. We would also like to note that between 2014 to mid-2015 the market was stagnant in both directions, at least in contrast to the related time periods. 
+
+*The autoplots to the right are interactive and can be zoomed/panned per user preference.
+
+Row 
+-----------------------------------------------------------------------
+
+
+```{r, echo=FALSE, include=FALSE}
+rm(list = ls())
+setwd('C:/Users/jdine/Desktop/SYracuse/Term 5 - Current/Financial Analytics- Fin 654/Final Project')
+
+
+require(ggplot2)
+require(flexdashboard)
+require(shiny)
+require(QRM)
+require(qrmdata)
+require(xts)
+require(zoo)
+require(psych)
+library(lubridate)
+library(plyr)
+library(plotly)
+#library(ggfortify)
+library(psych)
+require(moments)
+require(matrixStats)
+
+
+merge = read.csv('data/Oil.csv', header=TRUE)
+
+
+colnames(merge) <- c("Date", "Exxon", "Shell", "BP", "Chevron")
+
+merge.returns <- diff(log(as.matrix(merge[, -1]))) * 100
+colnames(merge.returns) <- c("BP.returns", "Chevron.returns", "Exxon.returns", "Shell.returns")
+
+# Create size and direction
+merge.size <- na.omit(abs(merge.returns)) # size is indicator of volatility
+colnames(merge.size) <- c("BP.size", "Chevron.size", "Exxon.size", "Shell.size")
+
+#head(size)
+direction <- ifelse(merge.returns > 0, 1, ifelse(merge.returns < 0, -1, 0)) # another indicator of volatility
+colnames(direction) <- c("BP.dir", "Chevron.dir", "Exxon.dir", "Shell.dir")
+
+dates <- as.Date(merge$Date[-1], "%m/%d/%Y")
+dates.chr <- as.character(merge$Date[-1])
+values <- cbind(merge.returns, merge.size, direction)
+
+# for dplyr pivoting and ggplot2 need a data frame also known as "tidy data"
+data.df <- data.frame(dates = dates, returns = merge.returns, size = merge.size, direction = direction)
+data.df.nd <- data.frame(dates = dates.chr, returns = merge.returns, size = merge.size, direction = direction, stringsAsFactors = FALSE) 
+
+#non-coerced dates for subsetting on non-date columns
+# 2. Make an xts object with row names equal to the dates
+data.xts <- na.omit(as.xts(values, dates)) #order.by=as.Date(dates, "%d/%m/%Y")))
+#str(data.xts)
+data.zr <- as.zooreg(data.xts)
+returns <- data.xts
+
+
+```
+
+
+### Price Percent Changes (Jake)
+```{r}
+renderPlotly({
+  library(ggplot2)
+  #library(ggfortify)
+  library(plotly)
+  #title.chg1 <- "Oil Price Percent Changes"
+  #title.chg2 <- "Size of Oil Price Percent Changes"
+  p <- autoplot.zoo(data.xts[,1:4]) # + ggtitle(title.chg1) #+ ylim(-5, 5)
+  ggplotly(p)
+})
+```
+
+### Size of Price Percent Changes (Jake)
+
+```{r}
+renderPlotly({
+  #title.chg1 <- "Oil Price Percent Changes"
+  #title.chg2 <- "Size of oil Price Percent Changes"
+  p <- autoplot.zoo(abs(data.xts[,1:4])) # + ggtitle(title.chg2) #+ ylim(-5, 5)
+  ggplotly(p)
+  })
+```
+
+row {.tabset }
+-----------------------------------------------------------------------
+
+### Returns (Jake)
+```{r }
+renderPlot({
+  acf(coredata(data.xts[,1:4])) # returns
+})
+```
+
+### Sizes (Jake)
+
+```{r}
+renderPlot({
+  acf(coredata(data.xts[,5:8])) # sizes
+})
+```
+
+Market Risk and EDA 
+=======================================================================
+
+
+Row {.sidebar}
+-----------------------------------------------------------------------
+```{r}
+sliderInput("alpha.q", label = "Risk Measure quantiles (%):",
+            min = 0.75, max = 0.99, value = 0.75, step = 0.01)
+```
+
+### BP Value-at-Risk 
+```{r}
+#threshold <- reactive({input$threshold.q}) #BE SURE that {} included 
+renderValueBox({
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  returns1 <- returns[,1]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df below
+  q <- quantile(returns1,alpha())
+  VaR.hist <- q
+  valueBox(round(VaR.hist, 2),
+           icon = "glyphicon-signal")
+})
+```
+
+### Chevron Value-at-Risk 
+```{r}
+#threshold <- reactive({input$threshold.q}) #BE SURE that {} included 
+renderValueBox({
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  returns1 <- returns[,2]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df below
+  q <- quantile(returns1,alpha())
+  VaR.hist <- q
+  valueBox(round(VaR.hist, 2),
+           icon = "glyphicon-signal")
+})
+```
+
+### Exxon Value-at-Risk 
+```{r}
+#threshold <- reactive({input$threshold.q}) #BE SURE that {} included 
+renderValueBox({
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  returns1 <- returns[,3]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df below
+  q <- quantile(returns1,alpha())
+  VaR.hist <- q
+  valueBox(round(VaR.hist, 2),
+           icon = "glyphicon-signal")
+})
+```
+
+### Shell Value-at-Risk 
+```{r}
+#threshold <- reactive({input$threshold.q}) #BE SURE that {} included 
+renderValueBox({
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  returns1 <- returns[,4]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df below
+  q <- quantile(returns1,alpha())
+  VaR.hist <- q
+  valueBox(round(VaR.hist, 2),
+           icon = "glyphicon-signal")
+})
+```
+
+Row {.tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### BP Returns Distribution
+```{r}
+renderPlot({
+  returns1 <- returns[,1]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df
+  returns1.df <- data.frame(Returns = returns1[,1], Distribution = rep("Historical", each = length(returns1)))
+  
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  
+  # Value at Risk
+  VaR.hist <- quantile(returns1,alpha())
+  VaR.text <- paste("Value at Risk =", round(VaR.hist, 2))
+  
+  # Determine the max y value of the desity plot.
+  # This will be used to place the text above the plot
+  VaR.y <- max(density(returns1.df$Returns)$y)
+  
+  # Expected Shortfall
+  ES.hist <- median(returns1[returns1 > VaR.hist])
+  ES.text <- paste("Expected Shortfall =", round(ES.hist, 2))
+  
+  ggplot(returns1.df, aes(x = Returns, fill = Distribution)) + 
+    geom_density(alpha = 0.8) + 
+    geom_vline(aes(xintercept = VaR.hist), linetype = "dashed", size = 1, color = "blue") + 
+    geom_vline(aes(xintercept = ES.hist), size = 1, color = "blue") +
+    annotate("text", x = VaR.hist, y = VaR.y*1.05, label = VaR.text) +
+    annotate("text", x = ES.hist, y = VaR.y*1.1, label = ES.text)
+})
+```
+
+### Chevron Returns Distribution 
+```{r}
+renderPlot({
+  returns1 <- returns[,2]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df
+  returns1.df <- data.frame(Returns = returns1[,1], Distribution = rep("Historical", each = length(returns1)))
+  
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  
+  # Value at Risk
+  VaR.hist <- quantile(returns1,alpha())
+  VaR.text <- paste("Value at Risk =", round(VaR.hist, 2))
+  
+  # Determine the max y value of the desity plot.
+  # This will be used to place the text above the plot
+  VaR.y <- max(density(returns1.df$Returns)$y)
+  
+  # Expected Shortfall
+  ES.hist <- median(returns1[returns1 > VaR.hist])
+  ES.text <- paste("Expected Shortfall =", round(ES.hist, 2))
+  
+  ggplot(returns1.df, aes(x = Returns, fill = Distribution)) + 
+    geom_density(alpha = 0.8) + 
+    geom_vline(aes(xintercept = VaR.hist), linetype = "dashed", size = 1, color = "blue") + 
+    geom_vline(aes(xintercept = ES.hist), size = 1, color = "blue") +
+    annotate("text", x = VaR.hist, y = VaR.y*1.05, label = VaR.text) +
+    annotate("text", x = ES.hist, y = VaR.y*1.1, label = ES.text)
+})
+```
+
+### Exxon Returns Distribution 
+```{r}
+renderPlot({
+  returns1 <- returns[,3]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df
+  returns1.df <- data.frame(Returns = returns1[,1], Distribution = rep("Historical", each = length(returns1)))
+  
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  
+  # Value at Risk
+  VaR.hist <- quantile(returns1,alpha())
+  VaR.text <- paste("Value at Risk =", round(VaR.hist, 2))
+  
+  # Determine the max y value of the desity plot.
+  # This will be used to place the text above the plot
+  VaR.y <- max(density(returns1.df$Returns)$y)
+  
+  # Expected Shortfall
+  ES.hist <- median(returns1[returns1 > VaR.hist])
+  ES.text <- paste("Expected Shortfall =", round(ES.hist, 2))
+  
+  ggplot(returns1.df, aes(x = Returns, fill = Distribution)) + 
+    geom_density(alpha = 0.8) + 
+    geom_vline(aes(xintercept = VaR.hist), linetype = "dashed", size = 1, color = "blue") + 
+    geom_vline(aes(xintercept = ES.hist), size = 1, color = "blue") +
+    annotate("text", x = VaR.hist, y = VaR.y*1.05, label = VaR.text) +
+    annotate("text", x = ES.hist, y = VaR.y*1.1, label = ES.text)
+})
+
+```
+
+### Shell Returns Distribution 
+```{r}
+renderPlot({
+  returns1 <- returns[,4]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df
+  returns1.df <- data.frame(Returns = returns1[,1], Distribution = rep("Historical", each = length(returns1)))
+  
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  
+  # Value at Risk
+  VaR.hist <- quantile(returns1,alpha())
+  VaR.text <- paste("Value at Risk =", round(VaR.hist, 2))
+  
+  # Determine the max y value of the desity plot.
+  # This will be used to place the text above the plot
+  VaR.y <- max(density(returns1.df$Returns)$y)
+  
+  # Expected Shortfall
+  ES.hist <- median(returns1[returns1 > VaR.hist])
+  ES.text <- paste("Expected Shortfall =", round(ES.hist, 2))
+  
+  ggplot(returns1.df, aes(x = Returns, fill = Distribution)) + 
+    geom_density(alpha = 0.8) + 
+    geom_vline(aes(xintercept = VaR.hist), linetype = "dashed", size = 1, color = "blue") + 
+    geom_vline(aes(xintercept = ES.hist), size = 1, color = "blue") +
+    annotate("text", x = VaR.hist, y = VaR.y*1.05, label = VaR.text) +
+    annotate("text", x = ES.hist, y = VaR.y*1.1, label = ES.text)
+})
+
+```
+
+Row
+-----------------------------------------------------------------------
+
+###About (Stephanie)
+- These visuals show an expected shortfall and value-at-risk (VaR) on a distribution curve. The curve shows a profit and loss probability density function. 
+
+- VaR gives us a conservative view of losses by gauging asset liquidity compared to the possible losses that can be incurred by the company. 
+
+- Expected shortfall (ES) shows us what we can be expected of our losses that go beyond the VaR, assuming a rare event in the tail of a distribution. 
+
+- Comparing the various distributions, we see that BP has the risk in the portfolio due to have the lowest VaR and ES.
+
+- In almost all cases, we see that our ES is significantly larger than our VaR, but is lesser than the tail end of our distributions (our max historical loss).
+
+
+
+
+### Statistics (Stephanie)
+```{r}
+## data_moments function
+## INPUTS: r vector
+## OUTPUTS: list of scalars (mean, sd, median, skewness, kurtosis)
+data_moments <- function(data){
+  library(moments)
+  library(matrixStats)
+  mean.r <- colMeans(data)
+  median.r <- colMedians(data)
+  sd.r <- colSds(data)
+  IQR.r <- colIQRs(data)
+  skewness.r <- skewness(data)
+  kurtosis.r <- kurtosis(data)
+  result <- data.frame(mean = mean.r, median = median.r, std_dev = sd.r, IQR = IQR.r, skewness = skewness.r, kurtosis = kurtosis.r)
+  return(result)
+}
+# Run data_moments()
+answer <- data_moments(data.xts[, 1:4])
+# Build pretty table
+answer <- round(answer, 4)
+knitr::kable(answer)
+```
+
+
+
+
+Market Risk and EDA cont. 
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Observations (Stephanie)
+- The rolling correlations under Market Risk show the correlation between assets for a certain amount of days. We can see how the correlation between assets change over time. 
+
+- Using zooreg, we were able to determine that there is a linear relationship between the four companies with a positive correlation ranging from 0.64-0.78. In addition, the panel plots proved that size is positively correlated signalling that the oil companies move in unison except volatility trends.
+
+- The 90-day window rolling correlations (shown on the right) suggest that there is a very high relationship between the variable sets with instances of seasonality identifiedd by the sharp drops followed by the spikes. 
+
+- Using quantile regression with monthly correlations, we can see that there is a stagnant relationship between our dependent and independent variable, suggesting that the correlation between BP and Chevron is lacking when measured against Chevron's volatility.
+
+- Quantile regression is the preferred analysis tool when there are non-constant variables with a straight line through our data that may not file throughthe variances. (e.g' wehn x is closer to 0 but as you move along the axis there is a growth in error/residual.)
+
+- Commodity Risk (e.g.,oil) is defined as the uncertainty that stems from changing prices that adversely impacts the financial results of those who both use and produce that commodity. (Investopedia.com). Commodity risks are typically made up of 5 different risks:
+    - Political Risk
+    - Geological Risk
+    - Price Risk 
+    - Supply and Demand Risks
+    - Cost Risk
+
+
+```{r, include=FALSE}
+###################################### 
+corr.rolling <- function(x) {	
+  dim <- ncol(x)	
+  corr.r <- cor(x)[lower.tri(diag(dim), diag = FALSE)]	
+  return(corr.r)	
+}
+require(zoo)# PAGE: Market risk 
+corr.rolling <- function(x) {	
+  dim <- ncol(x)	
+  corr.r <- cor(x)[lower.tri(diag(dim), diag = FALSE)]	
+  return(corr.r)	
+}
+
+ALL.r <- data.xts[, 1:3]
+window <- 90 #reactive({input$window})
+corr.returns <- rollapply(ALL.r, width = window, corr.rolling, align = "right", by.column = FALSE)
+corr.returns.df <- data.frame(Date = index(corr.returns), Bp.Chevron = corr.returns[,1], Bp.Exxon = corr.returns[,2], Chevron.Exxon = corr.returns[,3])
+
+# Market dependencies
+library(matrixStats)
+R.corr <- apply.monthly(as.xts(ALL.r), FUN = cor)
+R.vols <- apply.monthly(ALL.r, FUN = colSds) # from MatrixStats	
+# Form correlation matrix for one month 	
+R.corr.1 <- matrix(R.corr[20,], nrow = 3, ncol = 3, byrow = FALSE)	
+rownames(R.corr.1) <- colnames(ALL.r[,1:3])	
+colnames(R.corr.1) <- rownames(R.corr.1)	
+R.corr <- R.corr[, c(2, 3, 6)]
+colnames(R.corr) <- colnames(corr.returns) 	
+colnames(R.vols) <- c("BP.vols", "Chevron.vols", "Exxon.vols")
+
+R.corr.vols <- na.omit(merge(R.corr, R.vols))
+
+BP.vols <- as.numeric(R.corr.vols[,"BP.vols"])	
+Chevron.vols <- as.numeric(R.corr.vols[,"Chevron.vols"])	
+Exxon.vols <- as.numeric(R.corr.vols[,"Exxon.vols"])
+
+
+library(quantreg)
+# hist(rho.fisher[, 1])
+bp.corrs <- R.corr.vols[,1]
+#hist(nickel.corrs)
+taus <- seq(.05,.95,.05)	# Roger Koenker UI Bob Hogg and Allen Craig
+fit.rq.bp.chevron <- rq(bp.corrs ~ Chevron.vols, tau = taus)	
+fit.lm.bp.chevron <- lm(bp.corrs ~ Chevron.vols)	
+
+
+```
+
+row {panels}
+-----------------------------------------------------------------------
+### Chevron, BP, Shell and Exxon relationships (Returns) (Stephanie)
+```{r}
+#library(psych)
+renderPlot({
+pairs.panels(data.zr[,1:4])
+})
+```
+
+### Chevron, BP, Shell and Exxon relationships (Sizes) (Stephanie)
+
+```{r}
+#library(psych)
+renderPlot({
+pairs.panels(data.zr[,6:9])
+})
+```
+
+
+row {.tabset }
+-----------------------------------------------------------------------
+
+### BP and Chevron (90 day rolling correlation) (Stephanie)
+
+```{r }
+renderPlotly({
+  p <- ggplot(corr.returns.df, aes(x = Date, y = Bp.Chevron)) + geom_line()
+  ggplotly(p)
+})
+```
+
+### BP and Exxon (90 day rolling correlation) (Stephanie)
+
+```{r }
+renderPlotly({
+  p <- ggplot(corr.returns.df, aes(x = Date, y = Bp.Exxon)) + geom_line()
+  ggplotly(p)
+})
+```
+
+### Chevron and Exxon (90 day rolling correlation) (Stephanie)
+
+```{r }
+renderPlotly({
+  p <- ggplot(corr.returns.df, aes(x = Date, y = Chevron.Exxon)) + geom_line()
+  ggplotly(p)
+})
+```
+
+### 30 day within-sample correlations and volatilities (Stephanie)
+
+```{r}
+plot.zoo(R.corr.vols, main= "Monthly Correlations and Volatilities")
+```
+
+### BP Chevron Dependency (Stephanie)
+
+```{r}
+renderPlot({ 
+  plot(summary(fit.rq.bp.chevron), parm = "Chevron.vols", main = "BP Chevron correlation sensitivity to Chevron volatility")
+})
+```
+
+### BP Chevron Dependency Linear Model Summary (Stephanie)
+```{r}
+fit.lm.bp.chevron <- lm(bp.corrs ~ Chevron.vols)	
+summary(fit.lm.bp.chevron)
+```
+
+
+A Look at Crude
+=======================================================================
+
+```{r, include=FALSE}
+library(ggplot2)
+library(reshape2)
+library(dygraphs)
+merge = na.omit(read.csv('data/OilNew.csv', header=TRUE))
+
+colnames(merge) <- c("Date", "Exxon", "Shell", "BP", "Chevron", "Crude")
+merge.returns <- na.omit(diff(log(as.matrix(merge[, -1]))) * 100)
+colnames(merge.returns) <- c("BP.returns", "Chevron.returns", "Exxon.returns", "Shell.returns", "Crude.Returns")
+
+# Create size and direction
+merge.size <- na.omit(abs(merge.returns)) # size is indicator of volatility
+colnames(merge.size) <- c("BP.size", "Chevron.size", "Exxon.size", "Shell.size", "Crude.size")
+
+#head(size)
+direction <- ifelse(merge.returns > 0, 1, ifelse(merge.returns < 0, -1, 0)) # another indicator of volatility
+colnames(direction) <- c("BP.dir", "Chevron.dir", "Exxon.dir", "Shell.dir", "Crude.dir")
+
+dates <- as.Date(merge$Date[-1], "%m/%d/%Y")
+dates.chr <- as.character(merge$Date[-1])
+values <- cbind(merge.returns, merge.size, direction)
+
+
+# for dplyr pivoting and ggplot2 need a data frame also known as "tidy data"
+data.df <- data.frame(dates = dates, returns = merge.returns, size = merge.size, direction = direction)
+data.df.nd <- data.frame(dates = dates.chr, returns = merge.returns, size = merge.size, direction = direction, stringsAsFactors = FALSE) 
+
+#non-coerced dates for subsetting on non-date columns
+# 2. Make an xts object with row names equal to the dates
+data.xts <- na.omit(as.xts(values, dates)) #order.by=as.Date(dates, "%d/%m/%Y")))
+#str(data.xts)
+data.zr <- as.zooreg(data.xts)
+returns <- data.xts
+
+```
+
+row {.tabset }
+-----------------------------------------------------------------------
+
+###Returns (Jake)
+```{r}
+dygraph(data.xts[,1:5], main = "Oil Returns", xlab = "Date", ylab = "Returns")
+```
+
+
+###Volatility (Jake)
+```{r}
+dygraph(data.xts[,6:10], main = "Oil Volatility", xlab = "Date", ylab = "Volatility")
+```
+
+row {.tabset }
+-----------------------------------------------------------------------
+
+###Returns (Jake)
+```{r}
+renderPlot({
+pairs.panels(data.zr[,1:5])
+})
+```
+
+###Volatility (Jake)
+```{r}
+renderPlot({
+pairs.panels(data.zr[,6:10])
+})
+```
+
+###Statistics (Jake)
+```{r}
+summary(data.zr[,1:10])
+```
+
+row 
+-----------------------------------------------------------------------
+
+### Crude Oil Value at Risk (Jake)
+```{r}
+#threshold <- reactive({input$threshold.q}) #BE SURE that {} included 
+renderValueBox({
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  returns1 <- returns[,5]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df below
+  q <- quantile(returns1,alpha())
+  VaR.hist <- q
+  valueBox(round(VaR.hist, 2),
+           icon = "glyphicon-signal")
+})
+```
+
+### Crude Oil Distribution (Jake)
+```{r}
+renderPlot({
+  returns1 <- returns[,5]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df
+  returns1.df <- data.frame(Returns = returns1[,1], Distribution = rep("Historical", each = length(returns1)))
+  
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  
+  # Value at Risk
+  VaR.hist <- quantile(returns1,alpha())
+  VaR.text <- paste("Value at Risk =", round(VaR.hist, 2))
+  
+  # Determine the max y value of the desity plot.
+  # This will be used to place the text above the plot
+  VaR.y <- max(density(returns1.df$Returns)$y)
+  
+  # Expected Shortfall
+  ES.hist <- median(returns1[returns1 > VaR.hist])
+  ES.text <- paste("Expected Shortfall =", round(ES.hist, 2))
+  
+  ggplot(returns1.df, aes(x = Returns, fill = Distribution)) + 
+    geom_density(alpha = 0.8) + 
+    geom_vline(aes(xintercept = VaR.hist), linetype = "dashed", size = 1, color = "blue") + 
+    geom_vline(aes(xintercept = ES.hist), size = 1, color = "blue") +
+    annotate("text", x = VaR.hist, y = VaR.y*1.05, label = VaR.text) +
+    annotate("text", x = ES.hist, y = VaR.y*1.1, label = ES.text)
+})
+
+```
+
+
+row 
+-----------------------------------------------------------------------
+###About (Jake)
+- Here we include the rolling price of Crude Oil into our analysis. Our initial hypothesis was that Crude Oil would play a substantial role in the market of oil companies reliant on such downstream products, but what we are seeing to the left is counterintuitive to that notion, atleast partially. First off, we should note the sheer risk/reward potential of the Crude oil market, more than doubling the returns in each direction, seen in the 'Statistics' tab. Our dygraphs displaying returns and sizes are showing that Crude is dwarfing all four oil companies in both regards. Back to the matter at hand. Crude is positively correlated in all aspects of our analysis, but the positive correlation is of such little significance, mainly registering between 0 and 0.2. This is highly suggestive of a lack of significant relationship between Crude Oil and the stock prices (adjusted) of the four oil companies being analyzed.
+
+- We also show our value at risk at a default tolerance level, set on the previous tab, to the left, noting that our value at risk at expected shortfall are  higher for this commodity than for our oil stocks. In the case of a tail event, we'd need to have much more money in reserve to handle the potential shortfall. *Please note that the slider on the Exploratory Analysis page is tied to the alpha tolerance level of the the VaR/ES distribution chart on 'A Look at Crude'.
+
+
+
+Analyzing Returns 
+=======================================================================
+
+```{r, include=FALSE}
+R <- returns[,1:5]/100
+names.R <- colnames(R)
+colnames(R) <- names.R
+mean.R <- round(apply(R, 2, mean),6)
+
+barplot(mean.R)
+```
+
+
+
+row {.tabset }
+-----------------------------------------------------------------------
+### Boxplots (Diana)
+```{r}
+bx <-  data.df[,c(2:6)]
+colnames(bx) <- c("BP", "Chevron", "Exxon", "Shell", "Crude")
+par(las=0)
+renderPlot({ 
+boxplot(bx, main = "Boxplot of Returns by Stock/Commodity", ylab = "Return", xlab = "Stock/Commodity")
+})
+```
+
+### Annualized Mean Returns (Diana)
+```{r}
+renderPlot({ 
+barplot(mean.R, main = "Annualized Average Returns", ylab = "Return", xlab = "Stock/Commodity",horiz = FALSE)
+})
+```
+
+###Variance and Covariance (Diana)
+```{r}
+cov(R)
+sqrt(diag(cov(R)))
+
+```
+
+
+###About the Data (Diana)
+Here we calculate quantile ranges of our return data in an attempt to express risk associated with each stock. Notably, we see that the mean and median returns are clustered close to zero. We also see that BP has the highest min quantile of any of the stocks, suggesting it's not as volatile, but also suggesting that the returns aren't as high as Chevron/Exxon/Shell. For the sake of discussion, Chevron has the highest max return quantile, at 0.0672.
+We also calculate the annualized average returns of each of the four stocks. BP and shell register negative average mean returns, while Chevron/Exxon/Shell register slightly above 0 average annualized mean returns. These numbers are exponentially small, but are seen to be close to 0. 
+
+
+Optimization
+=======================================================================
+
+row {.tabset }
+-----------------------------------------------------------------------
+
+
+```{r  mysize=TRUE, size='\\footnotesize', echo = TRUE, include=FALSE}
+library(quantreg)
+library(quadprog)
+x <- merge.returns/100
+n <- nrow(x)
+p <- ncol(x)
+alpha <-  c(0.1, 0.3) # quantiles
+w <-  c(0.3, 0.7) # distortion weights
+lambda <- 100 # Lagrange multiplier for adding up constraint
+m <- length(alpha)
+# error handling: if (length(w) != m) stop("length of w doesn't match length of alpha")
+xbar <- apply(x, 2, mean)
+mu.0 <-  mean(xbar)
+y <- x[, 1] #set numeraire
+r <- c(lambda * (xbar[1] - mu.0), -lambda * (xbar[1] - mu.0))
+X <- x[, 1] - x[, -1]
+R <- rbind(lambda * (xbar[1] - xbar[-1]), -lambda * (xbar[1] - xbar[-1]))
+R <- cbind(matrix(0, nrow(R), m), R)
+f <- rq.fit.hogg(X, y, taus = alpha, weights = w, R = R, r = r)
+fit <- f$coefficients
+# transform regression coeff to portfolio weights
+pihat <- c(1 - sum(fit[-(1:m)]), fit[-(1:m)]) 
+x <- as.matrix(x)
+yhat <- x %*% pihat # predicted 
+etahat <- quantile(yhat, alpha)
+muhat <- mean(yhat)
+qrisk <- 0
+for (i in 1:length(alpha)) qrisk <- qrisk + w[i] * sum(yhat[yhat < etahat[i]])/(n * alpha[i])
+qrisk
+pihat
+```
+
+### Efficient Portfolio Frontier (Diana)
+```{r}
+R <- returns[,1:5]/100
+names.R <- colnames(R)
+mean.R <-  apply(R,2,mean)
+cov.R <-  cov(R)
+sd.R <-  sqrt(diag(cov.R)) ## remember these are in daily percentages
+require(quadprog)
+Amat <-  cbind(rep(1,5),mean.R)  ## set the equality constraints matrix
+mu.P <-  seq(-.0002, .0003, length=300)  ## set of 300 possible target portfolio returns
+sigma.P <-  mu.P ## set up storage for std dev's of portfolio returns
+weights <-  matrix(0, nrow=300, ncol = ncol(R)) ## storage for portfolio weights
+colnames(weights) <- names.R
+for (i in 1:length(mu.P))
+{
+  bvec = c(1,mu.P[i])  ## constraint vector
+  result =
+    solve.QP(Dmat = 2*cov.R, dvec=rep(0,5), Amat = Amat, bvec = bvec, meq = 2)
+  sigma.P[i] = sqrt(result$value)
+  weights[i,] = result$solution
+}
+mu.free <-  1.3/253/100 ## input value of risk-free interest rate
+sharpe <- ( mu.P-mu.free)/sigma.P ## compute Sharpe's ratios
+ind <-  (sharpe == max(sharpe)) ## Find maximum Sharpe's ratio
+ind2 <-  (sigma.P == min(sigma.P)) ## find the minimum variance portfolio
+  
+renderPlot({
+  par(mfrow = c(1,1))
+  plot(sigma.P,mu.P,type="l", lty = 3, lwd = 3) #, xlim=c(0,max(sd.R)*1.1), ylim=c(min(mean.R)*1.05, max(mean.R)*1.1), lty=3, lwd = 3)  ##  plot the efficient frontier (and inefficient portfolios
+  ## below the min var portfolio)
+  mu.free = 1.3/253/100 ## input value of risk-free interest rate
+  points(0,mu.free,cex=3,pch="+")  ## show risk-free asset
+  sharpe <- ( mu.P-mu.free)/sigma.P ## compute Sharpe's ratios
+  ind <-  (sharpe == max(sharpe)) ## Find maximum Sharpe's ratio
+  options(digits=3)
+  lines(c(0,2),mu.free+c(0,2)*(mu.P[ind]-mu.free)/sigma.P[ind],lwd=4,lty=1, col = "blue")
+  ## show line of optimal portfolios
+  points(sigma.P[ind],mu.P[ind],cex=4,pch="*") ## show tangency portfolio
+  ind2 <-  (sigma.P == min(sigma.P)) ## find the minimum variance portfolio
+  points(sigma.P[ind2],mu.P[ind2],cex=2,pch="+") ## show min var portfolio
+  ind3 <-  (mu.P > mu.P[ind2]) ## finally the efficient frontier
+  lines(sigma.P[ind3],mu.P[ind3],type="l", lwd = 3, col = "red") # xlim=c(0,max(sd.R)*1.1), ylim=c(min(mean.R)*1.05, max(mean.R)*1.1) , lwd=3, col = "red")  ##  plot the efficient frontier
+  text(2*sd.R[1], 2*mean.R[1], names.R[1] ,cex=1.15)
+  text(3*sd.R[2], mean.R[2], names.R[2] ,cex=1.15)
+  text(4*sd.R[3], .5*mean.R[3], names.R[3] ,cex=1.15)
+  text(5*sd.R[4], .5*mean.R[4], names.R[4] ,cex=1.15)
+  text(6*sd.R[5], .5*mean.R[5], names.R[5] ,cex=1.15)
+})
+
+```
+
+
+### Portfolio Analytics: the Markowitz model (Diana)
+
+```{r }
+library(quadprog)
+
+R <- returns[,1:5]/100
+quantile_R <- quantile(R[,1], 0.95)
+#R <- subset(R, nickel > quantile_R, select = nickel:aluminium)
+names.R <- colnames(R)
+mean.R <-  apply(R,2,mean)
+cov.R <-  cov(R)
+sd.R <-  sqrt(diag(cov.R)) ## remember these are in daily percentages
+#library(quadprog)
+Amat <-  cbind(rep(1,5),mean.R)  ## set the equality constraints matrix
+mu.P <- seq(0.5*min(mean.R), 1.5*max(mean.R), length = 100)  ## set of 300 possible target portfolio returns
+#mu.P <- seq(0.5*quantile_R, max(R), length = 100)  ## set of 300 possible target portfolio returns
+sigma.P <-  mu.P ## set up storage for std dev's of portfolio returns
+weights <-  matrix(0, nrow=300, ncol = ncol(R)) ## storage for portfolio weights
+colnames(weights) <- names.R
+for (i in 1:length(mu.P))
+{
+  bvec <- c(1,mu.P[i])  ## constraint vector
+  result <- solve.QP(Dmat=2*cov.R,dvec=rep(0,5),Amat=Amat,bvec=bvec,meq=2)
+  sigma.P[i] <- sqrt(result$value)
+  weights[i,] <- result$solution
+}
+sigma.mu.df <- data.frame(sigma.P = sigma.P, mu.P = mu.P )
+mu.free <-  1.3/253/100 ## input value of daily risk-free interest rate
+sharpe <- ( mu.P-mu.free)/sigma.P ## compute Sharpe's ratios
+ind <-  (sharpe == max(sharpe)) ## Find maximum Sharpe's ratio
+ind2 <-  (sigma.P == min(sigma.P)) ## find the minimum variance portfolio
+ind3 <-  (mu.P > mu.P[ind2]) ## finally the efficient frontier
+col.P <- ifelse(mu.P > mu.P[ind2], "blue", "grey")
+sigma.mu.df$col.P <- col.P
+renderPlotly({
+p <- ggplot(sigma.mu.df, aes(x = sigma.P, y = mu.P, group = 1)) + geom_line(aes(colour=col.P, group = col.P)) + scale_colour_identity() # + xlim(0, max(sd.R*1.1))  + ylim(0, max(mean.R)*1.1) + 
+p <- p + geom_point(aes(x = 0, y = mu.free), colour = "red")
+options(digits=4)
+p <- p + geom_abline(intercept = mu.free, slope = (mu.P[ind]-mu.free)/sigma.P[ind], colour = "red")
+p <- p + geom_point(aes(x = sigma.P[ind], y = mu.P[ind])) 
+p <- p + geom_point(aes(x = sigma.P[ind2], y = mu.P[ind2])) ## show min var portfolio
+p <- p + annotate("text", x = sd.R[1], y = mean.R[1], label = names.R[1]) + annotate("text", x = sd.R[2], y = mean.R[2], label = names.R[2]) + annotate("text", x = sd.R[3], y = mean.R[3], label = names.R[3]) + annotate("text", x = sd.R[4], y = mean.R[4], label = names.R[4]) + annotate("text", x = sd.R[5], y = mean.R[5], label = names.R[5])
+p	### ggplotly(p)
+})
+```
+
+
+Decisions 
+=======================================================================
+
+### Portfolio Weights & Decision/Recommendation (Diana)
+
+The weights for the minimum variance portfolio ("+") are
+
+```{r echo = FALSE}
+head(weights[ind2,],1)
+```
+
+
+The weights for the tangency portfolio ("*") are in
+
+```{r echo = FALSE}
+head(weights[ind,],1)
+```
+
+
+The minimum variance portfolio is the organization of risky assets that, when taken together, result in the lowest possible risk level for the rate of expected return. This type of portfolio hedges each investment with the addition of another investment. The decision of the individual investor on how much to offset investments depends on the level of risk and expected return that they are willing to accept. The investments in a minimum variance portfolio are individually riskier than the portfolio as a whole (Minimum Variance Portfolio). It is the point at which the red line curves upward into the tangency portfolio which is on the efficient frontier line (Blue line). In order to reduce our financial exposure, we diversify our investments into a number of different stocks/commoditities. Because we have seen that there is drastic correlation in volatility in the companies analyzed, it would likely not be wise to put all of our money into a single sector where asset classes are not spread out.
+
+The minimum variance report suggests that we should be have the following positions in each of our stocks/commodities.
+64.4% in BP.
+6.7% in Chevron.
+5.6% in Exxon.
+3.9% in Shell.
+19.2% in Crude
+
+This means in the working capital accounts (Assuming denonimation of 100m total capital):
+
+1. \$64.4 million should be invested in BP (A/R or Inventory)
+2. \$6.7 million should be invested in Exxon (A/R or Inventory)
+3. \$5.6  million invested in Chevron. (A/R or Inventory)
+4. \$3.9  million invested in Shell. (A/R or Inventory)
+5. \$19.2 million invested in Crude Oil. (A/R or Inventory)
+
+If we were to follow the weights of our tangency porfolio:
+1. Net short of 38.4% in BP.
+
+2. 31.9% investment in a long position in Chevron.
+
+3. 72% investment in a long position in Exxon.
+
+4. 48.3% investment in a long position in Shell.
+
+5. Net short of 13.8% in BP.
+
+Overall, the industry is not going anywhere even with all of these risks described on the Market Risk and EDA tabs. There are still many benefits within the industry but those risks are something to consider when making an investment decision.  The asset managers at The Vanguard Group should invest in Exxon's stock because it's attractive and their current process is desireable.
+
+
+
+Documentation/References 
+=======================================================================
+
+row {.tabset }
+-----------------------------------------------------------------------
+
+### Skills Used
+Autoplots for time series analysis.
+
+Summary statistics and data moments to show distributions.
+
+Dygraphs as an alternative to autoplots to overlay stocks.
+
+Plotly to render interactive VaR and ES charts dependent on tolerable risk.
+
+GGplot/Plotly to show rolling correlations and quantile/linear regression of dependency. 
+
+Boxplots and annualized average returns to display tables of return quantiles.
+
+Var and Cov functions to create variance and covariance matrices.
+
+Quantreg and Quantprog for portfolio analytics.
+
+
+### Packages and Books (Team)
+ggplot2, flexdashboard, shiny, QRM, qrmdata,xts, zoo, psych,lubridate,plyr,plotly,psych,moments,matrixStats, quantreg, quantprog, dygraphs, boxplots, Plotly, Autoplots
+
+Book:
+Financial Engineering Analytics: A Practice Manual Using R
+
+
+### References (Team)
+
+Online Resources:
+- https://www.chevron.com/
+
+- https://www.exxon.com/en
+
+- https://www.shell.com/
+
+- https://www.bp.com/
+
+- http://cdn.exxonmobil.com/~/media/global/files/summary-annual-report/2016_summary_annual_report.pdf
+
+- https://www.eia.gov/finance/markets/crudeoil/
+
+- https://www.eia.gov/todayinenergy/prices.php
+
+- https://www.bloomberg.com
+
+- https://finance.yahoo.com/
+
+- https://www.rdocumentation.org/
+
+- https://stackoverflow.com
+
+- https://www.investing.com/
+
+- https://www.investopedia.com/
+
+- https://blog.rstudio.com/
+
+- http://www.cookbook-r.com/ 
+
+
+Book:
+- Financial Engineering Analytics: A Practice Manual Using R
+
+Course:
+- All asynch videos from FinAnalytics course.
+
+- All supplemental powerpoints offered by Professor Khan.
+
+
+
+
+
+
+```{r, include = FALSE}
+#I thought this was cool, but it won't render in markdown. include == False to allow for shiny app to render minus this plot. 
+#It doesn't work as well with a non-sequential x-axis. Tried to change the type
+
+library(plotly)
+library(gapminder)
+
+head(data.df)
+newdf <- data.df
+head(newdf)
+newdf <- newdf[,c(1, 7:11)]
+
+newdf$month <- month(newdf$dates)
+newdf$year <- year(newdf$dates)
+
+
+newdf <-  newdf[,-1]
+head(newdf)
+str(newdf)
+
+newdf <- melt(newdf, id=c("month", "year"))
+head(newdf)
+
+
+p <- gapminder %>%
+  plot_ly(
+    x = newdf$month, 
+    y = newdf$value, 
+    color = newdf$variable, 
+    frame = newdf$year, 
+    hoverinfo = "text",
+    type = 'scatter',
+    mode = 'markers'
+  ) %>%
+  layout(
+    xaxis = list(
+      type = "log"
+    )
+  ) %>% 
+  animation_opts(
+    1000, easing = "elastic", redraw = FALSE
+  ) %>% 
+  animation_button(
+    x = 1, xanchor = "right", y = 0, yanchor = "bottom" 
+  ) %>%
+  animation_slider(
+    currentvalue = list(prefix = "YEAR ", font = list(color="red"))
+  )
+p
+
+```
+

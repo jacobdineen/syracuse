@@ -1,0 +1,225 @@
+---
+title: "SYR-MBA FIN 654 Financial Analytics Project 1"
+author: "Khan and Mohamed"
+date: "January 22, 2017"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Problem
+What is the influence of various terms and conditions on the lending rate of fully committed
+commercial loans with maturities greater than one year? 
+
+
+## Data Preparation
+
+Data is from St. Louis Federal Reserve Economic Data [FRED](https://fred.stlouisfed.org/categories/32407).
+
+\begin{center}
+  \begin{tabular}{| l | p{9cm} | l |}
+    \hline
+    Variable & Description & Units \\ \hline
+    rate & Weighted-Average Effective Loan Rate by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EETP365PDNQ) & percent \\ \hline
+prepay & Percent of Value of Loans Subject to Prepayment Penalty by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EPTP365PDNQ) & percent \\ \hline
+maturity & Weighted-Average Maturity/Repricing Interval in Days by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EITP365PDNQ) & days \\ \hline
+size & Average Loan Size by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EATP365PDNQ) & thousandsUSD \\ \hline
+volume & Total Value of Loans by Time that Pricing Terms Were Set and by Commitment, Before Survey Week, More than 365 Days, All Commercial Banks (EVTP365PDNQ) & millionsUSD \\ \hline
+  \end{tabular}
+\end{center}
+
+
+## Data Analysis
+
+### Data Exploration
+
+```{r}
+# Read data and Assign the data to a variable called x.data.
+# Examine the first and last five entries.
+x.data <- read.csv("data/commloans.csv")
+x.data <- na.omit(x.data)
+# Run a summary of the data set.
+head(x.data, n=5)
+tail(x.data, n=5)
+summary(x.data)
+#
+# What anomalies appear based on these procedures?
+#
+```
+
+The min and max for the different attributes are quite large.
+The median is closer to first quartile Q1 and there are likely outliers,
+indicating that the data (for each variabe) is skewed to the right.
+This is borne out by the box-and-whisker charts.
+
+```{r}
+boxplot(x.data[2], names, horizontal=TRUE) # ppp = prepaypenalty
+```
+\pagebreak
+```{r}
+boxplot(x.data[3], names, horizontal=TRUE) # mty = maturity
+```
+\pagebreak
+```{r}
+boxplot(x.data[4], names, horizontal=TRUE) # rte = rate
+```
+\pagebreak
+```{r}
+boxplot(x.data[5], names, horizontal=TRUE) # sze = size
+```
+\pagebreak
+```{r}
+boxplot(x.data[6], names, horizontal=TRUE) # vol = volume
+```
+\pagebreak
+```{r}
+#
+# Explore the data further.
+# Plot the time series data using this code:
+# Use melt() from reshape2 to build the data frame with data as id and values of variables
+#
+require(ggplot2)
+require(reshape2)
+x.melted <- melt(x.data[, c(1:4)], id = "date")
+ggplot(data = x.melted, aes(x = date, y = value)) + geom_point() + facet_wrap(~variable, scales = "free_x")
+# Describe the data frame that melt() produces.
+```
+
+Data frame produceed by melt() is from the first 4 columns inclusive of all rows
+but identifying the date column as the id. The data "melt" is such that
+each row is a unique id-variable combination, limited to the first 4 columns.
+The outliers for maturity variable are clearly visible here.
+
+### Relational Analysis
+
+```{r}
+# Load the psych library and produce a scatterplot matrix. Interpret this exploration.
+require(psych)
+pairs.panels(x.data)
+```
+
+Diagonals show histogram and trends for the variables: ppp, mty, rte, sze and vol.
+Upper right of diagonal show correlation numbers between pairs of the variables.
+Lower left of diagonal are scatter plots (partial correlations) between pairs of variables.
+
+### Regression Model
+
+```{r}
+# Analyze the data.
+# Regress rate on the rest of the variables in x.data. 
+# To do form a matrix of independent variables (predictor or explanatory variables)
+# in the matrix X and a separate vector y for the dependent (response) variable rate.
+# The 1 vector will produce a constant intercept in the regression model.
+y <- as.vector(x.data[, "rate"])
+X <- as.matrix(cbind(1, x.data[, c("prepaypenalty", "maturity", "size", "volume")]))
+head(y)
+head(X)
+#
+# Explain the code used to form y and X.
+#
+```
+
+y is s single vector transposed from the rate values in the rows.
+X is a matrix produced by stacking specific columns (ppp, mty, rte, sze and vol) from x.data 
+side-by-side along with a first column filled with the value 1 in every row.
+This feeds the predictive model for lending rate, 1 being the multiplier for the intercept.
+
+
+```{r}
+# Calculate the  $\hat{\beta}$coefficients and interpret their meaning.
+require(reshape2)
+require(ggplot2)
+XTX.inverse <- solve(t(X) %*% X)
+(beta.hat <- XTX.inverse %*% t(X) %*% y)
+```
+
+The function solve calculates the inverse, giving the coefficents that may be used
+to weight the various terms and conditions in the regression model for the lending rate.
+
+
+```{r}
+# Calculate actual and predicted rates and plot using this code.
+actual <- y
+predicted <- X %*% beta.hat
+residual <- actual - predicted
+results <- data.frame(actual = actual, predicted = predicted, residual = residual)
+```
+
+The vector y represents the actual lending rates based on the rows of values in the column rate.
+The predicted value is based on a best fitting regression line computed using the beta coefficients.
+
+y-predicted = coeff1 (or, intercept) + coeff2 * ppp + coeff3 * mte + coeff4 * sze + coeff5 * vol
+
+```{r}
+min_xy <- min(min(results$actual), min(results$predicted))
+max_xy <- max(max(results$actual), max(results$predicted))
+```
+
+The above compares the min and max of the actual and the predicted values for reach term.
+
+```{r}
+plot.melt <- melt(results, id.vars = "predicted")
+```
+
+Here, melt is used to produce a data frame for the min and max, using predicted for id.
+
+```{r}
+plot.data <- rbind(plot.melt, data.frame(predicted = c(min_xy, max_xy), variable = c("actual", "actual"), value = c(max_xy, min_xy)))
+```
+
+The resulting data is stored in plot.data above.
+
+```{r}
+p <- ggplot(plot.data, aes(x = predicted, y = value)) + geom_point(size = 2.5) + theme_bw()
+p <- p + facet_wrap(~variable, scales = "free")
+p
+```
+
+The above is the resulting plot for actual vs residual across predicted.
+The residuals are not completely random leading to a lack of confidence in a linear regression prediction model.
+The graph for actual against predicted value is clearly non-linear.
+
+```{r}
+# Calculate the standard error of the residuals.
+e <- y - X %*% beta.hat
+(e.sse <- t(e) %*%e)
+(n <- dim(X) [1])
+(k <- nrow(beta.hat))
+(e.se <- (e.sse / (n - k))^0.5)
+```
+
+The above indicate the standard error (e.se) on the loan rates based on (n) observations and (k-1) degrees of freedom.
+
+
+## Observations and Recommendations
+
+### Insights
+
+In the current model, the variables prepaypenalty, size and volume impact the lending rate negatively, 
+and the varable maturity impacts the lending rate positively.
+The scatter plots for the data are skewed to the right. 
+There is moderate positive correlation between prepaypenalty & maturity, and high
+correlation between size & volume
+There is also moderate negative correlation between prepaypenalty & volume.
+There are outliers in the data.
+The prediction model cannot be relied upon. 
+
+
+### Recommendations
+
+Per the current model, loans with larger maturity are recommended for better lending rates.
+However, the F-statistic needs to be checked to have any confidence in the [linear] regression model.
+For a better prediction model, the p-values in the regression should be studied.
+For each of the measures, the p-value should be less than 0.05 (95% confidence).
+Also, the outliers should be examined and dropped for a more reliable analysis.
+Bonferroni outlier test may be applied to confirm this.
+Finally, to avoid multicollinearity, some of the variable should be dropped or combined.
+A revised prediction model is recommended.
+
+
+## Sources
+Google, CRAN for ggplot2, reshape2, FRED, discussions with others, and varied sources.

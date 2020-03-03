@@ -1,0 +1,8 @@
+Unable to scrape facebook:
+
+(tensorflowlatest) C:\Users\jdine\Desktop\SYracuse\Term 7\Scripting for Data Analysis\Week 10 -Network Structures>run_facebook_request_save.py senschumer feed 25 fbusers chuckschumer
+Traceback (most recent call last):
+  File "C:\Users\jdine\Desktop\SYracuse\Term 7\Scripting for Data Analysis\Week 10 -Network Structures\run_facebook_request_save.py", line 15, in <module>
+    from facebook_request_fn import facebook_connection_request
+ModuleNotFoundError: No module named 'facebook_request_fn'
+

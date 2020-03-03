@@ -1,0 +1,338 @@
+---
+title: "Project 3 - Group 1"
+author: "Jacob Dineen, Diana Couillard and Stephanie Salvatore"
+date: "February 05, 2017"
+output:
+  pdf_document: default
+  word_document: default
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyhead[CO,CE]{\thetitle}
+- \fancyfoot[CO,CE]{Copyright 2018, William G. Foote}
+- \fancyhead[RE,RO]{\thepage}
+- \renewcommand{\footrulewidth}{0.5pt}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(tidy = TRUE)
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=36))
+knitr::opts_chunk$set(size = "small")
+knitr::opts_hooks$set(fig.width = function(options) {
+  if (options$fig.width < options$fig.height) {
+    options$fig.width = options$fig.height
+  }
+  options
+})
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+
+
+## Part 1
+
+In this set we will build and explore a data set using filters and `if` and `diff` statements. We will then answer some questions using plots and a pivot table report. We will then review a function to house our approach in case we would like to run some of the same analysis on other data sets.
+
+#### Problem
+
+Marketing and accounts receivables managers at our company continue to note we have a significant exposure to exchange rates. Our customer base is located in the United Kingdom, across the European Union, and in Japan. The exposure hits the gross revenue line of our financials. Cash flow is further affected by the ebb and flow of accounts receivable components of working capital. of producing several products. When exchange rates are volatile, so is earnings, and more importantly, our cash flow. Our company has also missed earnings forecasts for five straight quarters. To get a handle on exchange rate exposures we download this data set and review some basic aspects of the exchange rates. 
+
+```{r }
+# Read in data
+library(zoo)
+library(xts)
+library(ggplot2)
+# Read and review a csv file from FRED
+ exrates <- na.omit(read.csv("data/exrates.csv", header = TRUE))
+head(exrates)
+tail(exrates)
+str(exrates)
+summary(exrates)
+```
+
+#### Questions
+
+1. What is the nature of exchange rates? We want to reflect the ups and downs of rate movements, known to managers as currency appreciation and depreciation. First, we calculate percentage changes as log returns. Our interest is in the ups and downs. To look at that we use `if` and `else` statements to define a new column called `direction`. We will build a data frame to house this analysis.
+```{r }
+# Compute log differences percent using as.matrix to force numeric type
+exrates.r <- diff(log(as.matrix(exrates[, -1]))) * 100
+head(exrates.r)
+tail(exrates.r)
+str(exrates.r)
+# Create size and direction
+size <- na.omit(abs(exrates.r)) # size is indicator of volatility
+head(size)
+colnames(size) <- paste(colnames(size),".size", sep = "") # Teetor
+direction <- ifelse(exrates.r > 0, 1, ifelse(exrates.r < 0, -1, 0)) # another indicator of volatility
+colnames(direction) <- paste(colnames(direction),".dir", sep = "")
+head(direction)
+# Convert into a time series object: 
+# 1. Split into date and rates
+dates <- as.Date(exrates$DATE[-1], "%m/%d/%Y")
+values <- cbind(exrates.r, size, direction)
+# for dplyr pivoting we need a data frame
+exrates.df <- data.frame(dates = dates, returns = exrates.r, size = size, direction = direction)
+str(exrates.df) # notice the returns.* and direction.* prefixes
+# 2. Make an xts object with row names equal to the dates
+exrates.xts <- na.omit(as.xts(values, dates)) #order.by=as.Date(dates, "%d/%m/%Y")))
+str(exrates.xts)
+is.regular(exrates.xts)
+head(exrates.xts, n=10)
+exrates.zr <- na.omit(as.zooreg(exrates.xts))
+str(exrates.zr)
+head(exrates.xts)
+```
+
+We can plot with the `ggplot2` package. In the `ggplot` statements we use `aes`, "aesthetics", to pick `x` (horizontal) and `y` (vertical) axes. Use `group =1` to ensure that all data is plotted. The added (`+`) `geom_line` is the geometrical method that builds the line plot.
+```{r }
+library(ggplot2)
+title.chg <- "Exchange Rate Percent Changes"
+autoplot.zoo(exrates.xts[,1:4]) + ggtitle(title.chg) + ylim(-5, 5)
+autoplot.zoo(exrates.xts[,5:8]) + ggtitle(title.chg) + ylim(-5, 5)
+``` 
+
+2. Let's dig deeper and compute mean, standard deviation, etc. Load the `data_moments()` function. Run the function using the `exrates` data and write a `knitr::kable()` report.
+
+```{r }
+acf(coredata(exrates.xts[,1:4])) # returns
+acf(coredata(exrates.xts[,5:8])) # sizes
+# Load the data_moments() function
+## data_moments function
+## INPUTS: r vector
+## OUTPUTS: list of scalars (mean, sd, median, skewness, kurtosis)
+data_moments <- function(data){
+  library(moments)
+  library(matrixStats)
+  mean.r <- colMeans(data)
+  median.r <- colMedians(data)
+  sd.r <- colSds(data)
+  IQR.r <- colIQRs(data)
+  skewness.r <- skewness(data)
+  kurtosis.r <- kurtosis(data)
+  result <- data.frame(mean = mean.r, median = median.r, std_dev = sd.r, IQR = IQR.r, skewness = skewness.r, kurtosis = kurtosis.r)
+  return(result)
+}
+# Run data_moments()
+answer <- data_moments(exrates.xts[, 1:12])
+# Build pretty table
+answer <- round(answer, 4)
+knitr::kable(answer)
+
+hist(exrates.xts$USD.EUR.size)
+hist(exrates.xts$USD.GBP.size)
+
+
+```
+
+## Part 2
+
+We will use the data from Set A to investigate the interactions of the distribution of exchange rates.
+
+#### Problem
+
+We want to characterize the distribution of up and down movements visually. Also we would like to repeat the analysis periodically for inclusion in management reports.
+
+#### Questions 
+1. How can we show the shape of our exposure to euros, especially given our tolerance for risk? Suppose corporate policy set tolerance at 95\%. Let's use the `exrates.df` data frame with `ggplot2` and the cumulative relative frequency function `stat_ecdf`.
+```{r }
+exrates.tol.pct <- 0.95
+exrates.tol <- quantile(exrates.df$returns.USD.EUR, exrates.tol.pct)
+exrates.tol.label <- paste("Tolerable Rate = ", round(exrates.tol, 2), "%", sep = "")
+ggplot(exrates.df, aes(returns.USD.EUR, fill = direction.USD.EUR.dir)) + stat_ecdf(colour = "blue", size = 0.75) + geom_vline(xintercept = exrates.tol, colour = "red", size = 1.5) + annotate("text", x = exrates.tol + 1 , y = 0.75, label = exrates.tol.label, colour = "darkred")
+```
+
+2. What is the history of correlations in the exchange rate markets? If this is a "history," then we have to manage the risk that conducting business in one country will definitely affect business in another. Further that bad things will be followed by more bad things more often than good things. We will create a rolling correlation function, `corr_rolling`, and embed this function into the `rollapply()` function (look this one up!).
+
+```{r }
+one <- ts(exrates.df$returns.USD.EUR)
+two <- ts(exrates.df$returns.USD.GBP)
+# or
+one <- ts(exrates.zr[,1])
+two <- ts(exrates.zr[,2])
+ccf(one, two, main = "GBP vs. EUR", lag.max = 20, xlab = "", ylab = "", ci.col = "red")
+# build function to repeat these routines
+run_ccf <- function(one, two, main = "one vs. two", lag = 20, color = "red"){
+  # one and two are equal length series
+  # main is title
+  # lag is number of lags in cross-correlation
+  # color is color of dashed confidence interval bounds
+  stopifnot(length(one) == length(two))
+  one <- ts(one)
+  two <- ts(two)
+  main <- main
+  lag <- lag
+  color <- color
+  ccf(one, two, main = main, lag.max = lag, xlab = "", ylab = "", ci.col = color)
+  #end run_ccf
+}
+one <- ts(exrates.df$returns.USD.EUR)
+two <- ts(exrates.df$returns.USD.GBP)
+# or
+one <- exrates.zr[,1]
+two <- exrates.zr[,2]
+title <- "EUR vs. GBP"
+run_ccf(one, two, main = title, lag = 20, color = "red")
+# now for volatility (sizes)
+one <- abs(exrates.zr[,1])
+two <- abs(exrates.zr[,2])
+title <- "EUR vs. GBP: volatility"
+run_ccf(one, two, main = title, lag = 20, color = "red")
+# We see some small raw correlations across time with raw returns. More revealing, we see volatility of correlation clustering using return sizes. 
+```
+
+One more experiment, a rolling correlation using this function:	
+
+```{r}
+corr_rolling <- function(x) {	
+  dim <- ncol(x)	
+  corr.r <- cor(x)[lower.tri(diag(dim), diag = FALSE)]	
+  return(corr.r)	
+}
+ALL.r <- exrates.zr[, 1:4] # only returns
+corr.returns <- rollapply(ALL.r, width = 20, corr_rolling, align = "right", by.column = FALSE)
+head(corr.returns)
+str(corr.returns)
+colnames(corr.returns) <- c("EUR & GBP", "EUR & CNY", "EUR & JPY", "GBP & CNY", "GBP & JPY", "CNY & JPY")	
+plot(corr.returns, xlab = "", main = "")	
+#' 	
+
+```
+
+4. How related are correlations and volatilities? Put another way, do we have to be concerned that inter-market transactions (e.g., customers and vendors transacting in more than one currency) can affect transactions in a single market? Let's take the `exrate` data to understand how dependent correlations and volatilities depend upon one another.
+
+```{r}
+library(matrixStats)
+R.corr <- apply.monthly(as.xts(ALL.r), FUN = cor)	
+str(R.corr)
+head(ALL.r)
+tail(R.corr)
+R.vols <- apply.monthly(ALL.r, FUN = colSds) # from MatrixStats	
+head(R.corr, 3)	
+head(R.vols, 3)	
+#
+# Form correlation matrix for one month 	
+R.corr.1 <- matrix(R.corr[20,], nrow = 4, ncol = 4, byrow = FALSE)	
+rownames(R.corr.1) <- colnames(ALL.r[,1:4])	
+colnames(R.corr.1) <- rownames(R.corr.1)	
+head(R.corr.1)	
+#
+R.corr <- R.corr[, c(2, 3, 4, 7, 8, 12)]	
+head(R.corr)
+colnames(R.corr) <- colnames(corr.returns) 	
+colnames(R.vols) <- c("EUR.vols", "GBP.vols", "CNY.vols", "JPY.vols")	
+head(R.corr, 3)	
+head(R.vols, 3)	
+R.corr.vols <- merge(R.corr, R.vols)
+head(R.corr.vols)
+#'
+plot.zoo(R.corr.vols)	
+#' 	
+EUR.vols <- as.numeric(R.corr.vols[,"EUR.vols"])	
+GBP.vols <- as.numeric(R.vols[,"GBP.vols"])	
+CNY.vols <- as.numeric(R.vols[,"CNY.vols"])	
+length(EUR.vols)	
+# 	
+# Smooth data volatility
+#
+fisher <- function(r)	
+{0.5 * log((1 + r)/(1 - r))}	
+rho.fisher <- matrix(fisher(as.numeric(R.corr.vols[,1:6])), nrow = length(EUR.vols), ncol = 6, byrow= FALSE)	
+# 	
+```
+
+Here is the quantile regression part of the package.	
+	
+1. We set `taus` as the quantiles of interest.	
+2. We run the quantile regression using the `quantreg` package and a call to the `rq` function.	
+3. We can overlay the quantile regression results onto the standard linear model regression.	
+4. We can sensitize our analysis with the range of upper and lower bounds on the parameter estimates of the relationship between correlation and volatility.	
+ 	
+```{r}
+library(quantreg)
+# hist(rho.fisher[, 1])
+taus <- seq(.05,.95,.05)	
+fit.rq.EUR.GBP <- rq(rho.fisher[,1] ~ EUR.vols, tau = taus)	
+fit.lm.EUR.GBP <- lm(rho.fisher[,1] ~ EUR.vols)	
+# 	
+summary(fit.rq.EUR.GBP, se = "boot")
+#
+summary(fit.lm.EUR.GBP, se = "boot")
+plot(summary(fit.rq.EUR.GBP), parm = "EUR.vols")	
+```
+
+Here we build the estimations and plot the upper and lower bounds.	
+
+```{r} 	
+taus1 <- c(.05, 0.5, .95) # fit the confidence interval (CI)
+EUR.GBP.p <- predict(rq(rho.fisher[,1] ~ EUR.vols, tau = taus1))
+EUR.GBP.lm.p <- predict(lm(rho.fisher[,1] ~ EUR.vols))
+colnames(EUR.GBP.p) <- c(paste("tau",taus1[1]*100, sep = ""), paste("tau",taus1[2]*100, sep = ""), paste("tau",taus1[3]*100, sep = ""))
+head(EUR.GBP.p)
+EUR.GBP.CI <- data.frame(x = EUR.vols, y = rho.fisher[, 1], y.5 = EUR.GBP.p[, 1],  y.50 = EUR.GBP.p[, 2], y.95 = EUR.GBP.p[, 3], y.lm <- EUR.GBP.lm.p )
+head(EUR.GBP.CI)
+ggplot(EUR.GBP.CI, aes(x, y)) +
+    geom_point() +
+    geom_line(aes(y = y.5), colour = "red", linetype = "dashed") +
+    geom_line(aes(y = y.95), colour = "red", linetype = "dashed") +
+    geom_line(aes(y = y.50), colour = "blue") +
+    geom_line(aes(y = y.lm), colour = "blue", linetype = "dashed")
+
+
+
+#Test at more quantiles
+qs <-  1:9/10
+qr2 <- rq(y ~x, data=EUR.GBP.CI, tau = qs)
+ggplot(EUR.GBP.CI, aes(x,y)) + geom_point() + geom_quantile(quantiles = qs)
+```
+	
+
+#Interpretations?
+
+
+##Skills used
+###Part 1
+Working through the code in chronological order, we begin by loading the data in, but rather than load it in and then deal with null/missing values, we wrap it into a single call. After that we run the standard set of functions to see, at a high level, what our data looks like, what the shape is like, and what kind of data types and distributions we are dealing with. Similar to Project 2, our next set of steps involve us computing the returns through utilization of log difference of each feature, ignoring the first row of data due to lag, and coercing the data into a numeric matrix. This looks to render the date field as an index. Now we calculate the size, taking the abs. value of the returns, which will be an indicator of volatility. Again, we look to discretize directionality of each index, using ifelse statements to define up and down days, based on returns. The column name cleanups allow us to keep the origin of the column name, and subset them with size and cardinality for descriptive purposes. Merging this into a dateframe we can see returns, size and directionality for all 4 sets of FOREX pairs, easily delineated by prefixes. At this point, we can see why we coerced each set of data into a matrix with an index for date, and the final dataframe brings date back into the df as a feature. Next step is creating objects using the zoo and xts functions- the xts function changes the standard sequential index starting at 1 to the initial date moving sequentially. Zooreg is used instead of zoo because the index doesn't need to follow strict indexing rules, which we break in this instance (Nonnumeric). We can run is.regular(exrates.xts) to check if we are dealing with a series of data that is regular or has an underlying regularity (In this case, we do have missing indexes/dates, but if follows a pattern of 5days on, 2 days off). Using GGPLOT, we start by looking at the return columns, setting a y limit of 5 in each direction because all captured data is within that range. We use the same autoplot function to look at size, but we could likely change the y lim to (5,0) because we are dealing with absolutes. Next we look at autocorrelation, which is a function of correlation of time against lagged time.  We also look at the partial autocorrelation which helps us measure the order of the moving average term. Together, we can interpret the order of both the autoregressive and moving average terms of our data for an ARMA model, and potentially add in the difference order to build an ARIMA model. In the case of this assignment we are looking at ACF and PACF as a tool to cluster volatiltiy in our data. We look for lag terms that cross the significance thresholds of our plots to determine order- For example, looking at the ACF plot for USD.EUR, we see a break of limit at lag 22, suggesting an AR(22) model. We finish up part 1 by creating our standard data moments function to output a list of scalars assigned to each moment. In this case we are looking at statistics related to absolute return, or size, and the metrics can help us analyze and interpret distribution and shape of our pairs of currencies. 
+
+
+###Part 2
+Similar to project 2, we want to express our tolerance to risk, so we use the quantile function against our tolerance percentage (defined/given as 95%) and our desired currency pair's return column and get our tolerable rate. Using GGPLOT we define the desired parameters, setting aesthetic equal to returns of our currency pair and filling with direction of the same pair, which provides a digestable visual of our tolerable return rate in reference to directionality. Cross correlation is a way to understand one things impact on another, and in this case helps us to look at correlation between exchange rate movements over a period of time. In a business setting, this helps us to understand the history of currency, as it relates to their relationship amongst themselves, and can help us to better understand the relationships between different countries' currencies using ccf (cross correlation function), which can be seen as a measure of covariance amongst two sets of univariate time series. We look at relationships with the USD as our baseline to provide some standardization. For the purpose of reproducability, we wrap this into a nice function that takes converted time series vectors (ts function) as inputs. Next, we create a function that summizes rolling correlation amongst variables, rendering plots of cross correlation against specific currencies. Utilizing the matrix stats library we can analyze matrix tendencies and discern relationships. Using a monthly apply function with a FUN parameter set to correlation, we can look at all columns of our original data set and an aggregated monthly level, in terms of correlation. We do the same thing with FUN set to Sds, manipulating the matrix to show standard deviation of referenced columns at a monthly aggregate, eventually reaching a point where we look at correlation of standard deviation of returns at the currecy pair heirarchy, by month. Plotting this exposes the volatility of the correlation of standard deviation, so we utilize the fisher function to smooth the variance in the specified features (0.5 * log((1 + r)/(1 - r))). Using this matrix stabilized of volatility, we can model the input using both lm and qr functions, with the latter taking quantiles of interest as the 'taus. The next step involves predicting outputs at specified quantile ranges, preparing that into a new dataframe, and plotting both the QR and LM models against the actual values.
+
+
+##Discussion
+
+###Business analysis
+Working capital is the capital of a business that is used in its day-to-day trading operations, calculated as the current assets minus the current liabilities.  As assets increase, the working capital ratio increases.  Conversely, as assets decrease, working capital ratio will decrease.  The expectation is that an entity should possess enough current assets (cash, short-term investments, accounts receivable) to cover any outstanding liabilities (accounts payable, short term notes) if the company need to liquidate. A working capital ratio of 1 states the entity has equal amounts of current assets and liabilities.  An optimal working capital ratio lies between 1.5 and 2.0, a ratio below 1 can indicate a path toward bankruptcy. Accounts receivable is a current asset; thereby a major component of working capital.  Therefore, as foreign exchange rates fluctuate, the result can increase/decrease value of accounts receivable.  As the value of accounts receivable decreases, the working capital ratio decreases.  A low WC ratio can affect the company's ability to borrow capital to grow the company.  This entity can make the business decision to take measures to engage in hedging foreign exchange rate exposure.  FX hedging can be achieved by making foreign currency trades, just like the stock market.  These trades can be executed on a spot or forward basis.   Spot rate is the price a FX can be sold or purchased for today.  A forward rate is the price a FX can be sold or purchased sometime in the future.  In this case, when a sale is made, the payment is due sometime in the future. It would be extremely advantageous to purchase a forward rate at time of sale.  When payment is received from customers, we may be able to offset any loss incurred due to FX fluctuation by selling the forward rate.  Just like stock market trades, there is risk involved.  Another opportunity exists for companies engaging in foreign trade is purchasing option contracts. An option contract (put or call) provides the holder the right to trade, but not the obligation to trade foreign currency in the future. A put option is for the sale of foreign currency by the holder. A call option is for the purchase of foreign currency by the holder.  Option contracts provide more flexibility than forward contracts.   The data provided by our analysis will be very useful in creating a prediction model to determine whether hedging foreign currency is the appropriate course of action.  
+For global businesses who purchase raw material from one country they should look into making their orders more dynamic. This would avoid the exposure to the rate fluctuations.  The companies may also consider hedging or shorting an overvalued currency.  When contracting one unit of the currency should be expressed in a number of units in the other currency. For example:  If the EUR/USD spot rate is 1.50 then this means that the 1 Euro has the same value as 1.50 USD.
+
+###Updated Business Summary
+To understand the nature of exchange rates, we can start by looking at our first generated plot pertaining to returns over a series of time. USD.CNY is the most stable pair, showing very little deviation from the mean. The other three pairs show considerable volatility over time, but appear to be stationary, as any movement in one direction (returns) is countered by an equal move in the opposite direction (There is no linearity here when looking at returns). The autoplots of returns and size of the course of the five year analysis suggest that price movement was exceedant in 2016 for 3 of the 4 currency pairs, and volatility (size) was more prevalent as well. 
+
+Doing the same thing for rates, we can begin to see the shape of the volatility over time, noting that the same three pairs of currencies are expressively more volatile and appear to show heavy peaks. The ACF and PACF plots help us to understand the order of the AR and MA terms (looking for breaks against confidence) - The AR order appears to be more well defined and insightful when looking at size over return. The absolute values of returns over time, measured against themselves show correlation against time. 
+
+Applying data moments to our size variates shows us shape of distributions - All pairs are postively skewed which indicates that size of right tail is greater than the size of left tail. Kurtosis is relatively high across the board (for size), which speaks to presence of outliers and a corresponding non-normal distribution. USD.GBP and USD.CNY Size have kurtosis of 34 and 19, respectively, which falls well below the 'normal' threshold of 13. They also possess the highest skew of any currency pairs' absolute value of returns- Skew is positive for both pairs suggesting a long right tail and a mean that is farther to the right hand side of the distribution than the median. Poisson and Negative Binomial Distributions have long right tails and are useful for simulation of rare events.  
+
+
+Our exposure to USD.EUR is plotted above, showing the rate at which the exposure to the exchange rates cross our threshold calculated against our tolerance percentage (defined/given as 95%) and our desired currency pair's return column. 
+
+Cross correlation helps us to look at relationships between currency pairs. Looking at Eur vs GDP returns offers little insight into correlation across time against the two currency pairs, as most residuals are bound within the confidence intervals side from lag = 10/-13.  A 2 variate analysis referencing absolute value of returns, as described, shows us clustering of correlation of volatility measure of EUR vs GBP, and shows particularly heavy continual clustering around lag -10:-12. 
+
+We look at cross correlation to lend us insight into patterns of correlations against currency pairs. With a clear pattern we can surmise risk associated with different countries' respective currencies. The plot of corr.returns shows immense variance in returns correlation against pairs, and all plots appear to have a rolling correlation with a mean somewhere around 0 over the course of the time series, besides an overwhelmingly positive correlation between EUR and GBP. The remainder of the currencies do show large spikes in both directions, but we can see some patterns with currency association and understand that price movement is of Eur&CNY, EUR&JPY, and GBP&Japan is more likely following a pattern of low correlation. 
+
+Risk tolerance is plotted to show show much variabilility in returns we are willing to withstand. A high risk tolerance suggests an ability to withstand large swings in high volatility. 
+
+Work is done with matrix stats library that allows us to measure correlation of standard deviation, which is transformed and smoothed using the fisher function in preparation for modeling. Deviation over time is most positively correlated across pairs when looking at Eur V GBP.
+
+Again, we use the quantile regression and linear regression function to derive predicted values (quantile at .05 and .95, stepping .05 at a time). After those results are output, we construct a dataframe and embed the forecasts against the actual values. Our .05 quantile acts as our lower bound, the dashed blue line as our taus .50, and our .95 as our upper bound. The solid blue lines is an output of our linear model. Note - x is our standard deviation of Eur.GDP returns, y is our fisher transformation of the returns.  For a better understanding of quantile regression in this instance, we need a better understanding of quantile regression in general. QR is beneficial when there is non constant variance in the residuals. By layering in quantile ranges alongside standard linear modeling, we can estimate a variables effect on a specified quantile of our dependent variable. RQ (Quant Reg) is most useful when there is an increase of variance in error as x increases. In this case, our residuals are more clustered as the size of x increases, which would seemingly point to an lm model being sufficient to describe the relationship (http://data.library.virginia.edu/). All in all, the theory of quantile regression is that rather than estimating the mean of the dependent variable, we are looking at quantile ranges, and we are able to better account for variance as our independent variables move away from the origin. These lower and upper bounds, defined by our arbitrary taus, allow us to model relationships not contingent on the conditional mean and help to simulate situations where stress between currency pairs may be higher or lower. 
+
+**Specific Question from Prof. Khan feedback:
+The impact of foreign exchange rates across our customer base, as it relates to our business and our prospective customers, is extensive. We have to look at it from both sides. If we have a higher exchange rate in our native country it lends more purchasing power from imports from external companies - If we are outsourcing our supplies to other countries, a higher currency value would generally lead to an increased purchasing power. On the other end, if our country's exchange rate is lower, it lends to the notion that our exports will be cheaper abroad. With cheaper export prices driven by a deflated national currency we could see a resulting impact in sales in a positive direction. Eur and GDP, as seen above, tend to move in synchrony, while JPY tends to move in an opposite direction. If the dollar were to see a rise in value against the Euro and sterling, it is likely that there would be a drop in value against the Japanese currency.  
+
+Using evidence from this article/video (https://www.usatoday.com/story/money/business/2015/08/12/yuan-and-you-how-chinas-devalued-currency-affects-us-consumers/31524925/) we can see the impact the currency fluctuation and intentional devaluation has on a global scale. China devalued the yuan in hopes of stimulating their own economy by exporting to various countries for cheaper. On the downside, a devalued yuan against the US dollar leads to inflated export prices from the US back to China, so it negatively impacts our ability to trade, but reduces the consumer costs of goods coming from China.
+
+
+
+

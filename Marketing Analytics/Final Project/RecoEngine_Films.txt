@@ -1,0 +1,253 @@
+#Import TfIdfVectorizer from scikit-learn
+import pandas as pd
+import sklearn
+from sklearn.feature_extraction.text import TfidfVectorizer
+!pip install fuzzywuzzy
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+from sklearn.metrics.pairwise import linear_kernel
+from sklearn.metrics.pairwise import euclidean_distances
+from sklearn.feature_extraction.text import CountVectorizer
+import time
+import nltk, string, numpy
+
+
+######################################################################
+#Create Weighted Rating Feature
+#weighted rating (WR) = (v ÷ (v+m)) × R + (m ÷ (v+m)) × C 
+#https://help.imdb.com/article/imdb/track-movies-tv/faq-for-imdb-ratings/G67Y87TFYYP6TWAV#
+
+def weighted_rating(x, m=m, C=C):
+    '''
+    weighted rating that accounts for voting averages and number of user votes
+    m & C are derived based on the data  
+    '''
+    v = x['num_voted_users']
+    R = x['vote_average']
+    # Calculation based on the IMDB formula
+    return (v/(v+m) * R) + (m/(m+v) * C)
+
+
+######################################################################
+def fuzzymatching_title(title):
+    '''
+    input:: User input Movie Title
+    returns:: Closest Match to user input
+    '''
+    movie_titles = original_format['movie_title']
+    potential_matches = process.extractOne(title, movie_titles)
+    return str(potential_matches[0])
+    
+######################################################################    
+def clean_data(x):
+    ''' 
+    Converts all data to lower case and removes punctuation for stemming/lemmatization
+    '''
+    if isinstance(x, list):
+        return [str.lower(i.replace(" ", "")) for i in x]
+    else:
+        #Check if director exists. If not, return empty string
+        if isinstance(x, str):
+            return str.lower(x.replace(" ", ""))
+        else:
+            return ''
+        
+
+######################################################################    
+#https://sites.temple.edu/tudsc/2017/03/30/measuring-similarity-between-texts-in-python/
+#Normalize by lemmatization:
+lemmer = nltk.stem.WordNetLemmatizer()
+def LemTokens(tokens):
+     return [lemmer.lemmatize(token) for token in tokens]
+remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
+def LemNormalize(text):
+     return LemTokens(nltk.word_tokenize(text.lower().translate(remove_punct_dict)))
+
+#Normalize by stemming:
+stemmer = nltk.stem.porter.PorterStemmer()
+def StemTokens(tokens):
+    return [stemmer.stem(token) for token in tokens]
+remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
+def StemNormalize(text):
+    return StemTokens(nltk.word_tokenize(text.lower().translate(remove_punct_dict)))
+
+######################################################################    
+def hidesequels():
+    
+
+
+
+
+######################################################################
+C = original_format['vote_average'].mean()
+m = original_format['num_voted_users'].quantile(0.85)
+original_format['score'] = original_format.apply(weighted_rating, axis=1)
+original_format['cast'] = original_format['actor_1_name'] + ' ' \
+    + original_format['actor_2_name']+ ' ' + original_format['actor_3_name']
+
+original_format['all'] = original_format['cast'] + ' ' \
+    + original_format['director_name']+ ' ' + original_format['plot_keywords']+ ' ' \
+    + original_format['genres']+ ' ' + original_format['overview']
+
+
+
+
+######################################################################
+class Recommend():
+    
+    def by_synopsis(title, number_of_recommendations, token, verbose = True):
+
+        title = fuzzymatching_title(title) #Fuzzymatching on title incase user input error
+
+        if verbose:
+            print("Querying films similar to:" + ' ' + '\033[1m' +  str(title) + '\033[0m') #Display text output
+            print("Criteria for Matching:" + '\033[1m' + 'Cosine Similarity of Plot Overview' + '\033[0m')
+
+        newdf = original_format.copy() #Make a copy of the original dataframe to preserve objects
+        newdf['score'] = newdf.apply(weighted_rating, axis=1)
+        #Similarity based on Synopsis
+        #Define a TF-IDF Vectorizer Object. Remove all english stop words such as 'the', 'a'
+        tfidf = TfidfVectorizer(tokenizer = token, stop_words='english')
+        #Replace NaN with an empty string
+        newdf['overview'] = newdf['overview'].fillna('')
+        #Construct the required TF-IDF matrix by fitting and transforming the data
+        tfidf_matrix = tfidf.fit_transform(newdf['overview'])
+        # Compute the cosine similarity matrix
+        synopsis_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+        #Construct a reverse map of indices and movie titles
+        indices = pd.Series(newdf.index, index=newdf['movie_title']).drop_duplicates()
+        # Get the index of the movie that matches the title
+        idx = indices[title]
+        # Get the pairwsie similarity scores of all movies with that movie
+        sim_scores = list(enumerate(synopsis_sim[idx]))
+        # Sort the movie based on the similarity scores
+        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+        # Get the scores of the 100 most similar movies
+        sim_scores = sim_scores[1:21]
+        # Get the movie indices
+        movie_indices = [i[0] for i in sim_scores]
+        # Return the top 5 most similar movies w/ popularity factored in
+        cols = ['movie_title', 'score']
+        newdf = newdf[cols].iloc[movie_indices].sort_values('score', ascending = False)
+        newdf = newdf['movie_title'].head(number_of_recommendations)
+        rangeofmovies = range(1,number_of_recommendations +1)
+        for rang, reco in zip(rangeofmovies,newdf):
+            time.sleep(.5)
+            print (str(rang) + ':' + str(reco) )
+
+            
+    def by_plotkeywords(title, number_of_recommendations, token, verbose = True):
+
+        title = fuzzymatching_title(title) #Fuzzymatching on title incase user input error
+
+        if verbose:
+            print("Querying films similar to:" + ' ' + '\033[1m' +  str(title) + '\033[0m') #Display text output
+            print("Criteria for Matching:" + '\033[1m' + 'Cosine Similarity of Plot Keywords' + '\033[0m')
+
+        newdf = original_format.copy() #Make a copy of the original dataframe to preserve objects
+        #Similarity based on Synopsis
+        #Define a TF-IDF Vectorizer Object. Remove all english stop words such as 'the', 'a'
+        tfidf = TfidfVectorizer(tokenizer = token, stop_words='english')
+        #Replace NaN with an empty string
+        newdf['plot_keywords'] = newdf['plot_keywords'].fillna('')
+        #Construct the required TF-IDF matrix by fitting and transforming the data
+        tfidf_matrix = tfidf.fit_transform(newdf['plot_keywords'])
+        # Compute the cosine similarity matrix
+        keyword_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+        #Construct a reverse map of indices and movie titles
+        indices = pd.Series(newdf.index, index=newdf['movie_title']).drop_duplicates()
+        # Get the index of the movie that matches the title
+        idx = indices[title]
+        # Get the pairwsie similarity scores of all movies with that movie
+        sim_scores = list(enumerate(keyword_sim[idx]))
+        # Sort the movie based on the similarity scores
+        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+        # Get the scores of the 100 most similar movies
+        sim_scores = sim_scores[1:21]
+        # Get the movie indices
+        movie_indices = [i[0] for i in sim_scores]
+        # Return the top 5 most similar movies w/ popularity factored in
+        cols = ['movie_title', 'score']
+        newdf = newdf[cols].iloc[movie_indices].sort_values('score', ascending = False)
+        newdf = newdf['movie_title'].head(number_of_recommendations)
+        rangeofmovies = range(1,number_of_recommendations +1)
+        for rang, reco in zip(rangeofmovies,newdf):
+            time.sleep(.5)
+            print (str(rang) + ':' + str(reco) )
+            
+    def by_cast(title, number_of_recommendations, token, verbose = True):
+        title = fuzzymatching_title(title) #Fuzzymatching on title incase user input error
+        if verbose:
+            print("Querying films similar to:" + ' ' + '\033[1m' +  str(title) + '\033[0m') #Display text output
+            print("Criteria for Matching:" + '\033[1m' + 'Cosine Similarity Cast' + '\033[0m')
+
+        newdf = original_format.copy() #Make a copy of the original dataframe to preserve objects
+        #Similarity based on Synopsis
+        #Define a TF-IDF Vectorizer Object. Remove all english stop words such as 'the', 'a'
+        tfidf = TfidfVectorizer(tokenizer = token, stop_words='english')
+        #Replace NaN with an empty string
+        newdf['cast'] = newdf['cast'].fillna('')
+        #Construct the required TF-IDF matrix by fitting and transforming the data
+        tfidf_matrix = tfidf.fit_transform(newdf['cast'])
+        # Compute the cosine similarity matrix
+        keyword_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+        #Construct a reverse map of indices and movie titles
+        indices = pd.Series(newdf.index, index=newdf['movie_title']).drop_duplicates()
+        # Get the index of the movie that matches the title
+        idx = indices[title]
+        # Get the pairwsie similarity scores of all movies with that movie
+        sim_scores = list(enumerate(keyword_sim[idx]))
+        # Sort the movie based on the similarity scores
+        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+        # Get the scores of the 100 most similar movies
+        sim_scores = sim_scores[1:21]
+        # Get the movie indices
+        movie_indices = [i[0] for i in sim_scores]
+        # Return the top 5 most similar movies w/ popularity factored in
+        cols = ['movie_title', 'score']
+        newdf = newdf[cols].iloc[movie_indices].sort_values('score', ascending = False)
+        newdf = newdf['movie_title'].head(number_of_recommendations)
+        rangeofmovies = range(1,number_of_recommendations +1)
+        for rang, reco in zip(rangeofmovies,newdf):
+            time.sleep(.5)
+            print (str(rang) + ':' + str(reco) )
+            
+    def by_allcats(title, number_of_recommendations, token, verbose = True):
+        title = fuzzymatching_title(title) #Fuzzymatching on title incase user input error
+        if verbose:
+            print("Querying films similar to:" + ' ' + '\033[1m' +  str(title) + '\033[0m') #Display text output
+            print("Criteria for Matching:" + '\033[1m' + 'Cosine Similarity of All Categorical Variables' + '\033[0m')
+
+        newdf = original_format.copy() #Make a copy of the original dataframe to preserve objects
+
+        #Define a TF-IDF Vectorizer Object. Remove all english stop words such as 'the', 'a'
+        count = CountVectorizer(tokenizer = token, stop_words='english')
+        #Replace NaN with an empty string
+        newdf['all'] = newdf['all'].fillna('')
+        count_matrix = count.fit_transform(newdf['all'])
+        cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
+
+        #Construct a reverse map of indices and movie titles
+        indices = pd.Series(newdf.index, index=newdf['movie_title']).drop_duplicates()
+        # Get the index of the movie that matches the title
+        idx = indices[title]
+        # Get the pairwsie similarity scores of all movies with that movie
+        sim_scores = list(enumerate(cosine_sim2[idx]))
+        # Sort the movie based on the similarity scores
+        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+        # Get the scores of the 100 most similar movies
+        sim_scores = sim_scores[1:21]
+        # Get the movie indices
+        movie_indices = [i[0] for i in sim_scores]
+        # Return the top 5 most similar movies w/ popularity factored in
+        cols = ['movie_title', 'score']
+        newdf = newdf[cols].iloc[movie_indices].sort_values('score', ascending = False)
+        newdf = newdf['movie_title'].head(number_of_recommendations)
+        rangeofmovies = range(1,number_of_recommendations +1)
+        for rang, reco in zip(rangeofmovies,newdf):
+            time.sleep(.5)
+            print (str(rang) + ':' + str(reco) )
+            
+            
+            
+

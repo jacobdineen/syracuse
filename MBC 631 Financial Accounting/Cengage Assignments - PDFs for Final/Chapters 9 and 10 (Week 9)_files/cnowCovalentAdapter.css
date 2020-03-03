@@ -1,0 +1,652 @@
+.floatBoxContainer
+{
+    scrollbar-arrow-color: #4e658a;
+    scrollbar-3dlight-color: #777799;
+    scrollbar-darkshadow-color: #666677;
+    scrollbar-face-color: #a1b1c3;
+    scrollbar-highlight-color: #e9e9e9;
+    scrollbar-shadow-color: #a1b1c3;
+    scrollbar-track-color: #9faab8;
+    font-family: verdana, arial, sans-serif;
+    font-size: 10pt;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+.floatBoxContainer.pinned
+{
+    /* The following styles are needed in MSIE to prevent the floatBox from being
+       made transparent when the pin button is pressed. */
+    opacity: 1 !important;
+    filter: Alpha(Opacity=100) !important;
+    background: none;
+}
+
+.floatBoxContainer .floatBoxInnerContainer
+{
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.floatBoxContainer .floatBoxTitleBar
+{
+    position: relative;
+    width: 100%;
+    height: 20px;
+    padding: 0;
+    border: none;
+    white-space: nowrap;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.floatBoxContainer.pinned .floatBoxTitleBar
+{
+    cursor: default;
+}
+
+.floatBoxContainer .pinButton
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    margin: 3px;
+    background-image: url(/media/img/pt/dhtml/pin.gif);
+    cursor: pointer;
+}
+
+.floatBoxContainer.pinned .pinButton
+{
+    background-image: url(/media/img/pt/dhtml/pin_down.gif);
+}
+
+.floatBoxContainer .closeButton
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    margin: 3px;
+    background-image: url(/media/img/pt/dhtml/close.gif);
+    cursor: pointer;
+}
+
+.floatBoxContainer .floatBoxTitleBar .floatBoxTitle
+{
+    height: 20px;
+    margin: 0 20px;
+    padding: 1px 3px 0px 3px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.floatBoxContainer .floatBoxContents
+{
+    height: auto;
+    overflow-x: auto;
+    overflow-x: hidden\0/; /* hack for IE8 only */
+    overflow-y: auto;
+    border-top: 1px solid #777;
+    z-index: 1;
+}
+
+/* -------------------------------------------------------------------- */
+/* Rejoinders                                                           */
+/* -------------------------------------------------------------------- */
+
+.rejoinderContainer .rejoinderFeedback,
+.rejoinderContainer .rejoinderCorrectAnswer
+{
+    padding: .2em;
+}
+
+.rejoinderContainer .rejoinderCorrectAnswer
+{
+    border-top: 1px solid #777;
+}
+
+.rejoinderContainer .tailTop
+{
+    display: none; /* Initially hidden */
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: 1px;
+    left: 8px;
+    width: 15px;
+    height: 20px;
+    z-index: 2;
+}
+
+.rejoinderContainer.correct .tailTop
+{
+    background-image: url(/media/img/pt/dhtml/widget/popup_triangle_top_ffffff_478727.gif);
+}
+
+.rejoinderContainer.partial .tailTop
+{
+    background-image: url(/media/img/pt/dhtml/widget/popup_triangle_top_ffffff_5196ba.gif);
+}
+
+.rejoinderContainer.incorrect .tailTop
+{
+    background-image: url(/media/img/pt/dhtml/widget/popup_triangle_top_ffffff_983202.gif);
+}
+
+.rejoinderContainer.accepted .tailTop
+{
+    background-image: url(/media/img/pt/dhtml/widget/popup_triangle_top_ffffff_5196ba.gif);
+}
+
+.rejoinderContainer .tailBottom
+{
+    display: none; /* Initially hidden */
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: -1px;
+    left: 8px;
+    width: 18px;
+    height: 24px;
+    z-index: 2;
+}
+
+.rejoinderContainer.correct .tailBottom
+{
+    background-image: url(/media/img/pt/dhtml/widget/popup_triangle_bottom_ffffff_478727.gif);
+}
+
+.rejoinderContainer.partial .tailBottom
+{
+    background-image: url(/media/img/pt/dhtml/widget/popup_triangle_bottom_ffffff_5196ba.gif);
+}
+
+.rejoinderContainer.incorrect .tailBottom
+{
+    background-image: url(/media/img/pt/dhtml/widget/popup_triangle_bottom_ffffff_983202.gif);
+}
+
+.rejoinderContainer.accepted .tailBottom
+{
+    background-image: url(/media/img/pt/dhtml/widget/popup_triangle_bottom_ffffff_5196ba.gif);
+}
+
+.rejoinderContainer.correct .floatBoxInnerContainer
+{
+    border: 1px solid #478727;
+}
+.rejoinderContainer.partial .floatBoxInnerContainer
+{
+    border: 1px solid #5196ba;
+}
+.rejoinderContainer.incorrect .floatBoxInnerContainer
+{
+    border: 1px solid #983202;
+}
+.rejoinderContainer.accepted .floatBoxInnerContainer
+{
+    border: 1px solid #5196ba;
+}
+
+.rejoinderContainer.correct .floatBoxTitleBar
+{
+    color: #478727;
+}
+.rejoinderContainer.partial .floatBoxTitleBar
+{
+    color: #5196ba;
+}
+.rejoinderContainer.incorrect .floatBoxTitleBar
+{
+    color: #983202;
+}
+.rejoinderContainer.accepted .floatBoxTitleBar
+{
+    color: #5196ba;
+}
+
+
+.rejoinderButton
+{
+    position: relative; display: inline-block;
+    margin: 1px; padding: 0;
+    height: 19px; width: 19px;
+    background-position: top left; background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.MathJax .rejoinderButton
+{
+    position: relative; display: inline-block;
+    margin: 0px; padding: 0;
+    background-position: top left; background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.rejoinderButton.correct
+{
+    background-image: url(/media/img/pt/dhtml/rejoinder_correct.gif);
+}
+.rejoinderButton.partial
+{
+    background-image: url(/media/img/pt/dhtml/rejoinder_part_correct.gif);
+}
+.rejoinderButton.incorrect
+{
+    background-image: url(/media/img/pt/dhtml/rejoinder_incorrect.gif);
+}
+.rejoinderButton.accepted
+{
+    background-image: url(/media/img/pt/dhtml/rejoinder_accepted.gif);
+}
+
+.tfChoiceLevelRejoinder
+{
+    display: none;
+}
+/* -------------------------------------------------------------------- */
+/* Additional Info                                                      */
+/* -------------------------------------------------------------------- */
+
+.additionalInfoButton
+{
+}
+
+.additionalInfoButton:hover{
+}
+
+.additionalInfoButton.hideInfo
+{
+    background-position: -270px 0;
+}
+
+.additionalInfoButton.hideInfo:hover
+{
+    background-position: -405px 0;
+}
+
+.additionalInfoContainer .floatBoxInnerContainer
+{
+    border: 1px solid #5196BA;
+    background-color: #d1edf9;
+    padding: 5px;
+}
+
+.additionalInfoContainer .floatBoxInnerContainer .floatBoxContents
+{
+    padding: 5px;
+}
+
+/* -------------------------------------------------------------------- */
+/* Hint                                                                 */
+/* -------------------------------------------------------------------- */
+
+.hintButton
+{
+    cursor: pointer;
+}
+
+.hintButton:hover
+{
+}
+
+.hintContainer .floatBoxInnerContainer
+{
+    border: 1px solid #5196BA;
+    background-color: #d1edf9;
+    padding: 5px;
+}
+
+.hintContainer .floatBoxInnerContainer .floatBoxContents
+{
+    padding: 5px;
+}
+
+.hintContainer .hintContents .hintContentHolder.disable
+{
+    display: none;
+}
+
+.hintTitle
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.hintTitle .hintTitleText
+{
+    margin: 0 20px;
+}
+
+.hintTitle .prevNav
+{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background-image: url(/media/img/pt/dhtml/navSeqPrev.gif);
+}
+
+.hintTitle .prevNav.disabled
+{
+    background-image: url(/media/img/pt/dhtml/navSeqPrev_disable.gif);
+}
+
+.hintTitle .nextNav
+{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    right: 0;
+    top: 0;
+    position: absolute;
+    background-image: url(/media/img/pt/dhtml/navSeqNext.gif);
+}
+
+.hintTitle .nextNav.disabled
+{
+    background-image: url(/media/img/pt/dhtml/navSeqNext_disable.gif);
+}
+.covalentItem,
+.covalentItem table
+{
+    font: 14px/1.5em Georgia,Times,Times New Roman,serif;
+}
+
+.clickableArea
+{
+    cursor:pointer;
+}
+
+.feedbackArrow
+{
+    background-image: url(/media/img/feedBackWidget_arrow_expanded.png);
+    background-repeat: no-repeat;
+    float: left;
+    height: 7px;
+    width: 7px;
+    margin-top: 1px;
+    margin-right: 5px;
+}
+
+.feedbackArrow.collapsed
+{
+    background-image: url(/media/img/feedBackWidget_arrow_collapsed.png);
+    background-repeat: no-repeat;
+}
+
+.feedbackExpandedState
+{
+    background-image: url(/media/img/feedBackWidget_arrow_expanded.png);
+    background-repeat: no-repeat;
+}
+
+.feedBackWidgetOverallContainer .hideShowLink
+{
+    padding-top: 7px;
+    padding-left: 5px;
+    background-color: #A2CC42;
+    height: 20px;
+    position: relative;
+}
+
+.feedBackWidgetOverallContainer
+{
+    min-width: 500px;
+    -moz-box-shadow: 2px 3px 1px #999;
+    -webkit-box-shadow: 2px 2px 2px #999;
+    box-shadow: 2px 3px 1px #999;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.feedBackWidgetContainer
+{
+    background-color: rgb(255,255,255);
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    display: none;
+}
+
+.feedbackWidgetHeadingText
+{
+    text-decoration: underline;
+    line-height: 14px;
+    color: #0041CC;
+}
+
+.feedbackWidgetHeadingText:hover
+{
+    text-decoration: underline;
+    line-height: 14px;
+    color: #CC5800;
+}
+
+.feedbackWidgetOverallRejoinder
+{
+    padding-top: 7px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: #363636;
+    vertical-align: middle;
+
+    width: auto;
+    background-color: #b3dcee;
+    height: 20px;
+}
+
+.feedBackWidgetBody
+{
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+.feedbackWidgetBodyBorder
+{
+    border-style:solid;
+    border-width: 1px;
+    border-color: #81c2e0;
+}
+
+.feedBackWidgetOverallContainer .rejoinderIcon
+{
+    position: absolute;
+    right: 2px;
+    top: 9px;
+    width: 19px;
+    height: 19px;
+    background-repeat: no-repeat;
+}
+
+.feedbackWidgetRejoinder_Correct
+{
+    background-image: url(/media/themes/default/images/icons/assignments/correct.png);
+}
+
+.feedbackWidgetRejoinder_PartiallyCorrect
+{
+    background-image: url(/media/themes/default/images/icons/assignments/partiallyCorrect.png);
+}
+
+.feedbackWidgetRejoinder_Incorrect
+{
+    background-image: url(/media/themes/default/images/icons/assignments/incorrect.png);
+}
+
+.feedbackWidgetRejoinder_Accepted
+{
+    background-image: url(/media/themes/default/images/icons/assignments/manual.png);
+}
+
+.problemTypes
+{
+    margin-left:3px; /* fixes IE7 bug with italic text on a solid background color. */
+}
+
+/*
+     Rejoinder Information for the QNA PT
+*/
+.qnaItem .selection .rejoinder
+{
+    background-color: #FFF;
+    color: #FFF;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+}
+.qnaItem .selection.RIGHT .rejoinder
+{
+    background: #FFF url(/media/img/qna/icon_right.png) center no-repeat;
+}
+.qnaItem .selection.WRONG .rejoinder
+{
+        background: #FFF url(/media/img/qna/icon_wrong.png) center no-repeat;
+}
+.qnaItem .selection.RIGHT .rejoinder img
+{
+    height: 18px;
+    width: 18px;
+}
+.qnaItem .selection.WRONG .rejoinder img
+{
+    height: 18px;
+    width: 18px;
+}
+
+.qnaItem .optionRejoinder
+{
+    padding-right: 2.5px;
+}
+
+.qnaItem .check .optionRejoinder.RIGHT,
+.qnaItem .radio .option.RIGHT
+{
+    background: #FFF url(/media/img/qna/icon_right.png) left center no-repeat;
+}
+
+.qnaItem .check .optionRejoinder.WRONG,
+.qnaItem .radio .option.WRONG,
+.qnaItem .incorrect_noresponse.WRONG
+{
+    background: #FFF url(/media/img/qna/icon_wrong.png) left center no-repeat;
+}
+
+.qnaItem td span.optionRejoinder.RIGHT
+{
+    background: #FFF url(/media/img/qna/icon_right.png) left center no-repeat;
+    width:12px;
+    display:inline-block;
+}
+
+.qnaItem td span.optionRejoinder.WRONG
+{
+    background: #FFF url(/media/img/qna/icon_wrong.png) left center no-repeat;
+    width:12px;
+    display:inline-block;
+}
+
+.qnaItem td.optionRejoinderCell
+{
+    vertical-align: middle;
+}
+
+.MathJax span[name="htmlHolder"] * span {
+    vertical-align: 3% !important;
+    display: inline-block;
+}
+
+.covalentItem .rejoinder_right,
+.covalentItem .rejoinder_wrong,
+.covalentItem .rejoinder_partially_correct,
+.covalentItem .rejoinder_needsGrading,
+.covalentItem .rejoinder_noGrading
+{
+    background: #FFF url(/media/img/common/icon_right_R.gif) center right no-repeat;
+}
+.covalentItem .rejoinder_wrong
+{
+    background-image: url(/media/img/common/icon_wrong_R.gif);
+}
+.covalentItem .rejoinder_partially_correct
+{
+    background-image: url(/media/img/common/icon_part_R.gif);
+}
+.covalentItem .rejoinder_needsGrading
+{
+    background-image: url(/media/img/common/icon_needGrade_R.gif);
+}
+.covalentItem .rejoinder_noGrading
+{
+    background-image: url(/media/img/common/icon_noGrade_R.gif);
+}
+
+.covalentItem .accdefault_partially,
+.covalentItem .accdefault_partially_disabled
+{
+    background-color : #5196BA;
+}
+.covalentItem .accdefault_right,
+.covalentItem .accdefault_right_disabled
+{
+    background: url(/media/img/common/icon_right_TR.gif) top right no-repeat;
+}
+.covalentItem .accdefault_wrong,
+.covalentItem .accdefault_wrong_disabled
+{
+    background: url(/media/img/common/icon_wrong_TR.gif) top right no-repeat;
+}
+.covalentItem .acct_ledger .accdefault_right,
+.covalentItem .acct_ledger .accdefault_right_disabled
+{
+    background: url(/media/img/common/icon_right_TR.gif) top right no-repeat;
+}
+.covalentItem .acct_ledger .accdefault_wrong,
+.covalentItem .acct_ledger .accdefault_wrong_disabled
+{
+    background: url(/media/img/common/icon_wrong_TR.gif) top right no-repeat;
+}
+
+.acc_main_table .aptDropdownMenu.accdefault_wrong,
+.acc_main_table .aptDropdownMenu.accdefault_right,
+.acc_main_table .aptDropdownMenu.accdefault_wrong_disabled,
+.acc_main_table .aptDropdownMenu.accdefault_right_disabled
+{
+    padding-right: 5px;
+}
+
+
+.mcRow input.mcCheckbox {
+    display:none;
+}
+
+.mcRow input.mcCheckbox + label {
+    background: url('/media/img/pt/dhtml/mc_off.gif') no-repeat;
+    width: 19px;
+    display:inline-block;
+    padding: 0px;
+    padding-left: 20px;
+    width: auto;
+}
+ 
+.mcRow input.mcCheckbox:checked + label {
+    background: url('/media/img/pt/dhtml/mc_on.gif') no-repeat;
+    width: 19px;
+    display:inline-block;
+    padding: 0px;
+    padding-left: 20px;
+    width: auto;
+}​

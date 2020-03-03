@@ -1,0 +1,221 @@
+.additional_resource.additional_resource_dropdown .additional_resource_list
+{
+    position: absolute;
+    z-index: 1000;
+    top:17px; left:0px;
+	margin-top:20px;
+	width:231px;
+	-moz-box-shadow: 3px 3px 4px #a0a4a8;
+    -webkit-box-shadow: 3px 3px 4px #a0a4a8;
+    box-shadow: 3px 3px 4px #ff0000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+    behavior: url(ie-css3.htc);
+}
+
+.additional_resource.additional_resource_dropdown .additional_resource_list a
+{
+    display: block;
+    margin: 0; padding: 7px 5px 5px 15px;
+    white-space: nowrap;
+    border-bottom:#666666;
+    background-color:#ffffff;
+}
+
+.additional_resource_list a{
+	font-weight:normal;
+}
+
+.caption{
+padding-left: 15px;
+}
+
+.additional_resource
+{
+    position: relative; 
+    display: inline-block;
+	margin: 0 5px 0 0; 
+	padding: 12px 7px 3px 3px;
+	width: 231px;
+}
+
+.additional_resource .icon
+{
+    position: relative; display: inline-block;
+    margin: 0 5px 0 0;
+    height: 50px; width: 50px;
+    vertical-align: middle;
+    background-color: transparent;
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+.additional_resource a
+{
+    position: relative; 
+    display: inline-block;
+}
+.additional_resource.aee {
+ 	background: transparent url(img/aee.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;	
+	text-align:center;
+	padding-bottom:5px;	
+}
+.additional_resource.ebook {
+	background: transparent url(img/ebook.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.electure {
+	background: transparent url(img/electure.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.pss {
+	background: transparent url(img/pss.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.demo {
+	background: transparent url(img/demo.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.spreadsheet {
+	background: transparent url(img/spreadsheet.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.video {
+	background: transparent url(img/video.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold; 
+	text-align:center; 
+	padding-bottom:5px;
+}
+
+.additional_resource.ipod {
+	background: transparent url(img/video.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold; 
+	text-align:center; 
+	padding-bottom:5px;
+}
+
+.additional_resource.exhibit {
+	background: transparent url(img/ebook.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+	
+.additional_resource.exhibits {
+	background: transparent url(img/ebook.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.exhibitp {
+	background: transparent url(img/ebook.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+
+.additional_resource.aee:hover {
+	background: transparent url(img/aee-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.ebook:hover {
+	background: transparent url(img/ebook-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.electure:hover {
+	background: transparent url(img/electure-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.pss:hover {
+	background: transparent url(img/pss-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.demo:hover {
+	background: transparent url(img/demo-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.spreadsheet:hover {
+	background: transparent url(img/spreadsheet-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+.additional_resource.video:hover {
+	background: transparent url(img/video-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold; 
+	text-align:center;
+	padding-bottom:5px;
+}
+
+.additional_resource.ipod:hover {
+	background: transparent url(img/video-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold; 
+	text-align:center;
+	padding-bottom:5px;
+}
+
+.additional_resource.exhibit:hover {
+	background: transparent url(img/ebook-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+
+.additional_resource.exhibits:hover {
+	background: transparent url(img/ebook-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}
+
+.additional_resource.exhibitp:hover {
+	background: transparent url(img/ebook-over.jpg) bottom left no-repeat; 
+	color:#ffffff; 
+	font-weight:bold;
+	text-align:center;
+	padding-bottom:5px;
+}

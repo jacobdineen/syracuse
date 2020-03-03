@@ -1,0 +1,64 @@
+
+> UnivBank <- 
++   read.table("C:/Users/jdine/Desktop/SYracuse/Business Analytics/Homeworks/Hw4/scm651_homework_4_universal_bank.csv",
++    header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
+
+> names(UnivBank)
+ [1] "CustomerID"        "PersonalLoan"      "Age"              
+ [4] "Experience"        "Income"            "ZIP.Code"         
+ [7] "Family"            "CCAvg"             "Education"        
+[10] "Mortgage"          "SecuritiesAccount" "CDAccount"        
+[13] "Online"            "CreditCard"       
+
+> scatterplot(PersonalLoan~Income, reg.line=FALSE, smooth=FALSE, spread=FALSE,
++    boxplots=FALSE, span=0.5, ellipse=FALSE, levels=c(.5, .9), data=UnivBank)
+
+> GLM.1 <- glm(PersonalLoan ~ CCAvg + CDAccount + CreditCard + Education + 
++   Family + Income + Online + SecuritiesAccount, family=binomial(logit), 
++   data=UnivBank)
+
+> summary(GLM.1)
+
+Call:
+glm(formula = PersonalLoan ~ CCAvg + CDAccount + CreditCard + 
+    Education + Family + Income + Online + SecuritiesAccount, 
+    family = binomial(logit), data = UnivBank)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.1451  -0.2054  -0.0804  -0.0310   3.8986  
+
+Coefficients:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)       -13.224197   0.562495 -23.510  < 2e-16 ***
+CCAvg               0.113713   0.039265   2.896  0.00378 ** 
+CDAccount           3.853311   0.323447  11.913  < 2e-16 ***
+CreditCard         -1.123683   0.205003  -5.481 4.22e-08 ***
+Education           1.704116   0.112393  15.162  < 2e-16 ***
+Family              0.690388   0.074201   9.304  < 2e-16 ***
+Income              0.054721   0.002589  21.133  < 2e-16 ***
+Online             -0.667476   0.156717  -4.259 2.05e-05 ***
+SecuritiesAccount  -0.934627   0.284849  -3.281  0.00103 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 3162.0  on 4999  degrees of freedom
+Residual deviance: 1288.6  on 4991  degrees of freedom
+AIC: 1306.6
+
+Number of Fisher Scoring iterations: 8
+
+
+> exp(coef(GLM.1))  # Exponentiated coefficients ("odds ratios")
+      (Intercept)             CCAvg         CDAccount        CreditCard 
+     1.806359e-06      1.120431e+00      4.714891e+01      3.250803e-01 
+        Education            Family            Income            Online 
+     5.496526e+00      1.994489e+00      1.056246e+00      5.130018e-01 
+SecuritiesAccount 
+     3.927322e-01 
+
+> scatterplot(PersonalLoan~Income, reg.line=FALSE, smooth=FALSE, spread=FALSE, 
++   boxplots=FALSE, span=0.5, ellipse=FALSE, levels=c(.5, .9), data=UnivBank)
+

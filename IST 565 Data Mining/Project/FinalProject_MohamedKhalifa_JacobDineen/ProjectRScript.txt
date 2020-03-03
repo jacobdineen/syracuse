@@ -1,0 +1,113 @@
+
+#CLEAR ENVIRONMENT AND INSTALL INITIAL PACKAGES
+rm(list = ls(all = TRUE))#Clear Enviroment
+
+library(data.table)
+
+#Reading in Census Data
+Census <- fread('http://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data')
+Census <- as.data.frame(Census)
+CensusTest <- fread('http://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test')
+CensusTest <- as.data.frame(CensusTest)
+
+
+CensusTrainTest <- rbind(Census,CensusTest)
+
+
+#Changing Column Names per documentation
+colnames(Census) <- c("age", "workclass", "fnlwgt", "education", "education-num", "marital-status", "occupation", "relationship", "race", "sex", "capital-gain", 
+                      "capital-loss", "hours-per-week", "country", "class")
+#checking df structure
+str(Census)
+
+
+
+#Change factors to nominal
+
+for (i in c(2,4,6:10,14:15))
+{ 
+  Census[, i] <- as.factor(Census[,i])
+}
+
+
+#Change integers to numeric
+for (i in c(1,3,5,11:13))
+{ 
+  Census[, i] <- as.numeric(Census[,i])
+}
+
+
+
+#find Question Marks and convert to NAs
+  
+for (i in 1:15)
+{
+  Census[,i][Census[,i]== "?"] <- NA
+  
+}
+
+
+#Find rows with na
+row.has.na <- apply(Census,1,function(x){any(is.na(x))})
+sum(row.has.na) #2399 rows contain an NA
+Census <- Census[!row.has.na,]
+
+
+str(Census)
+
+write.csv(Census, file = "CensusMLProjectTrainingandTest.csv")
+
+summary((Census))
+
+summary(CensusTest)
+
+
+install.packages("corrplot")
+library("corrplot")
+
+dfcorr <- Census[,c(1,3,5,11,12,13)]
+
+cor(dfcorr)
+
+corrplot(cor(dfcorr), method= "square", title="Census Correlation Test")
+
+
+Census[sample(nrow(Census), 500), ]
+
+CensusSmall<- Census[sample(nrow(Census), 500), ]
+write.csv(CensusSmall, file = "CensusMLProjectTrainingandTest.csv")
+
+
+install.packages("wesanderson")
+library(dplyr)
+library(sqldf)
+library(ggplot2)
+library(reshape2)
+library(gridExtra)
+library(sqldf)
+library(wesanderson)
+adult<-read.csv("G:/MBA/01R/Data/adult_Census Income Data Set_original_32561.csv")
+str(adult)
+summary(adult)
+adult$income<-as.factor(gsub(">50K.", ">50K", adult$income))
+adult$income<-as.factor(gsub("<=50K.", "<=50K", adult$income))
+adult$workclass <- as.factor(gsub("[?]", NA, adult$workclass))
+adult$education <- as.factor(gsub("[?]", NA, adult$education))
+adult$marital.status <- as.factor(gsub("[?]", NA, adult$marital.status))
+adult$occupation <- as.factor(gsub("[?]", NA, adult$occupation))
+adult$relationship <- as.factor(gsub("[?]", NA, adult$relationship))
+adult$race <- as.factor(gsub("[?]", NA, adult$race))
+adult$sex <- as.factor(gsub("[?]", NA, adult$sex))
+adult <- na.omit(adult)
+adult$agedesc = as.factor(ifelse(test = adult[, "age"] <= 24, yes = "Youth", no = ifelse(test = adult[, "age"] > 24 & adult[, "age"] <= 40, yes = "Adult", no = ifelse(test = adult[, "age"] > 40 & adult[, "age"] <= 55, yes = "Adult", no = "Old"))))
+
+par(las=2) ## Attribute alignment with respect to axis(2-> perpendicular)
+par(mar = c(9, 5, 5, 3) + 0.5) # Define plot area
+
+based_on_AG<-subset(adult, select=c(agedesc,income))
+pal <- wes_palette(name = "GrandBudapest", type = "discrete")
+
+
+plot(based_on_AG, col = pal, ylab=expression(italic("Income\n")),xlab="", main=expression(italic("Age group")))
+
+plot(based_on_AG, col = pal, ylab=expression(italic("Income\n")),xlab="", main=expression(italic("Age group")))

@@ -1,0 +1,181 @@
+---
+title: "IST 565 Data Mining Homework # 7"
+author: "Jacob Dineen"
+date: "November 28th, 2017"
+output:
+  word_document: default
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[LE,RO]{\thepage}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(tidy = TRUE)
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=64))
+```
+
+# Digit Recognition in RMD
+In this experiment we will be looking at a systemically sampled dataset focusing on digit recognition as it relates to different machine learning algorithms. In this case, we will be contrasting success metrics between KNN, SVM and Random Forest algorithms. The purpose of this exercise is to determine which algorithm presents the most accurate model in a controlled setting. The parameter tuning will be slightly different from method to method, including random seed generation, but our testing will be similar (Holdout to Holdout, Cross-Validation to Cross-Validation). With little domain knowledge on digit recognition, I start by looking at the raw data via CSV. I can see that the first column, label, is our class for this dataset, and should be set as such when creating models.  The value is nominal/categorically in nature, and represents a value from between 0-9 (10 possible classes) Each row indicates an instance of a digit, so we are looking at 1400 instances.  The attributes, or features, are labeled by 'pixel' 1..2..3.. etc. After some research, I can see that for this classification problem an image is a 28x28 pixel square, which equals out to 784 pixels. So it is not a coincidence that we have 784 features within our dataset. 
+I have decided to run this project in R, particularly RMD, to sharpen up my R skills, and knowledge of the R libaries.
+
+## Problem
+Our classification problem will focus on digit recognition per pixel density, and location, as noted by our numeric columns.
+Previously we explored performance metrics using Naive Bayes and Decision Tree (J48) algorithms.
+The solution is organized in 3 sections: Data preparation, Model Building and Prediction.
+
+## Input Data
+The input data is a collection of feature sets describing essay and authorship (dispt, if disputed).
+Each record in our training data includes the nominal categorization of a single digit, as well as the features associated with that digit.
+We have a relatively even distribution per our class variable, which will be beneficial for our models.
+
+## Method
+In Section 1, we load data and save as two separate dataframes.
+In Section 2, we build and  models.
+First  using default settings, and then 
+parameter tuning to see if better models can be generated.
+We compare these models using appropriate evaluation measures. 
+Then, we describe and compare the patterns learned in these models.
+In section 3, we apply the model to the disputed papers to find out the authorship.
+
+
+### Section 1: Prepare the Data
+Separate the data into two dataframes.
+Read the trainig data and the test data into two separate data frames.
+We will use the sequentially sampled training data set and testing set to cut down on computation time.
+When preparing for Kaggle submission, we will load the larger testing set in for deduction (Kaggle DF)
+
+
+```{r }
+trainset <- read.csv("file:///C:/Users/jdine/Desktop/SYracuse/Term 4/IST 565 Data Mining/Week 8 - SVMS/DataSets/Kaggle-digit-train-sample-small-1400.csv")
+testset <- read.csv("file:///C:/Users/jdine/Desktop/SYracuse/Term 4/IST 565 Data Mining/Week 8 - SVMS/DataSets/Kaggle-digit-test-sample1000.csv")
+Kaggle <- read.csv("file:///C:/Users/jdine/Desktop/SYracuse/Term 4/IST 565 Data Mining/Week 8 - SVMS/DataSets/Kaggle-digit-test.csv")
+```
+
+
+### Section 2: Build RF, KNN, SVM Models 
+TRANSFORM DATA TYPE WITH WEKA FILTERS
+
+#Clean Data
+Create filters to convert to Nominal and deal with missing values.
+Then apply the filters.
+
+```{r }
+require(RWeka)
+NN <- make_Weka_filter("weka/filters/unsupervised/attribute/NumericToNominal")
+trainset$label <- as.factor(trainset$label)
+testset$label <- as.factor(testset$label)
+Kaggle$label <- as.factor(Kaggle$label)
+MS <- make_Weka_filter("weka/filters/unsupervised/attribute/ReplaceMissingValues")
+trainset <-MS(data=trainset, na.action = NULL)
+testset <-MS(data=testset, na.action = NULL)
+
+```
+
+BUILD and Test SVM Model
+
+```{r}
+#' install packages
+library(e1071)
+
+SVM <- svm(label~., data=trainset)
+print(SVM)
+
+PredSVM <- predict(SVM, newdata=Kaggle, type=c("class"))
+myids = c("ID")
+id_col=testset[myids]
+newpred=cbind(id_col, PredSVM)
+colnames(newpred)=c("ID", "Survived")
+write.csv(newpred, file="file:///C:/Users/jdine/Desktop/SYracuse/Term 4/IST 565 Data Mining/Week 8 - SVMS/DataSets/DRSVM.csv", row.names=FALSE)
+
+
+```
+
+
+BUILD KNN Model
+Use RWeka to build a Tree with default parameters.
+Then, evaluate the model using cross-validation with different settings of numFolds and seed.
+
+```{r}
+#' Use partykit to visualize
+require(partykit)
+#' View WOW parameters for tuning
+WOW("J48")
+#' Build model using J48 defaults
+(m=J48(author~., data = trainset))
+plot(m)
+#' Use 10 fold cross-validation to evaluate the model
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 10, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 20, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 30, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 40, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 20, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 20, seed = 20, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 30, seed = 20, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 40, seed = 20, class = TRUE))
+
+
+BUILD SVM Model
+Use RWeka to build a Tree with default parameters.
+Then, evaluate the model using cross-validation with different settings of numFolds and seed.
+
+```{r}
+#' Use partykit to visualize
+require(partykit)
+#' View WOW parameters for tuning
+WOW("J48")
+#' Build model using J48 defaults
+(m=J48(author~., data = trainset))
+plot(m)
+#' Use 10 fold cross-validation to evaluate the model
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 10, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 20, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 30, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 40, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 10, seed = 20, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 20, seed = 20, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 30, seed = 20, class = TRUE))
+(EV <- evaluate_Weka_classifier(m, numFolds = 40, seed = 20, class = TRUE))
+
+
+
+### Section 3: Predict using build Tree models with varying parameters
+
+```{r}
+#'
+#' Build model and predict without Pruning
+(m=J48(author~., data = trainset, control=Weka_control(U=TRUE, M=2, Q=20)))
+plot(m)
+(pred=predict (m, newdata = testset, type = c("class")))
+#'
+#' Build model and predict with Pruning but without reducedErrorPruning
+(m=J48(author~., data = trainset, control=Weka_control(U=FALSE, M=2, Q=20, C=0.5)))
+plot(m)
+(pred=predict (m, newdata = testset, type = c("class")))
+#'
+#' Build model Build model and predict with reducedErrorPruning
+(m=J48(author~., data = trainset, control=Weka_control(U=FALSE, M=2, Q=20, N=20, R=T)))
+plot(m)
+(pred=predict (m, newdata = testset, type = c("class")))
+```
+
+## Final Comments
+
+### Insights
+
+Building the Decision Tree with J48 defaults gives us a model that we then proceed to evaluate.
+Using different combinations of numFolds and seed, the cross-validation suggests we can use numFolds=20
+and seed=20 for optimal results. Further generating models with/without pruning and with/without
+reducedErrorPruning gives us a few variatons to compare. Most of the models have 4 leaves with Tree size of 7.
+The final model produced (with reducedErrorPruning) has only 2 leaves with Tree size of 3.
+In all cases, Madison is predicted as the author of the disputed essays.
+
+
+#### Conclusion
+
+With the J48 Decision Tree algorithm, the model identifies use of specific key words in identifying
+different authorships - namely: upon, of and not. With the reducedErrorPruning model, upon is clearly
+a the distinguishing key word. Based on the decison Tree analysis, therefore,
+Madison is clearly the author of the disputed essays - a prediction that was also echoed by
+cluster analysis previously.

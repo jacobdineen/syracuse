@@ -1,0 +1,789 @@
+---
+title: "DEEP THOUGHT (draft)"
+output:  
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    source_code: embed
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+require(ggplot2)
+require(flexdashboard)
+
+require(qrmdata)
+require(xts)
+require(zoo)
+require(xts)
+require(ggplot2)
+
+
+# PAGE: Exploratory Analysis
+
+# Function to get data
+getdataql <- function (q_code, col_no, clabel) {
+  require(Quandl)
+  mydata.ee <- Quandl(q_code, api_key="tzyKE21cvbzCY8pxDnPg")
+  data.ee <- data.frame(as.Date(mydata.ee[, 1]), mydata.ee[, col_no])
+  head(data.ee)
+  colnames(data.ee) <- c("DATE", clabel)
+  return(data.ee)
+}
+
+# Check and write data into a csv file one-time
+datafile <- "data/data_mm.csv"
+if(!file.exists(datafile)){
+  data.cu <- getdataql("LME/PR_CU", 2, "COPR")
+  data.mo <- getdataql("LME/PR_MO", 2, "MOLY")
+  data.au <- getdataql("LBMA/GOLD", 3, "GOLD")
+  data.ag <- getdataql("LBMA/SILVER", 2, "SLVR")
+  data1 <- merge(data.cu, data.mo, by.x = "DATE", by.y = "DATE")
+  data2 <- merge(data.au, data.ag, by.x = "DATE", by.y = "DATE")
+  data3 <- merge(data1, data2, by.x = "DATE", by.y = "DATE")
+  data3$DATE <- as.character(data3$DATE, format = "%m/%d/%Y")
+  head(data3)
+  write.table (data3, file=datafile, sep=",", row.names=F)
+}
+
+# Read and review the csv file generated or written previously
+data.x <- na.omit(read.csv(datafile, header = TRUE))
+
+# Compute log differences percent using as.matrix to force numeric type
+data.r <- diff(log(as.matrix(data.x[, -1]))) * 100
+
+# Create size - one indicator of volatility
+size <- na.omit(abs(data.r)) # size is indicator of volatility
+colnames(size) <- paste(colnames(size),".size", sep = "") # Teetor
+
+# Create direction - another indocator of volatility
+direction <- ifelse(data.r > 0, 1, ifelse(data.r < 0, -1, 0)) # another indicator of volatility
+colnames(direction) <- paste(colnames(direction),".dir", sep = "")
+
+# Convert into a time series object: 
+# 1. Split into date and rates
+dates <- as.Date(data.x$DATE[-1], "%m/%d/%Y")
+dates.chr <- as.character(data.x$DATE[-1])
+str(dates.chr)
+values <- cbind(data.r, size, direction)
+# for dplyr pivoting and ggplot2 need a data frame also known as "tidy data"
+data.df <- data.frame(dates = dates, returns = data.r, size = size, direction = direction)
+data.df.nd <- data.frame(dates = dates.chr, returns = data.r, size = size, direction = direction, stringsAsFactors = FALSE) 
+# non-coerced dates for subsetting on non-date columns
+# 2. Make an xts object with row names equal to the dates
+data.xts <- na.omit(as.xts(values, dates)) #order.by=as.Date(dates, "%d/%m/%Y")))
+str(data.xts)
+data.zr <- as.zooreg(data.xts)
+returns <- data.xts
+
+# PAGE: Market risk 
+
+# Function for rolling correlation
+corr.rolling <- function(x) {	
+  dim <- ncol(x)	
+  corr.r <- cor(x)[lower.tri(diag(dim), diag = FALSE)]	
+  return(corr.r)	
+}
+
+# Create a data frame with rolling correlations
+require(zoo)
+ALL.r <- data.xts[, 1:4]
+window <- 90 #reactive({input$window})
+corr.returns <- rollapply(ALL.r, width = window, corr.rolling, align = "right", by.column = FALSE)
+colnames(corr.returns) <- c("COPR&MOLY", "COPR&GOLD", "COPR&SLVR", "MOLY&GOLD", "MOLY&SLVR", "GOLD&SLVR")
+corr.returns.df <- data.frame(Date = index(corr.returns), 
+    COPR.MOLY = corr.returns[,1], COPR.GOLD = corr.returns[,2], COPR.SLVR = corr.returns[,3], 
+    MOLY.GOLD = corr.returns[,4], MOLY.SLVR = corr.returns[,5], GOLD.SLVR = corr.returns[,6])
+
+# Market dependencies
+
+require(matrixStats)
+R.corr <- apply.monthly(as.xts(ALL.r), FUN = cor)
+R.vols <- apply.monthly(ALL.r, FUN = colSds) # from MatrixStats
+
+# Form correlation matrix for one month 	
+R.corr.1 <- matrix(R.corr[20,], nrow = 4, ncol = 4, byrow = FALSE)	
+rownames(R.corr.1) <- colnames(ALL.r[,1:4])	
+colnames(R.corr.1) <- rownames(R.corr.1)
+
+# Combine corr and vols for all months into a single data frame
+R.cors <- R.corr[, c(2, 3, 4, 7, 8, 12)]
+colnames(R.cors) <- c("CU&MO", "CU&AU", "CU&AG", "MO&AU", "MO&AG", "AU&AG") 	
+colnames(R.vols) <- c("CU.vols", "MO.vols", "AU.vols", "AG.vols")	
+R.corr.vols <- na.omit(merge(R.cors, R.vols))		## fix with na_omit
+COPR.vols <- as.numeric(R.corr.vols[,"CU.vols"])	
+MOLY.vols <- as.numeric(R.corr.vols[,"MO.vols"])	## fix change R_corr
+GOLD.vols <- as.numeric(R.corr.vols[,"AU.vols"])	## fix change R_corr
+SLVR.vols <- as.numeric(R.corr.vols[,"AG.vols"])
+
+# Plot summary of fit for one of the correations
+require(quantreg)
+# hist(rho.fisher[, 1])
+COPR.corrs <- R.corr.vols[,1]
+#hist(COPR.corrs)
+taus <- seq(.05,.95,.05)	# Roger Koenker UI Bob Hogg and Allen Craig
+#summary(fit.rq.COPR.MOLY, se = "boot")
+#summary(fit.lm.COPR.MOLY, se = "boot")
+#'
+fit.rq.COPR.MOLY <- rq(COPR.corrs ~ MOLY.vols, tau = taus)	
+fit.lm.COPR.MOLY <- lm(COPR.corrs ~ MOLY.vols)	
+#plot(summary(fit.rq.COPR.MOLY), parm = "MOLY.vols", main = "COPR-MOLY correlation sensitivity to MOLY volatility", ylim = c(-0.1,0.1))	## fix add ylim
+#'
+fit.rq.COPR.GOLD <- rq(COPR.corrs ~ GOLD.vols, tau = taus)	
+fit.lm.COPR.GOLD <- lm(COPR.corrs ~ GOLD.vols)	
+#plot(summary(fit.rq.COPR.GOLD), parm = "GOLD.vols", main = "COPR-GOLD correlation sensitivity to GOLD volatility", ylim = c(-0.1,0.1))	## fix add ylim
+#'
+fit.rq.COPR.SLVR <- rq(COPR.corrs ~ SLVR.vols, tau = taus)	
+fit.lm.COPR.SLVR <- lm(COPR.corrs ~ SLVR.vols)	
+#plot(summary(fit.rq.COPR.SLVR), parm = "SLVR.vols", main = "COPR-SLVR correlation sensitivity to SLVR volatility", ylim = c(-0.1,0.1))	## fix add ylim
+
+
+# PAGE: Optimization
+
+# helper functions
+VaR.hist <- function(alpha, data){
+  # Value at Risk using historical simulation
+  data <- na.omit(data)
+  data <- na.	## <-- ???
+}
+VaR.norm <- function(alpha,mu,sigma,S=1){
+  # The VaR under the assumption of a normal-distribution 
+  - S * ( mu + qnorm(alpha) * sigma )
+}
+
+ES.norm <-  function(alpha,mu,sigma,S=1){
+  # The ES under the assumption of a normal-distribution
+  S * ( - mu + sigma * ( dnorm(qnorm(alpha))/alpha ) )
+}
+
+VaR.t <-  function(alpha,mu,lambda,nu,S=1){
+  # The VaR under the assumption of a t-distribution 
+  - S * ( mu + qt(alpha,nu) * lambda )
+}
+
+ES.t <-  function(alpha,mu,lambda,nu,S=1){
+  # The ES under the assumption of a t-distribution 
+  S * ( - mu + lambda * ( dt(qt(alpha,nu),nu) / alpha ) * ( ( nu + qt(alpha,nu)^2 )/( nu - 1 ) ) )
+}
+
+VaR.gpd <-  function(alpha,mu,lambda,nu,S=1){
+  # The VaR under the assumption of a t-distribution 
+  - S * ( mu + qt(alpha,nu) * lambda )
+}
+
+ES.gpd <-  function(alpha,mu,lambda,nu,S=1){
+  # The ES under the assumption of a t-distribution 
+  S * ( - mu + lambda * ( dt(qt(alpha,nu),nu) / alpha ) * ( ( nu + qt(alpha,nu)^2 )/( nu - 1 ) ) )
+}
+
+risk.boot.t <- function(data = data.xts, ind, alpha = 0.01, nsim = 1000){
+  # Fit a t-distribution to this data and estimate VaR and ES:
+  #
+  data <-  unique(data[ind]) # duplicate values seem to give us trouble 
+  params <-  fitdistr(data, densfun="t", start=list(m=-0.001, s=0.02, df=4.00))
+  params <-  as.vector(params$estimate)
+  mu <-  params[1] 
+  sigma <-  params[2] # estimate of sigma = sqrt( (nu-2)/nu ) standard_deviation
+  nu <-  params[3]
+  VaR <-  VaR.t(alpha, mu, sigma, nu, nsim)
+  ES <-  ES.t(alpha, mu, sigma, nu, nsim)
+  return(c( mu, sigma, nu, VaR, ES ))
+}
+
+risk.boot.gpd <-  function(data, ind, alpha = 0.01, qu = .9, nsim = 1000){
+  # Fit a t-distribution to this data and estimate VaR and ES:
+  #
+  require(QRM)
+  data <-  unique(data[ind]) # duplicate values seem to give us trouble 
+  u <- quantile(data, probs = qu, names = FALSE)
+  params <-  fit.GPD(data, threshold = u, start=list(m=-0.001, s=0.02, df=4.00))
+  params <-  as.vector(params$estimate)
+  mu <-  params[1] 
+  sigma <-  params[2] # estimate of sigma = sqrt( (nu-2)/nu ) standard_deviation
+  nu <-  params[3]
+  VaR <-  VaR.t(alpha, mu, sigma, nu, nsim)
+  ES <-  ES.t(alpha, mu, sigma, nu, nsim)
+  return(c( mu, sigma, nu, VaR, ES ))
+}
+#risk.boot.result <-  boot(returns[,1], risk.boot.t, R=10)
+#VaR.boot <-  risk.boot.result$t[,4]
+#plot( density(VaR_boots), lwd=2, main="VaR (kde)" )
+#
+#returns.params <- fitdistr(returns[,1], densfun="t", start=list(m=-0.001, s=0.02, df=4.00))
+# shapiro.test(VaR.boot) <-  risk.boot.result$t[,5]
+#boot.ci(risk.boot.result, conf=0.95, type="norm", index=4)
+#boot.ci(risk.boot.result, conf=0.95, type="norm", index=5)
+```
+
+
+Decision
+=======================================================================
+
+Background
+-----------------------------------------------------------------------
+
+### Introduction
+
+Canadian mining company Northern Dynasty Minerals has one of the world's largest undeveloped deposits
+of copper and gold, but the U.S. EPA nixed efforts to develop the Alaska Pebble Project in 2014
+to protect the sockeye salmon fishery. The new US government is in favor of NAK, and stock
+(once below $0.50 per share) now exceeds $700m valuation. An EPA agreement is expected shortly. 
+Aiming big, the company raised $35.5 million with new stock offerings, and is seeking partners. 
+Mining capacity estimates: 57B tons copper, 70M oz. gold, 3.4B lbs. molybdenum and 344M oz. silver. 
+Refer to the following websites:
+https://www.fool.com/investing/2017/02/01/where-will-northern-dynasty-minerals-be-in-10-year.aspx 
+
+http://www.northerndynastyminerals.com/ndm/Home.asp
+
+http://quotes.morningstar.com/chart/stock/chart.action?t=NAK&region=usa&culture=en-US
+
+
+### A financial analytics workflow
+
+1. What decision(s) are we making?
+2. What are the key business questions we need to support this decision?
+3. What data do we need?
+4. What tools do we need to analyze the data?
+5. How do we communicate answers to inform the decision?
+
+
+Questions
+-----------------------------------------------------------------------
+
+### Management is looking to us for analysis:
+1. Retrieve and begin to analyze data about some of the existing and new markets.
+2. Determine the impact of mining metals & minerals price on NAK stocks.
+3. Generate economic scenarios in the new markets based on price changes.
+
+### Decision is to generate direct & indirect revenue from mining and refining activities. 
+- Product: Gold, Silver, Copper, Molybdenum.
+- Geography: US, Canada, Europe, China.
+- Customers: Traders and Importers of metals & minerals.
+
+### Three business questions:
+1. How would the new mining project affect the stock of NAK?
+2. How would the value of identified markets affect the value of business in US dollars?
+3. How best to allocate resources for mining of the different metals? 
+Note: American labor and regulatory costs impact production costs, 
+and infrastructure costs are higher in rural areas.
+
+Approach
+-----------------------------------------------------------------------
+
+### Stylized facts of the market
+
+Learned the hard way: not independent, volatile
+
+- Financial stock, bond, commodity...have highly interdependent relationships.
+- Volatility is rarely constant, often has a structure (mean reversion), is dependent on the past.
+- Past shocks persist (rock in a pool).
+- Extreme events are likely to compound.
+- Negative returns are more likely (left skew).
+
+### History speaks
+
+- We will develop the *value at risk* and *expected shortfall* metrics from the historical simulated distributions of risk factors.
+- Given these factors we combine them into a portfolio and calculate their losses. 
+- Finally with the loss distribution in hand we can compute the risk measures. - This approach is nonparametric.
+
+### Data and analysis to inform the decision
+
+- NAK stock prices: volatility and correlation
+- Gold, Silver, Copper, Molybdenum: volatility and correlation
+- Foreign exchange rates: US dollars, Canadian dollars, EU euros and Chinese yuan
+- All together: correlations among these indicators
+
+
+Data
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Data at a Glance
+```{r}
+require(psych)
+pairs.panels(data.x)
+```
+
+### Data Definitions
+
+Copper Price: Londom Metal Exchage (LME) states LME Official Prices daily in US$ per tonne.
+
+Molybdenum Price: Londom Metal Exchage (LME) states LME Official Prices daily in US$ per tonne.
+
+Gold Price: The Gold price in London is set twice a day by five London Bullion Market Association
+(LBMA) Market Makers who comprise the London Gold Market Fixing Limited (LGMFL).
+Fixing levels are per troy ounce. Prices are in USD, GBP and EURO.
+
+Silver Price: The Silver price in London is set once a day by three London Bullion Market Association
+(LBMA) Market Makers who comprise the London Silver Market Fixing Limited (LSMFL).
+Fixing levels are per troy ounce. Prices are in USD, GBP and EURO.
+
+
+### Commentary
+
+Observation(s):
+
+- Historical prices show a lot of volatility
+- Metal prices show strong correlations
+- Gold and Silver prices have near-perfect correlation
+- Gold and Silver prices have new lower peaks
+- Copper price volatility suggest reaction to news events
+- Molybdenum prices have not fared as well as copper
+
+
+Row
+-----------------------------------------------------------------------
+
+###
+```{r}
+renderPlot({
+  require(ggplot2)
+  title.chg1 <- "Metals Prices Percent Changes"
+  title.chg2 <- "Size of Metals Prices Percent Changes"
+  autoplot.zoo(data.xts[,1:4]) + ggtitle(title.chg1) #+ ylim(-5, 5)
+})
+```
+
+###
+```{r}
+renderPlot({
+  require(ggplot2)
+  title.chg1 <- "Metals Prices Percent Changes"
+  title.chg2 <- "Size of Metals Prices Percent Changes"
+  autoplot.zoo(abs(data.xts[,1:4])) + ggtitle(title.chg2) #+ ylim(-5, 5)
+})
+```
+
+Exploratory Analysis
+=======================================================================
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+A quantile divides the returns distribution into two groups. For example 75\% of all returns may fall below a return value of 10\%. The distribution is thus divided into returns above 10\% and below 10\% at the 75\% quantile.
+
+Pull slide to the right to measure the risk of returns at desired quantile levels. The minimum risk quantile is 75\%. The maximum risk quantile is 99\%.
+
+
+```{r}
+sliderInput("alpha.q", label = "Risk Measure quantiles (%):",
+            min = 0.75, max = 0.99, value = 0.75, step = 0.01)
+```
+
+If an error appears, move a slider further to the right.
+
+Row
+-----------------------------------------------------------------------
+
+```{r}
+putvaluebox <- function(col_no) {
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  returns1 <- returns[,col_no]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df below
+  q <- quantile(returns1,alpha())
+  VaR.hist <- q
+  valueBox(round(VaR.hist, 2),
+           icon = "glyphicon-signal")
+}
+```
+
+### COPR Value at Risk
+
+```{r}
+#threshold <- reactive({input$threshold.q}) #BE SURE that {} included 
+renderValueBox({
+  putvaluebox(1)
+})
+```
+
+### MOLY Value at Risk
+
+```{r}
+#threshold <- reactive({input$threshold.q}) #BE SURE that {} included 
+renderValueBox({
+  putvaluebox(2)
+})
+```
+
+### GOLD Value at Risk
+
+```{r}
+#threshold <- reactive({input$threshold.q}) #BE SURE that {} included 
+renderValueBox({
+  putvaluebox(3)
+})
+```
+
+### SLVR Value at Risk
+
+```{r}
+#threshold <- reactive({input$threshold.q}) #BE SURE that {} included 
+renderValueBox({
+  putvaluebox(4)
+})
+```
+
+
+Row {.tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+```{r}
+goplotreturns <- function(col_no) {
+  returns1 <- returns[,col_no]
+  colnames(returns1) <- "Returns" #kluge to coerce column name for df
+  returns1.df <- data.frame(Returns = returns1, Distribution = rep("Historical", each = length(returns1)))
+  
+  alpha <- reactive({ifelse(input$alpha.q>1,0.99,ifelse(input$alpha.q<0,0.001,input$alpha.q))})
+  
+  # Value at Risk
+  VaR.hist <- quantile(returns1,alpha())
+  VaR.text <- paste("Value at Risk =", round(VaR.hist, 2))
+  
+  # Determine the max y value of the density plot.
+  # This will be used to place the text above the plot
+  VaR.y <- max(density(returns1.df$Returns)$y)
+  
+  # Expected Shortfall
+  ES.hist <- median(returns1[returns1 > VaR.hist])
+  ES.text <- paste("Expected Shortfall =", round(ES.hist, 2))
+  
+  ggplot(returns1.df, aes(x = Returns, fill = Distribution)) + 
+    geom_density(alpha = 0.8) + 
+    geom_vline(aes(xintercept = VaR.hist), linetype = "dashed", size = 1, color = "red") + 
+    geom_vline(aes(xintercept = ES.hist), size = 1, color = "blue") +
+    annotate("text", x = VaR.hist, y = VaR.y*1.05, label = VaR.text) +
+    annotate("text", x = ES.hist, y = VaR.y*1.1, label = ES.text)
+}
+```
+
+### COPPER Returns Distribution
+
+```{r}
+renderPlot({
+  goplotreturns(1)
+})
+```
+
+### MOLYBDENUM Returns Distribution
+```{r}
+
+renderPlot({
+  goplotreturns(2)
+})
+```
+
+### GOLD Returns Distribution
+```{r}
+renderPlot({
+  goplotreturns(3)
+})
+```
+
+### SILVER Returns Distribution
+```{r}
+renderPlot({
+  goplotreturns(4)
+})
+```
+
+Market Risk1
+=======================================================================
+
+Column {data = 1000}
+-----------------------------------------------------------------------
+
+### COPR and MOLY (90 day rolling correlation)
+
+```{r }
+renderPlot({
+ggplot(corr.returns.df, aes(x = Date, y = COPR.MOLY)) + geom_line()
+})
+```
+
+### COPR and GOLD (90 day rolling correlation)
+
+```{r }
+renderPlot({
+ggplot(corr.returns.df, aes(x = Date, y = COPR.GOLD)) + geom_line()
+})
+```
+
+### MOLY and GOLD (90 day rolling correlation)
+
+```{r }
+renderPlot({
+ggplot(corr.returns.df, aes(x = Date, y = COPR.SLVR)) + geom_line()
+})
+```
+
+Column {data = 1000}
+-----------------------------------------------------------------------
+
+### MOLY and GOLD (90 day rolling correlation)
+
+```{r }
+renderPlot({
+ggplot(corr.returns.df, aes(x = Date, y = MOLY.GOLD)) + geom_line()
+})
+```
+
+### MOLY and SLVR (90 day rolling correlation)
+
+```{r }
+renderPlot({
+ggplot(corr.returns.df, aes(x = Date, y = MOLY.SLVR)) + geom_line()
+})
+```
+
+### GOLD and SLVR (90 day rolling correlation)
+
+```{r }
+renderPlot({
+ggplot(corr.returns.df, aes(x = Date, y = GOLD.SLVR)) + geom_line()
+})
+```
+
+Market Risk2
+=======================================================================
+
+Row - 30 day within-sample correlations and volatilities
+-----------------------------------------------------------------
+
+###
+
+```{r}
+plot.zoo(R.cors, main= "Monthly Correlations and Volatilities")
+```
+
+###
+```{r}
+plot.zoo(R.vols, main= "Monthly Correlations and Volatilities")
+```
+
+Row
+-----------------------------------------------------------------
+
+### COPR - MOLY Dependency
+```{r}
+plot(summary(fit.rq.COPR.MOLY), parm = "MOLY.vols", main = "COPR-MOLY correlation sensitivity to MOLY volatility", ylim = c(-0.1,0.1))	## fix add ylim
+```
+
+### COPR - GOLD Dependency
+```{r}
+plot(summary(fit.rq.COPR.GOLD), parm = "GOLD.vols", main = "COPR-GOLD correlation sensitivity to GOLD volatility", ylim = c(-0.1,0.1))	## fix add ylim
+```
+
+### COPR - SLVR Dependency
+```{r}
+plot(summary(fit.rq.COPR.SLVR), parm = "SLVR.vols", main = "COPR-SLVR correlation sensitivity to SLVR volatility", ylim = c(-0.1,0.1))	## fix add ylim
+```
+
+Optimization
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Efficient Portfolio Frontier
+
+```{r}
+
+require(quadprog)
+
+R <- returns[,1:4]/100
+names.R <- colnames(R)
+mean.R <- apply(R,2,mean)
+cov.R <- cov(R)
+sd.R <- sqrt(diag(cov.R)) ## remember these are in daily percentages
+
+Amat <- cbind(rep(1,4), mean.R)  ## set the equality constraints matrix
+min.R <- -.0015 ## min(mean.R) + 1e-04
+max.R <- +.0015 ## max(mean.R) - 1e-04
+len.R <- 600
+mu.P <- seq(min.R, max.R, length=len.R)  ## set of (len.R) possible target portfolio returns
+sigma.P <- mu.P ## set up storage for std dev's of portfolio returns
+weights <- matrix(0, nrow=len.R, ncol=ncol(R)) ## storage for portfolio weights
+colnames(weights) <- names.R
+
+for (i in 1:length(mu.P)) {
+  bvec <- c(1,mu.P[i])  ## constraint vector
+  result <- solve.QP(Dmat=2*cov.R, dvec=rep(0,4), Amat=Amat, bvec=bvec, meq=2)
+  sigma.P[i] <- sqrt(result$value)
+  weights[i, ] <- result$solution
+}
+mu.free = 1.3/253/100 ## input value of risk-free interest rate
+sharpe <- ( mu.P-mu.free)/sigma.P ## compute Sharpe's ratios
+ind <- (sharpe == max(sharpe)) ## Find maximum Sharpe's ratio
+ind2 <- (sigma.P == min(sigma.P)) ## find the minimum variance portfolio
+
+renderPlot({
+  par(mfrow = c(1,1))
+  plot(sigma.P, mu.P, type="l", lty="dotted", lwd=3) #, xlim=c(0, max(sd.R)*1.1), ylim=c(min(mean.R)*1.05, max(mean.R)*1.1), lty=3, lwd=3)
+  ## plot the efficient frontier (and inefficient portfolios below the min var portfolio)
+  mu.free <- 1.3/253/100 ## input value of risk-free interest rate
+  points(0, mu.free, cex=3, pch="+")  ## show risk-free asset
+  sharpe <- (mu.P-mu.free)/sigma.P ## compute Sharpe's ratios
+  ind <- (sharpe == max(sharpe)) ## Find maximum Sharpe's ratio
+  options(digits=3)
+  lines(c(0,2), mu.free+c(0,2)*(mu.P[ind]-mu.free)/sigma.P[ind], lwd=4, lty="solid", col="blue")
+  ## show line of optimal portfolios
+  points(sigma.P[ind], mu.P[ind], cex=4, pch="*") ## show tangency portfolio
+  ind2 <- (sigma.P == min(sigma.P)) ## find the minimum variance portfolio
+  points(sigma.P[ind2], mu.P[ind2], cex=2, pch="+") ## show min var portfolio
+  ind3 <- (mu.P > mu.P[ind2]) ## finally the efficient frontier
+  lines(sigma.P[ind3], mu.P[ind3], type="l", lwd=3, col="red")  ## the efficient frontier
+  ## xlim=c(0, max(sd.R)*1.1), ylim=c(min(mean.R)*1.05, max(mean.R)*1.1), lwd=3, col="red")
+  text(2*sd.R[1], 1.25*mean.R[1], names.R[1] ,cex=1.15)
+  text(3*sd.R[2], .75*mean.R[2], names.R[2] ,cex=1.15)
+  text(4*sd.R[3], .5*mean.R[3], names.R[3] ,cex=1.15)
+  text(5*sd.R[4], .25*mean.R[4], names.R[4] ,cex=1.15)
+})
+```
+
+### Portfolio Weights
+
+The weights for the tangency portfolio ("*") are in
+```{r echo = FALSE}
+require(formattable)
+weights[ind,]
+name <- colnames(weights)
+posn <- ifelse((weights[ind, ] < 0), "go short (sell)", "go long (buy)")
+valu <- percent(abs(weights[ind, ]), 2)
+```
+To maximize the return for risk ratio, and for a given notional amount in the portfolio, 
+the recommendation is to have the following positions:
+```{r echo = FALSE}
+statm <- c(  paste(posn[1], valu[1], "of aggregate position in", name[1], "."),
+             paste(posn[2], valu[2], "of aggregate position in", name[2], "."),
+             paste(posn[3], valu[3], "of aggregate position in", name[3], "."),
+             paste(posn[4], valu[4], "of aggregate position in", name[4], ".") )
+noquote(statm)
+```
+The weights for the minimum variance portfolio ("+") are
+```{r echo = FALSE}
+require(formattable)
+weights[ind2,]
+name <- colnames(weights)
+posn <- ifelse((weights[ind2, ] < 0), "go short (sell)", "go long (buy)")
+valu <- percent(abs(weights[ind2, ]), 2)
+```
+To maximize the return for risk ratio, while maintaining positive amounts in the portfolio, 
+the recommendation is to have the following positions:
+```{r echo = FALSE}
+statm <- c(  paste(posn[1], valu[1], "of aggregate position in", name[1], "."),
+             paste(posn[2], valu[2], "of aggregate position in", name[2], "."),
+             paste(posn[3], valu[3], "of aggregate position in", name[3], "."),
+             paste(posn[4], valu[4], "of aggregate position in", name[4], ".") )
+noquote(statm)
+```
+
+If our working capital is \$100 million USD, 
+we might think of ways to bring this more into line with the optimal positions we just derived, 
+by changing contract terms and hedging against future price increases by using derivative instruments.
+
+In the mining business context, the company shoud not allocate any resources for the mining of those 
+metals & minerals that represent negative portfolio (not profitable) unless other constraints require 
+it, in which case portfolio with all positive weights is optimal.
+
+Documentation
+=======================================================================
+
+Row
+-----------------------------------------------------------------------
+
+### Data Analysis
+
+All the metals show strong correlations. Gold and Silver prices have near-perfect correlation. 
+Historical prices show a lot of volatility. Copper has the least volatility and Molybdenum the highest. 
+The sizes of metals prices percent changes also reflects that.
+
+Below the 90th percentile, the Value at Risk (VaR) is 0 for Molybdenum but rises quickly beyond that to 
+exceed the Value at Risk for the other metals. However, even when the Value at Risk is lower, 
+the Expected Shortfall (ES) is higher than for the other metals. 
+This is in line with the notion that you can add ES but not VaR. 
+Also, ES is greater VaR for all cases, as expected.
+
+The 90-day rolling correlations show similar volatility patterns amongst copper, gold and silver. 
+With molybdenum, the patterns are different but equally erratic.
+
+The monthly price volatilities show price [size] peaks in 2013 for gold and silver, a 2016 peak for 
+molybdenum, and a more recent peak for copper.
+
+The sensitivity diagrams confirm all the fluctuations.
+
+
+### Data Gathering
+
+Considering that the company is planning for mining four metals/minerals, the first order of business
+is to gather relevant data on price fluctuations for those four metals/minerals. This is done by directly querying Quandl via an
+api. For efficiency purposes, the data is fetched once and stored in a file. Subsequent runs check
+for existence of the file.  
+
+WARNING: Due to the nature of the api, it is possible that the program may "hang". Should no activity
+occur for more than a min, the recommendation is to start a new session after deleting any partially
+created file:
+```{r echo = FALSE}
+noquote(datafile)
+```
+Data source(s):
+
+- https://www.quandl.com/data/LME-London-Metal-Exchange 
+- https://www.quandl.com/data/LBMA-London-Bullion-Market-Association
+
+### In the News
+
+Gold is often looked at as more of a currency than a commodity. 
+Its value is based on the belief that in hard times it could be exchanged for goods and services. 
+In particular, Gold price is directly affected by the relative strength of the dollar. 
+
+Silver is inherently more volatile than gold. It is traded less, and
+has been hit particularly hard since the elections. 
+
+Copper is up since the election in the US. Copper is also reacting to news of union settlement at 
+Escondida mine in Chile, and resumed production of copper concentrate at the Grasberg mine in Indonesia. 
+
+Molybdenum is seeing a global surplus, but prices may rise
+due to demand increases in China and the global oil and gas industry.
+
+
+Row
+-----------------------------------------------------------------------
+
+### Recommendation
+
+The negative portfolio weights for Molybdenum and Silver suggest that the company should concentrate
+resources on the mining of Copper and Gold (unless other constraints apply).
+
+Molybdenum mining should be deferred until global demand picks up. 
+
+Silver should be mined only if the cost for doing that is lower than that for gold.
+
+
+### Measurements
+
+Value at Risk (VaR) is measured as
+$$
+VaR = q_{\alpha}(R_t)
+$$
+where $\alpha$ is the quantile level of tolerance, and $R_t$ are returns.
+
+Expected Shortfall (ES) is measured as
+$$
+ES = E[R_t \mid R_t > VaR]
+$$
+where $E[]$ is the expectation, a measure of central location.
+
+### About Distributions
+
+The Gaussian (normal) distribution is not a very thickly tailed distribution, and using this 
+does not help in understanding exteme events and their dependencies. 
+
+This is NOT a useful feature 
+ultimately. So, we use the Student's t-distribution and the generalized Pareto distribution (GPD) 
+to get dependency far out into the thick tails. 
+
+This is nearly perfect for risk managers and decision makers.

@@ -1,0 +1,4 @@
+"0","HO2 <- read.csv(""data/nyhh02.csv"", header = T, stringsAsFactors = F)
+"
+"2","Error in file(file, ""rt"") : cannot open the connection
+"

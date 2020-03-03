@@ -1,0 +1,27 @@
+def count_numbers():
+    summation = 0
+    count = 0
+    average = 0
+
+    while True:
+        try:
+            x = input("Enter a number: ")
+            if (x == "done"):
+                break
+            value = float(x)
+            summation += value 
+            count +=1
+            average = summation / count
+        except:
+            print("Invalid input.")
+    print('Count: {} | Sum: {} | Avg: {}'.format(count,summation,average))
+	
+count_numbers()	
+	
+Enter a number: 10
+Enter a number: 15
+Enter a number: 25
+Enter a number: 35
+Enter a number: 45
+Enter a number: done
+Count: 5 | Sum: 130.0 | Avg: 26.0

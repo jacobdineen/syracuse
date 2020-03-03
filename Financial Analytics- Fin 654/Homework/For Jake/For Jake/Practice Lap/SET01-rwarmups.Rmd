@@ -1,0 +1,227 @@
+---
+title: "Practice Set #1"
+subtitle: "solution revised 1/21/2017"
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyhead[CO,CE]{\thetitle}
+- \fancyfoot[CO,CE]{Copyright 2016 William G. Foote, all rights reserved.}
+- \fancyhead[RE,RO]{\thepage}
+- \renewcommand{\footrulewidth}{0.5pt}
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(tidy = TRUE)
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=36))
+knitr::opts_chunk$set(size = "small")
+knitr::opts_hooks$set(fig.width = function(options) {
+  if (options$fig.width < options$fig.height) {
+    options$fig.width = options$fig.height
+  }
+  options
+})
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+## Purpose, Process, Product
+
+These practice sets will repeat various `R` features in this chapter. Specifically we will practice defining vectors, matrices (arrays), and data frames and their use in present value, growth, future value calculations, We will build on this basic practice with the computation of ordinary lease squares coefficients and plots using `ggplot2`. We will summarize our findings in debrief documented with an `R markdown` file and output. 
+
+## `R Markdown` set up
+
+1. Open a new `R Markdown` pdf document file and save it with file name `MYName-FIN654-PS01` to your working directory. The `Rmd` file extension will automatically be appended to the file name. Create a new folder called `data` in this working directory and deposit the `.csv` file for practice set #2 to this directory.
+
+2. Modify the `YAML` header in the `Rmd` file to reflect the name of this practice set, your name, and date.
+
+3. Replace the `R Markdown` example in the new file with the following script.
+```{ }
+# Practice set 1: present value
+(INSERT results here)
+# Practice set 2: regression
+(Insert results here)
+```
+
+4. Click `knit` in the `Rstudio` command bar to produce the `pdf` document.
+
+### Warmups
+
+In a very few lines of `R` code
+
+1. Calculate the present value of receiving \$1 in perpetuity at a yield of 10\%  per annum when growth rates per annum might take on values of 0\%, 3\%, or 5\%, each in perpetuity.
+```{r}
+cashflow <- 1
+rate <- 0.1
+growth <- c(0, 0.03, 0.05)
+(pv.perpetuity <- cashflow/(rate - growth))
+```
+
+2. Calculate the present value of receiving \$1 for each of 5 years at yields of 5\%, 10\%, and 15\% per annum, each for the 5 year term of the present value.
+```{r}
+cashflow <- 1
+rate <- c(0.05, 0.1, 0.15)
+term <- 5
+(pv.perpetuity <- cashflow*(1/rate - 1/(rate*(1+rate)^term)))
+```
+
+3. Calculate the cumulative sum of working capital across 5 years, when the starting value of working capital is 100, and when working capital growth rates might take on values of 0\%, 3\%, or 5\% per annum, for each year of the 5 year projection.
+
+## Set A
+
+### Problem
+
+We work for a mutual fund that is legally required to fair value the stock of unlisted companies it owns. Your fund is about to purchase shares of InUrCorner, a U.S. based company, that provides internet-of-things legal services. 
+
+- We sampled several companies with business plans similar to InUrCorner and find that the average weighted average cost of capital is 18\%. 
+
+- InUrCorner sales is \$80 million and projected to growth at 50\% per year for the next 3 years and 15\% per year thereafter. 
+
+- Cost of services provided as a percent of sales is currently 70\% and projected to be flat for the foreseeable future. 
+
+- Depreciation is also constant at 5\% of net fixed assets (gross fixed asset minus accumulated depreciation), as are taxes (all-in) at 25\% of taxable profits. 
+
+- Discussions with InUrCorner management indicate that the company will need an increase in working capital at the rate of 15\% each year and an increase in fixed assets at the rate of 5\% of sales each year. Currently working capital is \$10, net fixed assets is \$90, and accumulated depreciation is \$15.
+
+### Solutions
+
+1. Let's project `sales`, `cost`, increments to net fixed assets `NFA`, increments to working capital `WC`, `depreciation`, `tax`, and free cash flow `FCF` for the next 4 years. We will use a table to report the projection.
+```{r}
+growth <- rep(0.5, 4)                  # vector of 4 growth ratios:                                                                       (sales[t]-sales[t-1])/sales[t]
+growth[4] <- 0.15                      # replace 4 year growth value
+sales0 <- 80                           # constant
+WC0 <- 10                              # constant
+NFA0 <- 90                             # constant
+DEP.accum <- 15                        # constant
+time <- 1:4                            # time index
+year0 <- 2016                          # base (valuation) year
+year <- year0 + time                   # projection years
+sales <- sales0 * (1 + growth) ^ time  # sales projection
+sales[4] <- sales[3] * (1 + growth[4]) # correct last year's forecast for change in growth
+cost.sales <- 0.70                     # constant ratio: cost / sales
+cost <- cost.sales * sales             # cost projection
+WC.incr.sales <- 0.10                  # constant ratio: incrWC / sales
+NFA.incr.sales <- 0.05                 # constant ratio: incrNFA / sales
+WC.incr <- WC.incr.sales * sales       # working capital increment projection
+NFA.incr <- NFA.incr.sales * sales     # net fixed assets increment projection
+WC <- cumsum(c(WC0, WC.incr))[-1]      # working capital projection
+NFA <- cumsum(c(NFA0, NFA.incr))[-1]   # net fixed assets projection
+depreciation.NFA <- 0.05               # constant ratio: depreciation / net fixed assets
+depreciation <- depreciation.NFA * NFA # depreciation projection
+tax.rate <- 0.25                       # tax rate constant:                                                                        tax / (sales-cost-depreciation)
+tax <- (sales - cost - depreciation) * tax.rate 
+                                       # tax projection
+FCF <- sales - cost - depreciation - tax - WC.incr - NFA.incr 
+                                       # free cash flow projection
+```
+Let's use this code to build and display a table.
+```{r}
+# Form table of results
+table.names <- c("Sales", "Cost", "Working Capital (incr.)", "Net Fixed Assets (incr.)", "Free Cash Flow")  
+                                       # Assign projection labels
+table.year <- year                                          # Assign projection years
+table.data <- rbind(sales, cost, WC.incr, NFA.incr, FCF)            # Layer projections
+rownames(table.data) <- table.names                         # Replace rows with projection labels
+colnames(table.data) <- table.year                          # Replace columns with projection years
+knitr::kable(table.data)                             # Display a readable table
+```
+
+2. Compute the present value of the cash flows assuming that year three (2019) is the "terminal" year. This can be interpreted such that year four (2020) is the assumed perpetual cash flow with growth rate 15\% in perpetuity. Total present value is composed of the present value of free cash flows from year 1 through year 4 earning the weighted average cost of capital plus the present value of the lump-sum terminal value of free cash flows from years four in perpetuity. Assuming that the riskiness of the entity does not appreciably change from year 1 into perpetuity, then the same weighted average cost of capital may be used for terminal value as for the valuation of years one through three. We can then express the total present value as:
+$$
+PV = \sum_{t=1}^{3}\frac{FCF_t}{(1+WACC)^t} + \frac{1}{(1+WACC)^3}\left(\frac{FCF_4}{WACC-g} \right)
+$$
+where, $FCF_t$ is free cash flow at year $t$, $WACC$ is the weighted average cost of capital, and $g$ is the perpetual growth rate.
+
+- Compute the present value of free cash flows from years 2017 through 2019 inclusive.
+- Compute the present value of terminal value cash flows.
+- Compute the total present value of the entity.
+- Construct a table to report the results.
+```{r}
+WACC <- 0.18
+g <- 0.15
+t <- 1:3
+(pv.1to3 <- sum(FCF[1:3]/(1+WACC)^t))
+(pv.terminal <- (1/(1+WACC)^4)*FCF[4]/(WACC-g))
+(pv.total <- pv.1to3 + pv.terminal)
+table.col <- "Present Value"
+table.row <- c("2017-2019", "2020+", "Total")
+pv.table <- matrix(c(pv.1to3, pv.terminal, pv.total), ncol = 1 )
+colnames(pv.table) <- table.col
+rownames(pv.table) <- table.row
+knitr::kable(pv.table)
+```
+
+
+## Set B
+
+### Problem
+
+We work for a healthcare insurer and our management is interested in understanding the relationship between input admission and outpatient rates as drivers of expenses, payroll, and employment. We gathered a sample of 200 hospitals in a test market in this data set.
+```{r}
+x.data <- read.csv("data/hospitals.csv")
+```
+
+### Solutions
+
+1. Build a table that explores this data set variable by variable and relationships among variables.
+```{r}
+head(x.data)
+tail(x.data)
+summary(x.data)
+require(psych)
+pairs.panels(x.data)
+```
+
+2. Investigate the influence of admission and outpatient rates on expenses and payroll. First, form these arrays.
+```{r}
+y <- as.vector(x.data[,"expense"])
+X <- as.matrix(cbind(1, x.data[,c("admissions", "outpatients")]))
+head(y)
+tail(y, n = 3)
+head(X)
+```
+Next, compute the regression coefficients.
+```{r}
+XTX.inverse <- solve(t(X) %*% X)
+(beta.hat <- XTX.inverse %*% t(X) %*% y )
+```
+Finally, compute the regression statistics.
+```{r}
+e <- y - X %*% beta.hat
+e <- y - X %*% beta.hat
+(e.sse <- t(e) %*% e)
+(n <- dim(X)[1])
+(k <- nrow(beta.hat))
+(e.se <- (e.sse / (n - k))^0.5)
+```
+3. Use this code to investigate further the relationship among predicted expenses and the drivers, admissions and outpatients.
+```{r }
+require(reshape2)
+require(ggplot2)
+actual <- y
+predicted <- X%*%beta.hat
+residual <- actual - predicted
+results <- data.frame(actual = actual, predicted = predicted, residual = residual)
+# Insert comment here
+min_xy <- min(min(results$actual), min(results$predicted))
+max_xy <- max(max(results$actual), max(results$predicted))
+# Insert comment here
+plot.melt <- melt(results, id.vars = "predicted")
+# Insert comment here
+plot.data <- rbind(plot.melt, data.frame(predicted = c(min_xy, max_xy), variable = c("actual", "actual"), value = c(max_xy, min_xy)))
+# Insert comment here
+p <- ggplot(plot.data, aes(x = predicted, y = value)) + geom_point(size = 2.5, colours = "blue") + theme_bw()
+p <- p + facet_wrap(~variable, scales = "free")
+p
+```
+
+## Practice Set Debrief
+
+1. List the R skills needed to complete these practice labs.
+
+2. Explain each of the packages used to compute and graph results.
+
+3. Discuss how well did the results begin to answer the business questions posed at the beginning of each practice lab.

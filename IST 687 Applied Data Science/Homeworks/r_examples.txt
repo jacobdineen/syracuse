@@ -1,0 +1,45 @@
+#=================================================
+# Question # 1
+# 
+# Delineate the amount of observations that exceed 
+# the value of the mean, and then output that 
+# value as a percentage.
+#=================================================
+
+# create a vector (v)
+v <- 1:5
+# calculate the mean of the vector (mv)
+mv <- mean(v)
+# return the percentage of values that exceed the mean
+answer1 <- length(v[v > mv]) / length(v)
+
+answer1
+
+#=================================================
+# Question # 2
+# 
+# Write function that will return the percentage 
+# of the elements within the vector that is less 
+# than the same.
+#=================================================
+
+# Use the built in datasets for mock data
+dfStates <- as.data.frame(datasets::state.x77)
+colnames(dfStates)[1] <- "Jul2011"
+
+# define your function
+gt_avg_pct <- function(v) {
+  mv <- mean(v)
+  answer <- length(v[v > mv]) / length(v)
+  # format your output as a percentage
+  return(sprintf("%.2f %%", 100 * answer))
+}
+
+# Call the function on your column
+answer2 <- gt_avg_pct(dfStates$Jul2011)
+answer2
+
+# A couple of other examples
+gt_avg_pct(dfStates$Illiteracy)
+gt_avg_pct(dfStates$`Life Exp`)
+gt_avg_pct(dfStates$Frost)

@@ -1,0 +1,19 @@
+#Jake Dineen
+
+geos = (('42.773760,  -78.786973'), ('44.854865, -93.242215'), ('42.999775,  -78.787046'),
+('43.183994,  -76.236695'),
+('40.689249,  -74.044500'))
+
+
+lats = [i[0] for i in geos]
+lons = [i[1] for i in geos]
+print('Fetching Geos')
+for i in geos:
+    print(geolocator.reverse(i))
+	
+Fetching Geos
+New Era Field, Bills Drive, Windom, Erie County, New York, 14127, USA
+Mall of America, 60, Lindau Lane, Bloomington, Hennepin County, Minnesota, 55425, USA
+The State University of New York, University at Buffalo - North Campus, Lee Entrance, Ellicott Complex, North Bailey, Amherst Town, Erie County, New York, 14228, USA
+Barnes & Noble, 3956, State Route 31, Euclid, Town of Clay, Onondaga County, New York, 13090, USA
+Statue of Liberty, Flagpole Plaza, Manhattan Community Board 1, New York County, NYC, Liberty Island, 10004, USA

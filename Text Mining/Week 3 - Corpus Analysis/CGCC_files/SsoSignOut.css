@@ -1,0 +1,19 @@
+﻿.subtitle {
+    font-size:19px;
+    color:#047B75;
+    word-wrap:break-word;
+    margin-left: 10px;
+    float:left;
+    padding-top: 35px;
+}
+
+.bluelock {
+    float: left;
+    width: 50px;
+}
+
+.message {
+    width: 538px;
+    font-size: 14px;
+    line-height: 20px;
+}

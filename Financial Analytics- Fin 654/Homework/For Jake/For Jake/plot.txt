@@ -1,0 +1,46 @@
+# This function takes in 3 inputs
+# INPUT1: a vector that holds actual values
+# INPUT2: a vector that holds predicted values from a model
+# INPUT3: a vector that holds predicted values from another model
+# OUTPUT: a plot of actuals vs. predicted and residuals vs. predicted of both predicting models
+
+p <- function(actual, pred.model1, pred.model2){
+  
+  library(ggplot2)
+  library(reshape2)
+  
+  # calculate the residuals from actual vs. pred.model1 then create a data frame
+  residual <- actual - pred.model1
+  results <- data.frame(actual = actual, predicted = pred.model1, residual = residual)
+  
+  # convert the results data frame to long format
+  plot.melt <- melt(results, id.vars = "predicted")
+  
+  # create 2 extra data points for plotting purposes only
+  min_xy <- min(min(results$actual), min(results$predicted))
+  max_xy <- max(max(results$actual), max(results$predicted))
+  
+  # bind plot.melt and the 2 new data points into a single data frame for plotting
+  plot.data <- rbind(plot.melt, data.frame(predicted = c(min_xy, max_xy), variable = c("actual", "actual"), value = c(max_xy, min_xy)))
+
+  # calculate the residuals from actual vs. pred.model2. then create a data frame
+  residual <- actual - pred.model2
+  results <- data.frame(actual = actual, predicted = pred.model2, residual = residual)
+  
+  # convert the results data frame to long format
+  plot.melt2 <- melt(results, id.vars = "predicted")
+
+  # plot both of plot.data and plot.melt2 data frames
+  p <- ggplot(plot.data, aes(x = predicted, y = value)) + 
+    geom_point(size = 2.5, col = "darkturquoise", alpha = 0.7) +
+    geom_point(data = plot.melt2, aes(x = predicted, y = value), col = "brown1", alpha = 0.7, size = 2) +
+    facet_wrap(~variable, scales = "free")
+
+  return(p)
+  
+}
+
+# plot forward.spline.q.50 and forward.quad
+p(forward.emp, forward.spline.q.50, forward.quad)
+
+# call this p() function on any other combinations of predictive models you want

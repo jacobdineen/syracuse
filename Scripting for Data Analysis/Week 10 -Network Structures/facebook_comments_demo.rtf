@@ -1,0 +1,124 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fmodern\fcharset0 CourierNewPS-BoldMT;\f1\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\vieww12000\viewh15840\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\b\fs36 \cf0 Week 10.4 Facebook post comments\
+\
+
+\f1\b0\fs28 Suppose that we want to know what people are commenting on a person or organization\'92s Facebook page.  We could use this to analyze the top topic words and bigrams for customers of a company or for public comments on politicians.  For this we need to get all the comments on the posts on a Facebook page.\
+\
+This will demonstrate the process of using the paging mechanism in Facebook to get all comments.  A similar technique could also get all the replies to each comment if you wanted to analyze the text from the replies as well.\
+\
+Download program:  facebook_all_comments.py\
+\
+Getting all comments in a Facebook post\
+\
+When we collected Facebook posts, we used the program\
+\
+run_facebook_request_save.py <query> <field> <num> <DB name> <collection name>\
+\
+where\
+<query> \'96 the Facebook name:  often the person name with no spaces\
+	(use the graph api explorer to try out names)\
+<field> - the Facebook \'93connection\'94 to collect \'96 feed gets all posts\
+<num> - a limit on the number to collect\
+<DB name> - a Mongo database name\
+<collection name> - and the database collection name\
+\
+When we collected Facebook posts, using the \'91feed\'92 connection, we saw that only 25 comments can be collected at one time.  \
+\
+To illustrate this, I collected 25 posts from a political figure, Senator Chuck Schumer, Facebook name \'91senschumer\'92, in order to collect from a page where there would be lots of comments on each post.  I checked the actual Facebook page, where I saw that the latest post had 246 comments (and 182 shares and 1K likes).\
+\
+python run_facebook_request_save.py senschumer feed 25 fbusers chuckschumer\
+\
+Let\'92s use the Python interpreter to see how the comments are structured and what we need to do to collect more than the initial 25.\
+\
+>>> import json\
+>>> import re\
+>>> import pymongo\
+>>> import facebook\
+>>> import requests\
+>>> from bson.json_util import dumps\
+\
+Start the mongod server if you haven\'92t already and get documents from the database.\
+\
+>>> client = pymongo.MongoClient()\
+>>> collection = client.fbusers.chuckschumer\
+\
+Let\'92s first get all the documents from the collection.  If we want to use JSON to print parts of them, we should convert the BSON results to JSON.\
+\
+>>> docs_bson = list(collection.find())\
+>>> docs_json_str = [dumps(doc) for doc in docs_bson]\
+>>> doclist = [json.loads(doc) for doc in docs_json_str]\
+\
+Now pick one of the documents to get all the comments.  In these notes, I show what I did for the first document in the collection.\
+\
+>>> doc = doclist[0]\
+>>> type(doc)\
+<class 'dict'>\
+>>> doc.keys()\
+dict_keys(['actions', 'message', 'status_type', 'type', 'to', 'shares', 'source', 'properties', 'link', 'from', 'picture', 'message_tags', 'created_time', 'is_expired', 'id', 'is_hidden', '_id', 'icon', 'updated_time', 'privacy', 'comments', 'object_id', 'likes'])\
+\
+>>> doc['from']\
+\{'name': 'Senator Chuck Schumer', 'category': 'Government Official', 'id': '15771239406'\}\
+>>> doc['message']\
+'At a time when income distribution is getting even worse in America, . . . \'91\
+>>> doc['id']\
+'15771239406_10155332008534407'\
+>>> FB_id = doc['id']\
+>>> comments = doc['comments']\
+>>> comments.keys()\
+dict_keys(['paging', 'data'])\
+>>> len(comments['data'])\
+25\
+>>> comments['paging']\
+\{'next': '{\field{\*\fldinst{HYPERLINK "https://graph.facebook.com/v2.3/15771239406_10155332008534407/comments?access_token=EAACEdEose0cBALOWlYzfGihcqBYSbT7a0eHMP5fqpAbmicShHMuN7X8XQZCPkeZAe3vmHSyyLu3HjKqszLNCyzBNqQPy5uMCWPgcleEBE41elAckVF1YbYdT7nSeBQMsT3nHaxc9mQ4A0QDDJHZCXIUnxJzaebsoaLrbsNuJwxZCsAtv2jOFnZAbbv6KCuJgZD&limit=25&after=MjI2"}}{\fldrslt https://graph.facebook.com/v2.3/15771239406_10155332008534407/comments?access_token=EAACEdEose0cBALOWlYzfGihcqBYSbT7a0eHMP5fqpAbmicShHMuN7X8XQZCPkeZAe3vmHSyyLu3HjKqszLNCyzBNqQPy5uMCWPgcleEBE41elAckVF1YbYdT7nSeBQMsT3nHaxc9mQ4A0QDDJHZCXIUnxJzaebsoaLrbsNuJwxZCsAtv2jOFnZAbbv6KCuJgZD&limit=25&after=MjI2}}', 'cursors': \{'before': 'MjUw', 'after': 'MjI2'\}\}\
+\
+This paging object has a \'91next\'92 field, which means that there are more comments that can be obtained.  The next field is a URL that can be given directly to the Python requests package to make a request using the REST API.\
+\
+But note that the paging object has the access token used for the request buried in it.  Since we are using short-term access tokens, we need to replace this token with an up-to-date one.  If you have obtained a permanent access token, you can skip this step.\
+\
+Get a new access token from the graph explorer page.\
+\
+ACCESS_TOKEN = '<put access token here>'\
+\
+I made some regular expressions to get the first part of the next field before the access token and the second part after the access token.  Then I made a new access token with those parts.  \
+\
+>>> nextPage = comments['paging']['next']\
+>>> firstpattern = re.compile('https.+access_token=')\
+>>> firstpart = firstpattern.findall(nextPage)[0]\
+>>> firstpart\
+'{\field{\*\fldinst{HYPERLINK "https://graph.facebook.com/v2.3/15771239406_10155332008534407/comments?access_token="}}{\fldrslt https://graph.facebook.com/v2.3/15771239406_10155332008534407/comments?access_token=}}'\
+>>> secondpattern = re.compile('&limit=.+')\
+>>> secondpart = secondpattern.findall(nextPage)[0]\
+>>> secondpart\
+'&limit=25&after=MTcxNwZDZD'\
+>>> nextPage2 = firstpart + ACCESS_TOKEN + secondpart\
+>>> nextPage2\
+\
+Now we use the requests package to directly send this URL to Facebook to get the results of the next comments paging.  From the results package we get a string, which we can convert to a JSON structure.\
+\
+>>> nextResult = requests.get(nextPage2).json()\
+\
+The result that we get back is another comment object with the next 25 comments and a paging object that may have a next field to get even more.\
+\
+>>> nextResult.keys()\
+dict_keys(['paging', 'data'])\
+>>> nextResult['paging']\
+\
+>>> type(nextResult['data'])\
+>>> len(nextResult['data'])\
+\
+Now I made a new comments structure that adds the new list of up to 25 comments to the ones already fetched, and uses the new paging object.\
+\
+\
+>>> comments2 = \{\}\
+>>> comments2['data'] = comments['data'] + nextResult['data']\
+>>> comments2['paging'] = nextResult['paging']\
+\
+\
+}

@@ -1,0 +1,127 @@
+---
+title: "Project 1 -- FIN654"
+author: "Bill Foote"
+date: "January 17, 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem and Questions
+What is the impact of terms and conditions of commercial loans on loan rates?
+xxxx
+
+## Data Preparation
+Data is from FRED <href>.
+
+...Data dictionary...
+
+\begin{tabular}{|l | p{5cm} | l}
+\hline
+xx & xx & xxx \\ \hline
+\end{tabular}
+
+some more words to talk about preparation
+
+```{r}
+x.data <- read.csv("data/commloans.csv")
+head(x.data, n = 5)
+tail(x.data, n = 5)
+summary(x.data)
+```
+
+Short discussion about data. Note anomalies.
+
+## Data Analysis
+
+### Data Exploration
+
+...lead in description ...
+
+```{r}
+require(ggplot2)
+require(reshape2)
+# Use melt() from reshape2 to build data frame with data as id and values of variables
+x.melted <- melt(x.data[, c(1:4)], id = "date")
+ggplot(data = x.melted, aes(x = date, y = value)) + 
+  geom_point() + facet_wrap(~variable, scales = "free_x")
+```
+
+commentary on the plots.
+
+### Relational Analysis
+
+...lead in ..
+
+```{r}
+require(psych)
+pairs.panels(x.data)
+```
+Note any observations here.
+
+Let's regress `rate` on the rest of the variables in `x.data`. To do this we form a matrix of independent variables (predictor or explanatory variables) in the matrix `X` and a separate vector `y` for the dependent (response) variable `rate`. We recall that the `1` vector will produce a constant intercept in the regression model.
+```{r }
+y <- as.vector(x.data[,"rate"])
+X <- as.matrix(cbind(1, x.data[,c("prepaypenalty", "maturity", "size", "volume")]))
+head(y)
+head(X)
+```
+- Explain the code used to form `y` and `X`.
+
+- Calculate the $\hat{\beta}$ coefficients and interpret their meaning.
+```{r }
+XTX.inverse <- solve(t(X) %*% X)
+(beta.hat <- XTX.inverse %*% t(X) %*% y )
+```
+
+- Calculate actual and predicted `rates` and plot using this code.
+```{r }
+# Insert comment here
+require(reshape2)
+require(ggplot2)
+actual <- y
+predicted <- X%*%beta.hat
+residual <- actual - predicted
+results <- data.frame(actual = actual, predicted = predicted, residual = residual)
+# Insert comment here
+min_xy <- min(min(results$actual), min(results$predicted))
+max_xy <- max(max(results$actual), max(results$predicted))
+# Insert comment here
+plot.melt <- melt(results, id.vars = "predicted")
+# Insert comment here
+plot.data <- rbind(plot.melt, data.frame(predicted = c(min_xy, max_xy), variable = c("actual", "actual"), value = c(max_xy, min_xy)))
+# Insert comment here
+p <- ggplot(plot.data, aes(x = predicted, y = value)) + geom_point(size = 2.5) + theme_bw()
+p <- p + facet_wrap(~variable, scales = "free")
+p
+```
+
+- Insert explanatory comments into the code chunk to document the work flow for this plot.
+
+- Interpret the graphs of actual and residual versus predicted values of `rate`.
+
+- Calculate the standard error of the residuals. Interpret its meaning.
+
+```{r}
+e <- y - X %*% beta.hat
+(e.sse <- t(e) %*% e)
+(n <- dim(X)[1])
+(k <- nrow(beta.hat))
+(e.se <- (e.sse / (n - k))^0.5)
+```
+
+...note any analytical insights
+
+## Observations and Recommmendations
+
+What we observe especially insights.
+
+Any recommendations for management in setting terms and conditions of loans.
+
+## Sources
+
+Google, CRAN for ggplot2, reshape2, FRED, discussions with whomever. Other sources.
+
+

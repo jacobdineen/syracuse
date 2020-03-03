@@ -1,0 +1,5 @@
+The first things that come to mind are:
+A distribution/time series analysis of tweets over time. Potentially adding in some metrics like favorites/retweets.
+Show a distribution of tweets/retweets.
+Sentiment analysis.
+Geo is a field, so maybe map out density over the US for a particle timeframe.

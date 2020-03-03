@@ -1,0 +1,951 @@
+---
+title: "Adventures in Extreme Finance: Market Risk"
+author: "Copyright 2017, Mohamed Khalifa using Professor William G. Foote's model. All rights reserved"
+fontsize: 10pt
+fig_caption: no
+header-includes:
+   - \usepackage[labelformat = empty]{caption}
+theme: "AnnArbor"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(tidy = TRUE)
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=36))
+knitr::opts_chunk$set(size = "small")
+knitr::opts_hooks$set(fig.width = function(options) {
+  if (options$fig.width < options$fig.height) {
+    options$fig.width = options$fig.height
+  }
+  options
+})
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+#Imagine this ...
+XYZ company is read to take on another investment. The CEO and the CFO need your experiance in Financial Analytics to assist on providing insitful analysis on three different market index. 
+You thought of providing data using FRED website on six years of most recent poweful indices using reported daily frequeny.
+
+1. RU1000TR
+Russell 1000® Total Market Index© (RU1000TR)
+The Russell 1000® Index measures the performance of the large-cap segment of the U.S. equity universe. It is a subset of the Russell 3000® Index and includes approximately 1000 of the largest securities based on a combination of their market cap and current index membership. The Russell 1000® represents approximately 92% of the U.S. market. The Russell 1000® Index is constructed to provide a comprehensive and unbiased barometer for the large-cap segment and is completely reconstituted annually to ensure new and growing equities are reflected.
+
+This series is a total market index, which assumes that all cash distributions are reinvested, in addition to tracking the price movements.
+
+2. DJCA
+Dow Jones Composite Average© (DJCA)
+The Dow Jones Composite Average is combination of all three major Dow Jones Averages (Industrial, Utility, and Transportation).
+
+3. VXXLECLS
+CBOE Energy Sector ETF Volatility Index© (VXXLECLS)
+Exchange Traded Funds (ETFs) are shares of trusts that hold portfolios of stocks designed to closely track the price performance and yield of specific indices.
+
+
+# A financial analytics workflow:
+1. What decision(s) are we making?
+2. What are the key business questions we need to support this decision?
+3. What data do we need?
+4. What tools do we need to analyze the data?
+5. How do we communicate answers to inform the decision?
+
+#Some ideas about some crispy issues
+1. Decision is *Take on New Investment*
+- Building a new Portfolio
+***
+2. Two business questions:
+- How would the performance of these indices affect the size and timing of the portfolio?
+- How would the value of the portfolio affect the value of our XYZ Company?
+
+***
+3. Data and analysis to inform the decision
+- volatility and correlation
+- Russell 1000: volatility-The Russell 1000® represents approximately 92% of the U.S. market.
+- Dow Jones Composite Average: volatility
+- CBOE Energy Sector ETF Volatility Index
+- All together: correlations among these indicators
+
+# Stylized facts of the market
+
+Learned the hard Way: not independent, volatile volatility, extreme
+
+- Financial stock, bond, commodity...you name it...have highly interdependent relationships.
+- Volatility is rarely constant and often has a structure (mean reversion) and is dependent on the past.
+- Past shocks persist and may or may not dampen (rock in a pool).
+- Extreme events are likely to happen with other extreme events.
+- Negative returns are more likely than positive returns (left skew).
+
+***
+
+# Guiding light
+
+It seems to me, however, that a more important matter is how to formulate more realistic models that will enable scientifically more searching questions to be asked of data. 
+
+(Cox 1962, p. 53)
+
+***
+
+## What is market risk?
+
+- Market risk for financial markets is the impact of unanticipated price changes on the value of an organization's position in instruments, commodities, and other contracts. 
+- In commodity markets there is sometimes considered a more physical type of market risk called volumetric risk. 
+- This risk might be triggered by a complex contract such as a CDO or a spark spread tolling agreement in power and energy markets. 
+- Here we will assume that volumetric changes are physical in the sense that a electricity system operator governs a physical process such as idling an electric generation plant. 
+- ASSUMPTION: The "position" is considered exogenous to the price stochastic process. This implies that changes in position do not affect the liquidity of the market relative to that position.
+
+
+# History speaks
+- To get the basic idea of risk measures across we develop the *value at risk* and *expected shortfall* metrics from the historical simulated distributions of risk factors.
+- Given these factors we combine them into a portfolio and calculate their losses. 
+- Finally with the loss distribution in hand we can compute the risk measures. 
+- This approach is nonparametric.
+## First we need to get some data. We will use throughout these computations several libraries: 
+1. `mvtnorm` builds multivariate normal (Gaussian) simulations and 
+2. `QRM` estimates Student-t and generalized pareto distribution (GPD) simulation. 
+3. We will hold off on these parametric approaches till later and start with historical simulation.
+4. The `psych` library helps us to explore the interactions among data through scatter plots and histograms. 
+5. The `ggplot2` library allows us to build complex vizualizations that will aid the generation of further insights.
+
+```{r mysize=TRUE, size='\\footnotesize', echo = FALSE}
+## Download the data
+# Read in data
+require(zoo)
+require(xts)
+require(ggplot2)
+# Read and review a csv file from FRED
+data <- na.omit(read.csv("data/index.csv", header = TRUE))
+#data.all <- read.csv("data/eurostock.csv",stringsAsFactors = FALSE)
+# This will convert string dates to date objects below
+#str(data.all) # Check the structure and look for dates
+# Compute log differences percent using as.matrix to force numeric type
+data.r <- diff(log(as.matrix(data[, -1]))) * 100
+#head(data.r)
+#tail(data.r)
+#str(data.r)
+# Create size and direction
+size <- na.omit(abs(data.r)) # size is indicator of volatility
+#head(size)
+colnames(size) <- paste(colnames(size),".size", sep = "") # Teetor
+direction <- ifelse(data.r > 0, 1, ifelse(data.r < 0, -1, 0)) # another indicator of volatility
+colnames(direction) <- paste(colnames(direction),".dir", sep = "")
+#head(direction)
+# Convert into a time series object: 
+# 1. Split into date and rates
+dates <- as.Date(data$DATE[-1], "%m/%d/%Y")
+values <- cbind(data.r, size, direction)
+# for dplyr pivoting we need a data frame
+data.df <- data.frame(dates = dates, returns = data.r, size = size, direction = direction)
+#str(data.df) # notice the returns.* and direction.* prefixes
+# 2. Make an xts object with row names equal to the dates
+data.xts <- na.omit(as.xts(values, dates)) #order.by=as.Date(dates, "%d/%m/%Y")))
+#str(data.xts)
+data.zr <- as.zooreg(data.xts)
+```
+
+# Now to the matter at hand
+Here are histories of Volatility Indexes and their absolute sizes for our viewing pleasure.
+
+```{r mysize=TRUE, size='\\footnotesize', echo = FALSE}
+## Here we can compute two items together: log price differences, and their range (to bound a plot)
+require(ggplot2)
+title.chg1 <- "Index Percent Changes"
+title.chg2 <- "Size of Index Percent Changes"
+autoplot.zoo(data.xts[,1:3]) + ggtitle(title.chg1) #+ ylim(-5, 5)
+```
+
+***
+
+```{r}
+autoplot.zoo(data.xts[,4:6]) + ggtitle(title.chg2) #+ ylim(-5, 5)
+```
+
+***
+Let's dig deeper and compute mean, standard deviation, etc. Load the `data_moments()` function. Run the function using the `data` data and write a `knitr::kable()` report.
+
+```{r }
+acf(coredata(data.xts[,1:3])) # returns
+#acf(coredata(data.xts[,4:5])) # sizes
+# Load the data_moments() function
+## data_moments function
+## INPUTS: r vector
+## OUTPUTS: list of scalars (mean, sd, median, skewness, kurtosis)
+data_moments <- function(data){
+  require(moments)
+  require(matrixStats)
+  mean.r <- colMeans(data)
+  median.r <- colMedians(data)
+  sd.r <- colSds(data)
+  IQR.r <- colIQRs(data)
+  skewness.r <- skewness(data)
+  kurtosis.r <- kurtosis(data)
+  result <- data.frame(mean = mean.r, median = median.r, std_dev = sd.r, IQR = IQR.r, skewness = skewness.r, kurtosis = kurtosis.r)
+  return(result)
+}
+```
+
+***
+```{r}
+acf(coredata(data.xts[,4:5])) # sizes
+```
+
+***
+```{r}
+# Run data_moments()
+answer <- data_moments(data.xts[, 1:6])
+# Build pretty table
+answer <- round(answer, 4)
+knitr::kable(answer)
+```
+
+***
+
+
+```{r }
+corr.rolling <- function(x) {	
+  dim <- ncol(x)	
+  corr.r <- cor(x)[lower.tri(diag(dim), diag = FALSE)]	
+  return(corr.r)	
+}
+ALL.r <- data.xts[, 1:3]
+corr.returns <- rollapply(ALL.r, width = 90, corr.rolling, align = "right", by.column = FALSE)
+#head(corr.returns)
+#str(corr.returns)
+colnames(corr.returns) <- c("RU1000TR & DJCA", "RU1000TR & VXXLECLS", "DJCA & VXXLECLS")	
+#head(corr.returns)
+plot(corr.returns[,1], ylab = "90 day rolling correlations", xlab = "", main = "RU1000TR & DJCA")
+```
+
+***
+
+```{r}
+plot(corr.returns[,2], ylab = "90 day rolling correlations", xlab = "", main = "RU1000TR & VXXLECLS")
+```
+
+***
+
+```{r}
+plot(corr.returns[,3], ylab = "90 day rolling correlations", xlab = "", main = "DJCA & VXXLECLS")	
+```
+
+# Cross market stability
+
+- If we have "history," then we have to manage the risk that conducting business in one country will definitely affect business in another. 
+- Further that bad things will be followed by more bad things more often than good things. - We calculate a rolling correlation function to explore inter-market stability.
+
+```{r }
+corr.rolling <- function(x) {	
+  dim <- ncol(x)	
+  corr.r <- cor(x)[lower.tri(diag(dim), diag = FALSE)]	
+  return(corr.r)	
+}
+ALL.r <- data.xts[, 1:3]
+corr.returns <- rollapply(ALL.r, width = 4, corr.rolling, align = "right", by.column = FALSE)
+#head(corr.returns)
+#str(corr.returns)
+colnames(corr.returns) <- c("RU1000TR & DJCA", "RU1000TR & VXXLECLS", "DJCA & VXXLECLS")	
+plot(corr.returns, xlab = "", main = "")	
+#' 	
+
+```
+
+# How related are correlations and volatilities?
+
+- Build monthly RU1000TR-DJCA correlations and DJCA volatilities for DJCA
+- Regress correlation on volatility to test the hypothesis that DJCA volatility might influence RU1000TR-DJCA correlation
+- First a picture to help us along
+
+***
+```{r}
+require(matrixStats)
+R.corr <- apply.monthly(as.xts(ALL.r), FUN = cor)	
+#str(R.corr)
+#head(ALL.r)
+#tail(R.corr)
+R.vols <- apply.monthly(ALL.r, FUN = colSds) # from MatrixStats	
+#head(R.corr, 3)	
+#head(R.vols, 3)	
+#
+# Form correlation matrix for one month 	
+R.corr.1 <- matrix(R.corr[20,], nrow = 3, ncol = 3, byrow = FALSE)	
+rownames(R.corr.1) <- colnames(ALL.r[,1:3])	
+colnames(R.corr.1) <- rownames(R.corr.1)	
+#head(R.corr.1)	
+#
+R.corr <- R.corr[, c(2, 3, 6)]	
+#head(R.corr)
+colnames(R.corr) <- colnames(corr.returns) 	
+colnames(R.vols) <- c("RU1000TR.vols", "DJCA.vols", "VXXLECLS.vols")	
+#head(R.corr, 3)	
+#head(R.vols, 3)	
+R.corr.vols <- merge(R.corr, R.vols)
+#head(R.corr.vols)
+#'
+plot.zoo(R.corr.vols, main= "Monthly Correlations and Volatilities")	
+#' 	
+RU1000TR.vols <- as.numeric(R.corr.vols[,"RU1000TR.vols"])	
+DJCA.vols <- as.numeric(R.vols[,"DJCA.vols"])	
+VXXLECLS.vols <- as.numeric(R.vols[,"VXXLECLS.vols"])	
+#length(RU1000TR.vols)	
+#' 	
+#' Smooth data volatility
+#'
+#str(R.corr.vols)
+fisher <- function(r)	
+{0.5 * log((1 + r)/(1 - r))}	
+rho.fisher <- matrix(fisher(as.numeric(R.corr.vols[,1:6])), nrow = length(DJCA.vols), ncol = 6, byrow= FALSE)	
+#' 	
+#' 	
+```
+
+# Examine upper and lower bounds of instability
+
+```{r}
+#' ***	
+
+#'
+require(quantreg)
+# hist(rho.fisher[, 1])
+RU1000TR.corrs <- R.corr.vols[,1]
+taus <- seq(.05,.95,.05)	
+fit.rq.RU1000TR.DJCA <- rq(RU1000TR.corrs ~ DJCA.vols, tau = taus)	
+fit.lm.RU1000TR.DJCA <- lm(RU1000TR.corrs ~ DJCA.vols)	
+#' 	
+#summary(fit.rq.RU1000TR.DJCA, se = "boot")
+#'
+#summary(fit.lm.RU1000TR.DJCA, se = "boot")
+plot(summary(fit.rq.RU1000TR.DJCA), parm = "DJCA.vols", main = "RU1000TR-DJCA correlation sensitivity to DJCA volatility")	
+```
+
+***
+```{r}
+#' ***	
+#' Here we build the estimations and plot the upper and lower bounds.	
+#' 	
+taus1 <- c(.05, 0.5, .95) # fit the confidence interval (CI)
+RU1000TR.DJCA.p <- predict(rq(RU1000TR.corrs ~ RU1000TR.vols, tau = taus1))
+RU1000TR.DJCA.lm.p <- predict(lm(RU1000TR.corrs ~ RU1000TR.vols))
+colnames(RU1000TR.DJCA.p) <- c(paste("tau",taus1[1]*100, sep = ""), paste("tau",taus1[2]*100, sep = ""), paste("tau",taus1[3]*100, sep = ""))
+#head(RU1000TR.DJCA.p)
+y <- RU1000TR.corrs
+colnames(RU1000TR.corrs) <- "y"
+RU1000TR.DJCA.CI <- data.frame(x = DJCA.vols, y= RU1000TR.corrs, y.5 = RU1000TR.DJCA.p[, 1], y.50 = RU1000TR.DJCA.p[, 2], y.95 = RU1000TR.DJCA.p[, 3], y.lm = RU1000TR.DJCA.lm.p )
+#str(RU1000TR.DJCA.CI)
+#head(RU1000TR.DJCA.CI)
+# names(RU1000TR.DJCA.CI)
+ggplot(RU1000TR.DJCA.CI, aes(x = x, y = y)) +
+    geom_point() +
+    geom_line(aes(y = y.5), colour = "red", linetype = "dashed") +
+    geom_line(aes(y = y.95), colour = "red", linetype = "dashed") +
+    geom_line(aes(y = y.50), colour = "red", linetype = "dashed") +
+    geom_line(aes(y = y.lm), colour = "blue") +
+    ggtitle("Upper and Lower Bounds on RU1000TR-DJCA correlation Relative to DJCA Volatility")
+```
+
+***
+
+Thus the "stylized facts"
+
+- Asymmetrical returns
+- Persisting negative returns
+- Large downward movements more likely than upward movements
+- Persistent volatility
+- Instability in one market can infect another
+
+# Measuring Loss
+
+- Loss, $L_t$, derives from negative $P\&L$ and erupts in a negative change in the value of $P\&L$, $V_t$ over time, $-\Delta V_t$. Suppose we have $d$ lines of business and random variable losses $L_1,\dots,L_d$ for each line defined on a common probability space $(\Omega,\mathcal{F},P)$.
+- Each line of business $i = 1, \dots, d$ has weight $\lambda \in \Lambda \subset \mathbb{R}^d \backslash \{\mathbb{0}\}$ so that the portfolio loss is 
+$$
+L(\lambda)=\sum_{i=1}^d \lambda_iL_i
+$$
+- Let $\mathcal{\rho}$ be a risk measure, and define an associated risk measure $r_Q$ as a function $r_Q: \Lambda \rightarrow \mathbb{R}$ so that $r_Q(\lambda) = r_Q(\rho(\lambda))$ on the portfolio of positions associated with each line of business.
+
+# Euler Allocation
+
+- If $r_Q$ is positive homogeneous and differentiable at $\lambda \in \Lambda$ then
+$$
+r_Q(\lambda) = \sum_{i=1}^d \lambda_i \frac{\partial r_Q}{\partial \lambda_i}(\lambda)
+$$
+- At $\lambda = 1$, so that the positions are portfolio weights, then the *Euler capital allocation principle* is for $1 \leq i \leq d$
+$$
+C_i = \frac{\partial r_Q}{\partial \lambda_i}(1)
+$$
+
+***
+
+- If $r_{SD}= \sqrt{var(L(\lambda))}$, and $\Sigma$ is the variance-covariance matrix of the losses of the lines of business $L_1,\dots,L_d$, then
+$$
+r_{SD}(\lambda) = \sqrt{\lambda^T \Sigma \lambda}
+$$
+We then have allocated capital for each line of business
+$$
+C_{Q,i}=\frac{\partial r_{SD}}{\partial \lambda_i}(1) = \frac{(\Sigma 1)_i}{r_{SD}(1)}=\frac{\Sigma_{j=1}^d cov(L_j, L_i)}{r_{SD}(1)}=\frac{cov(L_i,L)}{\sqrt{var(L)}}
+$$
+
+# Value at risk and expected shortfall
+
+- Define a risk measure called value at risk, $VaR$ as the quantile $q$ of loss $L$ at a tolerance level of $\alpha$, so that, $r_{VaR}^{\alpha}= q_{\alpha}(L(\lambda))$.
+- Tasche (2000) shows that, for the lines of business $L_1,\dots,L_d$, here is a value at risk allocation for each line of business
+$$
+C_{Q,i}=\frac{\partial r_{SD}}{\partial \lambda_i}(1) = E(L_i \, | \, L = q_{\alpha}(L))
+$$
+- Apply the Euler allocation principle to calculate the expected shortfall $ES$ as
+$$
+\frac{\partial r_{ES}^{\alpha}}{\partial \lambda_i}(1) = \frac{1}{1-\alpha}\int_{\alpha}^1 \frac{\partial r_{VaR}^{\alpha}}{\partial \lambda_i}(1)du = \frac{1}{1-\alpha}\int_{\alpha}^1E(L_i \, | \, L = q_{u}(L))du
+$$
+
+***
+
+- Assume that the loss density $f_L$ is strictly positive so that the distribution function of loss possesses a diffentiable inverse and change variables so that $v = q_u(L) = F_L(u)$ the cumulative loss distribution. Then 
+$$
+\frac{dv}{du} = f^{-1}(v)
+$$
+and we can compute
+$$
+\frac{\partial r_{ES}^{\alpha}}{\partial \lambda_i}(1) = \frac{1}{1-\alpha}\int_{q_{\alpha}(L)}^{\infty}E(L_i | L=v)f_L(v)dv = \frac{1}{1-\alpha}\int_{\alpha}^1E(L_i \, | \, L \geq q_{\alpha}(L))
+$$
+- (Finally) we have the expected shortfall contribution of a line of business $i$ as
+$$
+C_i^{ES} = E(L_i | L \geq VaR_{\alpha}(L))
+$$
+
+# Getting practical
+
+- Using fuel price returns we can compute loss. 
+- Weights for each are defined as the value of the positions in each risk factor. 
+- We can compute this as the notional (in barrels of oil equivalent for this market) times the last observed price. 
+- Sample summary of losses for this data.
+
+```{r mysize=TRUE, size='\\footnotesize'}
+# Get last prices
+price.last <- as.numeric(tail(data[, -1], n=1))
+# Specify the positions
+position.rf <- c(42, 1, 42 )
+# And compute the position weights
+w <- position.rf * price.last
+# Fan these across the length and breadth of the risk factor series
+weights.rf <- matrix(w, nrow=nrow(data.r), ncol=ncol(data.r), byrow=TRUE)
+## We need to compute exp(x) - 1 for very small x: expm1 accomplishes this
+loss.rf <- -rowSums(expm1(data.r/100) * weights.rf)
+summary(loss.rf)
+```
+
+***
+```{r }
+loss.rf.df <- data.frame(Loss = loss.rf, Distribution = rep("Historical", each = length(loss.rf)))
+Loss.q95 <- quantile(loss.rf.df$Loss, 0.95)
+Loss.max <- max(loss.rf.df$Loss)
+ggplot(loss.rf.df, aes(x = Loss, fill = Distribution)) + geom_density(alpha = 0.2) + xlim(0, Loss.q95) + ggtitle("Fuel Portfolio Historical Loss: Lower 95% Body")
+```
+
+***
+```{r}
+ggplot(loss.rf.df, aes(x = Loss, fill = Distribution)) + geom_density(alpha = 0.2) + xlim(Loss.q95, Loss.max) + ggtitle("Fuel Portfolio Loss: Upper 5% Tail")
+```
+
+# Back to measuring risk
+
+- We set the tolerance level $\alpha$ equal to 95\%. 
+- This would mean that a decision maker would not tolerate loss in  more than 5\% of all risk scenarios.
+- We define the VaR as the quantile for probability $\alpha \in (0,1)$, as
+$$
+VaR_{\alpha} (X) = inf \{ x \in R: F(x) \geq \alpha \},
+$$
+
+which means find the greatest lower bound of loss $x$ (what the symbol $inf$ = _infimum_ means in English), such that the cumulative probability of $x$ is greater than or equal to $\alpha$.
+
+***
+- Using the $VaR_{\alpha}$ definition we can also define $ES$ as
+
+$$
+ES_{\alpha} = E [X \lvert X \geq VaR_{\alpha}],
+$$
+
+where $ES$ is "expected shortfall" and $E$ is the expectation operator, also known as the "mean." Again, in English, the expected shortfall is the average of all losses greater than the loss at a $VaR$ associated with probability $\alpha$, and $ES \geq VaR$.
+
+***
+```{r}
+## Simple Value at Risk
+alpha.tolerance <- .99
+VaR.hist <- quantile(loss.rf, probs=alpha.tolerance, names=FALSE)
+## Just as simple Expected shortfall
+ES.hist <- mean(loss.rf[loss.rf > VaR.hist])
+VaR.text <- paste("Value at Risk =", round(VaR.hist, 2))
+ES.text <- paste("Expected Shortfall =", round(ES.hist, 2))
+ggplot(loss.rf.df, aes(x = Loss, fill = Distribution)) + geom_density(alpha = 0.2) + geom_vline(aes(xintercept = VaR.hist), linetype = "dashed", size = 1, color = "blue") + geom_vline(aes(xintercept = ES.hist), size = 1, color = "blue") + xlim(0,200) + annotate("text", x = 6, y = 0.2, label = VaR.text) + annotate("text", x = 12, y = 0.1, label = ES.text) + xlim(2, 20) + ggtitle("95% Loss Limits")
+```
+
+
+***
+
+- We see that `ES` is much bigger than `VaR` but also much less than the maximum historical loss.
+- One note: `VaR` is computed as a pre-event indicator beyond a loss of `0` in this example. Many applications of this metric center loss at the median loss. Thus, loss would be computed as gross loss minus the median (50th percentile of loss).
+
+# Carl Friedrich Gauss, I presume...
+
+- What we just did was the classic historical simulation technique for computing tail risk measures. 
+- Historical simulation is a "nonparametric" technique, since there is no estimation of parameters conditional on a distribution. Only history, unadorned, informs risk measurement. 
+- Now we shift gears into the parametric work of Gauss: Gaussian, Generalized Pareto, and as an exercise Gossett's (Student's t) distributions.
+
+***
+- Carl Friedrich Gauss is often credited with the discovery of the normal distribution. So we tack his name often enough to the normal distribution. 
+- This distribution has a crucial role in quantitative risk and finance. It is often the basis for most derivative pricing models and for simulation of risk factors in general. It is not exhibit thick tails, and definitely not skewed or peaked.
+- This distribution definitely does not describe volatility clustering we observe in most financial and commodity time series. 
+- Nevertheless, it is otherwise ubiquitous, if only as a benchmark (like "perfect competition" or "efficient markets").
+
+***
+With just a little of math here, we can define the Gaussian (normal) distribution function. If $x$ is a uniformly distributed random variable, then 
+
+$$
+f(x) = \frac{1}{\sigma \sqrt {2\pi}}e^{-(x - \mu)^{2} / 2 \sigma^{2}}
+$$
+
+is the probability density function of the normally distributed $x$ with mean $\mu$ and standard deviation $\sigma$.
+
+***
+"Halfway"" between the normal Gaussian distribution and Student's t is the chi-square, $\chi^2$, distribution. We define $\chi^2$ as the distribution of the sum of the squared normal random variables $x$ with density function and $k$ degrees of freedom for $x > 0$:
+
+$$
+f(x) = \frac{x^{(k/2-1)}e^{-x/2}}{2^{k/2}\Gamma(\frac{k}{2})}
+$$
+
+and $0$ otherwise. The "degrees of freedom" are the number of normal distributions used to create a chi-square variate.
+
+***
+Now on to Student's t distribution which is defined in terms of the Gaussian and chi-square distributions as the ratio of a Gaussian random variate to the square root of a chi-squared random variate. Student (a pseudonym for William Sealy Gossett) will have thicker tails but also the same symmetry as the normal curve. (Lookup this curve in Wikipedia among other references.)
+
+***
+- Here is a quick comparison of the standard Gaussian and the Student's t distributions. 
+- The functions `rnorm` and  `rt` generate Gaussian and Student's t
+variates, respectively. 
+- The functions `qnorm` and `qt` compute the distance from the mean (probability = 50%) for a given probability, here stored in `alpha.tolerance`.
+
+```{r mysize=TRUE, size='\\footnotesize'}
+library(mvtnorm) # Allows us to generate Gaussian and Student-t variates
+library(ggplot2)
+set.seed(1016)
+n.sim <- 1000
+z <- rnorm(n.sim)
+t <- rt(n.sim, df = 5)
+alpha.tolerance <- 0.95
+(z.threshold <- qnorm(alpha.tolerance))
+(t.threshold <- qt(alpha.tolerance, df = 5))
+```
+
+***
+```{r mysize=TRUE, size='\\footnotesize', echo = FALSE}
+zt.df <- data.frame(Deviations = c(z,t), Distribution = rep(c("Gaussian","Student's t"), each = n.sim))
+ggplot(zt.df, aes(x = Deviations, fill = Distribution)) + geom_density(alpha=.3)  +   geom_vline(aes(xintercept=z.threshold), color="red", linetype ="dashed", size=1) + geom_vline(aes(xintercept=t.threshold), color="blue", linetype="dashed", size=1) + xlim(-3,3)
+```
+
+***
+- The `ggplots2` library allows us to control several aspects of the histogram including fill, borders, vertical lines, colors, and line types and thickness. 
+- The plot requires a data frame where we have indicated the type of distribution using a replication of character strings.
+- We see the two distributions are nearly the same in appearance. But the Student's t tail is indeed thicker in the tail as the blue `t` density overtakes the red `z` density. - This is numerically evident as the `t.threshold` is $>$ then the `z.threshold` for a cumulative probability of 95%, the 95th quantile. 
+
+***
+
+Let's zoom in on the right tail with the `xlim` facet.
+
+```{r mysize=TRUE, size='\\footnotesize', eval = FALSE}
+ggplot(zt.df, aes(x = Deviations, fill = Distribution)) + geom_density(alpha = 0.2)  +   geom_vline(aes(xintercept=z.threshold), color="red", linetype ="dashed", size=1) +
+  geom_vline(aes(xintercept=t.threshold), color="blue", linetype="dashed", size=1) +xlim(1,5)
+
+```
+
+***
+
+Some results
+
+```{r mysize=TRUE, size='\\footnotesize', echo = FALSE}
+ggplot(zt.df, aes(x = Deviations, fill = Distribution)) + geom_density(alpha = 0.2)  +   geom_vline(aes(xintercept=z.threshold), color="red", linetype ="dashed", size=1) +
+  geom_vline(aes(xintercept=t.threshold), color="blue", linetype="dashed", size=1) +xlim(1,5)
+
+```
+
+***
+
+## Interesting digression! 
+- But not really not too far off the mark. 
+- The thresholds are the same with two standard risk measures, scaled for particular risk factors and positions. 
+- We have simulated two different *values at risk* and *expected short falls*.
+
+# Back to the future
+
+Let's remember where the returns (as changes) in each risk factor come from. Also, we extract the last price for use below.
+
+```{r mysize=TRUE, size='\\footnotesize'}
+## Again computing returns as changes in the risk factors
+#return.series <- apply(log(data), 2, diff) # compute risk-factor changes
+#price.last <- as.numeric(tail(price, n=1)) # reserve last price
+```
+
+- Again to emphasize what constitutes this data, we specify the notional exposure. 
+- These are number of shares if stock, number of \$1 million contracts of futures, or volumetric contract sizes, e.g., MMBtus or boe.  
+- All of these work for us given the that price is dimensioned relative to the notional dimension.
+- So if the risk factors are oil and natural VXXLECLS prices, then we should use a common volumetric equivalent such as Btu (energy content) or boe (barrel of oil equivalent for volume). 
+- Position weights are then calculated as position times the last available price.
+
+***
+*First*, we can set the weights directly and a little more simply than before since we do not need to simulate historically.
+
+```{r mysize=TRUE, size='\\footnotesize'}
+# Specify the positions
+# position.rf <- c(-30,10) # As before
+# And compute the position weights directly again as before
+(w <- position.rf * price.last)
+```
+
+*Second*, estimate the mean vector and the variance-covariance matrix, the two major inputs to the simulation of normal risk factor changes. Here we use a purely parametric approach.
+
+```{r mysize=TRUE, size='\\footnotesize'}
+return.series <- data.r
+mu.hat <- colMeans(return.series/100) # Mean vector mu; estimated = hat
+Sigma.hat  <- var(return.series/100) # Variance-covariance matrix Sigma
+(loss.mean <- -sum(w * mu.hat)) # Mean loss
+(loss.stdev <- sqrt(t(w) %*% Sigma.hat %*% w)) # Standard deviation of loss
+```
+
+*Third*, set the level of risk tolerance $\alpha$. Then calculate `VaR` and `ES`:
+
+```{r mysize=TRUE, size='\\footnotesize'}
+## Compute VaR and ES and return
+alpha.tolerance <- 0.95
+q.alpha <- qnorm(alpha.tolerance)
+(VaR.varcov <- loss.mean + loss.stdev * q.alpha)
+(ES.varcov  <- loss.mean + loss.stdev * dnorm(q.alpha) / (1-alpha.tolerance))
+```
+
+... and plot
+
+
+***
+```{r mysize=TRUE, size='\\footnotesize'}
+VaR.text <- paste("Value at Risk =", round(VaR.varcov, 2))
+ES.text <- paste("Expected Shortfall =", round(ES.varcov, 2))
+ggplot(loss.rf.df, aes(x = Loss, fill = Distribution)) + geom_density(alpha = 0.2) +
+  geom_vline(aes(xintercept = VaR.varcov), colour = "red", size = 1) +
+  geom_vline(aes(xintercept = ES.varcov), colour = "blue", size = 1) + xlim(0,200)+ 
+  annotate("text", x = 4, y = 0.3, label = VaR.text) +
+  annotate("text", x = 8, y = 0.2, label = ES.text) + xlim(0, 20)
+```
+
+***
+- So ends the story of the main method used for years and embodied in the famous 4:15 (pm, that is) report at JP Morgan.
+- Also remember the loss that we simulate here is an operating income loss, which after taxes and other adjustments, and, say, a one-year horizon, means a loss of additions to retained earnings. Book equity drops and so will market capitalization on average.
+
+# Let's go to extremes
+
+- All along we have been stylizing financial returns, commodities and exchange rates, as skewed and with thick tails.
+- We next go on to an extreme tail distribution called the Generalized Pareto Distribution (GPD). 
+- For very high thresholds, GPD not only well describes behavior in excess of the threshold, but the mean excess over the threshold is linear in the threshold. 
+- From this we get more intuition around the use of expected shortfall as a coherent risk measure. 
+- In recent years we well exceeded all Gaussian and Student's t thresholds.
+
+***
+For a random variate $x$, this distribution is defined for the shape parameters $\xi \geq 0$ as:
+
+$$
+g(x; \xi \geq 0) = 1- (1 + x \xi/\beta)^{-1/\xi}
+$$
+
+and when the shape parameter $\xi = 0$, the GPD becomes the exponential distribution dependent only on the scale parameter $\beta$:
+$$
+g(x; \xi = 0) = 1 - exp(-x/\beta).
+$$
+
+Now for one reason for GPD's notoriety...
+
+***
+
+## The notorious property: 
+- If $u$ is an upper (very high) threshold, then the excess of threshold function for the GPD is
+$$
+e(u) = \frac{\beta + \xi u}{1 - \xi}. 
+$$
+- This simple measure is _linear_ in thresholds. 
+- It will allow us to visualize where rare events begin (see McNeil, Embrechts, and Frei (2015, chapter 5)). 
+- we often exploit this property when we look at operational loss data.
+
+***
+Here are the fitted $\xi$ and $\beta$ parameters for loss.
+```{r mysize=TRUE, size='\\footnotesize'}
+library(QRM)
+u <- quantile(loss.rf, alpha.tolerance , names=FALSE)
+fit <- fit.GPD(loss.rf, threshold=u) # Fit GPD to the excesses
+(xi.hat <- fit$par.ests[["xi"]]) # fitted xi
+(beta.hat <- fit$par.ests[["beta"]]) # fitted beta
+```
+
+***
+Now for the closed form (no random variate simulation!) Value at Risk and Expected Shortfall using the McNeil, Embrechts, and Frei (2015, chapter 5) formulae:
+
+```{r mysize=TRUE, size='\\footnotesize', echo = FALSE}
+# Pull out the losses over the threshold and compute excess over the threshold
+loss.excess <- loss.rf[loss.rf > u] - u # compute the excesses over u
+n.relative.excess <- length(loss.excess) / length(loss.rf) # = N_u/n
+(VaR.gpd <- u + (beta.hat/xi.hat)*(((1-alpha.tolerance) / n.relative.excess)^(-xi.hat)-1)) 
+(ES.gpd <- (VaR.gpd + beta.hat-xi.hat*u) / (1-xi.hat))
+
+```
+
+***
+How good a fit? This plot should look roughly uniform since the GPD excess loss function is a linear function of thresholds `u`.
+
+***
+```{r}
+gpd.density <- pGPD(loss.excess, xi=xi.hat, beta=beta.hat)
+gpd.density.df <- data.frame(Density = gpd.density, Distribution = rep("GPD", each = length(gpd.density))) # This should be U[0,1]
+ggplot(gpd.density.df, aes(x = Density, fill = Distribution)) + geom_histogram()
+```
+
+# All together now
+
+Let's graph the historical simulation, variance-covariance and GPD results together.
+
+
+```{r }
+VaRvcv.text <- paste("VCV: Value at Risk =", round(VaR.varcov, 2))
+ESvcv.text <- paste("VCV: Expected Shortfall =", round(ES.varcov, 2))
+VaRgpd.text <- paste("GPD: Value at Risk =", round(VaR.gpd, 2))
+ESgpd.text <- paste("GPD: Expected Shortfall =", round(ES.gpd, 2))
+loss.plot <- ggplot(loss.rf.df, aes(x = Loss, fill = Distribution)) + geom_density(alpha = 0.2)
+loss.plot <- loss.plot + geom_vline(aes(xintercept = VaR.varcov), colour = "red", linetype = "dashed", size = 0.8)
+loss.plot <- loss.plot + geom_vline(aes(xintercept = ES.varcov), colour = "red", size = 0.8) + annotate("text", x = 6, y = 0.3, label = VaRvcv.text, colour = "red") + annotate("text", x = 7, y = 0.25, label = ESvcv.text, colour = "red")
+loss.plot <- loss.plot + geom_vline(aes(xintercept = VaR.gpd), colour = "blue", linetype = "dashed", size = 0.8)
+loss.plot <- loss.plot + geom_vline(aes(xintercept = ES.gpd), colour = "blue", size = 0.8) + annotate("text", x = 10, y = 0.15, label = VaRgpd.text, colour = "blue") + annotate("text", x = 12, y = 0.1, label = ESgpd.text, colour = "blue")
+loss.plot <- loss.plot + xlim(0,20)
+loss.plot
+```
+
+# If that wasn't enough...
+
+Stylized market facts indicate
+
+- Allocation across various component of loss drivers requires both body and tail considerations
+- Pessisimistic risk measurement requires some sort of distortion measure to assessment the probability of good and bad news
+
+# Degression on distortion
+
+- Bassett et al.(2004) show that the mean-expected shortfall efficient portfolio problem is equivalent to a quantile regression with linear constraints.
+- Enlarge scope of expected utility from monetary and probabality to include an assessment (distortion) of probability.
+- Choquet integrals build on Lebesgue measures by inflating or deflating the probabilities by the rank order of the outcomes.
+- Expected shortfall is an example of a Choquet, rank-ordered, criterion.
+
+# Pessimism reigns
+
+- A risk measure $\rho$ is pessistic if, for some probability measure $\phi$ on $[0,1]$, 
+$$
+\rho(L) = \int_0^1 \rho_{u}(L) \phi(u) du.
+$$
+- For expected shortfall, $\phi(u) = (1-\alpha)^{-1}I_{(u\geq\alpha)}$: equal weight is placed on all quantiles beyond the $\alpha$-quantile.
+- Suppose we have a loss portfolio with position weights $\pi$ and losses $X$ so that total loss is $L = X^T\pi$ with mean loss $\mu(L)$. Let's choose loss weights to minimize
+$$
+min_{\pi}\,[\rho_{\alpha}(L) - \lambda \mu(L)] \,\, s.t.\, \mu(L)=\mu_0, \,\, 1^T\pi = 1
+$$
+where the weights add up to 1 and we try to achieve a minimum return $\mu_0$.
+
+***
+
+- Taking this formulation to a sample version for $n$ observations of losses, we get
+$$
+min_{\beta, \xi}\sum_{k=1}^m \, \sum_{i=1}^n \, \nu_k \rho_{\alpha}(X_{i1}-\sum_{j=2}^p (x_{i1}-x_{ij}\beta_{j})-\xi_k))
+$$
+
+$$
+s.t.\, \bar{X}^T\pi(\beta) = \mu_0
+$$
+
+***
+- In this approach, there are $m$ weights $\nu$ that pull together $m$ different sets of portfolio weightings. The $\xi$ terms represent $m$ different intercepts, one for each $\nu_k$ weight. 
+- There are $p$ assets or loss categories here. We use the first asset, $i = 1$ as the "numerarire" or benchmark asset. We measure returns on assets 2 to $p$ relative to the first asset. The weights for assets 2 to $p$ are the regression coeffients $\beta$. the weight for the first asset uses the adding up constraint so that
+$$
+\pi_1 = 1 - \sum_{j=2}^p \pi_j
+$$
+
+***
+The corresponding Markowitz (1952) approach is
+$$
+min_{\beta, \xi} \, \sum_{i=1}^n (X_{i1}-\sum_{j=2}^p (x_{i1}-x_{ij})\beta_{j}-\xi))^2
+$$
+subject to the constraint
+$$
+s.t.\, \bar{X}^T\pi = \mu_0
+$$
+
+# Distorting allocations
+
+- We model distortions using weighted quantiles.
+- The Choquet criterion ends up using a weighted average of quantile allocations across assessed probabilities to express preferences.
+- Mimimize a weighted sum of quantile regression objective functions using the specified $\alpha$ quantiles. 
+- The model permits distinct intercept parameters at each of the specified taus, but the slope parameters are constrained to be the same for all $\alpha$s. 
+- This estimator was originally suggested to the Roger Koenker by Bob Hogg in one of his famous blue book notes of 1979. 
+- The algorithm used to solve the resulting linear programming problems is either the Frisch Newton algorithm described in Portnoy and Koenker (1997), or the closely related algorithm described in Koenker and Ng(2002) that handles linear inequality constraints. 
+- Linear inequality constraints can be imposed.
+
+***
+Some code to calculate optimal weights.
+
+```{r echo = TRUE}
+require(quantreg)
+x <- data.r/100
+n <- nrow(x)
+p <- ncol(x)
+alpha <-  c(0.1, 0.3) # quantiles
+w <-  c(0.3, 0.7) # distortion weights
+lambda <- 100 # Lagrange multiplier for adding up constraint
+m <- length(alpha)
+if (length(w) != m) stop("length of w doesn't match length of alpha")
+xbar <- apply(x, 2, mean)
+mu.0 <-  mean(xbar)
+y <- x[, 1] #set numeraire
+r <- c(lambda * (xbar[1] - mu.0), -lambda * (xbar[1] - mu.0))
+X <- x[, 1] - x[, -1]
+R <- rbind(lambda * (xbar[1] - xbar[-1]), -lambda * (xbar[1] - xbar[-1]))
+R <- cbind(matrix(0, nrow(R), m), R)
+f <- rq.fit.hogg(X, y, taus = alpha, weights = w, R = R, r = r)
+```
+
+***
+Rebuild loss position weights `pihat` and display with `qrisk`.
+```{r, echo = TRUE}
+fit <- f$coefficients
+# transform regression coeff to portfolio weights
+pihat <- c(1 - sum(fit[-(1:m)]), fit[-(1:m)]) 
+x <- as.matrix(x)
+yhat <- x %*% pihat # predicted 
+etahat <- quantile(yhat, alpha)
+muhat <- mean(yhat)
+qrisk <- 0
+for (i in 1:length(alpha)) qrisk <- qrisk + w[i] * sum(yhat[yhat < etahat[i]])/(n * alpha[i])
+qrisk
+pihat
+```
+
+***
+Trying a different distortion
+```{r echo = TRUE}
+require(quantreg)
+x <- data.r/100
+n <- nrow(x)
+p <- ncol(x)
+alpha <-  c(0.01, 0.1) # quantiles
+w <-  c(0.9, 0.1) # distortion weights
+lambda <- 100 # Lagrange multiplier for adding up constraint
+m <- length(alpha)
+if (length(w) != m) stop("length of w doesn't match length of alpha")
+xbar <- apply(x, 2, mean)
+mu.0 <-  mean(xbar)
+y <- x[, 1] #set numeraire
+r <- c(lambda * (xbar[1] - mu.0), -lambda * (xbar[1] - mu.0))
+X <- x[, 1] - x[, -1]
+R <- rbind(lambda * (xbar[1] - xbar[-1]), -lambda * (xbar[1] - xbar[-1]))
+R <- cbind(matrix(0, nrow(R), m), R)
+f <- rq.fit.hogg(X, y, taus = alpha, weights = w, R = R, r = r)
+```
+
+
+***
+```{r echo = TRUE}
+fit <- f$coefficients
+# transform regression coeff to portfolio weights
+pihat <- c(1 - sum(fit[-(1:m)]), fit[-(1:m)]) 
+x <- as.matrix(x)
+yhat <- x %*% pihat # predicted 
+etahat <- quantile(yhat, alpha)
+muhat <- mean(yhat)
+qrisk <- 0
+for (i in 1:length(alpha)) qrisk <- qrisk + w[i] * sum(yhat[yhat < etahat[i]])/(n * alpha[i])
+qrisk
+pihat
+```
+The tide turns...
+
+# Frontier finance
+
+Let's build a back of the envelope `mu-q.risk` map.
+
+```{r echo = TRUE}
+mu.0 <- mean(xbar)
+mu.P <-  seq(min(mu.0 - 0.0005), max(mu.0 + 0.0005), length=300)  ## set of 300 possible target portfolio returns
+qrisk.P <-  mu.P ## set up storage for quantile risks of portfolio returns
+weights <-  matrix(0, nrow=300, ncol = ncol(data.r)) ## storage for portfolio weights
+colnames(weights) <- names(data.r)
+for (i in 1:length(mu.P))
+{
+  mu.0 <-  mu.P[i]  ## target returns
+  result <- qrisk(x, mu = mu.0)
+  qrisk.P[i] <- -result$qrisk # convert to loss risk
+  weights[i,] <-  result$pihat
+}
+qrisk.mu.df <- data.frame(qrisk.P = qrisk.P, mu.P = mu.P )
+# head(qrisk.mu.df)
+```
+
+***
+```{r}
+require(psych)
+pairs.panels(qrisk.mu.df)
+```
+
+***
+Let's try the Markowitz regression model
+
+```{r}
+x <- data.r/100  
+n <- nrow(x)
+p <- ncol(x)
+xbar <- apply(x, 2, mean)
+X <- rbind(x, xbar)
+y <- X[, 1]
+lambda <- 100
+mu <- mean(xbar) 
+y[n + 1] <- lambda * (y[n + 1] - mu) # to match xbar n+1th row in X
+X <- X[, 1] - X[, -1] # calculate dif # difference between numeraire and all other columns
+X <- cbind(c(rep(1, n), 0), X) #put a column of 0s into first column
+X[n + 1, ] <- lambda * X[n + 1, ] # layer Lagrange multiplier condition in
+fit <- lm(y ~ X - 1) # don't forget -1! This means intercept is the origin
+pihat <- c(1 - sum(fit$coef[-1]), fit$coef[-1]) # one minus adding up the rest of the asset weights equals the numeraire asset weight
+yhat <- x %*% pihat
+muhat <- mean(yhat)
+sigma <- sqrt(var(yhat))
+```
+
+# References
+
+Bassett, G., R. Koenker, G. Kordas (2004), Pessimistic Portfolio Allocation and Choquet Expected Utility, Journal of Financial Econometrics, 2, 477-492.
+
+Choquet, G. (1953), Theory of Capacities, Annales de l'Institut Fourier 5, pages 131-295.
+
+Cox, D. (1962), Comment on L. J. Savage???s Lecture "Subjective Probability and Statistical Practice", in The Foundations of Statistical Inference (ed. by G. Barnard and D. Cox), London: Methuen.
+
+Koenker, R. and Ng, P (2003) Inequality Constrained Quantile Regression, preprint.
+
+Koenker, Roger (2005), Quantile Regression (Econometric Society Monographs), Cambridge University Press. 
+
+Koenker, R. (1984), A note on L-estimates for linear models, Stat. and Prob Letters, 2, 323-5.
+
+***
+Markowitz, Harry (1952), Portfolio Selection, The Journal of Finance, Vol. 7, No. 1. (March, 1952), pp. 77-91.
+
+McNeill, Alexander J., Rudiger Frey, and Paul Embrechts (2015), Quantitative Risk Management: Concepts, Techniques and Tools. Revised Edition. Princeton: Princeton University Press.
+
+Portnoy, S. and Koenker, R. (1997), The Gaussian Hare and the Laplacean Tortoise: Computability of Squared-error vs Absolute Error Estimators, (with discussion). Statistical Science, (1997) 12, 279-300.
+
+Ruppert, David and David S. Matteson (2014), Statistics and Data Analysis for Financial Engineering with R Examples, Second Edition. New York: Springer. 
+
+***
+Schmeidler, D. (1989), Subjective Probability and Expected Utility Without Additivity, Econometrica, 57, 571??? 587.
+
+Sharpe, William F. (1966), Mutual Fund Performance, Journal of Business, January 1966, pp. 119-138.
+
+Tasche, D. (2000), Conditional expectation as a quantile derivative, Preprint, TU-Munchen. (Available from arXiv math/0104190.)
+
+Tversky, A and Kahneman, D. (1992), Advances in Prospect Theory: Cumulative representation of uncertainty. Journal of Risk and Uncertainty, 5(4): 297-323.
+
+von Nuemann, J. and Morgenstern, O. (1944), Theory of games and economic behaviour, Princeton University Press. 
+
+Zou, Hui and and Ming Yuan (2008), Composite quantile regression and the Oracle model selection theory, Annals of Statistics, 36, 1108???11120.

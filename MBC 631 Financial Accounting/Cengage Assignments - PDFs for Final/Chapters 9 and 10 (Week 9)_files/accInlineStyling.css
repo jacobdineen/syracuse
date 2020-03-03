@@ -1,0 +1,13 @@
+.outsideDiv
+{
+  border-collapse:collapse; 
+  height:100%;
+  width:100%;
+}
+
+.aptDropdownMenu
+{
+    padding-left: 1em;
+    padding-right: 2em;
+    width: auto;
+}

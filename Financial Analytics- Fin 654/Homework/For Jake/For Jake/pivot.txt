@@ -1,0 +1,31 @@
+#Load this IBRD (World Bank) data.
+#The variable life.expectancy is the average life expectancy for each country from 2009 through 2014.
+#The variable sanitation is the percentage of population with direct access to sanitation facilities.
+le <- read.csv("life_expectancy.csv",header = TRUE, stringsAsFactors = FALSE)
+sa <- read.csv("sanitation_.csv", header = TRUE, stringsAsFactors = FALSE)
+head(le)
+head(sa)
+##join sanitation data with life expectancy data, by country
+#In this statement country is the value to be looked up
+## In R we use the merge() function
+life.sanitation <- merge(le[, c("country", "years.life.expectancy.avg")], sa[, c("country", "sanitation.avg")])
+## The whole range of countries is populated by the lookup.
+head(life.sanitation, 3)
+## Load this data on house prices
+## housing developer like Toll Brothers (NYSE: TOL) and want to allocate resources to marketing and financing the building of luxury homes in major US metropolitan areas. You have data for one test market.
+hprice <- read.csv("hprice.csv")
+hprice <- read.csv("hprice.csv") 
+head(hprice)
+summary(hprice)
+library("dplyr")
+# 1: filter to those houses with
+# fairly high prices
+pivot.table <- filter(hprice, Price > 99999)
+# 2: set up data frame for by-group
+# processing
+pivot.table <- group_by(pivot.table, Brick, Neighborhood)
+# 3: calculate the summary metrics
+options(dplyr.width = Inf) 
+# to display all columns
+pivot.table <- summarise(pivot.table, Price.avg = mean(Price), Price.cv = sd(Price)/mean(Price), SqFt.avg = mean(SqFt), Price.per.SqFt = mean(Price)/mean(SqFt))
+knitr::kable(pivot.table)

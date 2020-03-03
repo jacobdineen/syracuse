@@ -1,0 +1,365 @@
+---
+title: 'SYR-MBA FIN 654 Financial Analytics Practice Set #3'
+author: "Khan and Khalifa"
+date: "February 05, 2017"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(tidy = TRUE)
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=64))
+```
+
+# Practice Sets for Time series, Auto and Cross correlations, and Volatility clustering
+
+Various `R` features and finance topics are in these practice sets.
+Specifically there is focus on reading in data, exploring time series, 
+estimating auto and cross correlations, and investigating volatility clustering 
+in financial time series. Summary of experiences are in the debrief. 
+
+## Set A
+
+Build and explore a data set using filters and `if` and `diff` statements.
+Answer some questions using plots and a pivot table report.
+Review a function to house the approach to run some of the same analysis on other data sets.
+
+### Problem
+
+Marketing and accounts receivables managers at our company continue to note 
+we have a significant exposure to exchange rates. 
+Our customer base is located in the United Kingdom, across the European Union, and in Japan.
+The exposure hits the gross revenue line of our financials. 
+Cash flow is further affected by the ebb and flow of accounts receivable components of working capital
+for producing several products. When exchange rates are volatile, so is earnings, and more importantly,
+our cash flow. Our company has also missed earnings forecasts for five straight quarters.
+To get a handle on exchange rate exposures we download this data set and review some basic aspects of the exchange rates. 
+
+#### Read in data
+
+```{r }
+# Read and review a csv file from FRED
+exrates1 <- read.csv("data/exrates.csv", header = TRUE)
+exrates1 <- na.omit(exrates1)    ## to clean up any missing data
+exrates <- exrates1[order(as.Date(exrates1$DATE, format="%m/%d/%Y")),]
+head(exrates, n=5)
+tail(exrates, n=5)
+str(exrates, strict.width="wrap", width=80)
+```
+
+### Questions
+
+Q1. What is the nature of exchange rates? Reflect on the ups and downs of rate movements,
+known to managers as currency appreciation and depreciation.
+First, calculate percentage changes as log returns. 
+Then use `if` and `else` statements to define a new column called `direction`.
+Then build a data frame to house this analysis.
+
+```{r }
+# Compute log differences percent using as.matrix to force numeric type
+exrates.r <- diff(log(as.matrix(exrates[, -1]))) * 100
+head(exrates.r, n=3)
+tail(exrates.r, n=3)
+str(exrates.r)
+# Create size and direction - each is an indicator of volatility
+size <- na.omit(abs(exrates.r))
+colnames(size) <- paste(colnames(size),".size", sep = "")
+direction <- ifelse(exrates.r > 0, 1, ifelse(exrates.r < 0, -1, 0))
+colnames(direction) <- paste(colnames(direction),".dir", sep = "")
+# Convert into a time series object: 
+#' 1. Split into date and rates
+dates <- as.Date(exrates$DATE[-1], "%m/%d/%Y")
+values <- cbind(exrates.r, size, direction)
+#' 2. Construct a dataframe with dates, rates and direction
+exrates.df <- data.frame(dates = dates, returns = exrates.r, direction = direction)
+str(exrates.df) # notice the returns.* and direction.* prefixes
+#' 3. Make an xts object with row names equal to the dates
+require(xts)
+exrates.xts <- na.omit(as.xts(values, dates)) #order.by=as.Date(dates, "%d/%m/%Y")))
+head(exrates.xts, n=3)
+str(exrates.xts)
+#' 4. Make a zoo object (essentially, a "zoo" series with a "frequency" attribute)
+require(zoo)
+exrates.zr <- as.zooreg(exrates.xts)
+head(exrates.zr, n=3)
+str(exrates.zr)
+```
+
+
+```{r }
+#' 5. Plot with the 'zoo' and `ggplot2` packages.
+require(zoo)
+require(ggplot2)
+#' Use autoplot.zoo() function for easy plotting of data.
+title.chg <- "Exchange Rate Percent Changes"
+autoplot.zoo(exrates.xts[,1:4]) + ggtitle(title.chg) + ylim(-5, 5)
+``` 
+\pagebreak
+
+Q2. Dig deeper. Show autocovariance or autocorrelations. Compute mean, standard deviation, etc. Load the `data_moments()` function.
+Run the function using the `exrates.xts` data and write a `knitr::kable()` report.
+
+```{r }
+# Extract coredata
+exrates.cd <- coredata(exrates.xts[,1:4])
+head(exrates.cd, n=3)
+str(exrates.cd)
+# Compute estimates of the autocorrelation for the rates
+acf(exrates.cd)
+#
+# Extract coredata
+exrates.cd <- coredata(exrates.xts[,5:8])
+head(exrates.cd, n=3)
+str(exrates.cd)
+# Compute estimates of the autocorrelation for the magnitude of the rates
+acf(exrates.cd)
+``` 
+
+
+```{r }
+# Define the data_moments() function
+#' data_moments function
+#' INPUTS: r vector
+#' OUTPUTS: list of scalars (mean, sd, median, skewness, kurtosis)
+data_moments <- function(data){
+  require(moments)
+  mean.r <- mean(data)
+  sd.r <- sd(data)
+  median.r <- median(data)
+  skewness.r <- skewness(data)
+  kurtosis.r <- kurtosis(data)
+  result <- data.frame(mean = mean.r, std_dev = sd.r, median = median.r, skewness = skewness.r, kurtosis = kurtosis.r)
+  return(result)
+}
+# Run data_moments()
+#' --- original code ---
+answer <- data_moments(exrates.xts)
+answer <- round(answer, 4)
+#' --- corrected code ---
+answer <- data_moments(exrates.xts[,1])
+answer <- round(answer, 4)
+for (i in 2:12) {
+  answer.k <- data_moments(exrates.xts[,i])
+  answer <- rbind(answer, round(answer.k, 4))
+}
+# Build pretty table
+knitr::kable(answer)
+```
+
+## Set B
+
+Use the data from Set A to investigate the interactions of the distribution of exchange rates.
+
+### Problem
+
+Characterize the distribution of up and down movements visually.
+Further, set up for a periodic repeat analysis for inclusion in management reports.
+
+### Questions 
+Q1. Show the shape of exposure to euros, especially given the tolerance for risk.
+Assume corporate policy set tolerance at 95\%.
+Use the `exrates.df` data frame with `ggplot2` and the empirical cumulative relative frequency function `stat_ecdf`.
+
+```{r }
+exrates.tol.pct <- 0.95
+exrates.tol <- quantile(exrates.df$returns.USD.EUR, exrates.tol.pct)
+exrates.tol.label <- paste("Tolerable Rate = ", round(exrates.tol, 2), "%", sep = "")
+ggplot(exrates.df, aes(returns.USD.EUR, fill = direction.USD.EUR.dir)) +
+ stat_ecdf(colour = "blue", size = 0.75) + geom_vline(xintercept = exrates.tol, colour = "red", size = 1.5) +
+ annotate("text", x = exrates.tol + 1 , y = 0.75, label = exrates.tol.label, colour = "darkred")
+```
+\pagebreak
+
+Q2. What is the history of correlations in the exchange rate markets?
+If this is a "history," then consider the risk that conducting business in one country will definitely affect
+ business in another. Further, bad things may be followed by more bad things more often than good things.
+
+```{r }
+lag1 <- 20
+ccf(exrates.zr[, 1], exrates.zr[, 2], main = "GBP vs. EUR", lag.max = lag1,
+ ylab = "", xlab = "", col = "blue", ci.col = "red")
+```
+Applying cross-correlation function on the rates, we find that there is a correlation beween exchange rates for GBP and EUR.	
+\pagebreak
+
+```{r }
+lag1 <- 20
+ccf(abs(exrates.zr[, 1]), abs(exrates.zr[, 2]), main = "GBP vs. EUR: size", lag.max = lag1,
+ ylab = "", xlab = "", col = "blue", ci.col = "red")
+```
+Applying cross-correlation function on the absolute sizes, we note the volatility of correlation is also related.
+\pagebreak
+
+Q3. One more experiment: a rolling correlation.
+Create a rolling correlation function, `corr.rolling`, and embed this function into the `rollapply()` function.
+
+```{r } 	
+corr.rolling <- function(x) {	
+  dim <- ncol(x)	
+  corr.r <- cor(x)[lower.tri(diag(dim), diag = FALSE)]	
+  return(corr.r)	
+}
+ALL.r <- exrates.zr[, 1:4]
+corr.returns <- rollapply(ALL.r, width = 250, corr.rolling, align = "right", by.column = FALSE)
+head(corr.returns, n=2)
+str(corr.returns)
+colnames(corr.returns) <- c("EUR & GBP", "EUR & CNY", "EUR & JPY", "GBP & CNY", "GBP & JPY", "CNY & JPY")	
+plot(corr.returns, xlab = "", main = "")	
+```
+
+
+\pagebreak
+
+Q4. How related are correlations and volatilities? 
+Put another way, are there concerns that inter-market transactions
+(e.g., customers and vendors transacting in more than one currency)
+can affect transactions in a single market?
+Take the `exrate` data to understand how dependent correlations and volatilities depend upon one another.
+
+```{r}
+require(matrixStats)
+head(ALL.r, n=3)
+str(ALL.r)
+R.corr <- apply.monthly(as.xts(ALL.r), FUN = cor)
+head(R.corr, n=3)
+str(R.corr)
+R.vols <- apply.monthly(ALL.r, FUN = colSds) # from MatrixStats	
+head(R.vols, n=3)
+str(R.vols)	
+#'
+#' Form correlation matrix for one month
+#' 
+R.corr.1 <- matrix(R.corr[1,], nrow = 4, ncol = 4, byrow = FALSE)
+rownames(R.corr.1) <- colnames(ALL.r[,1:4])
+colnames(R.corr.1) <- rownames(R.corr.1)
+head(R.corr.1)
+str(R.corr.1)
+#
+R.corr <- R.corr[, c(2, 3, 4, 7, 8, 12)]	
+head(R.corr, n=3)
+colnames(R.corr) <- colnames(corr.returns)
+colnames(R.vols) <- c("EUR.vols", "GBP.vols", "CNY.vols", "JPY.vols")
+head(R.corr, n=3)
+head(R.vols, n=3)
+R.corr.vols <- merge(R.corr, R.vols)
+head(R.corr.vols, n=3)
+plot.zoo(R.corr.vols)
+	
+EUR.vols <- as.numeric(R.corr.vols[,"EUR.vols"])
+GBP.vols <- as.numeric(R.vols[,"GBP.vols"])
+CNY.vols <- as.numeric(R.vols[,"CNY.vols"])
+length(EUR.vols)	
+#' 
+#' Smooth data volatility
+#'
+fisher <- function(r)	
+{0.5 * log((1 + r)/(1 - r))}	
+rho.fisher <- matrix(fisher(as.numeric(R.corr.vols[,1:6])), nrow = length(EUR.vols), ncol = 6, byrow= FALSE)	
+#' 
+#' ***
+#' Here is the quantile regression part of the package.
+#' 
+#' ## Notice
+#' 1. We set `taus` as the quantiles of interest.
+#' 2. We run the quantile regression using the `quantreg` package and a call to rq().
+#' 3. We can overlay the quantile regression results onto the linear model regression.
+#' 4. We can sensitize our analysis with the range of upper and lower bounds on the 
+#'    parameter estimates of the relationship between correlation and volatility.
+#' 
+require(quantreg)
+taus <- seq(.05,.95,.05)
+fit.rq.EUR.GBP <- rq(rho.fisher[,1] ~ EUR.vols, tau = taus)
+fit.lm.EUR.GBP <- lm(rho.fisher[,1] ~ EUR.vols)
+#' 
+summary(fit.rq.EUR.GBP, se = "boot")
+summary(fit.lm.EUR.GBP, se = "boot")
+#'
+plot(summary(fit.rq.EUR.GBP), parm = "EUR.vols")
+#' ***
+#' Here we build the estimations and plot the upper and lower bounds.
+#' 
+taus1 <- c(.05, 0.5, .95) # fit the confidence interval (CI)
+EUR.GBP.p <- predict(rq(rho.fisher[,1] ~ EUR.vols, tau = taus1))
+EUR.GBP.lm.p <- predict(lm(rho.fisher[,1] ~ EUR.vols))
+colnames(EUR.GBP.p) <- c(paste("tau",taus1[1]*100, sep = ""), paste("tau",taus1[2]*100, sep = ""),
+ paste("tau",taus1[3]*100, sep = ""))
+head(EUR.GBP.p, n=3)
+EUR.GBP.CI <- data.frame(x = EUR.vols, y = rho.fisher[, 1], y.5 = EUR.GBP.p[, 1],  y.50 = EUR.GBP.p[, 2],
+ y.95 = EUR.GBP.p[, 3], y.lm <- EUR.GBP.lm.p )
+head(EUR.GBP.CI, n=3)
+ggplot(EUR.GBP.CI, aes(x, y)) +
+    geom_point() +
+    geom_line(aes(y = y.5), colour = "red", linetype = "dashed") +
+    geom_line(aes(y = y.95), colour = "red", linetype = "dashed") +
+    geom_line(aes(y = y.50), colour = "blue") +
+    geom_line(aes(y = y.lm), colour = "blue", linetype = "dashed")
+```
+	
+
+## Practice Set Debrief
+
+### List the R skills needed to complete these practice sets.
+Plotting of graphs continues to be a skill that builds upon previous basic graphing skills. Here plot and ggplot are used
+with plot.zoo and ggplot.zoo to build plots for time series, correlatons, cumulative distribution and summary of the fit.
+Functions are again used to capture repetitive tasks with different inputs. The ability to delete the first row or column
+to align data is a handy skill at times, as is the abilty to "bind" rows or columns to form larger matrices. Further,
+names and labels may be formed using "paste" to concatenate strings and other data. Additionally, merge() provides vlookup
+style functionality. Lastly, the use of apply(), apply.monthly() and rollapply() are ways to pass data and functions as 
+parameters to generate new tables.
+
+### What are the packages used to compute and graph results? Explain each of them.
+Set A uses zoo, xts and ggplot2 packages. 
+Package zoo contains methods for totally ordered indexed observations. It is particularly aimed at irregular time series
+of numeric vectors/matrices and factors. The package provides methods to extend standard generics, keeping consistency 
+with ts and base R and independence of any particular index/date/time class. For example, coredata() is used for extracting 
+the core data contained in a (more complex) object and replacing it.
+Package xts specifies the extensible time series class and methods, extending and behaving like zoo. The package has methods
+to coerce data objects of arbitrary classes to class xts and back, without losing any attributes of the original format.
+Package ggplot2 is a system for creating elegant graphics. You provide the data and the variables that need to be mapped to
+aesthetics, and what kind of charts to plot (bar, line, pie, etc.) and ggplot2 does the rest. You can output several charts with
+different styles to be superimposed on the same graph. \break \break
+In addition, Set B uses moments, matrixStats and quantreg packages.
+Package moments provides many of the descriptive statistics functions (beyond the summary() function) to understand 
+a data set: mean, median, mode, quartile, standard deviation, skewness and kurtosis.
+Package matrixStats supplements matrix manipulations with several other functions for rows and columns - in particluar, 
+colSds() provides the standard deviation estimates for each column in a matrix. Further, while the fisher() function is used
+as a smoothing routine to help stabilize the volitility of a variate, the ccf() from stats package computes the cross-correlation
+or cross-covariance of two univariate series, and the lm() from stats package is used to fit linear models.
+Package quantreg has a number of estimation and inference methods for models of conditional quantiles - linear and nonlinear 
+parametric and non-parametric models. Specifically, rq() from quantreg package gives the quantile regression fit, which is used
+in the generic function predict() to obtain a suitable fitting prediction model.
+
+
+### How well do the results begin to answer the business questions posed at the beginning of each practice set?
+The overall objective here is to analyze any significant exposure to exchange rates. Because the customer base is 
+located in the United Kingdom, across the European Union, and in Japan, the analytics is based on available exchange rates
+with respect to USD. We read in the data, examine it in the raw form, and then proceed to build stylized facts of the market.
+First, we use the notion of continuous compounding rates to build a table of changes in the exchange rates using ln(), or log() in R.
+We also compute the size or magnitude (absolute value) of the rates and the direction (up/down/same) of changes between 
+successive points. By constructing a dataframe and extending that to time series (xts) and ordered indexed observations (zoo),
+we are able to graph the changes in the exchange rates over time. The USD.CNY rate appears relatively stable over time, whereas
+the other three - USD.EUR, USD.GBP and USD.JPY - show volatility. Digging deeper, we look at the autocorrelation between
+the different rates and between the different sizes (absolute value of rates), and compute several statistics including skewness
+and kurtosis. The autocorrelation function shows spikes for relationships in EUR with the other three and for GBP with CNY. 
+That means persistence and correlations for those specific markets. Also, only USD.EUR.dir and USD.JPY.dir skew to the left. Further, USB.GBP and USB.CNY are thick tailed (with respect
+to the rate changes and the sizes of the rate changes). \break \break
+Then, we begin to examine the exposure to euros, given a corporate policy and tolerance at 95%.
+A plot of USD.EUR based on cumulative relative frequency distribution shows a tolerance rate of 1.47% 
+beyond which there could be exposure to the exchange rate for euros.
+Moving on to examine the cross correlation between USD.GBP and USD.EUR rates, we show that correlation does exist and the
+volatility of correlation is high with respect to JPY rates. 
+From the plot of corr.returns, it appears that the relationship among EUR, CNY and JPY levels off, 
+but is varying with respect to GBP. 
+In the merge of the tables of correlations and volatilities, we again note high correlations between EUR and GBP, 
+and negative correlations between Europe (GBP & EUR) rates and Asian (CNY & JPY) rates. 
+The volatility for JPY is particularly high in Feb 2012 (for example).
+Using the fisher function to stabilize the volatility, we then run a quantile regression (5% thru 95% in steps of 5%)
+on the monthly rolled data. This gives us the upper and lower bounds on correlation and volatility, and a plot of the
+summary of the fit. Next, we build the estimations and plot the upper and lower bounds along with the linear regression.
+This reveals a definite pattern with a distance of about 1 between upper and lower bounds. Surprisingly, as volatility rises, 
+the amount of dispersion of correlation grows very little, and the linear regression line approaches
+the lower bound.
+
+

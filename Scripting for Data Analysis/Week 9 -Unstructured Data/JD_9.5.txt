@@ -1,0 +1,5 @@
+As the site says, we could use this package for a variety of different analysis, including but not limited to:
+tokenizing words
+extracting specific words based on their part of speech
+counting words, measuring distributions of different corpuses (KL divergence)
+Sentiment analysis/General text classification/Natural Language Processing

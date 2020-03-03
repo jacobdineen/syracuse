@@ -1,0 +1,181 @@
+Player,Team,Salary,Position
+"Acevedo, Juan",New York Yankees,900000,Pitcher
+"Anderson, Jason",New York Yankees,300000,Pitcher
+"Clemens, Roger",New York Yankees,10100000,Pitcher
+"Contreras, Jose",New York Yankees,5500000,Pitcher
+"Hammond, Chris",New York Yankees,2200000,Pitcher
+"Hitchcock, Sterling",New York Yankees,6000000,Pitcher
+"Karsay, Steve",New York Yankees,5000000,Pitcher
+"Liever, Jon",New York Yankees,550000,Pitcher
+"Mussina, Mike",New York Yankees,12000000,Pitcher
+"Osuna, Antonio",New York Yankees,2400000,Pitcher
+"Pettitte, Andy",New York Yankees,11500000,Pitcher
+"Rivera, Mariano",New York Yankees,10500000,Pitcher
+"Weaver, Jeff",New York Yankees,4150000,Pitcher
+"Wells, David",New York Yankees,3250000,Pitcher
+"Appier, Kevin",Anaheim Angels,11500000,Pitcher
+"Callaway, Mickey",Anaheim Angels,302500,Pitcher
+"Donnelly, Brendan",Anaheim Angels,325000,Pitcher
+"Lackey, John",Anaheim Angels,315000,Pitcher
+"Ortiz, Ramon",Anaheim Angels,2266667,Pitcher
+"Percival, Troy",Anaheim Angels,7833333,Pitcher
+"Rodriquez, Francisco",Anaheim Angels,312500,Pitcher
+"Schoeneweis, Scott",Anaheim Angels,1425000,Pitcher
+"Sele, Aaron",Anaheim Angels,8166667,Pitcher
+"Shields, Scot",Anaheim Angels,305000,Pitcher
+"Washburn, Jarrod",Anaheim Angels,3875000,Pitcher
+"Weber, Ben",Anaheim Angels,375000,Pitcher
+"Wise, Matt",Anaheim Angels,302500,Pitcher
+"Burkett, John",Boston Red Sox,5500000,Pitcher
+"Embree, Alan",Boston Red Sox,3000000,Pitcher
+"Fossum, Casey",Boston Red Sox,324500,Pitcher
+"Fox, Chad",Boston Red Sox,500000,Pitcher
+"Gonzalez, Dicky",Boston Red Sox,300000,Pitcher
+"Howry, Bobby",Boston Red Sox,1700000,Pitcher
+"Lowe, Derek",Boston Red Sox,3625000,Pitcher
+"Lyon, Brandon",Boston Red Sox,309500,Pitcher
+"Martinez, Pedro",Boston Red Sox,15500000,Pitcher
+"Mendoza, Ramiro",Boston Red Sox,2900000,Pitcher
+"Person, Robert",Boston Red Sox,300000,Pitcher
+"Timlin, Mike",Boston Red Sox,1850000,Pitcher
+"Wakefield, Tim",Boston Red Sox,4000000,Pitcher
+"White, Matt",Boston Red Sox,300000,Pitcher
+"Anderson, Brian",Cleveland Indians,1500000,Pitcher
+"Baez, Danys",Cleveland Indians,5125000,Pitcher
+"Bere, Jason",Cleveland Indians,1000000,Pitcher
+"Davis, Jason",Cleveland Indians,301100,Pitcher
+"Lee, Cliff",Cleveland Indians,300900,Pitcher
+"Mulholland, Terry",Cleveland Indians,500000,Pitcher
+"Myette, Aaron",Cleveland Indians,307500,Pitcher
+"Riske, David",Cleveland Indians,314000,Pitcher
+"Rodriguez, Ricardo",Cleveland Indians,302400,Pitcher
+"Sabathia, CC",Cleveland Indians,1100000,Pitcher
+"Sadler, Carl",Cleveland Indians,303200,Pitcher
+"Santiago, Jose",Cleveland Indians,600000,Pitcher
+"Traber, Billy",Cleveland Indians,300000,Pitcher
+"Westbrook, Jake",Cleveland Indians,305500,Pitcher
+"Wickman, Bob",Cleveland Indians,6000000,Pitcher
+"Wohlers, Mark",Cleveland Indians,2600000,Pitcher
+"Creek, Doug",Toronto Blue Jays ,700000,Pitcher
+"Escobar, Kelvim",Toronto Blue Jays ,3900000,Pitcher
+"File, Bob",Toronto Blue Jays ,310000,Pitcher
+"Halladay, Roy",Toronto Blue Jays ,3825000,Pitcher
+"Hendrickson, Mark",Toronto Blue Jays ,302000,Pitcher
+"Lidle, Cory",Toronto Blue Jays ,5350000,Pitcher
+"Linton, Doug",Toronto Blue Jays ,350000,Pitcher
+"Lopez, Aquilino",Toronto Blue Jays ,300000,Pitcher
+"Miller, Trever",Toronto Blue Jays ,305000,Pitcher
+"Politte, Cliff",Toronto Blue Jays ,845000,Pitcher
+"Sturtze, Tanyon",Toronto Blue Jays ,1000000,Pitcher
+"Tam, Jeff",Toronto Blue Jays ,600000,Pitcher
+"Walker, Pete",Toronto Blue Jays ,425000,Pitcher
+"Bauer, Rick",Baltimore Orioles,325000,Pitcher
+"Bedard, Erik",Baltimore Orioles,300000,Pitcher
+"Daal, Omar",Baltimore Orioles,3000000,Pitcher
+"Erickson, Scott",Baltimore Orioles,7030000,Pitcher
+"Groom, Buddy",Baltimore Orioles,3000000,Pitcher
+"Helling, Rick",Baltimore Orioles,1000000,Pitcher
+"Hentgen, Pat",Baltimore Orioles,1200000,Pitcher
+"Johson, Jason",Baltimore Orioles,2900000,Pitcher
+"Julio, Jorge",Baltimore Orioles,350000,Pitcher
+"Ligtenberg, Kerry",Baltimore Orioles,1200000,Pitcher
+"Lopez, Rodrigo",Baltimore Orioles,325000,Pitcher
+"Ponson, Sidney",Baltimore Orioles,4250000,Pitcher
+"Roberts, Willis",Baltimore Orioles,3500000,Pitcher
+"Ryan, BJ",Baltimore Orioles,762500,Pitcher
+"Bierbrodt, Nick",Tampa Bay Devil Rays,300000,Pitcher
+"Carter, Lance",Tampa Bay Devil Rays,300000,Pitcher
+"Colome, Jesus",Tampa Bay Devil Rays,300000,Pitcher
+"Harper, Travis",Tampa Bay Devil Rays,325000,Pitcher
+"Kennedy, Joe",Tampa Bay Devil Rays,300000,Pitcher
+"McClung, Seth",Tampa Bay Devil Rays,300000,Pitcher
+"Parque, Jim",Tampa Bay Devil Rays,400000,Pitcher
+"Parris, Steve",Tampa Bay Devil Rays,400000,Pitcher
+"Seay, Bobby",Tampa Bay Devil Rays,300000,Pitcher
+"Sosa, Jorge",Tampa Bay Devil Rays,300000,Pitcher
+"Venafro, Mike",Tampa Bay Devil Rays,300000,Pitcher
+"Zambrano, Victor",Tampa Bay Devil Rays,300000,Pitcher
+"Affeldt, Jeremy",Kansas City Royals,313000,Pitcher
+"Asencio, Miguel",Kansas City Royals,314000,Pitcher
+"Bukvich, Ryan",Kansas City Royals,304500,Pitcher
+"Carrasco, DJ",Kansas City Royals,300000,Pitcher
+"George, Chris",Kansas City Royals,303500,Pitcher
+"Grimsley, Jason",Kansas City Royals,2000000,Pitcher
+"Hernandez, Runelvys",Kansas City Royals,305500,Pitcher
+"Lopez, Albie",Kansas City Royals,1500000,Pitcher
+"MacDougal, Mike",Kansas City Royals,301000,Pitcher
+"May, Darrell",Kansas City Royals,450000,Pitcher
+"Wilson, Kris",Kansas City Royals,311000,Pitcher
+"Fetters, Mike",Minnesota Twins,500000,Pitcher
+"Fiore, Tony",Minnesota Twins,330000,Pitcher
+"Guardado, Eddie",Minnesota Twins,2700000,Pitcher
+"Hawkins, Latroy",Minnesota Twins,3000000,Pitcher
+"Lohse, Kyle",Minnesota Twins,330000,Pitcher
+"Mays, Joe",Minnesota Twins,4150000,Pitcher
+"Milton, Eric",Minnesota Twins,6000000,Pitcher
+"Radke, Brad",Minnesota Twins,8750000,Pitcher
+"Reed, Rick",Minnesota Twins,8000000,Pitcher
+"Rogers, Kenny",Minnesota Twins,2000000,Pitcher
+"Romero, JC",Minnesota Twins,325000,Pitcher
+"Santana, Johan",Minnesota Twins,335000,Pitcher
+"Buehrle, Mark",Chicago White Sox,445000,Pitcher
+"Colon, Bartolo",Chicago White Sox,8250000,Pitcher
+"Garland, Jon",Chicago White Sox,375000,Pitcher
+"Glover, Gary",Chicago White Sox,330000,Pitcher
+"Gordon, Tom",Chicago White Sox,1400000,Pitcher
+"Koch, Billy",Chicago White Sox,4250000,Pitcher
+"Loaiza, Esteban",Chicago White Sox,500000,Pitcher
+"Marte, Damaso",Chicago White Sox,330000,Pitcher
+"Stewart, Josh",Chicago White Sox,300000,Pitcher
+"White, Ribk",Chicago White Sox,600000,Pitcher
+"Wright, Danny",Chicago White Sox,325000,Pitcher
+"Wunsch, Kelly",Chicago White Sox,575000,Pitcher
+"Anderson, Matt",Detroit Tigers,3200000,Pitcher
+"Bernero, Adam",Detroit Tigers,314000,Pitcher
+"Bonderman, Jeremy",Detroit Tigers,300000,Pitcher
+"Cornejo, Nate",Detroit Tigers,303000,Pitcher
+"German, Franklyn",Detroit Tigers,300000,Pitcher
+"Knotts, Gary",Detroit Tigers,305000,Pitcher
+"Ledezma, Wilfredo",Detroit Tigers,300000,Pitcher
+"Maroth, Mike",Detroit Tigers,309000,Pitcher
+"Patterson, Danny",Detroit Tigers,2500000,Pitcher
+"Roney, Matt",Detroit Tigers,300000,Pitcher
+"Sparks, Steve",Detroit Tigers,4500000,Pitcher
+"Spurling, Chris",Detroit Tigers,305000,Pitcher
+"Walker, Jamie",Detroit Tigers,360000,Pitcher
+"Carrara, Giovanni",Seattle Mariners,400000,Pitcher
+"Franklin, Ryan",Seattle Mariners,425000,Pitcher
+"Garcia, Freddy",Seattle Mariners,6875000,Pitcher
+"Hasegawa, Shigetoshi",Seattle Mariners,1800000,Pitcher
+"Mateo, Julio",Seattle Mariners,302500,Pitcher
+"Meche, Gil",Seattle Mariners,325000,Pitcher
+"Moyer, Jamie",Seattle Mariners,6500000,Pitcher
+"Nelson, Jeff",Seattle Mariners,3983333,Pitcher
+"Pineiro, Joel",Seattle Mariners,440000,Pitcher
+"Rhodes, Arthur",Seattle Mariners,3500000,Pitcher
+"Sasaki, Kazuhiro",Seattle Mariners,8000000,Pitcher
+"Bowie, Micah",Oakland Athletics,304000,Pitcher
+"Bradford, Chad",Oakland Athletics,331000,Pitcher
+"Fikac, Jeremy",Oakland Athletics,316000,Pitcher
+"Foulke, Keith",Oakland Athletics,6000000,Pitcher
+"Halama, John",Oakland Athletics,750000,Pitcher
+"Hudson, Tim",Oakland Athletics,2700000,Pitcher
+"Lilly, Ted",Oakland Athletics,335000,Pitcher
+"Mecir, Jim",Oakland Athletics,3216667,Pitcher
+"Mulder, Mark",Oakland Athletics,2650000,Pitcher
+"Neu, Mike",Oakland Athletics,300000,Pitcher
+"Rincon, Ricardo",Oakland Athletics,1700000,Pitcher
+"Zito, Barry",Oakland Athletics,1000000,Pitcher
+"Cordero, Francisco",Texas Rangers,900000,Pitcher
+"Fultz, Aaron",Texas Rangers,600000,Pitcher
+"Garcia, Reynaldo",Texas Rangers,300000,Pitcher
+"Lewis, Colby",Texas Rangers,302500,Pitcher
+"Nitkowski, CJ",Texas Rangers,550000,Pitcher
+"Park, Chan Ho",Texas Rangers,13000000,Pitcher
+"Powell, Jay",Texas Rangers,3250000,Pitcher
+"Thomson, John",Texas Rangers,1300000,Pitcher
+"Urbina, Ugueth",Texas Rangers,4500000,Pitcher
+"Valdes, Ismael",Texas Rangers,2500000,Pitcher
+"Van Poppel, Todd",Texas Rangers,2500000,Pitcher
+"Yan, Esteban",Texas Rangers,1500000,Pitcher
+"Zimmerman, Jeff",Texas Rangers,3366667,Pitcher

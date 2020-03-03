@@ -1,0 +1,22 @@
+CreditCard <- read.csv("CreditCard.csv") 
+CreditCard=read.csv("CreditCard.csv") 
+str(CreditCard)
+head(CreditCard,4)
+summary(CreditCard)
+#Age minimum is 0.2? Let’s filter the data for ages greater than 18:
+ccard <- CreditCard[CreditCard$age >= 18, ]
+# let's see Histogram
+hist(ccard$age)
+#3 basic steps to Pivot Table
+library(dplyr)
+# 1: filter to keep three states.
+pvt_table <- filter(ccard, state %in% "NY")
+# 2: set up data frame for by-group
+# processing.
+pvt_table <- group_by(pvt_table, card, owner, selfemp)
+# 3: calculate the three summary
+# metrics
+options(dplyr.width = Inf) 
+# to display all columns
+pvt_table <- summarise(pvt_table, income.cv = sd(income)/mean(income), age.avg = mean(age), income.per.dependent = sum(income)/sum(dependents))
+knitr::kable(pvt_table)

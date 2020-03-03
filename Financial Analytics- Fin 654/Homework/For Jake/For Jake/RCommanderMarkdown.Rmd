@@ -1,0 +1,81 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title "This is a test"
+=======================
+
+### Mohamed Khalifa
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+
+```{r}
+oj <- 
+  read.table("E:/MBA/January 2017/Business Analytics/Weekly Exercise/oj.csv", 
+  header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+```{r}
+library(abind, pos=14)
+```
+
+
+```{r}
+library(e1071, pos=15)
+```
+
+
+```{r}
+numSummary(oj[,"AGE60"], statistics=c("mean", "sd", "IQR", "quantiles"), 
+  quantiles=c(0,.25,.5,.75,1))
+```
+
+```{r}
+RegModel.1 <- lm(logmove~AGE60+INCOME+price, data=oj)
+summary(RegModel.1)
+```
+
+```{r}
+library(zoo, pos=16)
+```
+
+
+```{r}
+library(lmtest, pos=16)
+```
+
+
+```{r}
+resettest(logmove ~ AGE60 + INCOME + price, power=2:3, type="regressor", 
+  data=oj)
+```
+
+```{r}
+vif(RegModel.1)
+```
+
+
+```{r}
+resettest(logmove ~ AGE60 + INCOME + price, power=2:3, type="regressor", 
+  data=oj)
+```
+

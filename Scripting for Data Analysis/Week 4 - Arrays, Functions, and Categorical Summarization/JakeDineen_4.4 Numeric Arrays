@@ -1,0 +1,23 @@
+#Jake Dineen
+#4.4 Numeric Arrays
+
+import numpy as np
+#Store Array
+nparr = np.array([[1,2,3,4,5], [6,7,8,9,10], [11,12,13,14,15], [16,17,18,19,20]])
+#Print Array Type
+print(type(nparr))
+nparr[0]
+
+#a. Use Index Slicing and show how to get the subarray consisting of the last two rows and the third and fourth columns.
+print(nparr.shape)
+nparr[2:, 3:]
+
+# b. Show how to create a one-dimensional array that sums the columns
+summedarray = nparr.sum(axis=0) #Column-wise summation
+print(summedarray)
+print(summedarray.shape)
+
+<class 'numpy.ndarray'>
+(4, 5)
+[34 38 42 46 50]
+(5,)

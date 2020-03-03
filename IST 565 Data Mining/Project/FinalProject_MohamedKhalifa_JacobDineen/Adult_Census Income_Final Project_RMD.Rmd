@@ -1,0 +1,422 @@
+---
+title: "Adult Census Income"
+subtitle: "IST 565 Data Mining.................Professor: Bei Yu"
+author: "Jake Dineen and Mohamed Khalifa"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+  The goal is to use statistical computation to solve a classification problem. The dataset in which we will be performing analysis/prediction can be found on the UCI Machine Learning Repository site: http://archive.ics.uci.edu/ml/datasets/Census+Income
+  
+  This particular data set, compiled from census data, contains 14 attributes defining a person's demographic, behavioral and socioeconomic characteristics in an attempt to predict income levels- above or below a threshold of $50k per year. The data set is robust, comparatively speaking, containing 48,842 instances. Also included is a test dataset that we can crossvalidate our models against.
+
+=============================================================
+
+### Data Preparation
+
+```{r }
+# Clearing the working environment
+rm(list=ls())
+
+# Load necessary packages
+library(ggplot2)
+library(data.table)
+library(plyr)
+library(ROCR)
+
+# reading The dataset directly from UCI websit.
+adult <- read.table('https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data', 
+    sep = ',', fill = F, strip.white = T)
+# Assign names to the columns.
+colnames(adult) <- c('age', 'workclass', 'fnlwgt', 'educatoin', 
+    'educatoin_num', 'marital_status', 'occupation', 'relationship', 'race', 'sex', 
+    'capital_gain', 'capital_loss', 'hours_per_week', 'native_country', 'income')
+
+### dropping 3 attributes that have little or no effect on of our anaysis
+adult$educatoin <- NULL
+adult$fnlwgt <- NULL
+adult$relationship <- NULL
+
+###{{{Exploring data visualization}}}
+#____________________________________
+# Age by income group
+ggplot(adult) + aes(x=as.numeric(age), group=income, fill=income) + 
+  geom_histogram(binwidth=1, color='black')
+# Age and gender
+ggplot(adult) + aes(x=as.numeric(age), group=sex, fill=sex) + 
+  geom_histogram(binwidth=1, color='blue')
+# Age and race
+ggplot(adult) + aes(x=as.numeric(age), group=race, fill=race) + 
+  geom_histogram(binwidth=1, color='yellow')
+```
+#===============================================================================
+###{{{Workclass Focus}}}
+#_______________________
+# Exploring workclass attribute.
+
+```{r }
+summary(adult$workclass)
+
+## Assign "Undefined" to workclass with value "?".
+levels(adult$workclass)[1] <- 'Undefined'
+
+
+## Breaking workclass attribute into 4 catagories
+## Government, Private, Self-Employed and Other.
+
+# combine all Government jobs into one catagory.
+adult$workclass <- gsub('^Federal-gov', 'Government', adult$workclass)
+adult$workclass <- gsub('^Local-gov', 'Government', adult$workclass)
+adult$workclass <- gsub('^State-gov', 'Government', adult$workclass) 
+
+# combine Sele-Employed into one catagory
+adult$workclass <- gsub('^Self-emp-inc', 'Self-Employed', adult$workclass)
+adult$workclass <- gsub('^Self-emp-not-inc', 'Self-Employed', adult$workclass)
+
+# combine all other into Other.
+adult$workclass <- gsub('^Never-worked', 'Other', adult$workclass)
+adult$workclass <- gsub('^Without-pay', 'Other', adult$workclass)
+adult$workclass <- gsub('^Other', 'Other', adult$workclass)
+adult$workclass <- gsub('^Undefined', 'Other', adult$workclass)
+
+adult$workclass <- as.factor(adult$workclass)
+summary(adult$workclass)
+
+ggplot(adult) + aes(x=as.numeric(age), group=workclass, fill=workclass) + 
+  geom_histogram(binwidth=1, color='yellow')
+
+
+count <- table(adult[adult$workclass == 'Government',]$income)["<=50K"]
+count <- c(count, table(adult[adult$workclass == 'Government',]$income)[">50K"])
+count <- c(count, table(adult[adult$workclass == 'Other',]$income)["<=50K"])
+count <- c(count, table(adult[adult$workclass == 'Other',]$income)[">50K"])
+count <- c(count, table(adult[adult$workclass == 'Private',]$income)["<=50K"])
+count <- c(count, table(adult[adult$workclass == 'Private',]$income)[">50K"])
+count <- c(count, table(adult[adult$workclass == 'Self-Employed',]$income)["<=50K"])
+count <- c(count, table(adult[adult$workclass == 'Self-Employed',]$income)[">50K"])
+count <- as.numeric(count)
+
+industry <- rep(levels(adult$workclass), each = 2)
+income <- rep(c('<=50K', '>50K'), 4)
+df <- data.frame(industry, income, count)
+df
+
+## Visulaization using percentage.
+df <- ddply(df, .(industry), transform, percent = count/sum(count) * 100)
+
+# Format the labels and calculate their positions
+df <- ddply(df, .(industry), transform, pos = (cumsum(count) - 0.5 * count))
+df$label <- paste0(sprintf("%.0f", df$percent), "%")
+```
+#==============================================================================
+###{{{Visualiztion of counts by industry}}}
+#___________________________________________
+
+```{r}
+ggplot(df, aes(x = industry, y = count, fill = income)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(y = pos, label = label), size = 3) + 
+  ggtitle('Industry Comparison Income')
+```
+#==============================================================================
+###{{{Education Focus}}}
+#_______________________
+
+```{r}
+df1 <- data.frame(table(adult$income,adult$educatoin_num))
+names(df1) <- c('income', 'education_num', 'count')
+df1
+# The data indicates that Those who are "self employed" are reletively the highest earners "37%"
+# in proportion to all other classes.
+
+df1 <- ddply(df1, .(education_num), transform, percent = count/sum(count) * 100)
+
+# format the labels and calculate their positions
+df1 <- ddply(df1, .(education_num), transform, pos = (cumsum(count) - 0.5 * count))
+df1$label <- paste0(sprintf("%.0f", df1$percent), "%")
+
+# remove some in group percentage to avoid overlapped text
+df1$label[which(df1$percent < 10)] <- NA
+```
+# Data indicates the following:
+#_____________________________
+# Correlation exist between earning >50K and the number of years spent in education.
+# Those who don't have any forms of college education or spent <8 years of education earn <$50K.
+# Most of those whoe earn the highest degree "PHD" earn >50K.
+# Removed 8 rows containing missing value.
+
+
+```{r}
+ggplot(df1, aes(x = education_num, y = count, fill = income)) +
+  geom_bar(stat = "identity") +
+  ggtitle('Income Level with Years of Education')
+```
+#============================================================================
+###{{{Occupation Focus}}}
+#________________________
+
+
+```{r}
+summary(adult$occupation)
+
+levels(adult$occupation)[1] <- 'Undefined'
+adult$occupation <- gsub('Adm-clerical', 'White-Collar', adult$occupation)
+adult$occupation <- gsub('Craft-repair', 'Blue-Collar', adult$occupation)
+adult$occupation <- gsub('Exec-managerial', 'White-Collar', adult$occupation)
+adult$occupation <- gsub('Farming-fishing', 'Blue-Collar', adult$occupation)
+adult$occupation <- gsub('Handlers-cleaners', 'Blue-Collar', adult$occupation)
+adult$occupation <- gsub('Machine-op-inspct', 'Blue-Collar', adult$occupation)
+adult$occupation <- gsub('Other-service', 'Service', adult$occupation)
+adult$occupation <- gsub('Priv-house-serv', 'Service', adult$occupation)
+adult$occupation <- gsub('Prof-specialty', 'Professional', adult$occupation)
+adult$occupation <- gsub('Protective-serv', 'Service', adult$occupation)
+adult$occupation <- gsub('Tech-support', 'Service', adult$occupation)
+adult$occupation <- gsub('Transport-moving', 'Blue-Collar', adult$occupation)
+adult$occupation <- gsub('Undefined', 'Other', adult$occupation)
+adult$occupation <- gsub('Armed-Forces', 'Other', adult$occupation)
+adult$occupation <- as.factor(adult$occupation)
+
+# Occupation breaken down into 6 catagory.
+summary(adult$occupation)
+
+df2 <- data.frame(table(adult$income, adult$occupation))
+names(df2) <- c('income', 'occupation', 'count')
+df2
+
+
+# calculate the percentages
+df2 <- ddply(df2, .(occupation), transform, percent = count/sum(count) * 100)
+
+# format the labels and calculate their positions
+df2 <- ddply(df2, .(occupation), transform, pos = (cumsum(count) - 0.5 * count))
+df2$label <- paste0(sprintf("%.0f", df2$percent), "%")
+
+# Using bar plot of counts by occupation with-in-group proportions 
+# the data indicates that "Professional" occupation group is the highest in proportion
+# 45% of "professionals" make >50K. Professional are the higest >50K earners among all catagories.
+# The 2nd highest is white-collar catagory.
+ggplot(df2, aes(x = occupation, y = count, fill = income)) +
+  geom_bar(stat = "identity") + 
+  ggtitle('Income per occupations')
+```
+#=================================================================================
+###{{{Marital Status Focus}}}
+#___________________________
+
+
+```{r}
+summary(adult$marital_status)
+adult$marital_status <- gsub('Married-AF-spouse', 'Married', adult$marital_status)
+adult$marital_status <- gsub('Married-civ-spouse', 'Married', adult$marital_status)
+adult$marital_status <- gsub('Married-spouse-absent', 'Married', adult$marital_status)
+adult$marital_status <- gsub('Never-married', 'Single', adult$marital_status)
+adult$marital_status <- as.factor(adult$marital_status)
+summary(adult$marital_status)
+
+df3 <- data.frame(table(adult$income, adult$marital_status))
+names(df3) <- c('income', 'marital_status', 'count')
+df3
+
+df3 <- ddply(df3, .(marital_status), transform, percent = count/sum(count) * 100)
+
+# format the labels and calculate their positions
+df3 <- ddply(df3, .(marital_status), transform, pos = (cumsum(count) - 0.5 * count))
+df3$label <- paste0(sprintf("%.0f", df3$percent), "%")
+
+# bar plot of counts by marital status with in group proportions 
+ggplot(df3, aes(x = marital_status, y = count, fill = income)) +
+  geom_bar(stat = "identity") +
+  ggtitle('Marital Status and Income')
+# Data indicates that Married catagory are the higest >50K earners among other catagory
+# 44% of those who are married earn >50K
+```
+#================================================================
+###{{{Capital Gain and Capital Loss Focus}}}
+#__________________________________________
+
+```{r}
+ggplot(adult) + aes(x=as.numeric(capital_gain), group=income, fill=income) + 
+  geom_histogram(bins=10, color='black') + ggtitle('Histogram of Capital Gain')
+
+ggplot(adult) + aes(x=as.numeric(capital_loss), group=income, fill=income) + 
+  geom_histogram(bins=10, color='black') + ggtitle('Histogram of Capital Loss')
+
+sum(adult$capital_gain == 0)/length(adult$capital_gain)
+
+# There are 3 variables "capital_gain, capital_loss and native_country" serve as much noise and have little or no effect on our analysys.
+# Most of our observations have zeros or displays high skewness as most observations are 
+# from United States. Therefore, these three variables are excluded from the analysis as well.
+
+adult$capital_gain <- NULL
+adult$capital_loss <- NULL
+adult$native_country <- NULL
+```
+#========================================================================
+###{{{Race Focus}}}
+#__________________
+
+```{r}
+df4 <- data.frame(table(adult$income, adult$race))
+names(df4) <- c('income', 'race', 'count')
+df4
+
+# calculate the percentages
+df4 <- ddply(df4, .(race), transform, percent = count/sum(count) * 100)
+
+# format the labels and calculate their positions
+df4 <- ddply(df4, .(race), transform, pos = (cumsum(count) - 0.5 * count))
+df4$label <- paste0(sprintf("%.0f", df4$percent), "%")
+
+# do not display percentage for low counts categories
+df4$label[df4$race == 'Other'] <- NA
+df4$label[df4$race == 'Amer-Indian-Eskimo'] <- NA
+
+# bar plot of counts by marital status with in group proportions 
+ggplot(df4, aes(x = race, y = count, fill = income)) +
+  geom_bar(stat = "identity") + 
+  ggtitle('Income Level by Race')
+# Data indicates that white race are the higest earner, in its class, 26% of white earn >50K.
+
+# Table of summary statistics
+summary(adult)
+```
+#==========================================================
+###{{{Using Model Fitting Machine Learning Models and Logistic Regression}}}
+#__________________________________________________
+# Setting the training data set to 2/3 of the data.
+# Setting the test data set to 1/3 of the data.
+
+```{r}
+sz <- round(.67 * dim(adult)[1])  
+training_set <- adult[1:sz,]
+testing_set <- adult[-(1:sz),]
+# Setting a logistic regression using income as the response variable,
+# and all other variables as predictors is fitted.
+
+m1 <- glm(income ~ ., data = training_set, family = binomial('logit'))
+summary(m1)
+
+confint(m1)
+
+m_full <- m1
+m_null <- glm(income ~ 1, data = training_set, family = binomial('logit'))
+
+# backward selection
+step(m_full, trace = F, scope = list(lower=formula(m_null), upper=formula(m_full)),
+     direction = 'backward')
+
+step(m_null, trace = F, scope = list(lower=formula(m_null), upper=formula(m_full)),
+     direction = 'forward')
+
+# create a data frame to store information regarding deviance residuals
+index <- 1:dim(training_set)[1]
+dev_resid <- residuals(m1)
+income <- training_set$income
+dff <- data.frame(index, dev_resid, income)
+
+ggplot(dff, aes(x = index, y = dev_resid, color = income)) +
+  geom_point() + 
+  geom_hline(yintercept = 3, linetype = 'dashed', color = 'blue') +
+  geom_hline(yintercept = -3, linetype = 'dashed', color = 'blue')
+
+ggtitle('Plot of Deviance Residuals')
+
+prob <- predict(m1, testing_set, type = 'response')
+pred <- rep('<=50K', length(prob))
+pred[prob>=.5] <- '>50K'
+# confusion matrix 
+tb <- table(pred, testing_set$income)
+tb
+
+library(nnet)
+nn1 <- nnet(income ~ ., data = training_set, size = 40, maxit = 500)
+
+nn1.pred <- predict(nn1, newdata = testing_set, type = 'raw')
+
+pred1 <- rep('<=50K', length(nn1.pred))
+pred1[nn1.pred>=.5] <- '>50K'
+# confusion matrix 
+tb1 <- table(pred1, testing_set$income)
+tb1
+
+library(rpart)
+tree2 <- rpart(income ~ ., data = training_set, method = 'class', cp = 1e-3)
+tree2.pred.prob <- predict(tree2, newdata = testing_set, type = 'prob')
+tree2.pred <- predict(tree2, newdata = testing_set, type = 'class')
+# confusion matrix 
+tb2 <- table(tree2.pred, testing_set$income)
+tb2
+
+library(randomForest)
+rf3 <- randomForest(income ~ ., data = training_set, ntree = 1000)
+rf3.pred.prob <- predict(rf3, newdata = testing_set, type = 'prob')
+rf3.pred <- predict(rf3, newdata = testing_set, type = 'class')
+# confusion matrix 
+tb3 <- table(rf3.pred, testing_set$income)
+tb3
+
+library(kernlab)
+svm4 <- ksvm(income ~ ., data = training_set)
+svm4.pred.prob <- predict(svm4, newdata = testing_set, type = 'decision')
+svm4.pred <- predict(svm4, newdata = testing_set, type = 'response')
+# confusion matrix 
+tb4 <- table(svm4.pred, testing_set$income)
+tb4
+```
+#=======================================================================
+###{{{Conclusion}}}
+#___________________
+
+# ROC curve is a plot of true positive rate against false positive rate under
+# all threshold values. Confusion matrix is a measurement of overall prediction accuracy.
+# Since the majority of observations in the data set has income less than $50,000 a year,
+# sensitivity and specificity contribute to the overall accuracy by different weights. 
+# create a prediction object
+```{r}
+pr <- prediction(prob, testing_set$income)
+prf <- performance(pr, measure = "tpr", x.measure = "fpr")
+
+# create a data frame for TP and FP rates
+dd <- data.frame(FP = prf@x.values[[1]], TP = prf@y.values[[1]])
+
+# RF
+pr3 <- prediction(rf3.pred.prob[,2], testing_set$income)
+prf3 <- performance(pr3, measure = "tpr", x.measure = "fpr")
+dd3 <- data.frame(FP = prf3@x.values[[1]], TP = prf3@y.values[[1]])
+
+# SVM
+pr4 <- prediction(svm4.pred.prob, testing_set$income)
+prf4 <- performance(pr4, measure = "tpr", x.measure = "fpr")
+dd4 <- data.frame(FP = prf4@x.values[[1]], TP = prf4@y.values[[1]])
+
+# plot ROC curve for logistic regression
+g <- ggplot() + 
+  geom_line(data = dd, aes(x = FP, y = TP, color = 'Logistic Regression')) +
+  geom_line(data = dd3, aes(x = FP, y = TP, color = 'Random Forest')) +
+  geom_line(data = dd4, aes(x = FP, y = TP, color = 'Support Vector Machine')) +
+  geom_segment(aes(x = 0, xend = 1, y = 0, yend = 1)) +
+  ggtitle('ROC Curve') + 
+  labs(x = 'False Positive Rate', y = 'True Positive Rate')
+
+
+g +  scale_colour_manual(name = 'Classifier', values = c('Logistic Regression'='#E69F00', 
+                                                   'Random Forest'='#D55E00', 'Support Vector Machine'='#0072B2'))
+
+auc <- rbind(performance(pr, measure = 'auc')@y.values[[1]],
+             performance(pr3, measure = 'auc')@y.values[[1]],
+             performance(pr4, measure = 'auc')@y.values[[1]])
+rownames(auc) <- (c('Logistic Regression','Random Forest', 'Support Vector Machine'))
+colnames(auc) <- 'Area Under ROC Curve'
+round(auc, 4)
+```
+# Refrences:
+#https://github.com/nkafr/Adult-dataset-analysis
+#https://github.com/mmd52/UCI_ADULT_DATSET_CATEGORICAL_PROJECT/blob/master/LogisticRegression.R
+#https://rpubs.com/H_Zhu/235617
+#https://datascience52.wordpress.com/2016/12/24/running-logistic-regression-on-uci-adult-data-set-with-r/
+#https://github.com/mmd52/UCI_ADULT_DATSET_CATEGORICAL_PROJECT
+#https://mathematicaforprediction.wordpress.com/2014/03/30/classification-and-association-rules-for-census-income-data/
+

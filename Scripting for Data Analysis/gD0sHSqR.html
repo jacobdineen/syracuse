@@ -1,0 +1,545 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Requests: HTTP for Humans &#8212; Requests 2.19.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://media.readthedocs.org/css/badge_only.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="#" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/underscore.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/doctools.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="index" title="Index" href="genindex/" />
+    <link rel="search" title="Search" href="search/" />
+    <link rel="next" title="Introduction" href="user/intro/" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="http://docs.python-requests.org/en/master/" />
+
+<link rel="stylesheet" href="https://media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'index'
+READTHEDOCS_DATA['source_suffix'] = '.rst'
+</script>
+
+<script type="text/javascript" src="https://media.readthedocs.org/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="requests-http-for-humans">
+<h1>Requests: HTTP for Humans<a class="headerlink" href="#requests-http-for-humans" title="Permalink to this headline">¶</a></h1>
+<p>Release v2.19.1. (<a class="reference internal" href="user/install/#install"><span class="std std-ref">Installation</span></a>)</p>
+<a class="reference external image-reference" href="https://pypi.org/project/requests/"><img alt="https://img.shields.io/pypi/l/requests.svg" src="https://img.shields.io/pypi/l/requests.svg" /></a>
+<a class="reference external image-reference" href="https://pypi.org/project/requests/"><img alt="https://img.shields.io/pypi/wheel/requests.svg" src="https://img.shields.io/pypi/wheel/requests.svg" /></a>
+<a class="reference external image-reference" href="https://pypi.org/project/requests/"><img alt="https://img.shields.io/pypi/pyversions/requests.svg" src="https://img.shields.io/pypi/pyversions/requests.svg" /></a>
+<a class="reference external image-reference" href="https://codecov.io/github/requests/requests"><img alt="codecov.io" src="https://codecov.io/github/requests/requests/coverage.svg?branch=master" /></a>
+<a class="reference external image-reference" href="https://saythanks.io/to/kennethreitz"><img alt="https://img.shields.io/badge/Say%20Thanks!-🦉-1EAEDB.svg" src="https://img.shields.io/badge/Say%20Thanks!-🦉-1EAEDB.svg" /></a>
+<p><strong>Requests</strong> is the only <em>Non-GMO</em> HTTP library for Python, safe for human
+consumption.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The use of <strong>Python 3</strong> is <em>highly</em> preferred over Python 2. Consider upgrading your applications and infrastructure if you find yourself <em>still</em> using Python 2 in production today. If you are using Python 3, congratulations —&nbsp;you are indeed a person of excellent taste.
+—<em>Kenneth Reitz</em></p>
+</div>
+<hr class="docutils" />
+<p><strong>Behold, the power of Requests</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://api.github.com/user&#39;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pass&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="go">200</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;content-type&#39;</span><span class="p">]</span>
+<span class="go">&#39;application/json; charset=utf8&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">encoding</span>
+<span class="go">&#39;utf-8&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">text</span>
+<span class="go">u&#39;{&quot;type&quot;:&quot;User&quot;...&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="go">{u&#39;private_gists&#39;: 419, u&#39;total_private_repos&#39;: 77, ...}</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://gist.github.com/973705">similar code, sans Requests</a>.</p>
+<p><strong>Requests</strong> allows you to send <em>organic, grass-fed</em> HTTP/1.1 requests, without the
+need for manual labor. There’s no need to manually add query strings to your
+URLs, or to form-encode your POST data. Keep-alive and HTTP connection pooling
+are 100% automatic, thanks to <a class="reference external" href="https://github.com/shazow/urllib3">urllib3</a>.</p>
+<div class="section" id="user-testimonials">
+<h2>User Testimonials<a class="headerlink" href="#user-testimonials" title="Permalink to this headline">¶</a></h2>
+<p>Nike, Twitter, Spotify, Microsoft, Amazon, Lyft, BuzzFeed, Reddit, The NSA, Her Majesty’s Government, Google, Twilio, Runscope, Mozilla, Heroku,
+PayPal, NPR, Obama for America, Transifex, Native Instruments, The Washington
+Post, SoundCloud, Kippt, Sony, and Federal U.S.
+Institutions that prefer to be unnamed claim to use Requests internally.</p>
+<dl class="docutils">
+<dt><strong>Armin Ronacher</strong>, creator of Flask—</dt>
+<dd><em>Requests is the perfect example how beautiful an API can be with the
+right level of abstraction.</em></dd>
+<dt><strong>Matt DeBoard</strong>—</dt>
+<dd><em>I’m going to get Kenneth Reitz’s Python requests module tattooed
+on my body, somehow. The whole thing.</em></dd>
+<dt><strong>Daniel Greenfeld</strong>—</dt>
+<dd><em>Nuked a 1200 LOC spaghetti code library with 10 lines of code thanks to
+Kenneth Reitz’s Requests library. Today has been AWESOME.</em></dd>
+<dt><strong>Kenny Meyers</strong>—</dt>
+<dd><em>Python HTTP: When in doubt, or when not in doubt, use Requests. Beautiful,
+simple, Pythonic.</em></dd>
+</dl>
+<p>Requests is one of the most downloaded Python packages of all time, pulling in
+over 400,000 downloads <strong>each day</strong>. Join the party!</p>
+<p>If your organization uses Requests internally, consider <a class="reference external" href="https://www.kennethreitz.org/requests3">supporting the development of 3.0</a>. Your
+generosity will be greatly appreciated, and help drive the project forward
+into the future.</p>
+</div>
+<div class="section" id="beloved-features">
+<h2>Beloved Features<a class="headerlink" href="#beloved-features" title="Permalink to this headline">¶</a></h2>
+<p>Requests is ready for today’s web.</p>
+<ul class="simple">
+<li>Keep-Alive &amp; Connection Pooling</li>
+<li>International Domains and URLs</li>
+<li>Sessions with Cookie Persistence</li>
+<li>Browser-style SSL Verification</li>
+<li>Automatic Content Decoding</li>
+<li>Basic/Digest Authentication</li>
+<li>Elegant Key/Value Cookies</li>
+<li>Automatic Decompression</li>
+<li>Unicode Response Bodies</li>
+<li>HTTP(S) Proxy Support</li>
+<li>Multipart File Uploads</li>
+<li>Streaming Downloads</li>
+<li>Connection Timeouts</li>
+<li>Chunked Requests</li>
+<li><code class="docutils literal notranslate"><span class="pre">.netrc</span></code> Support</li>
+</ul>
+<p>Requests officially supports Python 2.7 &amp; 3.4–3.7, and runs great on PyPy.</p>
+</div>
+<div class="section" id="the-user-guide">
+<h2>The User Guide<a class="headerlink" href="#the-user-guide" title="Permalink to this headline">¶</a></h2>
+<p>This part of the documentation, which is mostly prose, begins with some
+background information about Requests, then focuses on step-by-step
+instructions for getting the most out of Requests.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user/intro/">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/intro/#philosophy">Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/intro/#apache2-license">Apache2 License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/intro/#requests-license">Requests License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/install/">Installation of Requests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/install/#pipenv-install-requests">$ pipenv install requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/install/#get-the-source-code">Get the Source Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/quickstart/">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#make-a-request">Make a Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#passing-parameters-in-urls">Passing Parameters In URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#response-content">Response Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#binary-response-content">Binary Response Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#json-response-content">JSON Response Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#raw-response-content">Raw Response Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#custom-headers">Custom Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#more-complicated-post-requests">More complicated POST requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#post-a-multipart-encoded-file">POST a Multipart-Encoded File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#response-status-codes">Response Status Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#response-headers">Response Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#cookies">Cookies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#redirection-and-history">Redirection and History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#timeouts">Timeouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/quickstart/#errors-and-exceptions">Errors and Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/advanced/">Advanced Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#session-objects">Session Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#request-and-response-objects">Request and Response Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#prepared-requests">Prepared Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#ssl-cert-verification">SSL Cert Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#client-side-certificates">Client Side Certificates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#ca-certificates">CA Certificates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#body-content-workflow">Body Content Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#keep-alive">Keep-Alive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#streaming-uploads">Streaming Uploads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#chunk-encoded-requests">Chunk-Encoded Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#post-multiple-multipart-encoded-files">POST Multiple Multipart-Encoded Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#event-hooks">Event Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#custom-authentication">Custom Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#streaming-requests">Streaming Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#proxies">Proxies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#compliance">Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#http-verbs">HTTP Verbs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#custom-verbs">Custom Verbs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#link-headers">Link Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#transport-adapters">Transport Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#blocking-or-non-blocking">Blocking Or Non-Blocking?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#header-ordering">Header Ordering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/advanced/#timeouts">Timeouts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/authentication/">Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/authentication/#basic-authentication">Basic Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/authentication/#digest-authentication">Digest Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/authentication/#oauth-1-authentication">OAuth 1 Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/authentication/#oauth-2-and-openid-connect-authentication">OAuth 2 and OpenID Connect Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/authentication/#other-authentication">Other Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/authentication/#new-forms-of-authentication">New Forms of Authentication</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-community-guide">
+<h2>The Community Guide<a class="headerlink" href="#the-community-guide" title="Permalink to this headline">¶</a></h2>
+<p>This part of the documentation, which is mostly prose, details the
+Requests ecosystem and community.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="community/sponsors/">Community Sponsors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/sponsors/#patron-sponsors">Patron Sponsors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/sponsors/#major-sponsors">Major Sponsors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/sponsors/#individual-sponsors">Individual Sponsors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community/recommended/">Recommended Packages and Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/recommended/#certifi-ca-bundle">Certifi CA Bundle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/recommended/#cachecontrol">CacheControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/recommended/#requests-toolbelt">Requests-Toolbelt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/recommended/#requests-threads">Requests-Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/recommended/#requests-oauthlib">Requests-OAuthlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/recommended/#betamax">Betamax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community/faq/">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/faq/#encoded-data">Encoded Data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/faq/#custom-user-agents">Custom User-Agents?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/faq/#why-not-httplib2">Why not Httplib2?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/faq/#python-3-support">Python 3 Support?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/faq/#what-are-hostname-doesn-t-match-errors">What are “hostname doesn’t match” errors?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community/out-there/">Integrations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/out-there/#python-for-ios">Python for iOS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community/out-there/#articles-talks">Articles &amp; Talks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/support/">Support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/support/#stack-overflow">Stack Overflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/support/#send-a-tweet">Send a Tweet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/support/#file-an-issue">File an Issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/support/#e-mail">E-mail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/support/#irc">IRC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community/vulnerabilities/">Vulnerability Disclosure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/vulnerabilities/#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/vulnerabilities/#previous-cves">Previous CVEs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community/updates/">Community Updates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/updates/#github">GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/updates/#twitter">Twitter</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community/updates/#release-and-version-history">Release and Version History</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/updates/#release-history">Release History</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community/release-process/">Release Process and Rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/release-process/#major-releases">Major Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/release-process/#minor-releases">Minor Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/release-process/#hotfix-releases">Hotfix Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/release-process/#reasoning">Reasoning</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-api-documentation-guide">
+<h2>The API Documentation / Guide<a class="headerlink" href="#the-api-documentation-guide" title="Permalink to this headline">¶</a></h2>
+<p>If you are looking for information on a specific function, class, or method,
+this part of the documentation is for you.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/">Developer Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/#main-interface">Main Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#request-sessions">Request Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#lower-level-classes">Lower-Level Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#lower-lower-level-classes">Lower-Lower-Level Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#encodings">Encodings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#cookies">Cookies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#status-code-lookup">Status Code Lookup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#migrating-to-1-x">Migrating to 1.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/#migrating-to-2-x">Migrating to 2.x</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-contributor-guide">
+<h2>The Contributor Guide<a class="headerlink" href="#the-contributor-guide" title="Permalink to this headline">¶</a></h2>
+<p>If you want to contribute to the project, this part of the documentation is for
+you.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev/contributing/">Contributor’s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev/contributing/#be-cordial">Be Cordial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/contributing/#get-early-feedback">Get Early Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/contributing/#contribution-suitability">Contribution Suitability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/contributing/#code-contributions">Code Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dev/contributing/#steps-for-submitting-code">Steps for Submitting Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev/contributing/#code-review">Code Review</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev/contributing/#new-contributors">New Contributors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev/contributing/#kenneth-reitz-s-code-style">Kenneth Reitz’s Code Style™</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dev/contributing/#documentation-contributions">Documentation Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/contributing/#bug-reports">Bug Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/contributing/#feature-requests">Feature Requests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev/philosophy/">Development Philosophy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev/philosophy/#management-style">Management Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/philosophy/#values">Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/philosophy/#semantic-versioning">Semantic Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/philosophy/#standard-library">Standard Library?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/philosophy/#linux-distro-packages">Linux Distro Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev/todo/">How to Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev/todo/#feature-freeze">Feature Freeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/todo/#development-dependencies">Development Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/todo/#runtime-environments">Runtime Environments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev/authors/">Authors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev/authors/#keepers-of-the-crystals">Keepers of the Crystals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/authors/#previous-keepers-of-crystals">Previous Keepers of Crystals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/authors/#patches-and-suggestions">Patches and Suggestions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>There are no more guides. You are now guideless.
+Good luck.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="#">
+    <img class="logo" src="_static/requests-sidebar.png" title="https://kennethreitz.org/tattoos"/>
+  </a>
+</p>
+
+<p>
+  <iframe src="https://ghbtns.com/github-btn.html?user=requests&repo=requests&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+  Requests is an elegant and simple HTTP library for Python, built for
+  human beings.
+</p>
+<p>Sponsored by <strong><a href="https://linode.com/">Linode</a></strong> and <a href="http://docs.python-requests.org/en/master/community/sponsors/#patron-sponsors">other wonderful organizations</a>.</p>
+
+
+<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=pythonrequestsorg" id="_carbonads_js"></script>
+
+<p><a href="http://www.unixstickers.com/stickers/coding_stickers/requests-shaped-sticker">Requests Stickers!</a></p>
+<h3>Stay Informed</h3>
+<p>Receive updates on new releases and upcoming projects.</p>
+
+<p><iframe src="https://ghbtns.com/github-btn.html?user=kennethreitz&type=follow&count=false"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200" height="20"></iframe></p>
+
+<p><a href="https://twitter.com/kennethreitz" class="twitter-follow-button" data-show-count="false">Follow @kennethreitz</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></p>
+<p><a href="http://tinyletter.com/kennethreitz">Join Mailing List</a>.</p>
+<h3>Other Projects</h3>
+
+<p>More <a href="http://kennethreitz.org/">Kenneth Reitz</a> projects:</p>
+<ul>
+    <li><a href="http://html.python-requests.org/">Requests-HTML</a></li>
+    <li><a href="http://howtopython.org/">howtopython.org</a></li>
+    <li><a href="http://pipenv.org/">pipenv</a></li>
+    <li><a href="http://pep8.org/">pep8.org</a></li>
+    <li><a href="http://httpbin.org/">httpbin.org</a></li>
+    <li><a href="http://python-guide.org">The Python Guide</a></li>
+    <li><a href="https://github.com/kennethreitz/maya">Maya: Datetimes for Humans</a></li>
+    <li><a href="https://github.com/kennethreitz/records">Records: SQL for Humans</a></li>
+    <li><a href="http://www.git-legit.org">Legit: Git for Humans</a></li>
+    <li><a href="http://docs.python-tablib.org/en/latest/">Tablib: Tabular Datasets</a></li>
+</ul>
+
+
+<h3>Useful Links</h3>
+<ul>
+  <li><a href="http://docs.python-requests.org/en/latest/community/recommended/">Recommended Packages and Extensions</a></li>
+
+  <p></p>
+
+  <li><a href="https://github.com/requests/requests">Requests @ GitHub</a></li>
+  <li><a href="https://pypi.org/project/requests/">Requests @ PyPI</a></li>
+  <li><a href="https://github.com/requests/requests/issues">Issue Tracker</a></li>
+  <li><a href="http://docs.python-requests.org/en/latest/community/updates/#software-updates">Release History</a></li>
+</ul>
+
+
+<h3>Translations</h3>
+
+<ul>
+  <li><a href="http://docs.python-requests.org/">English</a></li>
+  <li><a href="http://fr.python-requests.org/">French</a></li>
+  <li><a href="http://de.python-requests.org/">German</a></li>
+  <li><a href="http://jp.python-requests.org/">Japanese</a></li>
+  <li><a href="http://cn.python-requests.org/">Chinese</a></li>
+  <li><a href="http://pt.python-requests.org/">Portuguese</a></li>
+  <li><a href="http://it.python-requests.org/">Italian</a></li>
+  <li><a href="http://es.python-requests.org/">Spanish</a></li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search/" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script><!-- Alabaster (krTheme++) Hacks -->
+<aside id="python27">
+    <a href="https://www.kennethreitz.org/requests3"><strong>Requests 3.0</strong> development is underway, and your financial help is appreciated!</a>
+</aside>
+
+<!-- Python 2 Death Clock™ -->
+<style type="text/css">
+  body { margin-top: 4em; }
+  #python27 {
+      position: fixed;
+      top: 0;
+      left: 0; right: 0;
+      height:  auto;
+      text-align: center;
+      color: white;
+      background-color: black;
+      font-size: larger;
+      line-height: 3;
+  }
+
+</style>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script>
+  var death = new Date('2020-04-12');
+
+  var diff = moment.duration(death - moment());
+
+  document.querySelector('#python27 time').innerText = (diff.years() * 12) + diff.months();
+</script> -->
+
+
+<!-- CSS Adjustments (I'm very picky.) -->
+<style type="text/css">
+
+  /* Rezzy requires precise alignment. */
+  img.logo {margin-left: -20px!important;}
+
+  /* "Quick Search" should be capitalized. */
+  div#searchbox h3 {text-transform: capitalize;}
+
+  /* Make the document a little wider, less code is cut-off. */
+  div.document {width: 1008px;}
+
+  /* Much-improved spacing around code blocks. */
+  div.highlight pre {padding: 11px 14px;}
+
+  /* Remain Responsive! */
+  @media screen and (max-width: 1008px) {
+    div.sphinxsidebar {display: none;}
+    div.document {width: 100%!important;}
+
+    /* Have code blocks escape the document right-margin. */
+    div.highlight pre {margin-right: -30px;}
+  }
+
+</style>
+
+
+<!-- Analytics tracking for Kenneth. -->
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '56ca7a57c88d9011080024dd');
+    t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
+    t.src = 'https://d36ee2fcip1434.cloudfront.net/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+<!-- There are no more hacks. -->
+<!--         இڿڰۣ-ڰۣ—         -->
+<!--   Love, Kenneth Reitz    -->
+
+<script src="_static//konami.js"></script>
+<script>
+  var easter_egg = new Konami('http://fortunes.herokuapp.com/random/raw');
+</script>
+
+<!-- That was not a hack. That was art. -->
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;MMXVIII. A <a href="http://kennethreitz.com/pages/open-projects.html">Kenneth Reitz</a> Project.
+      
+    </div>
+
+    
+    <a href="https://github.com/requests/requests" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

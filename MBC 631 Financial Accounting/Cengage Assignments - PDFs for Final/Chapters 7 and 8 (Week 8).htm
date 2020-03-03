@@ -1,0 +1,3894 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Chapters 7 and 8 (Week 8)</title><link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/core.css" media="all"><style media="all" type="text/css">
+            	@import "/media/css/style_sheet_v3.css";
+                body,
+                html
+                {
+                    background: #FFF !important;
+                	margin: 5px;
+                }
+                div.documentHeader
+                {
+                	border: 1px solid #4D6AAC;
+                }
+				div.information
+				{
+					font-size: 1em;
+					margin: 0.5em;
+				}
+				div.information span.infoTitle
+				{
+					font-weight: bold;
+				}
+				div.information span.info
+				{
+					padding-left: 5px;
+					font-weight: normal;
+				}
+				div#assignmentHeader
+				{
+					float: right;
+				}
+                div.item
+                {
+                	padding: 5px;
+                	border-top: 1px solid #4D6AAC;
+                }
+                div.item div.itemNumber
+                {
+                	font-weight: bold;
+                }
+            </style><style media="print" type="text/css">
+                div.item,
+                div.item div
+                {
+                	page-break-inside: avoid;
+            	}
+            	body
+            	{
+            		margin: 0.25in;
+            	}
+            </style>
+<!-- Javascript imports for com.thomson.OldEventsHelper -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/com.js"></script>
+
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/engine.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE="com.thomson";</script>
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/DWRHelper.js"></script>
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JSOLService.htm"></script>
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/com_002.js"></script>
+
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+<link type="text/css" href="Chapters%207%20and%208%20%28Week%208%29_files/cnowCovalentAdapter.css" rel="stylesheet"><link type="text/css" href="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.css" rel="stylesheet">
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery-1.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_003.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery-ui-1.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_006.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_004.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+<script type="text/javascript">
+      // turn off $() and instead revert to jQuery() so that we do not conflict with other javascript frameworks.
+      jQuery.noConflict();
+    </script>
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/cim_min.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/API.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+
+<!-- Javascript imports for null -->
+<script language="javascript" type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/CnowCovalentAdapter.js"></script>
+<script language="javascript" type="text/javascript">var _PACKAGE=null;</script>
+<script type="text/javascript">
+        jQuery(window).load(function(){
+            if( typeof(CovalentItemManager) != 'function' )
+                return;
+            
+            if (! 'tmpl' in jQuery) {
+                jQuery.getScript('/media/jsframeworks/jquery/jquery.tmpl.min.js');
+            }
+
+            if (!jQuery.timepicker){
+                jQuery.getScript('/media/jsframeworks/jquery/plugins/timepicker/jquery-ui-timepicker-addon.js', function(){
+                    jQuery.getScript('/media/jsframeworks/jquery/plugins/dateTimeWidget/jquery.dateTimeWidget.js');
+                });
+            }
+      
+            if (!jQuery.dropdown){
+                jQuery.dropdown = {};
+                jQuery.getScript('/media/jsframeworks/jquery/plugins/dropdown/jquery.dropdown.js');
+            }
+      
+            var covalentRenderer = new CnowCovalentRenderer({
+                showCheckMyWork: true
+            });
+      
+            if( !covalentRenderer )
+                return;
+          
+            CovalentItemManager.getInstance().pageLoaded(covalentRenderer);
+        });
+    </script><style type="text/css" media="print">.dropShadow{visibility:hidden;}</style><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJaxHelper.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJax.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJax.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJax.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJax.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJax.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJax.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJax.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MathJax.js"></script><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap; display: none}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+.fieldHolder {visibility: hidden}
+</style></head><body><div id="MathJax_Message" style="display: none;"></div><div class="documentHeader"><div id="assignmentHeader" class="information"><span class="infoTitle">Assignment:
+					</span><span class="info">Chapters 7 and 8 (Week 8)</span></div><div id="studentHeader" class="information"><span class="infoTitle">Student:
+					</span><span class="info">
+						Jacob Dineen
+					</span></div></div><div id="score"><h3>Take Details</h3><table class="secondaryHighlight listTable delineated"><tbody><tr><th>Assignment score: </th><td>
+                100%
+    			</td></tr><tr><th>Total Time spent:
+    		</th><td>2 hours, 7 minutes, 35 seconds</td></tr><tr><th>Score for selected take: </th><td>
+                    100%
+                    (100/100)</td></tr><tr><th>Time spent on selected take:</th><td></td></tr></tbody></table><div class="secondaryHighlight primaryBorder toolBar integrated leads largeSet"></div></div><div id="details"><div class="item"><div class="itemNumber">1.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_1044623428"><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/mcItemStateSaver.js" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><!--#-7905360802170567155--><link href="Chapters%207%20and%208%20%28Week%208%29_files/covalent.css" rel="stylesheet" type="text/css"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/API.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "1044623428",
+                            formElementProcessor: mcProcessSingleElement,
+                            onLoadElementProcessor: null,
+                            inFocusElementProcessor: null,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(null),
+                            ptOnUnloadActions: new Array(null),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "001_Brief Exercise 8-01",
+                    "adapter": itemAdapter,
+                    "renderingContext": "YAVWQC2ab5PpADbr2lbf0N1nxRDTXTy5NmndrkbpqXCWANT5dZMI62JSsE+te3Z6ckb7aAC5VlIU\n+c77dblw+1NLScq3hidL1688/bORpV/Kjaj4FrPoRHSuVWsIi3bzrr1IubQ4+HApa4wGG3DiDnSQ\nL0N3/2JeUQ7DD6feogmYmy75oajEjugf38qpVPyQkRZ0R//Pimz81L0x+CJRiXPqODFv43pvcKS1\nPKSgnDEAV2XBfRfmfIWQT+abNUE71f+WL7Fjq1tROz4t6TO4ZxZeItukNDhGJmTSuSQpgleArV1a\n+fxKn2QwcVdVgLB8/hHMr88NqYCGipBOYmPgTdiqeHATWGGlIUYY4SlvWcIeAa2N21tZ9+iSbit+\nWMRW5S7Y/9JbwSJ+sjp+CHubz4JFkPWJrQAjO5kbF2UCIJnSkRdpW8Ks1HELZsvPUa0RJH1uCQZs\nZo/Ykk9sioXDHNl56ivNtJrm7EbK6Ic8kKD4jlJbzF4Zlr2ucfHsYLAitk+CJgUKQl6FoJxzIPMp\nZnKCclj39qd3khVH6mh8i7iSOXadBX3jM9dviotJkjsMMdgXXvF5SSFOoHRcZafldyG1rdqrGKD0\n6vPuhX2p9FhRw3jrxSFWwwxc3uWh4WrZLhLzM6ImP7A+ppZVG86j+JDeH9l7bWXFOeE3ht4YZIHz\nCenXpFAW67PBWFatZCozeCcKX+je14BP1YsI+ueRggQ6g7QlRPIw6RuCdZ+YnPwUt23cm6zwfnWh\n310GnNNPGGpEO9blxaROmNx5tavjYzdCWF53RfQoZssfTRUXTFrYaUqMwpYCd1Zw8TJ297lIGTdK\nBRbNbyCm4VgQDSYpi0ux2aH+9qIsShac3LBts3z0vFHXXbDPtWXm864VFIqIY4nLUYZipwFWg1v7\ntZ2Mx8rOb22Q5fgvzAkNIStmG48Ybefr52Xvgaze5kk3F7ZwfG9yi9fAd0rhFQlq7lvJNarF/X5o\njrHdccN+KRcMI7BwqhUZDH1C3PnfSG1V7jV9BNxETCs2ebbgVZPQFWBJP9tHu91dAKfH3Jf54KB7\nX7A=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5Hv0wM9mXfnAhX3KzjbwxJOrzqB7AQmQ2j29xnR70nzS"
+                } ) );
+            </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/onload.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/location.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '1044623428';
+
+              }
+              function validateItem1044623428() {var result = false;  if (typeof(validateScript1044623428) != 'undefined') {try {eval(validateScript1044623428);} catch(e) {result = e;}}return result;}
+          </script><input id="item-state_1044623428" name="item-state_1044623428" value="" type="hidden"><div class="questionWrapper">
+<div class="questionContent">
+<div>
+<script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript">
+        	var MEScot1='Sorry, your current browser does not support this content. \nPlease upgrade your browser. Refer to the CengageNOW System Requirements to determine the appropriate browser and version for your system.';
+        </script>
+<style type="text/css">
+            .choiceTable tr td
+            {
+                font-family: Verdana,Arial,Helvetica,sans-serif;
+                font-size: 10px;
+            }        
+        </style>
+<div class="problemTypes"><link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/jquery.css" rel="stylesheet" type="text/css">
+			<script src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script><div class="narrative">
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/mindTapReader.js" type="text/javascript"><!-- Keep the end script tag. --></script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" href="#" ebook="{ &quot;docId&quot;:&quot;WJXJRI068643512&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" style="">8-1: Balance Sheet Presentation of Property, Plant, and Equipment</a></div></span>
+
+
+<p>Property, Plant, and Equipment Classification</p>
+<p>The following would be in the Property, Plant and Equipment balance sheet category EXCEPT for:</p>
+</div></div>
+<span id="rejoinderPlaceholder_1044623428_">
+<!--placeholder for rejoinderPlaceholder_1044623428_--></span>
+<table class="choiceTable" width="100%" cellspacing="2" cellpadding="0" border="0">
+<tbody><tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-01_choice_1"><span class="mcLabel" style="line-height: 19px; display: inline-block;">a. Construction in process </span></label></td><td><span id="rejoinderPlaceholder_1044623428_printed_1">
+<!--placeholder for rejoinderPlaceholder_1044623428_printed_1--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-01_choice_2"><span class="mcLabel" style="line-height: 19px; display: inline-block;">b. Buildings </span></label></td><td><span id="rejoinderPlaceholder_1044623428_printed_2">
+<!--placeholder for rejoinderPlaceholder_1044623428_printed_2--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-01_choice_3"><span class="mcLabel" style="line-height: 19px; display: inline-block;">c. Leasehold improvements </span></label></td><td><span id="rejoinderPlaceholder_1044623428_printed_3">
+<!--placeholder for rejoinderPlaceholder_1044623428_printed_3--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-01_choice_4"><span class="mcLabel" style="line-height: 19px; display: inline-block;">d. Land </span></label></td><td><span id="rejoinderPlaceholder_1044623428_printed_4">
+<!--placeholder for rejoinderPlaceholder_1044623428_printed_4--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_checked_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-01_choice_5"><span class="mcLabel" style="line-height: 19px; display: inline-block;">e. Patent </span></label></td><td><span id="rejoinderPlaceholder_1044623428_printed_5">
+<!--placeholder for rejoinderPlaceholder_1044623428_printed_5--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-01_choice_6"><span class="mcLabel" style="line-height: 19px; display: inline-block;">f. Accumulated Depreciation </span></label></td><td><span id="rejoinderPlaceholder_1044623428_printed_6">
+<!--placeholder for rejoinderPlaceholder_1044623428_printed_6--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><script type="text/javascript">
+        
+            (function(covalentItem){
+            
+                
+        (function(covalentItem){
+        
+            var rejoinders = [];
+        
+            
+
+            jQuery.each(rejoinders, function(i, rejoinder){
+                covalentItem.addRejoinder(rejoinder);
+            });
+
+        })(covalentItem);
+        
+    
+            
+            })( CovalentItemManager.getInstance().findItem('1044623428') );
+
+        </script>
+</span></div><div class="item"><div class="itemNumber">2.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_515095470"><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/mcItemStateSaver.js" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><!--#-5527751698037789519--><link href="Chapters%207%20and%208%20%28Week%208%29_files/covalent.css" rel="stylesheet" type="text/css"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/API.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "515095470",
+                            formElementProcessor: mcProcessSingleElement,
+                            onLoadElementProcessor: null,
+                            inFocusElementProcessor: null,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(null),
+                            ptOnUnloadActions: new Array(null),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "001_Brief Exercise 8-02",
+                    "adapter": itemAdapter,
+                    "renderingContext": "JZJ6VLrighuVZywHESHDrVIAGLqQuJ41rGiPU6DPYg2kfImMxqJRs4ZBv6Z1dfSKoLRUHU1jGccp\n9Er2uILp8w5LCVOKaUtoETTln+SyKILErst1PkVZXz0rUxbSXfHxzZjMcrKGI+BUAsP+QmvqGilH\noAMDBS6GyctyCNMwaU4e+EDJ2e4FMvc8LjECaFHc5vlFd4u+/IRVFL4mWAKgdLfDGG6uOW8RT+uN\ni5rwBrHzr16WZ7O3b8QLuWW1JHOjrCMwBSgRwDXEH5VrU5gR+uK3O3F1RLoMztANpMvhWFnE/RZr\nN8tZ2Cg209+gurUMbKQvKETv30xgsae9LR8VKdOz20v8Cmitrw342rxquDCoqMy+6ZP9Zieoa430\n8EYuDTYY3iCWJSh+xh84hfZB+eUDEFrhyvfsrUNF7aQgfbl+H60GeVDSmG/tkoA6Bm48ZKzsfKEE\nJwwf298VQgiTxJxpDqKaARJNEUyG90v2lvb5II8kleDmHiCuAd0/VCFDeusYVUrNZBf2eFuCRl2u\nAwDJowQDKJqbMty+Od9GGX7Hn1Zmq1qo2ZZsvTZRqyGE8/RecJBPyG75XqnMSAMLJ92Cz5pKGqxg\nD5E8ZmuL1+EnKf2hoHUz/vHk7m702+gL0K0shtBvCOllyBvO/7TyBNoh0OmwHDDySpiYVEP1a4B/\nvar3Saomw/I8tqEJ0I4Hn9P3nvieENvQJteJfKZlekJKTMYmdDDiiM6amW2CSFIcFDLWcp4Mg57K\nc5W0XCOFoACwJyxr3sQOk5NY7NpDdhTFPHTBvi6YN/PMPjKhMGiBfx872iJcPf7LpoVFaLeQQQeu\n935GDUVTEwa1cio/vlPQn5WhnBEmFb/E/0SUserUnImDHUhA18pe9PXNe26+/lGGsGDsdLaDrjse\n+THRqXIoZ8nOpYZl3Plem43r0PXCQhnl0EwwmLGGUKic37IjDhfXQJY0lYuphw3yun+YmFg2bJIm\n5aWiC9ropq62l4tx+kAkc6CykfgyA35k4UEr6PaJhDVe6caqAr+kE/jXaIX84JuJjRr2yPF/pTuR\n+PM=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5FSQrlQNhsR6djY4Hn2IqCpsLNQq+6+9QYwtaQ3KvBQe"
+                } ) );
+            </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/onload.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/location.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '515095470';
+
+              }
+              function validateItem515095470() {var result = false;  if (typeof(validateScript515095470) != 'undefined') {try {eval(validateScript515095470);} catch(e) {result = e;}}return result;}
+          </script><input id="item-state_515095470" name="item-state_515095470" value="" type="hidden"><div class="questionWrapper">
+<div class="questionContent">
+<div>
+<script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript">
+        	var MEScot1='Sorry, your current browser does not support this content. \nPlease upgrade your browser. Refer to the CengageNOW System Requirements to determine the appropriate browser and version for your system.';
+        </script>
+<style type="text/css">
+            .choiceTable tr td
+            {
+                font-family: Verdana,Arial,Helvetica,sans-serif;
+                font-size: 10px;
+            }        
+        </style>
+<div class="problemTypes"><link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/jquery.css" rel="stylesheet" type="text/css">
+			<script src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script><div class="narrative">
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/mindTapReader.js" type="text/javascript"><!-- Keep the end script tag. --></script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" href="#" ebook="{ &quot;docId&quot;:&quot;YKCYDT122999825&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" style="">8-2: Acquisition of Property, Plant, and Equipment</a></div></span>
+
+
+<p>Determine Acquisition Cost</p>
+<p>Which of the following would be considered part of the acquisition cost of an asset?</p>
+</div></div>
+<span id="rejoinderPlaceholder_515095470_">
+<!--placeholder for rejoinderPlaceholder_515095470_--></span>
+<table class="choiceTable" width="100%" cellspacing="2" cellpadding="0" border="0">
+<tbody><tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-02_choice_1"><span class="mcLabel" style="line-height: 19px; display: inline-block;">a. Transportation costs, installation costs, necessary repair costs incurred after the asset has been installed and used </span></label></td><td><span id="rejoinderPlaceholder_515095470_printed_1">
+<!--placeholder for rejoinderPlaceholder_515095470_printed_1--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-02_choice_2"><span class="mcLabel" style="line-height: 19px; display: inline-block;">b.
+ Transportation costs, repair costs incurred at time of purchase, 
+necessary repair costs incurred after the asset has been installed and 
+used </span></label></td><td><span id="rejoinderPlaceholder_515095470_printed_2">
+<!--placeholder for rejoinderPlaceholder_515095470_printed_2--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_checked_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-02_choice_3"><span class="mcLabel" style="line-height: 19px; display: inline-block;">c. Transportation costs, installation costs, necessary repair costs incurred at time of purchase </span></label></td><td><span id="rejoinderPlaceholder_515095470_printed_3">
+<!--placeholder for rejoinderPlaceholder_515095470_printed_3--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr valign="top" align="left">
+<td width="100%">
+<table style="float : left" border="0">
+<tbody><tr class="mcRow" valign="center">
+<td><img src="Chapters%207%20and%208%20%28Week%208%29_files/MC_circle16x16_cut.gif" style="position: static; vertical-align: -4px" width="16" vspace="1" hspace="2" align="middle" height="16">
+                        </td>
+                        <td>
+                    <label class="hand" style="cursor:default" for="001_Brief Exercise 8-02_choice_4"><span class="mcLabel" style="line-height: 19px; display: inline-block;">d. Transportation costs, installation costs, interest on loan to purchase the asset </span></label></td><td><span id="rejoinderPlaceholder_515095470_printed_4">
+<!--placeholder for rejoinderPlaceholder_515095470_printed_4--></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><script type="text/javascript">
+        
+            (function(covalentItem){
+            
+                
+        (function(covalentItem){
+        
+            var rejoinders = [];
+        
+            
+
+            jQuery.each(rejoinders, function(i, rejoinder){
+                covalentItem.addRejoinder(rejoinder);
+            });
+
+        })(covalentItem);
+        
+    
+            
+            })( CovalentItemManager.getInstance().findItem('515095470') );
+
+        </script>
+</span></div><div class="item"><div class="itemNumber">3.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_1828557164"><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><!--#-4072826578179615587--><link href="Chapters%207%20and%208%20%28Week%208%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/API.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "1828557164",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(null),
+                            ptOnUnloadActions: new Array(null),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "001_Brief Exercise 8-05 (Algorithmic)",
+                    "adapter": itemAdapter,
+                    "renderingContext": "YAVWQC2ab5PpADbr2lbf0N1nxRDTXTy5NmndrkbpqXCWANT5dZMI62JSsE+te3Z6ckb7aAC5VlIU\n+c77dblw+1NLScq3hidL1688/bORpV/Kjaj4FrPoRHSuVWsIi3bzrr1IubQ4+HApa4wGG3DiDnSQ\nL0N3/2JeUQ7DD6feogmOovjv1af83b064U3sHJ9ylqYy2JcNbh2cBSL+OzAvJtV9vaAbb3ylLT+H\nEP/UHruz8tvG33yKnH8td5f3XfXo6fcLnZtbCmf7pSUPlUIOOPsbVEr3x0XGpeeFTXsY9y7e7T80\nuEmltvVmXk9JtVAvAWoe9WssFrsshDewR4vfwsr8xzKqKGhEQ5Ya1mlCmkBBnyqQluaAZHYAulTR\nFTOvQ/vt/+IgJKnT685oCx3YWk9e8wEE+PlSPA9F9N+MNwS2PUsw/Hy5a/HxGLk4pgqgDRYxzka4\nLKFf2B9T/3s72s0Fl+2XODcA5RqVTWn256n+u/sAqmXWMQsZ2tmzIe5+zVccSo6WRFibPz/XFY59\nKwvPudsgx+0z0Lm53AYIxF7esIJqiCwB5VHAN50eRps0PrbdK0fhsgeEd6L80ZaDx6nR7VwfTSvR\ntp2Nc0QCKrz8q5dRbXHeIXl/GZASUsE0GEgLuVMylteOI3wTlilY2Gx0SP12JPa/D7NwiBQtj9FC\nyJqFeXhr3XddtBXzh82T+CVr9mZxalaKnw43u5YiA3xMmOkFG/5C0sH39NUobCcXd0yjhIwg7lOS\nKih0vkOylnA7QyVYqE6JqS2avWZxlF4vMsFJFyPWqEzhLwe2XqjbOtwsvH+/h97Yn/kzaHO6rEGO\nNf45IQ6Ia8bQSnaNqBNw/RrjKv+/1HpIAGfSqK4vkUDQ4NAedhi5q9MTv2eehkbtgKvanKsgad4V\nqvlRn1GfsUS8bHfdf48XwW2XdzvQkgMGyq/c1Vf/6NS1UXyPO5jP2aCLMRuEyA7I8dflqs5fP3bg\n4WCEYHTTmFISbGBkSUARWofPRTH5kwiTrr52XoAMkPPI1qGPi8wb8pGxm741r0Ef9I7DiJS4rXh/\nOwo=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5NSqaRnd4mc5h5/I0UqQtEZ/kcuZR8teyf9U3wxC0RTs"
+                } ) );
+            </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/onload.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/location.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '1828557164';
+
+              }
+              function validateItem1828557164() {var result = false;  if (typeof(validateScript1828557164) != 'undefined') {try {eval(validateScript1828557164);} catch(e) {result = e;}}return result;}
+          </script><div class="questionWrapper questionContent">
+<table width="100%" cellspacing="4" cellpadding="0" border="0">
+<tbody><tr>
+<td class="problemTypes" colspan="100%" width="100%" align="left"><span method="post" name="submitForm_1828557164" id="submitForm_1828557164" action="" onsubmit="if ( typeof( buttonClick ) == 'undefined' || !buttonClick ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.1828557164" type="hidden"><input name="uid" id="uid" value="1828557164" type="hidden"><input id="item-state_1828557164" name="item-state_1828557164" value="" type="hidden"><span id="rejoinderPlaceholder_1828557164_">
+<!--placeholder for rejoinderPlaceholder_1828557164_--></span><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1828557164">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/jquery.css" rel="stylesheet" type="text/css">
+			
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script>
+<div class="narrative">
+
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/mindTapReader.js" type="text/javascript"> Keep the end script tag. </script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" ebook="{ &quot;docId&quot;:&quot;QLAPOM011724792&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" href="#" style="">8-5: Disposal of Property, Plant, and Equipment</a></div></span>
+
+<span class="additional_resource demo additional_resource_dropdown"><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span>
+
+<div class="additional_resource_list" style="display: none;"><a href="http://www.cengage.com/accounting/book_content/porter_9781285182957/video/video.html?asset=pwt_be8_5" target="_blank">Show Me How</a></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div></span>
+
+
+
+<p>Depreciation Methods</p>
+
+<p>A company uses the double-declining-balance method of depreciation. 
+The company purchases an asset for $60,000, which is expected to have a 
+20-year life and a $5,400 residual value.</p>
+
+<p>
+<strong>1. &nbsp;</strong>What depreciation rate will be applied each year?<br>
+
+</p><div>
+<u>10</u>
+</div> %<p></p>
+
+<p>
+<strong>2. &nbsp;</strong>What amount will be charged for depreciation in the first and second years?</p>
+
+<table class="narrative2" width="300" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>First-year</td>
+    <td>$<div>
+<u>6000</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Second-year</td>
+    <td>$<div>
+<u>5400</u>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>  
+
+<p>
+<strong>3. &nbsp;</strong>What amount will be treated as depreciation over the 20-year life?<br>
+$</p><div>
+<u>54600</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+<p></p>
+
+</div>
+</div>
+<br>
+</span></td>
+</tr>
+</tbody></table>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><script type="text/javascript">
+        
+            (function(covalentItem){
+            
+                
+        (function(covalentItem){
+        
+            var rejoinders = [];
+        
+            
+
+            jQuery.each(rejoinders, function(i, rejoinder){
+                covalentItem.addRejoinder(rejoinder);
+            });
+
+        })(covalentItem);
+        
+    
+            
+            })( CovalentItemManager.getInstance().findItem('1828557164') );
+
+        </script>
+</span></div><div class="item"><div class="itemNumber">4.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_1413091340"><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><!--#-7989350576665430586--><link href="Chapters%207%20and%208%20%28Week%208%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/API.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "1413091340",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(null),
+                            ptOnUnloadActions: new Array(null),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "002_Exercise 8-01 (Algorithmic)",
+                    "adapter": itemAdapter,
+                    "renderingContext": "YAVWQC2ab5PpADbr2lbf0N1nxRDTXTy5NmndrkbpqXCWANT5dZMI62JSsE+te3Z6nG7a6132hg2t\nrpi4FZ/zGf5kYSGpWRd0cQK2b5Y1k/wgBOPk33hCeVkqQ3N5Al72exama+Jbo1z61hx6Ug9Ebjfs\nX3frW9ceGteB4VWwGqMx7dLGs+UjkKtbYLTPeR68UESILgkTGnDr3utT4OKZAGC5gvqTFT8d4XYW\nbxC4ckYISoRwJZnXM0nChJtc0FzA3Zl4vyTUTDqfYe6iut0oEbH99mDGxfPKy46gdNrSf1wJhOPP\na5JN5FpSwJ9CFcPInsQov9GoAqhCBPX5kW1csPv9ZiKINwmz6pCgnVZNKkHVVaBNjNcWq4BHDB6/\nucs1swIiIRxGGDBH/Rmca/WAtDatHs1qAQaaVqRZoJGAOo33cZsRxI1SE66hKXOy884twbfQQHhS\nBqMBFflzdjC+YEhXXH8HyOdAm2U2WQLLCwxnifnF34Zurxm4FvRXPpSuj8if1546RPdX/4naW0OR\nxEo6vpZFO9R6VjOCaoOvIIlUTkStMslkjyCySNuYhAIczF56THMtshvb9P7dks0LyYhbj+qM/VvL\nzx/bNAFTORPpSJ1vh3doJv7Tc4S0Caixtyn+YsDeQ32+7GV5tOsxDVeGhrX0YcqZLDuWYx/QfDeR\nurPVjWwRmFE+/bCu3Tx055RmGcfRuwi1psg/aUeLtzy9M9jx5jDWMYPdIz2lZJA3+YpK+XKbLXDv\nffaYb8GpdbAwE0O/S25iKNV7UWhy6R/dkyMM0R1YslXqCICkRrktGXCuQUFgSsMI5Rstx+KkMvww\nuRVJyO9WFTXuB8U9v9yM4y28fzfnYkgQub9OawV7aAeRoNYWJ0EPsRfFsuM5cnx68sPaDFiZrNYu\nqPJCFK+JVIPt2rW83K0byyyAqMNMOpE0nBq/9BZ11w1DXG6Xy5DyfNIcaduYo5/NJuAhkmpNB1Ws\nmQQPi1aNHxYfs1lfCtqQ26ryovFeeeHQgg0fSUfb2Sjdw4Rrea2O9ngcQrhSA+po8S7X6cBPxbci\nTJY=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5COT35k4iT9RluqMXE7DYZ2T1A69wz7d7Az5n62xDvd7"
+                } ) );
+            </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/onload.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/location.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '1413091340';
+
+              }
+              function validateItem1413091340() {var result = false;  if (typeof(validateScript1413091340) != 'undefined') {try {eval(validateScript1413091340);} catch(e) {result = e;}}return result;}
+          </script><div class="questionWrapper questionContent">
+<table width="100%" cellspacing="4" cellpadding="0" border="0">
+<tbody><tr>
+<td class="problemTypes" colspan="100%" width="100%" align="left"><span method="post" name="submitForm_1413091340" id="submitForm_1413091340" action="" onsubmit="if ( typeof( buttonClick ) == 'undefined' || !buttonClick ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.1413091340" type="hidden"><input name="uid" id="uid" value="1413091340" type="hidden"><input id="item-state_1413091340" name="item-state_1413091340" value="
+&lt;item-state&gt;&lt;state/&gt;&lt;/item-state&gt;" type="hidden"><span id="rejoinderPlaceholder_1413091340_">
+<!--placeholder for rejoinderPlaceholder_1413091340_--></span><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1413091340">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/jquery.css" rel="stylesheet" type="text/css">
+			
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script>
+<div class="narrative">
+
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/mindTapReader.js" type="text/javascript"> Keep the end script tag. </script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" ebook="{ &quot;docId&quot;:&quot;YKCYDT122999825&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" href="#" style="">8-2: Acquisition of Property, Plant, and Equipment</a></div></span>
+
+
+
+<p>Acquisition Cost</p>
+
+<p>On January 1, 2014, Topaz Corp. purchased a piece of equipment with a
+ list price of $60,000. The following amounts were related to the 
+equipment purchase:</p>
+
+<ul>
+  
+<li>Terms of the purchase were 2/10, net 30. Topaz paid for the purchase on January 8.</li>
+  
+<li>Freight costs of $1,000 were incurred.</li>
+  
+<li>A state agency required that a pollution control device be installed on the equipment at a cost of $2,500.</li>
+  
+<li>During installation, the equipment was damaged and repair costs of $4,000 were incurred.</li>
+  
+<li>Architect's fees of $8,300 were paid to redesign the work space to accommodate the new equipment.</li>
+  
+<li>Topaz purchased liability insurance to cover possible damage to the asset. The three-year policy cost $8,000.</li>
+  
+<li>Topaz financed the purchase with a bank loan. Interest of $3,000 was paid on the loan during 2014.</li>
+
+</ul>
+
+
+<p>
+<strong>Required:</strong>
+</p>
+
+<p>Determine the acquisition cost of the equipment.<br>
+$</p><div>
+<u>70600</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+<p></p>
+
+</div>
+</div>
+<br>
+</span></td>
+</tr>
+</tbody></table>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><script type="text/javascript">
+        
+            (function(covalentItem){
+            
+                
+        (function(covalentItem){
+        
+            var rejoinders = [];
+        
+            
+
+            jQuery.each(rejoinders, function(i, rejoinder){
+                covalentItem.addRejoinder(rejoinder);
+            });
+
+        })(covalentItem);
+        
+    
+            
+            })( CovalentItemManager.getInstance().findItem('1413091340') );
+
+        </script>
+</span></div><div class="item"><div class="itemNumber">5.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_280600701"><link href="Chapters%207%20and%208%20%28Week%208%29_files/accdefault.css" rel="stylesheet" type="text/css" xmlns:fo="http://www.w3.org/1999/XSL/Format"><link href="Chapters%207%20and%208%20%28Week%208%29_files/accInlineStyling.css" rel="stylesheet" type="text/css"><script type="text/javascript" language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script type="text/javascript">
+        function accountingAjaxCleanup(item)
+        {
+            ACcleanupAutocomplete();
+        }
+        
+        function accountingOnloadAction()
+        {
+            if (typeof(MultipleCorrectsPopupHandler) != 'undefined'){
+                MultipleCorrectsPopupHandler.getInstance().render();
+            }
+        }
+    </script><!--#4976213406619208007--><link href="Chapters%207%20and%208%20%28Week%208%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/API.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "280600701",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(accountingOnloadAction),
+                            ptOnUnloadActions: new Array(accountingAjaxCleanup),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "002_Exercise 8-04 (Algorithmic)",
+                    "adapter": itemAdapter,
+                    "renderingContext": "YAVWQC2ab5PpADbr2lbf0L/DhfmtqTovkLzsc3NqpJx+MFRvksY6jg/OecbiQQox2+zIFEnixxZc\nk2Em6UwOBLwOhpnOZmYTh+45L5ZGDSoMjRhbGiADwcMU0pqRCGvm/IfTmBYwo/K8PPLuk9tofSVB\na4did+AiS3Ro/BUIP0O2Jjtp45V7Q/jGfpzXx7oJQYZyGqc+oqZSqPmH8juU/+dzUjNCTO4/YjaL\nbDPtUVwlGy/fm2hODCMudU5bcJcO/zWQPAJwiWGhRluWqObi8BNhXDNoawVOqcDDngtQkKMC8aWr\nXjKaoxtnnpscrv6MAhNuqYUdemf+sRsOFSjfmN6KoYst5rsvwIhtZPmkuKTsl8Daz3K4ZC/ncBtG\nIqm5DOjRpk+LWKHqjBq1SWlEsIRLpRfMNXaeEcdzdV/yZJ1/gc3oL/wnN+ejfGj9UZOjaE82PPxf\nSIZ5sJESlZ4mprb+uoRDelzd1tuef0nmaJ3aR+k27rhRU+1/P5jmDdGcj5/qg7wQF9I1YAKlGo7g\npQs8oRptYRTtP7EBV8IBHyrXLSRhxa9bjtfhx4Ix/QeJFmo63OOso8bmDZazs/xTuF86G5+BdMrZ\nkREPGBy55l7bM1ymxQyDHVCfR5cIcrDMW/VYBA7PREa0jU/A0xPiMQLogN9s+1bjHfOQW20v8mKT\nSIWXQgklNB9cFC5OOZKT4KG4FZ/C4/FQ0TphzF7hsgvDN1u0kqDXNDnt7E7jvO/K1Zo/0f2r23+b\nAKJdvgBeksr9a0kdz9VC3c27E590QLbkqg36GIgQp0MkRGZ9QLkJTPrH0ZQLchYPTKHpasgWg5ie\nclIf58PHOzV8OA8gCngw7RJWfhlb548QGqP0ZTVJ8GT4XKa/6kqbyM+KnVnQDCfylWX2LUr3snHY\nTXs1rSHXfAgFfRJIOsJWkzreqGtvaFA/ga8f0dbhYAKO4cSgvDFrD2tJQNWLScSoGOPZ9OdwXQOl\npUfs2Tsc+3MXdltX5eg9oUPlZIf1l5DjtZIMTTPFPHKcXxUnj5bXoFUtHEZkMnX+b2nt9rIiZJMr\nZIA=",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5BljVxn4Fhhfct4ZEi4LZcQWuHZTBcS0hifMp6WXZ5v6"
+                } ) );
+            </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/onload.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/location.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '280600701';
+
+              }
+              function validateItem280600701() {var result = false;  if (typeof(validateScript280600701) != 'undefined') {try {eval(validateScript280600701);} catch(e) {result = e;}}return result;}
+          </script><input id="item-state_280600701" name="item-state_280600701" value="" type="hidden"><div class="questionWrapper">
+<div class="questionContent">
+<div>
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.css" type="text/css">
+<link id="absolutePath" href="http://cvg.cengagenow.com/">
+<script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/autocomplete.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/specialnumber.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/specialNumberFieldInlineFunctions.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/engine.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JSOLService.htm"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script type="text/javascript">
+          var absolutePath = document.getElementById('absolutePath').href;
+          var jqueryHome = absolutePath + 'media/jsframeworks/jquery/';
+          if (!jQuery.ui) {
+              jQuery.ui = jQuery.dropdown = {};
+              jQuery.getScript(jqueryHome + 'jquery-ui-1.10.3.custom.min.js', function(){
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              });
+          } else {
+              if (!jQuery.dropdown){
+                  jQuery.dropdown = {};
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              }
+          }
+      </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/formTools.js"></script><script language="javascript">
+
+        var allAccountingStyles = [];
+        
+            allAccountingStyles.push( 'accdefault' );
+        
+            allAccountingStyles.push( 'journal-entry' );
+        
+
+        
+      jQuery( function()
+      {
+          var feedbackElements = jQuery('.clearFeedbackTrigger');
+
+          var clearFeedbackForElement = function(ev)
+          {
+              if( !ev )
+                  return;
+
+              for (var j = 0; j < allAccountingStyles.length; j++) {
+                  var element = jQuery (ev.target);
+                  var rightStyle = allAccountingStyles[j] + "_right";
+                  var wrongStyle = allAccountingStyles[j] + "_wrong";
+                  var defaultStyle = allAccountingStyles[j] + "_default";
+                  do {
+                      if (element.hasClass (rightStyle) || element.hasClass (wrongStyle)) {
+                          element.removeClass(rightStyle).removeClass(wrongStyle).addClass(defaultStyle).prop("title", "");
+                          return;
+                      }
+                      element = element.parent()
+                  } while (element.length);
+              }
+          }
+
+          feedbackElements.filter(':checkbox').click(clearFeedbackForElement);
+
+          var feedbackElementsNotCheckbox = jQuery(feedbackElements).not(':checkbox');
+          feedbackElementsNotCheckbox = feedbackElementsNotCheckbox.not(function(arg){
+                if (jQuery(this.parentNode.parentNode).hasClass('autocomplete_div'))
+                    return this;
+          });
+
+          for (var i = 0; i < feedbackElementsNotCheckbox.length; i++){
+                var  oldValue = feedbackElementsNotCheckbox[i].value;
+                jQuery(feedbackElementsNotCheckbox[i]).change(function(old_value){
+                    return function(e){
+                        var value = this.value;
+                        if (old_value != value)
+                            clearFeedbackForElement(e);
+                    }
+                }(oldValue));
+          }
+
+          if( typeof(CovalentItemManager) != 'function' || !CovalentItemManager )
+              return;
+
+          var thisItem = CovalentItemManager.getInstance().findItem('280600701');
+          if (!thisItem) {
+              return;
+          }
+          var helper = function(item){
+
+              return {
+                  hideFeedback: function()
+                  {
+                      for(var j = 0; j < allAccountingStyles.length; j++)
+                      {
+                          var rightStyle = allAccountingStyles[j] + "_right";
+                          var wrongStyle = allAccountingStyles[j] + "_wrong";
+                          var defaultStyle = allAccountingStyles[j] + "_default";
+
+                          jQuery('.' + rightStyle + ', .' + wrongStyle).each(function()
+                          {
+                              var feedbackElement = jQuery(this);
+                              feedbackElement.toggleClass(rightStyle, false).toggleClass(wrongStyle, false).toggleClass(defaultStyle, true);
+                              feedbackElement.attr('title', '');
+                          });
+                      }
+                  }
+              };
+
+          }(thisItem);
+
+          thisItem.addItemHelper( helper );
+      });
+
+       // ILRN-36468
+       // Used for determining correct localized prefix for the reserve word status
+       var global_reserveWordCorrectStatus = {
+         'correct'   : 'Correct',
+         'incorrect' : 'Incorrect'
+       };
+
+      var MEScot1='Sorry, your current browser does not support this content. \nPlease upgrade your browser. Refer to the CengageNOW System Requirements to determine the appropriate browser and version for your system.';
+
+      function elem(id) {
+         return document.getElementById(id);
+      }
+      function showAndHide(divId, anchorId) {
+        var anchor = elem(anchorId);
+        var div = elem(divId);
+        if (div.style.display == "none") {
+          div.style.display = "";
+          anchor.innerHTML = 'Hide';
+          anchor.title = 'Hide';
+        }
+        else {
+          div.style.display = "none";
+          anchor.innerHTML = 'Show';
+          anchor.title = 'Show';
+        }
+      }
+
+      function calendarSetStyle(inputId, style, fieldStyle) {
+        document.getElementById(inputId + '_y').parentNode.className = style;
+        document.getElementById(inputId + '_m').parentNode.className = style;
+        document.getElementById(inputId + '_d').parentNode.className = style;
+        document.getElementById(inputId + '_y').className = style;
+        document.getElementById(inputId + '_m').className = style;
+        document.getElementById(inputId + '_d').className = style;
+        if (typeof(fieldStyle) != "undefined" && fieldStyle != "0") {
+          document.getElementById(inputId + '_y').parentNode.align = "right";
+          document.getElementById(inputId + '_m').parentNode.align = "right";
+          document.getElementById(inputId + '_d').parentNode.align = "right";
+          document.getElementById(inputId + '_y').parentNode.style.display = "";
+          document.getElementById(inputId + '_m').parentNode.style.display = "";
+          document.getElementById(inputId + '_d').parentNode.style.display = "";
+        }
+      }
+
+      function _fixEmpty(value) {
+        if (value == null || typeof(value) == "undefined" || value == "" || value == "blank") {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+
+      function _fixEmptyFITB(value) {
+        if (_fixEmpty(value) == "&#160;" || value == '""') {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+    </script>
+<div class="box-in-blue-box">
+<div class="problemTypes">
+<br><link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/jquery.css" rel="stylesheet" type="text/css">
+			<script src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script><div class="narrative">
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/mindTapReader.js" type="text/javascript"><!-- Keep the end script tag. --></script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" href="#" ebook="{ &quot;docId&quot;:&quot;QLAPOM011724792&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" style="">8-5: Disposal of Property, Plant, and Equipment</a></div></span>
+
+
+<p>Accelerated Depreciation</p>
+<p>Koffman's Warehouse purchased a forklift on January 1, 2014, for 
+$180,000. The forklift is expected to last for five years and have a 
+residual value of $14,000. Koffman's uses the double-declining-balance 
+method for depreciation.</p>
+
+<p><strong>Required:</strong></p>
+</div><span method="post" autocomplete="off" name="submitForm_280600701" id="submitForm_280600701" action="?" onsubmit="if ( document.getElementById('buttonClick').value != 1 ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.280600701" type="hidden" align="absmiddle"><script type="text/JavaScript" language="JavaScript">
+                  function getCssStep(index) {
+                  
+                    if (index == 0) {
+                      return "accdefault";
+                    }
+                  
+                    if (index == 1) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 2) {
+                      return "accdefault";
+                    }
+                  
+                    if (index == 3) {
+                      return "accdefault";
+                    }
+                  
+                  }
+                </script>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_280600701">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>
+<strong>1. &nbsp;</strong>Calculate the depreciation expense, 
+accumulated depreciation, and book value for each year of the forklift's
+ life. If necessary, round any depreciation calculations to the nearest 
+dollar.</p>
+
+<table class="narrative2" width="500" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td class="narrative_line" align="center"> <strong>Year </strong></td>
+    <td class="narrative_line" colspan="3" align="center"> <strong>Annual<br> Depreciation</strong></td>
+    <td class="narrative_line" colspan="3" align="center"> <strong>Accumulated<br> Depreciation </strong></td>
+    <td class="narrative_line" colspan="3" align="center"> <strong>Book Value </strong></td>
+  
+</tr>
+  
+<tr>
+    
+<td>2014</td>
+    <td align="right">$<div>
+<u>72000</u>
+</div>
+</td>
+    	<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    <td align="right">$<div>
+<u>72000</u>
+</div>
+</td>
+    	<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    <td align="right">$<div>
+<u>108000</u>
+</div>
+</td>
+    	<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+  
+</tr>
+  
+<tr>
+    
+<td>2015</td>
+    <td align="right">$<div>
+<u>43200</u>
+</div>
+</td>
+    	<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    <td align="right">$<div>
+<u>115200</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    
+    	
+    <td align="right">$<div>
+<u>64800</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+ 
+    	
+  
+</tr>
+  
+<tr>
+    
+<td>2016</td>
+    <td align="right">$<div>
+<u>25920</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    <td align="right">$<div>
+<u>141120</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    <td align="right">$<div>
+<u>38880</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+  
+</tr>
+  
+<tr>
+    
+<td>2017</td>
+    <td align="right">$<div>
+<u>15552</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    <td align="right">$<div>
+<u>156672</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    <td align="right">$<div>
+<u>23328</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+  
+</tr>
+  
+<tr>
+    
+<td>2018</td>
+    <td align="right">$<div>
+<u>9328</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    <td align="right">$<div>
+<u>166000</u>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+    <td align="right">$<div>
+<u>14000</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+<td align="right">&nbsp;</td>
+    	<td align="right">&nbsp;</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_280600701">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>
+<strong>2. &nbsp;</strong>Identify and analyze the effect of the transaction for depreciation for 2014.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Operating</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Depreciation Expense Increase, Accumulated Depreciation Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_280600701">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation? If a financial 
+statement item is not affected, select "No Entry" and leave the amount 
+box blank. If the effect on a financial statement item is negative, i.e,
+ a decrease, be sure to enter the answer with a minus sign. Remember: if
+ a contra account is <i>increased</i>, it will have the effect of <i>decreasing</i> the corresponding financial statement item.</p>
+
+
+<table cellpading="3" class="narrative3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Accumulated Depreciation</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-72000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-72000</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>Depreciation Expense</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>72000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-72000</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_280600701">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>
+<strong>3. &nbsp;</strong>Refer to <a href="http://cvg.cengagenow.com/ilrn/books/pnal09h/images/ch08/pnal09h_ch08_exhibit8_2.gif" target="_blank">Exhibit 8-2</a>.</p> 
+
+<p>What factors may have influenced Koffman’s to use the double-declining-balance method?</p>
+
+<p></p>
+<p>Koffman’s may believe that the double-declining-balance method best </p><div>
+<u>matches the decline in usefulness</u>
+</div> of the asset with the revenues produced by the asset. Koffman’s may also choose this method because it allows  <div>
+<u>more</u>
+</div> depreciation to be taken in the early years of the asset life and thus  <div>
+<u>delays</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div> taxes until the later years. <p></p>
+
+</div>
+</div>
+</div>
+</span><script language="javascript">
+              jQuery(".globalReserveWordCorrectStatusPlaceHolder").each(function(i, item) {
+                  jQuery(item).replaceWith(global_reserveWordCorrectStatus['jQuery(item).text()'])
+              });
+          </script>
+</div>
+</div>
+</div>
+</div>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><style>
+        #content table.accdefault_answerInfo
+        {
+            background-color: #FFF;
+            padding: 2px;
+            margin: 5px;
+            border: 1px dashed #CDE;
+            width: auto;
+        }
+        
+        #content table.accdefault_answerInfo td
+        {
+        }
+      </style>
+</span></div><div class="item"><div class="itemNumber">6.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_1793720641"><link href="Chapters%207%20and%208%20%28Week%208%29_files/accdefault.css" rel="stylesheet" type="text/css" xmlns:fo="http://www.w3.org/1999/XSL/Format"><link href="Chapters%207%20and%208%20%28Week%208%29_files/accInlineStyling.css" rel="stylesheet" type="text/css"><script type="text/javascript" language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script type="text/javascript">
+        function accountingAjaxCleanup(item)
+        {
+            ACcleanupAutocomplete();
+        }
+        
+        function accountingOnloadAction()
+        {
+            if (typeof(MultipleCorrectsPopupHandler) != 'undefined'){
+                MultipleCorrectsPopupHandler.getInstance().render();
+            }
+        }
+    </script><!--#1486469382024067922--><link href="Chapters%207%20and%208%20%28Week%208%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/API.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "1793720641",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(accountingOnloadAction),
+                            ptOnUnloadActions: new Array(accountingAjaxCleanup),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "002_Exercise 7-13 (Algorithmic)",
+                    "adapter": itemAdapter,
+                    "renderingContext": "cX8fMWdD7txo07vd77UNC2CfzaXNyjnTh0+ppY+ROZaTcpWnNOQgz2ibQ5uRuovxpAQZJB19Xu/6\nCCZa4dFhjNzzC1DGViva8A8Iu5MIxj1dP5Guh7Vh0aobyZ3/PSE8/ulOY/NOLNXc/cvRUjcN4kua\nXRYAHLYD1yaQzUtMwjK/4MiH4rnVQC9uXc/5BdA9Rfw2rCxzDFumRe3QV+6QxiY7OTtNYjRKT/Gh\naDTSQ2Cbi6sU1N/S+SAsU7db31iGlhs5IDsFUqdkAH2CUIRQ7n/YLz66Cog36lpunT0d1vFqsw3d\nOM5YCBeR1vfV/i2xSEBH4vs0/103sW+HgerE3IgsmWKVB8F/dMRNw+WBNcyOmUtwTA9/oPWnyawc\n/RjTDvgm6aSHKR6Wg+HMAAw5fdS/77xn0SwZQz8vM8E3HKgaAv7nbDXGK9iPNV9AK9V/mWGGb9R+\npLI+Z5zMhO+Ejxy2KltQDi9/0trDKd5xaS4awU03jIEp7NBLci3IHybjZ/+Kbc9pgzVvpw1VPqlS\nUNqeXDt51+bYBrClmvDz8qrDbgoI27L/3L44aV8GMXI4tLfiD2c3IdL0mvOHbdm6rIdJmCTnVYEU\nlkD3wiTxRROdPMl+5GAkgZIHIqZHmVcer+XSFEhuQWx+z+EYs+mjhGgHSpvcSwgeGG6bLWtDStUQ\nY3BQWODPaRJ+DyfevXwnNswdDgm6d7I/Y8Y+U0+CZJYND50aUBxXXArKqOe1KBHnteP5l94tIufU\nAm/E/ngrANhiayJcnyuKbAIJK0B43LMKzMOo7smmz1UbEmvigR3NJT3hygVnmuJKIYOaWJPlBC+Y\nl2AxaSvJr/TIS/E3opDkeeUnBgp9mntEO9YZwCL6CpzvKdPe4zfjGUwMU3IAIFfv39X5PWFZcDnn\nrs13oxJQFg8ZLocNh6cF+3M/SMveh4+xzefcHN8Hzm1r5nw9W9gW+Avx/wbp2JXcXQ7MefrzRyMg\nZ33/htT7pQZwBVxX9a5s8V4v5Vu2BeB8nz4jaCCE5ET6eSZcaq0k1Jqm/Ca7mQGUmfWt/OLOgYvz\nlVz/YgZnXQccZDTKBTdfb0+SWPq082TW2n2xgpzIMVpGOA==",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5GsX8j1zM93M+tOIT8PaKnbcgwd2nEZIjRuhunob5Oa2"
+                } ) );
+            </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/onload.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/location.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '1793720641';
+
+              }
+              function validateItem1793720641() {var result = false;  if (typeof(validateScript1793720641) != 'undefined') {try {eval(validateScript1793720641);} catch(e) {result = e;}}return result;}
+          </script><input id="item-state_1793720641" name="item-state_1793720641" value="" type="hidden"><div class="questionWrapper">
+<div class="questionContent">
+<div>
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.css" type="text/css">
+<link id="absolutePath" href="http://cvg.cengagenow.com/">
+<script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/autocomplete.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/specialnumber.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/specialNumberFieldInlineFunctions.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/engine.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JSOLService.htm"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script type="text/javascript">
+          var absolutePath = document.getElementById('absolutePath').href;
+          var jqueryHome = absolutePath + 'media/jsframeworks/jquery/';
+          if (!jQuery.ui) {
+              jQuery.ui = jQuery.dropdown = {};
+              jQuery.getScript(jqueryHome + 'jquery-ui-1.10.3.custom.min.js', function(){
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              });
+          } else {
+              if (!jQuery.dropdown){
+                  jQuery.dropdown = {};
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              }
+          }
+      </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/formTools.js"></script><script language="javascript">
+
+        var allAccountingStyles = [];
+        
+            allAccountingStyles.push( 'accdefault' );
+        
+            allAccountingStyles.push( 'journal-entry' );
+        
+
+        
+      jQuery( function()
+      {
+          var feedbackElements = jQuery('.clearFeedbackTrigger');
+
+          var clearFeedbackForElement = function(ev)
+          {
+              if( !ev )
+                  return;
+
+              for (var j = 0; j < allAccountingStyles.length; j++) {
+                  var element = jQuery (ev.target);
+                  var rightStyle = allAccountingStyles[j] + "_right";
+                  var wrongStyle = allAccountingStyles[j] + "_wrong";
+                  var defaultStyle = allAccountingStyles[j] + "_default";
+                  do {
+                      if (element.hasClass (rightStyle) || element.hasClass (wrongStyle)) {
+                          element.removeClass(rightStyle).removeClass(wrongStyle).addClass(defaultStyle).prop("title", "");
+                          return;
+                      }
+                      element = element.parent()
+                  } while (element.length);
+              }
+          }
+
+          feedbackElements.filter(':checkbox').click(clearFeedbackForElement);
+
+          var feedbackElementsNotCheckbox = jQuery(feedbackElements).not(':checkbox');
+          feedbackElementsNotCheckbox = feedbackElementsNotCheckbox.not(function(arg){
+                if (jQuery(this.parentNode.parentNode).hasClass('autocomplete_div'))
+                    return this;
+          });
+
+          for (var i = 0; i < feedbackElementsNotCheckbox.length; i++){
+                var  oldValue = feedbackElementsNotCheckbox[i].value;
+                jQuery(feedbackElementsNotCheckbox[i]).change(function(old_value){
+                    return function(e){
+                        var value = this.value;
+                        if (old_value != value)
+                            clearFeedbackForElement(e);
+                    }
+                }(oldValue));
+          }
+
+          if( typeof(CovalentItemManager) != 'function' || !CovalentItemManager )
+              return;
+
+          var thisItem = CovalentItemManager.getInstance().findItem('1793720641');
+          if (!thisItem) {
+              return;
+          }
+          var helper = function(item){
+
+              return {
+                  hideFeedback: function()
+                  {
+                      for(var j = 0; j < allAccountingStyles.length; j++)
+                      {
+                          var rightStyle = allAccountingStyles[j] + "_right";
+                          var wrongStyle = allAccountingStyles[j] + "_wrong";
+                          var defaultStyle = allAccountingStyles[j] + "_default";
+
+                          jQuery('.' + rightStyle + ', .' + wrongStyle).each(function()
+                          {
+                              var feedbackElement = jQuery(this);
+                              feedbackElement.toggleClass(rightStyle, false).toggleClass(wrongStyle, false).toggleClass(defaultStyle, true);
+                              feedbackElement.attr('title', '');
+                          });
+                      }
+                  }
+              };
+
+          }(thisItem);
+
+          thisItem.addItemHelper( helper );
+      });
+
+       // ILRN-36468
+       // Used for determining correct localized prefix for the reserve word status
+       var global_reserveWordCorrectStatus = {
+         'correct'   : 'Correct',
+         'incorrect' : 'Incorrect'
+       };
+
+      var MEScot1='Sorry, your current browser does not support this content. \nPlease upgrade your browser. Refer to the CengageNOW System Requirements to determine the appropriate browser and version for your system.';
+
+      function elem(id) {
+         return document.getElementById(id);
+      }
+      function showAndHide(divId, anchorId) {
+        var anchor = elem(anchorId);
+        var div = elem(divId);
+        if (div.style.display == "none") {
+          div.style.display = "";
+          anchor.innerHTML = 'Hide';
+          anchor.title = 'Hide';
+        }
+        else {
+          div.style.display = "none";
+          anchor.innerHTML = 'Show';
+          anchor.title = 'Show';
+        }
+      }
+
+      function calendarSetStyle(inputId, style, fieldStyle) {
+        document.getElementById(inputId + '_y').parentNode.className = style;
+        document.getElementById(inputId + '_m').parentNode.className = style;
+        document.getElementById(inputId + '_d').parentNode.className = style;
+        document.getElementById(inputId + '_y').className = style;
+        document.getElementById(inputId + '_m').className = style;
+        document.getElementById(inputId + '_d').className = style;
+        if (typeof(fieldStyle) != "undefined" && fieldStyle != "0") {
+          document.getElementById(inputId + '_y').parentNode.align = "right";
+          document.getElementById(inputId + '_m').parentNode.align = "right";
+          document.getElementById(inputId + '_d').parentNode.align = "right";
+          document.getElementById(inputId + '_y').parentNode.style.display = "";
+          document.getElementById(inputId + '_m').parentNode.style.display = "";
+          document.getElementById(inputId + '_d').parentNode.style.display = "";
+        }
+      }
+
+      function _fixEmpty(value) {
+        if (value == null || typeof(value) == "undefined" || value == "" || value == "blank") {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+
+      function _fixEmptyFITB(value) {
+        if (_fixEmpty(value) == "&#160;" || value == '""') {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+    </script>
+<div class="box-in-blue-box">
+<div class="problemTypes">
+<br><link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/jquery.css" rel="stylesheet" type="text/css">
+			<script src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script><div class="narrative">
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/mindTapReader.js" type="text/javascript"><!-- Keep the end script tag. --></script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" href="#" ebook="{ &quot;docId&quot;:&quot;QSNWOV386343213&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" style="">7-5: Accelerating the Inflow of Cash from Sales</a></div></span>
+
+
+<p>Investment in Stock</p>
+<p>On October 1, 2014, Austin Inc. purchases 1,000 shares of the 
+preferred stock of Little Rock Corp. for $21 per share. Austin pays 
+another $1,000 in commissions. On October 20, 2014, Little Rock declares
+ and pays a dividend of $1 per share. Austin sells the stock on November
+ 5, 2014, at a price of $45 per share.</p>
+
+<p><strong>Required:</strong></p>
+</div><span method="post" autocomplete="off" name="submitForm_1793720641" id="submitForm_1793720641" action="?" onsubmit="if ( document.getElementById('buttonClick').value != 1 ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.1793720641" type="hidden" align="absmiddle"><script type="text/JavaScript" language="JavaScript">
+                  function getCssStep(index) {
+                  
+                    if (index == 0) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 1) {
+                      return "accdefault";
+                    }
+                  
+                    if (index == 2) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 3) {
+                      return "accdefault";
+                    }
+                  
+                    if (index == 4) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 5) {
+                      return "accdefault";
+                    }
+                  
+                  }
+                </script>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1793720641">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>Identify and analyze all transactions on Austin’s books in connection
+ with its investment, beginning with the purchase of the preferred stock
+ on October 1, 2014.
+</p><table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Investing</u>
+</div>
+</td>
+    
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Investment in Little Rock Preferred Stock Increase, Cash Decrease</u>
+</div>
+</td>
+    
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet only</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+    
+</tr>
+
+</tbody></table>
+
+<p></p>
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1793720641">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br>
+If a financial statement item is not affected, select "No Entry" and 
+leave the amount box blank. If the effect on a financial statement item 
+is negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign.</p>
+
+
+<table cellpading="3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Investment in Little Rock Corp. Preferred Stock</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>22000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<div>
+<u>Cash</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-22000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1793720641">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>The dividend received on October 20, 2014.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Operating</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Cash Increase, Dividend Income Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1793720641">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br>
+If a financial statement item is not affected, select "No Entry" and 
+leave the amount box blank. If the effect on a financial statement item 
+is negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign.</p>
+
+
+<table cellpading="3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Cash</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>1000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>1000</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>Dividend Income</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>1000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>0</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>1000</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1793720641">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>The sale on November 5, 2014.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Investing</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Cash Increase, Investment in Little Rock Preferred Stock Decrease, Gain on Sale of Stock Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1793720641">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br>
+If a financial statement item is not affected, select "No Entry" and 
+leave the amount box blank. If the effect on a financial statement item 
+is negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign.</p>
+
+
+<table cellpading="3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Cash</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>45000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>23000</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>Gain on Sale of Stock</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>23000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>23000</u>
+</div>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<div>
+<u>Investment in Little Rock Corp. Preferred Stock</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-22000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+</span><script language="javascript">
+              jQuery(".globalReserveWordCorrectStatusPlaceHolder").each(function(i, item) {
+                  jQuery(item).replaceWith(global_reserveWordCorrectStatus['jQuery(item).text()'])
+              });
+          </script>
+</div>
+</div>
+</div>
+</div>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><style>
+        #content table.accdefault_answerInfo
+        {
+            background-color: #FFF;
+            padding: 2px;
+            margin: 5px;
+            border: 1px dashed #CDE;
+            width: auto;
+        }
+        
+        #content table.accdefault_answerInfo td
+        {
+        }
+      </style>
+</span></div><div class="item"><div class="itemNumber">7.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_942987965"><link href="Chapters%207%20and%208%20%28Week%208%29_files/accdefault.css" rel="stylesheet" type="text/css" xmlns:fo="http://www.w3.org/1999/XSL/Format"><link href="Chapters%207%20and%208%20%28Week%208%29_files/accInlineStyling.css" rel="stylesheet" type="text/css"><script type="text/javascript" language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script type="text/javascript">
+        function accountingAjaxCleanup(item)
+        {
+            ACcleanupAutocomplete();
+        }
+        
+        function accountingOnloadAction()
+        {
+            if (typeof(MultipleCorrectsPopupHandler) != 'undefined'){
+                MultipleCorrectsPopupHandler.getInstance().render();
+            }
+        }
+    </script><!--#-2874593907488723804--><link href="Chapters%207%20and%208%20%28Week%208%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/API.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "942987965",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(accountingOnloadAction),
+                            ptOnUnloadActions: new Array(accountingAjaxCleanup),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "002_Exercise 7-14 (Algorithmic)",
+                    "adapter": itemAdapter,
+                    "renderingContext": "CmbjvjR6sdABK9YT0qy05/2jDPxe6220bYW838kgjjeGB4PWrSiG/u8kip4Q+hgPMQNPQxPHBtOY\naLrJlu0mj5mwSeh4/1L2jNp2WtXq5Ul+Oys3P2BAEHEu39bkBNV9V/wiR4dY7ekojldMpvU+H2Kq\ny0+oyYXWUocoWTIxHswtDJH9UnTzikpu3hOQL5UyXdO1Zq7QyL8HouAivNYbLisUxVKDT7G6bKCV\nnTYXaGReDQGniBFR526R7TjO4974/aihCHK8oDDc6q601G2YpkfoNsRmHoGqgHeNMSr7EXQj1kH+\n+HK7Sq0GZnsHY7oQWJxeVR9JlGDm0B9E1PWzdYs3x3yWHJ3SwIDfZqeFx/xN1rJiP6TKQe3QqNe6\nClKfguNy9egOZQ7ZJHT+80yE/faFlw82BFD0QLFiYcJMGW8oYaj/tUYmchCD4+AnprYOJP4bjMp8\nSeZHflX/BtAsFWCQO8dG2o/jRApS7ea6ktR/JrLdMPdE0uaGEgPIon26+6PikMYOl4CjxcQ6v6ws\nrHjiOh1iVR33iIiKpreXTP6FQJip53hNfNkuPusJLhv+zVBd0ZkudQZ+4CkOc4ASe+tvRZMYVgM5\np6lb29+EnoL/bbxXbXpphwsLYCnM/1q6y4XulSxZ4KjQBZUEKQepF3k3+dt0fya+InTWwR+ettmQ\nkT3lB+73JrOtdirUBsr69QXQlT6CJcQqGJcb9xXKl2JF7c1LqRfk7nOa19JCHEvoNIGVtzlY5pT5\nR+yh5cf816UxnlawK9+iuq7gKcmqWL6akfppNYHez7ymvU0xRMc3y5d+ruIhMpgCIgnUY9bLiuh9\nvAsWURSQ9MvM0KLyDxUaxoLYsmpu2hj0Z1FTRa31gRyXjfCHF3IP0fYBwDeFpcOV2XwmTyCJhxp7\nvGwFpbCcoG8C/PC4CavyWwx92dlDp1OjSekiMjXVus0AvfoIWooxprfxOSvKnAH2/ugwnxzV4U1Y\n82KL9qVYxKE2qTiV0g1OL0rWNdjlY1PcSTzHTbg5us42ptHqZ4v6NYOXQr7VX4eQgHyXE9/E5JBG\nBDUzvM8ZfUBwxHJZ96DlW9xFCKujiwKDNLqxtx1rX/VBiQ==",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5DqABHtocFxHsJBNF1me0PF17V7ElejLb646VgOelw0F"
+                } ) );
+            </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/onload.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/location.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '942987965';
+
+              }
+              function validateItem942987965() {var result = false;  if (typeof(validateScript942987965) != 'undefined') {try {eval(validateScript942987965);} catch(e) {result = e;}}return result;}
+          </script><input id="item-state_942987965" name="item-state_942987965" value="" type="hidden"><div class="questionWrapper">
+<div class="questionContent">
+<div>
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.css" type="text/css">
+<link id="absolutePath" href="http://cvg.cengagenow.com/">
+<script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/autocomplete.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/specialnumber.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/specialNumberFieldInlineFunctions.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/engine.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JSOLService.htm"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script type="text/javascript">
+          var absolutePath = document.getElementById('absolutePath').href;
+          var jqueryHome = absolutePath + 'media/jsframeworks/jquery/';
+          if (!jQuery.ui) {
+              jQuery.ui = jQuery.dropdown = {};
+              jQuery.getScript(jqueryHome + 'jquery-ui-1.10.3.custom.min.js', function(){
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              });
+          } else {
+              if (!jQuery.dropdown){
+                  jQuery.dropdown = {};
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              }
+          }
+      </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/formTools.js"></script><script language="javascript">
+
+        var allAccountingStyles = [];
+        
+            allAccountingStyles.push( 'accdefault' );
+        
+            allAccountingStyles.push( 'journal-entry' );
+        
+
+        
+      jQuery( function()
+      {
+          var feedbackElements = jQuery('.clearFeedbackTrigger');
+
+          var clearFeedbackForElement = function(ev)
+          {
+              if( !ev )
+                  return;
+
+              for (var j = 0; j < allAccountingStyles.length; j++) {
+                  var element = jQuery (ev.target);
+                  var rightStyle = allAccountingStyles[j] + "_right";
+                  var wrongStyle = allAccountingStyles[j] + "_wrong";
+                  var defaultStyle = allAccountingStyles[j] + "_default";
+                  do {
+                      if (element.hasClass (rightStyle) || element.hasClass (wrongStyle)) {
+                          element.removeClass(rightStyle).removeClass(wrongStyle).addClass(defaultStyle).prop("title", "");
+                          return;
+                      }
+                      element = element.parent()
+                  } while (element.length);
+              }
+          }
+
+          feedbackElements.filter(':checkbox').click(clearFeedbackForElement);
+
+          var feedbackElementsNotCheckbox = jQuery(feedbackElements).not(':checkbox');
+          feedbackElementsNotCheckbox = feedbackElementsNotCheckbox.not(function(arg){
+                if (jQuery(this.parentNode.parentNode).hasClass('autocomplete_div'))
+                    return this;
+          });
+
+          for (var i = 0; i < feedbackElementsNotCheckbox.length; i++){
+                var  oldValue = feedbackElementsNotCheckbox[i].value;
+                jQuery(feedbackElementsNotCheckbox[i]).change(function(old_value){
+                    return function(e){
+                        var value = this.value;
+                        if (old_value != value)
+                            clearFeedbackForElement(e);
+                    }
+                }(oldValue));
+          }
+
+          if( typeof(CovalentItemManager) != 'function' || !CovalentItemManager )
+              return;
+
+          var thisItem = CovalentItemManager.getInstance().findItem('942987965');
+          if (!thisItem) {
+              return;
+          }
+          var helper = function(item){
+
+              return {
+                  hideFeedback: function()
+                  {
+                      for(var j = 0; j < allAccountingStyles.length; j++)
+                      {
+                          var rightStyle = allAccountingStyles[j] + "_right";
+                          var wrongStyle = allAccountingStyles[j] + "_wrong";
+                          var defaultStyle = allAccountingStyles[j] + "_default";
+
+                          jQuery('.' + rightStyle + ', .' + wrongStyle).each(function()
+                          {
+                              var feedbackElement = jQuery(this);
+                              feedbackElement.toggleClass(rightStyle, false).toggleClass(wrongStyle, false).toggleClass(defaultStyle, true);
+                              feedbackElement.attr('title', '');
+                          });
+                      }
+                  }
+              };
+
+          }(thisItem);
+
+          thisItem.addItemHelper( helper );
+      });
+
+       // ILRN-36468
+       // Used for determining correct localized prefix for the reserve word status
+       var global_reserveWordCorrectStatus = {
+         'correct'   : 'Correct',
+         'incorrect' : 'Incorrect'
+       };
+
+      var MEScot1='Sorry, your current browser does not support this content. \nPlease upgrade your browser. Refer to the CengageNOW System Requirements to determine the appropriate browser and version for your system.';
+
+      function elem(id) {
+         return document.getElementById(id);
+      }
+      function showAndHide(divId, anchorId) {
+        var anchor = elem(anchorId);
+        var div = elem(divId);
+        if (div.style.display == "none") {
+          div.style.display = "";
+          anchor.innerHTML = 'Hide';
+          anchor.title = 'Hide';
+        }
+        else {
+          div.style.display = "none";
+          anchor.innerHTML = 'Show';
+          anchor.title = 'Show';
+        }
+      }
+
+      function calendarSetStyle(inputId, style, fieldStyle) {
+        document.getElementById(inputId + '_y').parentNode.className = style;
+        document.getElementById(inputId + '_m').parentNode.className = style;
+        document.getElementById(inputId + '_d').parentNode.className = style;
+        document.getElementById(inputId + '_y').className = style;
+        document.getElementById(inputId + '_m').className = style;
+        document.getElementById(inputId + '_d').className = style;
+        if (typeof(fieldStyle) != "undefined" && fieldStyle != "0") {
+          document.getElementById(inputId + '_y').parentNode.align = "right";
+          document.getElementById(inputId + '_m').parentNode.align = "right";
+          document.getElementById(inputId + '_d').parentNode.align = "right";
+          document.getElementById(inputId + '_y').parentNode.style.display = "";
+          document.getElementById(inputId + '_m').parentNode.style.display = "";
+          document.getElementById(inputId + '_d').parentNode.style.display = "";
+        }
+      }
+
+      function _fixEmpty(value) {
+        if (value == null || typeof(value) == "undefined" || value == "" || value == "blank") {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+
+      function _fixEmptyFITB(value) {
+        if (_fixEmpty(value) == "&#160;" || value == '""') {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+    </script>
+<div class="box-in-blue-box">
+<div class="problemTypes">
+<br><link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/jquery.css" rel="stylesheet" type="text/css">
+			<script src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script><div class="narrative">	
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/mindTapReader.js" type="text/javascript"><!-- Keep the end script tag. --></script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" href="#" ebook="{ &quot;docId&quot;:&quot;QSNWOV386343213&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" style="">7-5: Accelerating the Inflow of Cash from Sales</a></div></span>
+
+
+<p>Investment in Stock</p>
+<p>On August 15, 2014, Kartchner Inc. purchases 9,000 shares of common 
+stock in Baumgarden Corp. at a market price of $15 per share. In 
+addition, Kartchner pays brokerage fees of $1,000. On October 20, 2014, 
+Kartchner sells the Baumgarden stock for $10 per share.</p>
+
+<p><strong>Required:</strong></p>
+</div><span method="post" autocomplete="off" name="submitForm_942987965" id="submitForm_942987965" action="?" onsubmit="if ( document.getElementById('buttonClick').value != 1 ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.942987965" type="hidden" align="absmiddle"><script type="text/JavaScript" language="JavaScript">
+                  function getCssStep(index) {
+                  
+                    if (index == 0) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 1) {
+                      return "accdefault";
+                    }
+                  
+                    if (index == 2) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 3) {
+                      return "accdefault";
+                    }
+                  
+                  }
+                </script>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_942987965">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>Identify and analyze all transactions on Kartchner’s books in 
+connection with the investment beginning with the purchase of the common
+ stock on August 15, 2014.
+
+</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Investing</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Investment in Baumgarden Common Stock Increase, Cash Decrease</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet only</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_942987965">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br>
+If a financial statement item is not affected, select "No Entry" and 
+leave the amount box blank. If the effect on a financial statement item 
+is negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign.</p>
+
+
+<table cellpading="3" class="narrative3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Investment in Baumgarden Common Stock</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>136000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<div>
+<u>Cash</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-136000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_942987965">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/gen-journal-white.css" rel="stylesheet" type="text/css">
+
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+
+<p>The sale of the common stock on October 20, 2014.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Investing</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Cash Increase, Loss on Sale of Stock Increase, Investment in Baumgarden Common Stock Decrease</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_942987965">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br>
+If a financial statement item is not affected, select "No Entry" and 
+leave the amount box blank. If the effect on a financial statement item 
+is negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign.</p>
+
+
+<table cellpading="3" class="narrative3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Cash</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>90000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-46000</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>Loss on Sale of Stock</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>46000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>-46000</u>
+</div>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<div>
+<u>Investment in Baumgarden Common Stock</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-136000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+</span><script language="javascript">
+              jQuery(".globalReserveWordCorrectStatusPlaceHolder").each(function(i, item) {
+                  jQuery(item).replaceWith(global_reserveWordCorrectStatus['jQuery(item).text()'])
+              });
+          </script>
+</div>
+</div>
+</div>
+</div>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><style>
+        #content table.accdefault_answerInfo
+        {
+            background-color: #FFF;
+            padding: 2px;
+            margin: 5px;
+            border: 1px dashed #CDE;
+            width: auto;
+        }
+        
+        #content table.accdefault_answerInfo td
+        {
+        }
+      </style>
+</span></div><div class="item"><div class="itemNumber">8.</div><br>Your answer:<br> <span class="covalentItem" id="covalentContainer_1354559920"><link href="Chapters%207%20and%208%20%28Week%208%29_files/accdefault.css" rel="stylesheet" type="text/css" xmlns:fo="http://www.w3.org/1999/XSL/Format"><link href="Chapters%207%20and%208%20%28Week%208%29_files/accInlineStyling.css" rel="stylesheet" type="text/css"><script type="text/javascript" language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script type="text/javascript">
+        function accountingAjaxCleanup(item)
+        {
+            ACcleanupAutocomplete();
+        }
+        
+        function accountingOnloadAction()
+        {
+            if (typeof(MultipleCorrectsPopupHandler) != 'undefined'){
+                MultipleCorrectsPopupHandler.getInstance().render();
+            }
+        }
+    </script><!--#2547573475095824147--><link href="Chapters%207%20and%208%20%28Week%208%29_files/covalent.css" rel="stylesheet" type="text/css" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"><div src="/media/" id="mediaRootElement" style="visibility: hidden; position: absolute; left: -1000px;"></div><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/ScriptLoader.js">
+<!--keep--></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/commonItemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/CovalentScriptManager.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/API.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FlashItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/FormBasedItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/AggregateItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JsObjectItemAdapter.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script type="text/javascript">
+                        var itemAdapter = new FormBasedItemAdapter( {
+                            id: "1354559920",
+                            formElementProcessor: fitbProcessSingleElement,
+                            onLoadElementProcessor: fitbOnLoadElementProcessor,
+                            inFocusElementProcessor: fitbInFocusElementProcessor,
+                            beforeLoadActions: new Array(null),
+                            afterLoadActions: new Array(accountingOnloadAction),
+                            ptOnUnloadActions: new Array(accountingAjaxCleanup),
+                            interactive: false
+                        } );
+                    
+
+                CovalentItemManager.getInstance().registerItem( new CovalentItem( {
+                    "name": "001_Brief Exercise 7-05 (Algorithmic)",
+                    "adapter": itemAdapter,
+                    "renderingContext": "K678S6ILOFVCOsJ2AiugEoRl/IWFvSYpAqj65evAI/D5SFq0UT/XJmYVWa22dI0vd6H5M4FuPCh8\nixNUuyg+ZpY0GUnuXQAAR8aNQYxDc5rimYB0HSf4IjXJVJhtF/tN/aYDtdv+g2cclTm4DcmC+zZm\nJji/rgvDT6G2UHfCxI7cHWzvSJPNFP2IBvMXsNDV3Ch/W98bT9knNnqki5rc+bF+M3FazCJK1a2j\nD1r5ZhkAwT+I2ut531LZ1ysXuRnfVG27uWyzmC9kmBbFxa2MB1GDnVSXQgqPoy+uWxN4d5ZTF4Wa\nOHINxv9pKEt/M8xzQsY7GgzDSTAf44qJG91siMABTlyhvlA9EK7SVBPNvFoeSdvdLQq6Xm+4DTH3\nYYPNGJleIBtKY0kbxYr61CnPJNdJ5VS3QseltyY262dSATOOkLUN0hpWiS/uf8x7/CMMXWiOc86E\nS733V8nlAsE3D3WO/HELT2nTeUUmL9FvkhdQklSCZmqjUUcSFrb/VIFVUQvy7BVrT8FuCR4Wdcy8\nwG0k8JbFLVcMs8i3Kq40HE5j5IK27JYZzR5KHbbnZavWfIaypdJ+6p8SCrQOml3GaVZVcwkB6TSz\n3dWpdYUHL89WBv5IutqFoKw2imWlTjKBSdX4lqyo/i57lNQBmuciiRtK7F3fPcQyVlPnWE3TE7zP\nC99HvOmS7Qo5VDAYpQgkFn37Ow62HN50Uf7UMT1aDatxGp3EHqhfUW5xUBlgEEKxwx/pTX+jyjHp\nAdr+NeGrxt29Oc1Eia5VEXTMhRSTwFtOxwB0R8ldmRw0PCm67aTXVaeAFpwwjeI40to8LR4GPqwZ\n4xgNzWbOyaHtBSbhOk+Ky2zCDBtBEBS2Lh5YGClqSw+GknHK51s0RaKaZnp5l9JVD7v9mF0IjirN\nfcBx1eaUneg6hdpeTULsicJmD340+6S2kaojiDLkfNuyeHTFTS7Pp8OnS8rGmb9YwjcX6VIrMOIe\nRzrIaj4l3gAtFnpz35uuB77yVfISXoFW/Pk/pJ78FDbrLgDA68iHkXYB6mY6jpOwk0t917Me3WV1\nI2AYxpVuivYhZIGmVa4tkMkjRcKffV2tgUjvM/uh3KJYIw==",
+                    "itemState": "yRKHBvZhIQ/DzmOZUdPS5M97vpZKVTPTDJdsTAOg+wUkv1ki+yjywBEV8gIzzzHj"
+                } ) );
+            </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/onload.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/location.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/dragFrameDialogs.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/widgets.js"></script><script language="javascript" type="text/javascript">
+            var imgDialogs = new Array();
+            try {
+              window.enlargedImages = new Object();
+            }
+            catch (e) {}
+             
+            
+            var imgs = new Array(imgDialogs.length);
+            function openImgDialog(img, imgContent, width, height) {
+                for (var i = 0; i < imgs.length; i++) {
+                    if (imgs[i] == null) {
+                        imgs[i] = img.id;
+                        dialogs[imgDialogs[i]].setHTML(imgContent);
+                        dialogs[imgDialogs[i]].setDimensions(width, height);
+                        dialogs[imgDialogs[i]].correctSize();
+                    }
+                    if (imgs[i] == img.id) {
+                        var isFirstShow = !dialogs[imgDialogs[i]].isInit;
+                        dialogs[imgDialogs[i]].show();
+                        if ( isFirstShow ) {
+                            dialogs[imgDialogs[i]].setCenterPosition();
+                        }
+                        break;
+                    }
+                }
+            }
+        </script><script type="text/JavaScript" language="JavaScript">
+              if( typeof(problemTypesUIDArray) != 'undefined' )
+              {
+                  problemTypesUIDArray[problemTypesUIDArray.length] = '1354559920';
+
+              }
+              function validateItem1354559920() {var result = false;  if (typeof(validateScript1354559920) != 'undefined') {try {eval(validateScript1354559920);} catch(e) {result = e;}}return result;}
+          </script><input id="item-state_1354559920" name="item-state_1354559920" value="" type="hidden"><div class="questionWrapper">
+<div class="questionContent">
+<div>
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.css" type="text/css">
+<link id="absolutePath" href="http://cvg.cengagenow.com/">
+<script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/autocomplete.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/specialnumber.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/specialNumberFieldInlineFunctions.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/engine.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/JSOLService.htm"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script type="text/javascript">
+          var absolutePath = document.getElementById('absolutePath').href;
+          var jqueryHome = absolutePath + 'media/jsframeworks/jquery/';
+          if (!jQuery.ui) {
+              jQuery.ui = jQuery.dropdown = {};
+              jQuery.getScript(jqueryHome + 'jquery-ui-1.10.3.custom.min.js', function(){
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              });
+          } else {
+              if (!jQuery.dropdown){
+                  jQuery.dropdown = {};
+                  jQuery.getScript(jqueryHome + 'plugins/dropdown/jquery.dropdown.js');
+              }
+          }
+      </script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/formTools.js"></script><script language="javascript">
+
+        var allAccountingStyles = [];
+        
+            allAccountingStyles.push( 'accdefault' );
+        
+            allAccountingStyles.push( 'journal-entry' );
+        
+
+        
+      jQuery( function()
+      {
+          var feedbackElements = jQuery('.clearFeedbackTrigger');
+
+          var clearFeedbackForElement = function(ev)
+          {
+              if( !ev )
+                  return;
+
+              for (var j = 0; j < allAccountingStyles.length; j++) {
+                  var element = jQuery (ev.target);
+                  var rightStyle = allAccountingStyles[j] + "_right";
+                  var wrongStyle = allAccountingStyles[j] + "_wrong";
+                  var defaultStyle = allAccountingStyles[j] + "_default";
+                  do {
+                      if (element.hasClass (rightStyle) || element.hasClass (wrongStyle)) {
+                          element.removeClass(rightStyle).removeClass(wrongStyle).addClass(defaultStyle).prop("title", "");
+                          return;
+                      }
+                      element = element.parent()
+                  } while (element.length);
+              }
+          }
+
+          feedbackElements.filter(':checkbox').click(clearFeedbackForElement);
+
+          var feedbackElementsNotCheckbox = jQuery(feedbackElements).not(':checkbox');
+          feedbackElementsNotCheckbox = feedbackElementsNotCheckbox.not(function(arg){
+                if (jQuery(this.parentNode.parentNode).hasClass('autocomplete_div'))
+                    return this;
+          });
+
+          for (var i = 0; i < feedbackElementsNotCheckbox.length; i++){
+                var  oldValue = feedbackElementsNotCheckbox[i].value;
+                jQuery(feedbackElementsNotCheckbox[i]).change(function(old_value){
+                    return function(e){
+                        var value = this.value;
+                        if (old_value != value)
+                            clearFeedbackForElement(e);
+                    }
+                }(oldValue));
+          }
+
+          if( typeof(CovalentItemManager) != 'function' || !CovalentItemManager )
+              return;
+
+          var thisItem = CovalentItemManager.getInstance().findItem('1354559920');
+          if (!thisItem) {
+              return;
+          }
+          var helper = function(item){
+
+              return {
+                  hideFeedback: function()
+                  {
+                      for(var j = 0; j < allAccountingStyles.length; j++)
+                      {
+                          var rightStyle = allAccountingStyles[j] + "_right";
+                          var wrongStyle = allAccountingStyles[j] + "_wrong";
+                          var defaultStyle = allAccountingStyles[j] + "_default";
+
+                          jQuery('.' + rightStyle + ', .' + wrongStyle).each(function()
+                          {
+                              var feedbackElement = jQuery(this);
+                              feedbackElement.toggleClass(rightStyle, false).toggleClass(wrongStyle, false).toggleClass(defaultStyle, true);
+                              feedbackElement.attr('title', '');
+                          });
+                      }
+                  }
+              };
+
+          }(thisItem);
+
+          thisItem.addItemHelper( helper );
+      });
+
+       // ILRN-36468
+       // Used for determining correct localized prefix for the reserve word status
+       var global_reserveWordCorrectStatus = {
+         'correct'   : 'Correct',
+         'incorrect' : 'Incorrect'
+       };
+
+      var MEScot1='Sorry, your current browser does not support this content. \nPlease upgrade your browser. Refer to the CengageNOW System Requirements to determine the appropriate browser and version for your system.';
+
+      function elem(id) {
+         return document.getElementById(id);
+      }
+      function showAndHide(divId, anchorId) {
+        var anchor = elem(anchorId);
+        var div = elem(divId);
+        if (div.style.display == "none") {
+          div.style.display = "";
+          anchor.innerHTML = 'Hide';
+          anchor.title = 'Hide';
+        }
+        else {
+          div.style.display = "none";
+          anchor.innerHTML = 'Show';
+          anchor.title = 'Show';
+        }
+      }
+
+      function calendarSetStyle(inputId, style, fieldStyle) {
+        document.getElementById(inputId + '_y').parentNode.className = style;
+        document.getElementById(inputId + '_m').parentNode.className = style;
+        document.getElementById(inputId + '_d').parentNode.className = style;
+        document.getElementById(inputId + '_y').className = style;
+        document.getElementById(inputId + '_m').className = style;
+        document.getElementById(inputId + '_d').className = style;
+        if (typeof(fieldStyle) != "undefined" && fieldStyle != "0") {
+          document.getElementById(inputId + '_y').parentNode.align = "right";
+          document.getElementById(inputId + '_m').parentNode.align = "right";
+          document.getElementById(inputId + '_d').parentNode.align = "right";
+          document.getElementById(inputId + '_y').parentNode.style.display = "";
+          document.getElementById(inputId + '_m').parentNode.style.display = "";
+          document.getElementById(inputId + '_d').parentNode.style.display = "";
+        }
+      }
+
+      function _fixEmpty(value) {
+        if (value == null || typeof(value) == "undefined" || value == "" || value == "blank") {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+
+      function _fixEmptyFITB(value) {
+        if (_fixEmpty(value) == "&#160;" || value == '""') {
+          return "&#160;";
+        }
+        else {
+          return value;
+        }
+      }
+    </script>
+<div class="box-in-blue-box">
+<div class="problemTypes">
+<br><link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/jquery.css" rel="stylesheet" type="text/css">
+			<script src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_002.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				jQuery(document).ready(function(){
+					jQuery(".additional_resource").additional_resource();
+				});
+			</script><div class="narrative">
+<span class="additional_resource ebook additional_resource_dropdown"><span class="caption">eBook</span>
+
+<script src="Chapters%207%20and%208%20%28Week%208%29_files/mindTapReader.js" type="text/javascript"><!-- Keep the end script tag. --></script>
+
+<div class="additional_resource_list" style="display: none;"><a class="mindtapReaderLink" href="#" ebook="{ &quot;docId&quot;:&quot;QSNWOV386343213&quot;, &quot;isbn&quot;: &quot;9781285779294&quot;, &quot;strategy&quot; : &quot;EXTERNAL&quot;, &quot;hasEntitlement&quot; : true, &quot;mindTapRootUrl&quot; : &quot;http://ng.cengage.com&quot; }" style="">7-5: Accelerating the Inflow of Cash from Sales</a></div></span>
+
+<span class="additional_resource demo additional_resource_dropdown"><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span><span class="caption">Show Me How</span>
+
+<div class="additional_resource_list" style="display: none;"><a href="http://www.cengage.com/accounting/book_content/porter_9781285182957/video/video.html?asset=pwt_be7_5" target="_blank">Show Me How</a></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div><div class="additional_resource_list" style="display: none;"></div></span>
+
+
+<p>Accounting for Sale of Stock</p>
+<p>On March 5, Plantain sold stock in another company for $14,100. Plantain bought the stock on February 14 for $10,100.</p>
+</div><span method="post" autocomplete="off" name="submitForm_1354559920" id="submitForm_1354559920" action="?" onsubmit="if ( document.getElementById('buttonClick').value != 1 ) return false;"><input id="buttonClick" name="buttonClick" value="0" type="hidden"><input value="1" name="go.1354559920" type="hidden" align="absmiddle"><script type="text/JavaScript" language="JavaScript">
+                  function getCssStep(index) {
+                  
+                    if (index == 0) {
+                      return "journal-entry";
+                    }
+                  
+                    if (index == 1) {
+                      return "accdefault";
+                    }
+                  
+                  }
+                </script>
+<div class="journal-entry_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1354559920">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css">
+
+<div class="narrative">
+
+<p>Identify and analyze the transaction on Plantain’s books on March 5.</p>
+
+<table class="narrative2" width="700" cellspacing="0" cellpadding="3" border="0">
+  
+<tbody><tr>
+    
+<td>Activity</td>
+    <td>
+<div>
+<u>Investing</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Accounts</td>
+    <td>
+<div>
+<u>Cash Increase, Investment in Stock Decrease, Gain on Sale of Stock Increase</u>
+</div>
+</td>
+  
+</tr>
+  
+<tr>
+    
+<td>Statement(s)</td>
+    <td>
+<div>
+<u>Balance Sheet and Income Statement</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+  
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+<div class="accdefault_answered-box-paragraph"><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/main.js" xmlns:ilrn-util="xalan://com.ilrn.util.xsl.XSLFunctions"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/compatabilityTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/sysCheck.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/popupTools.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/eventHandlerAdder.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/itemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/fitbItemStateSaver.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/jquery_005.js"></script><script language="javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/stringUtil.js"></script><script language="javascript">function onEntryClick(id) {}</script><div class="problemTypes" id="problemTypes_1354559920">
+<link rel="stylesheet" href="Chapters%207%20and%208%20%28Week%208%29_files/multipleCorrectsPopup.css" type="text/css">
+<!---->
+
+<script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/RejoinderRendererUtils.js"></script><script type="text/javascript" src="Chapters%207%20and%208%20%28Week%208%29_files/MultipleAnswersPopup.js"></script>
+<link href="Chapters%207%20and%208%20%28Week%208%29_files/pnal09h.css" rel="stylesheet" type="text/css"> 
+
+<div class="narrative">
+
+<p>How does this entry affect the accounting equation?<br>
+If a financial statement item is not affected, select "No Entry" and 
+leave the amount box blank. If the effect on a financial statement item 
+is negative, i.e, a decrease, be sure to enter the answer with a minus 
+sign.</p>
+
+
+<table cellpading="3" style="color:#000000; border:#000000 1px solid" cellspacing="0" border="0">
+
+<tbody><tr>
+
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Balance Sheet</strong></td>
+<td width="2%">&nbsp;</td>
+<td colspan="7" style="background:#1ea345;color:#ffffff;" align="center"><strong>Income Statement</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Assets</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Liabilities</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>+</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Stockholders' Equity</strong></td>
+<td>&nbsp;</td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Revenues</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>–</strong></td>
+<td class="narrative_line" colspan="2" nowrap="nowrap" align="center"><strong>Expenses</strong></td>
+<td width="2%" nowrap="nowrap" align="center"><strong>=</strong></td>
+<td class="narrative_line" nowrap="nowrap" align="center"><strong>Net Income</strong></td>
+
+</tr>
+
+
+<tr>
+
+<td>
+<div>
+<u>Cash</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>14100</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>4000</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>Gain on Sale of Stock</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>4000</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>4000</u>
+</div>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<div>
+<u>Investment in Stock</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>-10100</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+<td align="center">&nbsp;</td>
+
+
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td>
+<div>
+<u>No Entry</u>
+</div>
+</td>
+<td align="center">
+<div>
+<u>blank</u>
+</div>
+</td>
+
+<td align="center">&nbsp;</td>
+
+<td align="center">
+<div>
+<u>blank</u><span xmlns:fo="http://www.w3.org/1999/XSL/Format" style="font-family:arial, verdana; vertical-align: top;"></span>
+</div>
+</td>
+
+</tr>
+
+
+</tbody></table>
+
+</div>
+</div>
+</div>
+</span><script language="javascript">
+              jQuery(".globalReserveWordCorrectStatusPlaceHolder").each(function(i, item) {
+                  jQuery(item).replaceWith(global_reserveWordCorrectStatus['jQuery(item).text()'])
+              });
+          </script>
+</div>
+</div>
+</div>
+</div>
+</div><style type="text/css">
+              .feedBackWidgetContent .MathJax .tmp_container {
+                  font-size: inherit !important;
+              }
+          </style><script type="text/javascript">
+                jQuery(function(){
+                    window.resourcePath = "";
+                    var mathjaxHelperScript = document.createElement("script");
+                    mathjaxHelperScript.type = "text/javascript";
+                    mathjaxHelperScript.src = "/media/js/problemTypes/MathJaxHelper.js";
+                    document.getElementsByTagName("head")[0].appendChild(mathjaxHelperScript);
+                });
+          </script><style>
+        #content table.accdefault_answerInfo
+        {
+            background-color: #FFF;
+            padding: 2px;
+            margin: 5px;
+            border: 1px dashed #CDE;
+            width: auto;
+        }
+        
+        #content table.accdefault_answerInfo td
+        {
+        }
+      </style>
+</span></div></div><script type="text/javascript">
+			    
+                    forceDisableRejoinderEvents = true;
+                    
+                    function blankSync(){};
+
+			    </script></body></html>

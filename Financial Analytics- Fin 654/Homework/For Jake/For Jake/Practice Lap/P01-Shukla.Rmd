@@ -1,0 +1,280 @@
+---
+title: 'Laboratory Project #1'
+subtitle: 'Commercial Loan Rate Estimation'
+author: "Ravi Shukla"
+date: "January 25-29, 2017"
+output: pdf_document
+---
+
+\textcolor{blue}{Note: My  notes are in blue font. The instructions provided by Professor Foote in the document are in red.}
+
+\textcolor{blue}{I executed all the R commands one line at a time in the console and examined the results in detail to convince myself that the commands worked and gave reasonable results. Once I was convincedthat the commands worked correctly, I copied and pasted them from the console to the R Markdown panel.}
+
+# \textcolor{red}{Purpose}
+
+\textcolor{red}{This project will allow us to practice various R features using live data to support a decision regarding the provision of captive financing to customers at the beginning of this chapter. We will focus on translating regression statistics into R, plotting results, and interpreting ordinary least squares regression outcomes.}
+
+# \textcolor{red}{Problem}
+
+\textcolor{red}{As we researched how to provide captive financing and insurance for our customers, we found that we needed to understand the relationships among lending rates and various terms and conditions of typical equipment financing contracts.}
+
+\textcolor{red}{We will focus on one question:}
+
+\begin{quote}
+\textcolor{red}{\textit{What is the influence of terms and conditions on the lending rate of fully committed commercial loans with maturities greater than one year?}}
+\end{quote}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# \textcolor{red}{Data}
+
+\textcolor{red}{The data set commloan.csv contains data from the St. Louis Federal Reserve Bank's FRED website, which we will use to get some high level insights. The quarterly data extends from the first quarter of 2003 to the second quarter of 2016 and aggregates a survey administered by the St. Louis Fed. There are several time series included. Each loan record is collected by the time that pricing terms were set and by commitment, with maturities more than 365 days from a survey of all commercial banks. Here are the definitions.}
+
+
+$$\begin{tabular}{|l|p{4cm}|l|}
+\hline
+\textcolor{red}{Variable} & \textcolor{red}{Description} & \textcolor{red}{Units of Measure} \\
+\hline
+\textcolor{red}{rate} & \textcolor{red}{Weighted-Average Effective Loan Rate} & \textcolor{red}{percent} \\
+\textcolor{red}{prepay} & \textcolor{red}{Percent of Value of Loans Subject to Prepayment Penalty} & \textcolor{red}{percent} \\
+\textcolor{red}{maturity} & \textcolor{red}{Weighted-Average Maturity/Repricing Interval in Days} & \textcolor{red}{days} \\
+\textcolor{red}{size} & \textcolor{red}{Average Loan Size} & \textcolor{red}{thousands USD} \\
+\textcolor{red}{volume} & \textcolor{red}{Total Value of Loans} & \textcolor{red}{millions USD} \\
+\hline
+\end{tabular}$$
+
+# \textcolor{red}{Work Flow}
+
+1. \textcolor{red}{Prepare the data.}
+* \textcolor{red}{Visit the FRED website. Include any information on the site to enhance the interpretation of results.}
+* \textcolor{red}{Use read.csv to read the data into R. Be sure to set the working directory where the data resides. Use na.omit() to clean the data.}
+
+\textcolor{blue}{I placed \texttt{commloans.csv} in a folder named \texttt{data} within my working directory (the directory where the .Rmd file is saved). This allows me to issue the command read.csv("data/commloans.csv") to read the file.}
+
+\textcolor{blue}{Note that we  can set the working directory explicitly. If we don't do that, then the directory where the R Markdown file is saved becomes the working directory. I chose the latter alternative in this program.} 
+
+\textcolor{blue}{Note the use of \texttt{n=5} in head and tail to view five records as required in the instructions. Bydefault head and tail show 6 records.}
+
+```{r}
+# Read the data file 
+x.data <- read.csv("data/commloans.csv")
+# omit missing data (data with na)
+x.data <- na.omit(x.data)
+# examine the first five and last five records from the data
+head(x.data, n=5)
+tail(x.data, n=5)
+# Summarize the data
+summary(x.data)
+```
+* \textcolor{red}{Assign the data to a variable called x.data. Examine the first and last five entries (lookup head()). Run a summary of the data set.}
+* \textcolor{red}{What anomalies appear based on these procedures?}
+
+\textcolor{blue}{We have quarterly data from April 1, 2003 to July 1, 2016. The maturity ranges from 40 days to 396 days. This seems inconsistent with what we expect since the database is supposed to be of loans with maturities more than 365 days. Perhaps, the maturity values are shorter because they refer to repricing rather than maturity. The max value (396) seems to be an outlier. Volume seems to be skewed to the right: There are some very large size loans.}
+
+2. \textcolor{red}{Explore the data}
+
+* \textcolor{red}{Let's plot the time series data using this code:}
+
+```{r}
+require(ggplot2)
+require(reshape2)
+# Use melt() from reshape2 to build
+# data frame with data as id and
+# values of variables
+x.melted <- melt(x.data[, c(1:4)], id = "date")
+```
+
+\textcolor{blue}{Here is an explanation of \texttt{melt(x.data[, c(1:4)], id = "date")}: Take all rows and columns 1 through 4 of \texttt{x.data} (date, prepaypenalty, maturity and rate) and create time-series using for prepeypenalty, maturity and rate using the \texttt{melt} function. For more information about the melt function which is a part of the reshape package, go to \url{http://www.statmethods.net/management/reshape.html}.} 
+
+* \textcolor{red}{Describe the data frame that melt() produces.}
+
+```{r}
+# Examine the first and last six records of x.melted
+head(x.melted)
+tail(x.melted)
+```
+
+\textcolor{blue}{Here is the plot using the code given by Professor Foote.}
+
+```{r}
+# Plot the data
+ggplot(data = x.melted, aes(x = date,
+y = value)) + geom_point() + facet_wrap(~variable,
+scales = "free_x")
+```
+
+\textcolor{blue}{I also plot all six data items individually. I am reusing the variable name \texttt{x.melted}. This is perfectly legal.}
+
+```{r}
+# Variable 1: prepaypenalty
+x.melted <- melt(x.data[, c(1,2)], id = "date")
+# Examine the first and last six records
+head(x.melted)
+tail(x.melted)
+# Plot the data
+ggplot(data = x.melted, aes(x = date,
+y = value)) + geom_point() + facet_wrap(~variable,
+scales = "free_x")
+
+# Variable 2: maturity
+x.melted <- melt(x.data[, c(1,3)], id = "date")
+# Examine the first and last six records of x.melted
+head(x.melted)
+tail(x.melted)
+# Plot the data
+ggplot(data = x.melted, aes(x = date,
+y = value)) + geom_point() + facet_wrap(~variable,
+scales = "free_x")
+
+# Variable 3: rate
+x.melted <- melt(x.data[, c(1,4)], id = "date")
+# Examine the first and last six records of x.melted
+head(x.melted)
+tail(x.melted)
+# Plot the data
+ggplot(data = x.melted, aes(x = date,
+y = value)) + geom_point() + facet_wrap(~variable,
+scales = "free_x")
+
+# Variable 4: size
+x.melted <- melt(x.data[, c(1,5)], id = "date")
+# Examine the first and last six records of x.melted
+head(x.melted)
+tail(x.melted)
+# Plot the data
+ggplot(data = x.melted, aes(x = date,
+y = value)) + geom_point() + facet_wrap(~variable,
+scales = "free_x")
+
+# Variable 4: volume
+x.melted <- melt(x.data[, c(1,6)], id = "date")
+# Examine the first and last six records of x.melted
+head(x.melted)
+tail(x.melted)
+# Plot the data
+ggplot(data = x.melted, aes(x = date,
+y = value)) + geom_point() + facet_wrap(~variable,
+scales = "free_x")
+```
+
+* \textcolor{red}{Let's load the psych library and produce a scatterplot matrix. Interpret this exploration.}
+
+\textcolor{blue}{I create the scatterplot for only the five variables of interest which are in columns 2:6 of \texttt{x.data}.} 
+```{r}
+library(psych)
+
+pairs.panels(x.data[,2:6])
+```
+
+\textcolor{blue}{Loan size and volume are highly positively correlated ($\rho=0.82$). So, the  higher the loan size, the higher the loan volume.Loan rate is mildly negatively correlated with size and volume. So, loans with low interest rates are smaller in size and have lower volume.}
+
+3. \textcolor{red}{Analyze the data.}
+
+\textcolor{red}{Let's regress \texttt{rate} on the rest of the variables in \texttt{x.data}. To do this we form a matrix of independent variables (predictor or explanatory variables) in the matrix $\mathbf{X}$ and a separate vector $\mathbf{y}$ for the dependent (response) variable rate. We recall that the $\mathbf{1}$ vector will produce a constant intercept in the regression model.}
+
+```{r}
+y <- as.vector(x.data[, "rate"])
+X <- as.matrix(cbind(1, x.data[, c("prepaypenalty", "maturity", "size", "volume")]))
+head(y)
+head(X)
+```
+
+
+* \textcolor{red}{Explain the code used to form \texttt{y} and \texttt{X}.}
+
+\textcolor{blue}{\texttt{as.vector(x.data[, \"rate\"])} takes the \texttt{rate} column from \texttt{x.data} and creates a column vector \texttt{y}. 
+\texttt{as.matrix(cbind(1, x.data[, c("prepaypenalty", "maturity", "size", "volume")]))} takes four columns identified in the formula and creates a matrix \texttt{X} of 4 columns.}
+
+* \textcolor{red}{Calculate the $\hat\beta$ coefficients and interpret their meaning.}
+
+```{r}
+XtX.inverse <- solve(t(X) %*% X)
+(beta.hat <- XtX.inverse %*% t(X) %*% y)
+```
+
+\textcolor{blue}{I used the code provided by Professor Foote. The code is based on the standard multiple regression model:
+\[
+\text{rate}=\beta_0+\beta_1\;\text{prepaypenalty}+\beta_2\;\text{maturity}+\beta_3\;\text{size}+\beta_4\;\text{volume}+\epsilon
+\]
+Writing the regression equation in matrix notation (See slide 11 of section 1.7 from asynchronous video for unit 1). $\mathbf{y}$ is the $n\times1$ vector of rates, the dependent variable, $\mathbf{X}$ is the $n\times4$ matrix of independent variables (prepaypenalty, maturity, size and volume), $\mathbf{B}$ is the $4\times1$ vector of coefficients ($\beta$s) and $\mathbf{E}$ is the $n\times1$ vector of errors ($\epsilon$s). $n$ is the number of observations. My fonts are somewhat different than those in Professor Foote's slides.
+\[
+\mathbf{y}=\mathbf{X}\mathbf{B}+\mathbf{E}
+\]
+Now we can find the regression coefficients using standard regression 
+\[
+\hat{\mathbf{B}}=\left(\mathbf{X}^{\mathbf{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathbf{T}}\mathbf{y}
+\]
+The \texttt{t} function in used to transpose the matrix and \texttt{solve} function is used to invert the matrix. The process is implemented in two steps here: First we calculate $\left(\mathbf{X}^{\mathbf{T}}\mathbf{X}\right)^{-1}$ as \texttt{XTX.inverse} and then multiply it by $\mathbf{X}^{\mathbf{T}}\mathbf{y}$ to get $\hat{\mathbf{B}}$ as \texttt{beta.hat}. Note that the parentheses around the expression makes R display the result (\texttt{beta.hat} here) without us having to ask for it explicitly.}
+
+\textcolor{blue}{The coefficients show that the dependent variable, \texttt{rate}, is positively related to maturity but negatively related to the other three variables \texttt{prepaypenalty}, \texttt{size} and \texttt{volume}.}
+
+
+* \textcolor{red}{Calculate actual and predicted rates and plot using this code.}
+```{r}
+# Insert comment here
+#require(reshape2) # omitting this line since reshape2 has already been loaded
+#require(ggplot2) # omitting this line since ggplot2 has already been loaded
+actual <- y
+predicted <- X %*% beta.hat
+residual <- actual - predicted
+results <- data.frame(actual = actual,
+predicted = predicted, residual = residual)
+head(predicted)
+# Insert comment here
+min_xy <- min(min(results$actual), min(results$predicted))
+max_xy <- max(max(results$actual), max(results$predicted))
+# Insert comment here
+plot.melt <- melt(results, id.vars = "predicted")
+# Insert comment here
+plot.data <- rbind(plot.melt, data.frame(predicted = c(min_xy,
+max_xy), variable = c("actual", "actual"),
+value = c(max_xy, min_xy)))
+# Insert comment here
+p <- ggplot(plot.data, aes(x = predicted, y = value)) + geom_point(size = 2.5) + theme_bw()
+p <- p + facet_wrap(~variable, scales = "free")
+p
+```
+
+```{r}
+# Calculate the errors, sum of squared errors and standard error of the regression
+e <- y - X %*% beta.hat
+(e.sse <- t(e) %*%e)
+(n <- dim(X)[1])
+(k <- dim(beta.hat)[1])
+(e.se <- (e.sse / (n - k))^0.5)
+```
+
+\textcolor{blue}{Another way to conduct the regression analysis (estimate the coefficients and calculate the SSE) is by using the \texttt{lm} function whch estimates the linear model. You can get help on the lm model at \url{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html}. I define \texttt{Z} as the matrix of independent variables.}
+
+```{r}
+Z <- as.matrix(cbind(x.data[, c("prepaypenalty", "maturity", "size", "volume")]))
+head(Z)
+# Estimate a linear model between y and Z. Remember that Z consists of four variables. 
+lmresult=lm(y~Z)
+summary(lmresult)
+# Get predicted/fitted values
+predictedvalues=fitted.values(lmresult)
+head(predictedvalues)
+# Calculate error based on the lm model for all data points
+elm =  y - predicted
+head(elm)
+# Calculate the sum of squared errors and display it
+(elm.sse=t(elm)%*%elm)
+(n <- dim(Z)[1])
+(k <- dim(Z)[2])
+(elm.se <- (elm.sse / (n - k - 1 ))^0.5)
+```
+
+# \textcolor{blue}{Observations and Recommendations}
+
+\textcolor{blue}{The analysis shows that the interest rate on the loan is related in the statistically significant manner to the prepayment penalty (\texttt{prepaypenalty}). While \texttt{rate} is related positively with maturity and negatively with size and volume, those relationships are not statistically significant. The $R^2$ of 0.4026 or 40.26\% indicates that we can have a reaosnable confidence in the model. To explore the reltionship more, we should regress rate on prepaypenalty alone to see how well this one variable alone explains the variability in rate.}
+
+# \textcolor{blue}{Sources}
+
+\begin{itemize}
+\item Various discussions on \url{http://stackoverflow.com}
+\item \url{http://www.statmethods.net/management/reshape.html}
+\item \url{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html} 
+\end{itemize}

@@ -1,0 +1,30 @@
+#Jake Dineen
+#3.6.2
+
+
+#Input
+
+#Create dicts
+stock = {"banana":6,"apple":0,"orange":32,"pear":15}
+prices={"banana":4,"apple":2,"orange":1.5,"pear":3}
+
+#Find value of stock dict at orange
+stock['orange']
+print('The value of orange is: {}'.format( stock['orange']))
+
+
+stock['cherry'] = 14
+print('-------------------------------------------------')
+#loop that iterates over the stock dictionary and prints each key and value
+for key,value in stock.items():
+    print(key,value)
+	
+	
+#Output
+The value of orange is: 32
+-------------------------------------------------
+banana 6
+apple 0
+orange 32
+pear 15
+cherry 14
